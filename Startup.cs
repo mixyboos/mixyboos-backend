@@ -1,23 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Identity.Web;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using mixyboos_api.Data;
 using MixyBoos.Api.Services.Workers;
+using OpenIddict.Abstractions;
+using OpenIddict.Server.AspNetCore;
+using OpenIddict.Validation.AspNetCore;
 
 namespace MixyBoos.Api {
     public class Startup {
@@ -29,8 +26,13 @@ namespace MixyBoos.Api {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            // services.AddDbContext<MixyBoosContext>(options => {
+            //     options.UseNpgsql(Configuration.GetConnectionString("MixyBoosContext"));
+            //     options.UseOpenIddict();
+            // });
+
             services.AddDbContext<MixyBoosContext>(options => {
-                options.UseNpgsql(Configuration.GetConnectionString("MixyBoosContext"));
+                options.UseInMemoryDatabase(nameof(MixyBoosContext));
                 options.UseOpenIddict();
             });
 
@@ -38,33 +40,58 @@ namespace MixyBoos.Api {
                 .AddEntityFrameworkStores<MixyBoosContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<IdentityOptions>(options => {
+                options.ClaimsIdentity.UserNameClaimType = OpenIddictConstants.Claims.Name;
+                options.ClaimsIdentity.UserIdClaimType = OpenIddictConstants.Claims.Subject;
+                options.ClaimsIdentity.RoleClaimType = OpenIddictConstants.Claims.Role;
+            });
+
+
             services.AddOpenIddict()
                 .AddCore(options => {
                     options.UseEntityFrameworkCore()
                         .UseDbContext<MixyBoosContext>();
                 })
                 .AddServer(options => {
-                    options.SetTokenEndpointUris("/connect/token");
-                    options.AllowClientCredentialsFlow();
-                    options.AddDevelopmentEncryptionCertificate()
-                        .AddDevelopmentSigningCertificate();
-                    options.UseAspNetCore()
+                    options
+                        .AllowClientCredentialsFlow()
+                        .AllowAuthorizationCodeFlow()
+                        .RequireProofKeyForCodeExchange();
+
+                    options
+                        .SetAuthorizationEndpointUris("/connect/authorize")
+                        .SetTokenEndpointUris("/connect/token");
+                    options
+                        .AddEphemeralEncryptionKey()
+                        .AddEphemeralSigningKey()
+                        .DisableAccessTokenEncryption();
+
+                    options.RegisterScopes("api");
+                    options
+                        .UseAspNetCore()
+                        .EnableAuthorizationEndpointPassthrough()
                         .EnableTokenEndpointPassthrough();
-                })
-                .AddValidation(options => {
+                }).AddValidation(options => {
                     options.UseLocalServer();
                     options.UseAspNetCore();
                 });
-            services.AddHostedService<OpenIdDictWorker>();
+            ;
 
-            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //     .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"));
-            
+            services.ConfigureApplicationCookie(options => {
+                options.Events.OnRedirectToLogin = context => {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
+            });
+
+            services.AddHostedService<OpenIdDictWorker>();
+            services
+                .AddAuthentication(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
+
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "MixyBoos.Api", Version = "v1"});
-                // c.DocumentFilter<LowerCaseDocumentFilter>();
             });
         }
 
@@ -77,6 +104,13 @@ namespace MixyBoos.Api {
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(builder => {
+                builder.WithOrigins("http://dev.mixyboos.com:3000");
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+            });
+
 
             app.UseRouting();
 

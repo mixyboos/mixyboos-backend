@@ -22,16 +22,49 @@ namespace MixyBoos.Api.Services.Workers {
             var manager =
                 scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();
 
-            if (await manager.FindByClientIdAsync("console") is null) {
+            // await manager.DeleteAsync("webclient");
+            if (await manager.FindByClientIdAsync("webclient") is null) {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor {
-                    ClientId = "console",
-                    ClientSecret = "f30ce517-4219-46da-9cac-46a93d2cd57e",
-                    DisplayName = "MixyBoos Client",
+                    ClientId = "webclient",
+                    DisplayName = "MixyBoos Web Client",
+                    ConsentType = ConsentTypes.Implicit,
+                    PostLogoutRedirectUris = {
+                        new Uri("https://localhost:5002/oidc-signout")
+                    },
+                    RedirectUris = {
+                        new Uri("https://localhost:5002/oidc-signin"),
+                        new Uri("https://localhost:5002/oidc-silent-refresh")
+                    },
                     Permissions = {
+                        Permissions.Endpoints.Authorization,
+                        Permissions.Endpoints.Logout,
                         Permissions.Endpoints.Token,
-                        Permissions.GrantTypes.ClientCredentials
+                        Permissions.GrantTypes.AuthorizationCode,
+                        Permissions.GrantTypes.RefreshToken,
+                        Permissions.GrantTypes.Password,
+                        Permissions.ResponseTypes.Code,
+                        Permissions.Scopes.Email,
+                        Permissions.Scopes.Profile,
+                        Permissions.Prefixes.Scope + "api"
                     }
                 });
+            }
+
+            if (await manager.FindByClientIdAsync("postman", cancellationToken) is null) {
+                await manager.CreateAsync(new OpenIddictApplicationDescriptor {
+                    ClientId = "postman",
+                    ClientSecret = "postman-secret",
+                    DisplayName = "Postman",
+                    RedirectUris = {new Uri("https://oauth.pstmn.io/v1/callback")},
+                    Permissions = {
+                        OpenIddictConstants.Permissions.Endpoints.Authorization,
+                        OpenIddictConstants.Permissions.Endpoints.Token,
+                        OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
+                        OpenIddictConstants.Permissions.GrantTypes.ClientCredentials,
+                        OpenIddictConstants.Permissions.Prefixes.Scope + "api",
+                        OpenIddictConstants.Permissions.ResponseTypes.Code
+                    }
+                }, cancellationToken);
             }
         }
 
