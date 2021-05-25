@@ -1,3 +1,4 @@
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -53,8 +54,10 @@ namespace MixyBoos.Api {
                 })
                 .AddServer(options => {
                     options
+                        .AllowPasswordFlow()
                         .AllowClientCredentialsFlow()
                         .AllowAuthorizationCodeFlow()
+                        .AcceptAnonymousClients()
                         .AllowRefreshTokenFlow()
                         .RequireProofKeyForCodeExchange()
                         .AcceptAnonymousClients();
@@ -62,10 +65,13 @@ namespace MixyBoos.Api {
                     options
                         .SetAuthorizationEndpointUris("/connect/authorize")
                         .SetTokenEndpointUris("/connect/token");
-                    options
-                        .AddEphemeralEncryptionKey()
-                        .AddEphemeralSigningKey()
-                        .DisableAccessTokenEncryption();
+
+                    // options
+                    //     .AddEphemeralEncryptionKey()
+                    //     .AddEphemeralSigningKey()
+                    //     .DisableAccessTokenEncryption();
+                    options.AddDevelopmentEncryptionCertificate()
+                        .AddDevelopmentSigningCertificate();
 
                     options.RegisterScopes("api");
                     options

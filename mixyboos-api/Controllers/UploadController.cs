@@ -17,15 +17,19 @@ using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Validation.AspNetCore;
 
 namespace MixyBoos.Api.Controllers {
-    public class FormData {
-        public string Note { get; set; }
+    public class UploadFormData {
+        public string Id { get; set; }
+    }
+
+    public class AppFile {
+        public string Id { get; set; }
+        public byte[] Content { get; set; }
     }
 
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class UploadController : _Controller {
         const long FileSizeLimit = 2147483648;
-        private readonly string[] _permittedExtensions = {".mp3", "*.wav", "*.aiff", "*.mp4", "*.flac"};
 
         public UploadController(ILogger<UploadController> logger) : base(logger) {
         }
@@ -33,7 +37,7 @@ namespace MixyBoos.Api.Controllers {
         [HttpPost]
         [RequestFormLimits(MultipartBodyLengthLimit = FileSizeLimit)] //2Gb
         [RequestSizeLimit(FileSizeLimit)] //2Gb
-        public async Task<IActionResult> UploadAudio( /*[FromQuery] string id, IFormFile file*/) {
+        public async Task<IActionResult> UploadAudio() {
             if (!MultipartRequestHelper.IsMultipartContentType(Request.ContentType)) {
                 ModelState.AddModelError("File",
                     $"The request couldn't be processed (Error 1).");
@@ -44,8 +48,6 @@ namespace MixyBoos.Api.Controllers {
 
             // Accumulate the form data key-value pairs in the request (formAccumulator).
             var formAccumulator = new KeyValueAccumulator();
-            var trustedFileNameForDisplay = string.Empty;
-            var untrustedFileNameForStorage = string.Empty;
             var streamedFileContent = Array.Empty<byte>();
 
             var boundary = MultipartRequestHelper.GetBoundary(
@@ -63,25 +65,17 @@ namespace MixyBoos.Api.Controllers {
                 if (hasContentDispositionHeader) {
                     if (MultipartRequestHelper
                         .HasFileContentDisposition(contentDisposition)) {
-                        untrustedFileNameForStorage = contentDisposition.FileName.Value;
-                        // Don't trust the file name sent by the client. To display
-                        // the file name, HTML-encode the value.
-                        trustedFileNameForDisplay = WebUtility.HtmlEncode(
-                            contentDisposition.FileName.Value);
-
-                        streamedFileContent =
-                            await FileHelpers.ProcessStreamedFile(
-                                section,
-                                contentDisposition,
-                                ModelState,
-                                _permittedExtensions,
-                                FileSizeLimit);
+                        streamedFileContent = await FileHelpers.ProcessStreamedFile(
+                            section,
+                            contentDisposition,
+                            ModelState,
+                            FileSizeLimit
+                        );
 
                         if (!ModelState.IsValid) {
                             return BadRequest(ModelState);
                         }
-                    } else if (MultipartRequestHelper
-                        .HasFormDataContentDisposition(contentDisposition)) {
+                    } else if (MultipartRequestHelper.HasFormDataContentDisposition(contentDisposition)) {
                         // Don't limit the key name length because the 
                         // multipart headers length limit is already in effect.
                         var key = HeaderUtilities
@@ -89,35 +83,32 @@ namespace MixyBoos.Api.Controllers {
                         var encoding = GetEncoding(section);
 
                         if (encoding == null) {
-                            ModelState.AddModelError("File",
-                                $"The request couldn't be processed (Error 2).");
+                            ModelState.AddModelError("File", $"The request couldn't be processed (Error 2).");
                             // Log error
-
                             return BadRequest(ModelState);
                         }
 
-                        using (var streamReader = new StreamReader(
+                        using var streamReader = new StreamReader(
                             section.Body,
                             encoding,
                             detectEncodingFromByteOrderMarks: true,
                             bufferSize: 1024,
-                            leaveOpen: true)) {
-                            // The value length limit is enforced by 
-                            // MultipartBodyLengthLimit
-                            var value = await streamReader.ReadToEndAsync();
+                            leaveOpen: true);
+                        // The value length limit is enforced by 
+                        // MultipartBodyLengthLimit
+                        var value = await streamReader.ReadToEndAsync();
 
-                            if (string.Equals(value, "undefined",
-                                StringComparison.OrdinalIgnoreCase)) {
-                                value = string.Empty;
-                            }
+                        if (string.Equals(value, "undefined",
+                            StringComparison.OrdinalIgnoreCase)) {
+                            value = string.Empty;
+                        }
 
-                            formAccumulator.Append(key, value);
+                        formAccumulator.Append(key, value);
 
-                            if (formAccumulator.ValueCount > 1) {
-                                ModelState.AddModelError("File",
-                                    $"The request couldn't be processed (Error 3).");
-                                return BadRequest(ModelState);
-                            }
+                        if (formAccumulator.ValueCount > 1) {
+                            ModelState.AddModelError("File",
+                                $"The request couldn't be processed (Error 3).");
+                            return BadRequest(ModelState);
                         }
                     }
                 }
@@ -128,22 +119,23 @@ namespace MixyBoos.Api.Controllers {
             }
 
             // Bind form data to the model
-            var formData = new FormData();
+            var formData = new UploadFormData();
             var formValueProvider = new FormValueProvider(
                 BindingSource.Form,
                 new FormCollection(formAccumulator.GetResults()),
                 CultureInfo.CurrentCulture);
-            var bindingSuccessful = await TryUpdateModelAsync(formData, prefix: "",
-                valueProvider: formValueProvider);
+
+            var bindingSuccessful = await TryUpdateModelAsync(
+                formData,
+                "",
+                formValueProvider);
 
             if (!bindingSuccessful) {
-                ModelState.AddModelError("File",
-                    "The request couldn't be processed (Error 5).");
-                // Log error
-
+                ModelState.AddModelError("File", "The request couldn't be processed (Error 5).");
                 return BadRequest(ModelState);
             }
 
+            await System.IO.File.WriteAllBytesAsync($"/tmp/{formData.Id}.mp3", streamedFileContent);
             return Created(nameof(UploadController), null);
         }
 

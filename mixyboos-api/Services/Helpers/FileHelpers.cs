@@ -19,12 +19,24 @@ namespace MixyBoos.Api.Services.Helpers {
 
         // For more file signatures, see the File Signatures Database (https://www.filesignatures.net/)
         // and the official specifications for the file types you wish to add.
-        private static readonly Dictionary<string, List<byte[]>> _fileSignature = new Dictionary<string, List<byte[]>> {
+        private static readonly Dictionary<string, List<byte[]>> _fileSignatures = new() {
             //audio
-            {".mp3", new List<byte[]> {new byte[] {0x49, 0x44, 0x33,}}},
-            {".wav", new List<byte[]> {new byte[] {0x52, 0x49, 0x46, 0x46}}},
+            {
+                ".mp3",
+                new List<byte[]> {
+                    new byte[] {0xFF, 0xFB},
+                    new byte[] {0xFF, 0xF3}, new byte[] {0xFF, 0xF2},
+                    new byte[] {0x49, 0x44, 0x33,}
+                }
+            }, {
+                ".wav", new List<byte[]> {
+                    new byte[] {0x52, 0x49, 0x46},
+                    new byte[] {0x57, 0x41, 0x56, 0x45}
+                }
+            },
             {".flac", new List<byte[]> {new byte[] {0x66, 0x4C, 0x61, 0x43, 0x00, 0x00, 0x00, 0x22}}},
-            {".mp3", new List<byte[]> {new byte[] {0x00, 0x00, 0x01, 0xBA}}},
+            {".mp4", new List<byte[]> {new byte[] {0x00, 0x00, 0x01, 0xBA}}},
+            {".m4a", new List<byte[]> {new byte[] {0x00, 0x00, 0x01, 0xBA}}},
 
             //image
             {".gif", new List<byte[]> {new byte[] {0x47, 0x49, 0x46, 0x38}}},
@@ -62,8 +74,7 @@ namespace MixyBoos.Api.Services.Helpers {
         // app.
 
         public static async Task<byte[]> ProcessFormFile<T>(IFormFile formFile,
-            ModelStateDictionary modelState, string[] permittedExtensions,
-            long sizeLimit) {
+            ModelStateDictionary modelState, long sizeLimit) {
             var fieldDisplayName = string.Empty;
 
             // Use reflection to obtain the display name for the model
@@ -117,8 +128,7 @@ namespace MixyBoos.Api.Services.Helpers {
                             $"{fieldDisplayName}({trustedFileNameForDisplay}) is empty.");
                     }
 
-                    if (!IsValidFileExtensionAndSignature(
-                        formFile.FileName, memoryStream, permittedExtensions)) {
+                    if (!IsValidFileExtensionAndSignature(formFile.FileName, memoryStream)) {
                         modelState.AddModelError(formFile.Name,
                             $"{fieldDisplayName}({trustedFileNameForDisplay}) file " +
                             "type isn't permitted or the file's signature " +
@@ -139,7 +149,7 @@ namespace MixyBoos.Api.Services.Helpers {
 
         public static async Task<byte[]> ProcessStreamedFile(
             MultipartSection section, ContentDispositionHeaderValue contentDisposition,
-            ModelStateDictionary modelState, string[] permittedExtensions, long sizeLimit) {
+            ModelStateDictionary modelState, long sizeLimit) {
             try {
                 await using var memoryStream = new MemoryStream();
                 await section.Body.CopyToAsync(memoryStream);
@@ -152,8 +162,8 @@ namespace MixyBoos.Api.Services.Helpers {
                     modelState.AddModelError("File",
                         $"The file exceeds {megabyteSizeLimit:N1} MB.");
                 } else if (!IsValidFileExtensionAndSignature(
-                    contentDisposition.FileName.Value, memoryStream,
-                    permittedExtensions)) {
+                    contentDisposition.FileName.Value, memoryStream
+                )) {
                     modelState.AddModelError("File",
                         "The file type isn't permitted or the file's " +
                         "signature doesn't match the file's extension.");
@@ -162,8 +172,7 @@ namespace MixyBoos.Api.Services.Helpers {
                 }
             } catch (Exception ex) {
                 modelState.AddModelError("File",
-                    "The upload failed. Please contact the Help Desk " +
-                    $" for support. Error: {ex.HResult}");
+                    $"The upload failed. Error: {ex.HResult}");
                 // Log the exception
             }
 
@@ -171,14 +180,14 @@ namespace MixyBoos.Api.Services.Helpers {
         }
 
         private static bool
-            IsValidFileExtensionAndSignature(string fileName, Stream data, string[] permittedExtensions) {
+            IsValidFileExtensionAndSignature(string fileName, Stream data) {
             if (string.IsNullOrEmpty(fileName) || data == null || data.Length == 0) {
                 return false;
             }
 
             var ext = Path.GetExtension(fileName).ToLowerInvariant();
 
-            if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext)) {
+            if (string.IsNullOrEmpty(ext) || !_fileSignatures.ContainsKey(ext)) {
                 return false;
             }
 
@@ -226,7 +235,7 @@ namespace MixyBoos.Api.Services.Helpers {
             // With the file signatures provided in the _fileSignature
             // dictionary, the following code tests the input content's
             // file signature.
-            var signatures = _fileSignature[ext];
+            var signatures = _fileSignatures[ext];
             var headerBytes = reader.ReadBytes(signatures.Max(m => m.Length));
 
             return signatures.Any(signature =>

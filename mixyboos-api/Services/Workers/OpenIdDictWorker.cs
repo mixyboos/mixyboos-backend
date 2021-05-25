@@ -23,39 +23,31 @@ namespace MixyBoos.Api.Services.Workers {
             var manager =
                 scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();
 
-            if (await manager.FindByClientIdAsync("webclient") is null) {
+            if (await manager.FindByClientIdAsync("webclient", cancellationToken) is null) {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor {
                     ClientId = "webclient",
-                    ClientSecret = "04c11800-18a9-49ba-bcdb-4ffea3206359",
                     DisplayName = "MixyBoos Web Client",
                     ConsentType = ConsentTypes.Implicit,
                     Permissions = {
                         Permissions.Endpoints.Authorization,
                         Permissions.Endpoints.Logout,
                         Permissions.Endpoints.Token,
-                        Permissions.GrantTypes.AuthorizationCode,
-                        Permissions.GrantTypes.RefreshToken,
-                        Permissions.GrantTypes.ClientCredentials,
                         Permissions.GrantTypes.Password,
-                        Permissions.ResponseTypes.Code,
-                        Permissions.Scopes.Email,
-                        Permissions.Scopes.Profile,
+                        Permissions.GrantTypes.RefreshToken,
                         Permissions.Prefixes.Scope + "api"
                     }
-                });
+                }, cancellationToken);
             }
 
-            if (await manager.FindByClientIdAsync("postman", cancellationToken) is null) {
+            if (await manager.FindByClientIdAsync("testharness", cancellationToken) is null) {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor {
-                    ClientId = "postman",
-                    ClientSecret = "postman-secret",
-                    DisplayName = "Postman",
-                    RedirectUris = {new Uri("https://oauth.pstmn.io/v1/callback")},
+                    ClientId = "testharness",
+                    ClientSecret = "e83ec86b-d234-4a09-bb91-6a36c43ccf77",
+                    DisplayName = "Test Harness",
                     Permissions = {
                         Permissions.Endpoints.Authorization,
                         Permissions.Endpoints.Token,
-                        Permissions.GrantTypes.AuthorizationCode,
-                        Permissions.GrantTypes.ClientCredentials,
+                        Permissions.GrantTypes.Password,
                         Permissions.Prefixes.Scope + "api",
                         Permissions.ResponseTypes.Code
                     }

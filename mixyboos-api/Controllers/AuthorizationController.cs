@@ -28,10 +28,11 @@ namespace MixyBoos.Api.Controllers {
             _userManager = userManager;
         }
 
-        [HttpPost("~/connect/token"), Produces("application/json")]
+        [HttpPost("~/connect/token")]
+        [Produces("application/json")]
         public async Task<IActionResult> Exchange() {
             var request = HttpContext.GetOpenIddictServerRequest();
-            if (request.IsClientCredentialsGrantType()) {
+            if (request.IsClientCredentialsGrantType() || request.IsPasswordGrantType()) {
                 var user = await _userManager.FindByNameAsync(request.Username);
                 if (user == null) {
                     var properties = new AuthenticationProperties(new Dictionary<string, string> {
