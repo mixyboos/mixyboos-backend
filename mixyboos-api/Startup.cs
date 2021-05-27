@@ -27,7 +27,8 @@ namespace MixyBoos.Api {
             services.AddScoped<IDbInitializer, DbInitializer>();
 
             services.AddDbContext<MixyBoosContext>(options => {
-                options.UseNpgsql(Configuration.GetConnectionString("MixyBoosContext"));
+                // options.UseNpgsql(Configuration.GetConnectionString("MixyBoosContext"));
+                options.UseSqlite("Data Source=./mixyboos.sqlite");
                 options.UseOpenIddict();
             });
 

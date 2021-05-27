@@ -71,7 +71,12 @@ namespace MixyBoos.Api.Controllers {
                     Scopes.OfflineAccess,
                     Scopes.Roles
                 }.Intersect(request.GetScopes()));
-
+                
+                principal.SetAccessTokenLifetime(TimeSpan.FromMinutes(1));
+                principal.SetAuthorizationCodeLifetime(TimeSpan.FromMinutes(1));
+                principal.SetIdentityTokenLifetime(TimeSpan.FromMinutes(1));
+                principal.SetRefreshTokenLifetime(TimeSpan.FromDays(2));
+                
                 foreach (var claim in principal.Claims) {
                     claim.SetDestinations(GetDestinations(claim, principal));
                 }
