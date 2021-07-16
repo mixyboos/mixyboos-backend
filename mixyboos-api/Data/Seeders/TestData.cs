@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Bogus;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MixyBoos.Api.Data.Models;
 
 namespace MixyBoos.Api.Data.Seeders {
     public class TestData {
@@ -266,20 +267,53 @@ namespace MixyBoos.Api.Data.Seeders {
             _rand = new Random();
         }
 
-        public async Task<List<ApplicationUser>> GetTestUsers() {
-            var user = new ApplicationUser {
-                DisplayName = "Fergal Moran",
-                Email = "fergal.moran+mixyboos@gmail.com",
-                NormalizedEmail = "FERGAL.MORAN+MIXYBOOS@GMAIL.COM",
-                UserName = "fergal.moran+mixyboos@gmail.com",
-                NormalizedUserName = "FERGAL.MORAN+MIXYBOOS@GMAIL.COM",
-                PhoneNumber = "+111111111111",
-                EmailConfirmed = true,
-                PhoneNumberConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString("D"),
-                Image = _faker.Internet.Avatar()
+        public async Task<List<MixyBoosUser>> GetTestUsers() {
+            var users = new List<MixyBoosUser>() {
+                new() {
+                    DisplayName = "Fergal Moran",
+                    Email = "fergal.moran+mixyboos@gmail.com",
+                    NormalizedEmail = "FERGAL.MORAN+MIXYBOOS@GMAIL.COM",
+                    UserName = "fergal.moran+mixyboos@gmail.com",
+                    NormalizedUserName = "FERGAL.MORAN+MIXYBOOS@GMAIL.COM",
+                    PhoneNumber = "+111111111111",
+                    StreamKey = "YfbUdfzcgjgIXvUaNZ3X9lQoyhdEc6nc",
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                    SecurityStamp = Guid.NewGuid().ToString("D"),
+                    Image = _faker.Internet.Avatar()
+                },
+                new() {
+                    DisplayName = "I am follower",
+                    Email = "fergal.moran+mixyboosfollower@gmail.com",
+                    NormalizedEmail = "FERGAL.MORAN+MIXYBOOSFOLLOWER@GMAIL.COM",
+                    UserName = "fergal.moran+mixyboosfollower@gmail.com",
+                    NormalizedUserName = "FERGAL.MORAN+MIXYBOOSFOLLOWER@GMAIL.COM",
+                    PhoneNumber = "+111111111111",
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                    SecurityStamp = Guid.NewGuid().ToString("D"),
+                    Image = _faker.Internet.Avatar()
+                },
             };
-            return await Task.FromResult(new List<ApplicationUser> {user});
+            return await Task.FromResult(users);
+        }
+
+        public async Task<List<LiveShow>> GetTestShows() {
+            var user = await _context.Users.FirstOrDefaultAsync(u =>
+                u.UserName.Equals("fergal.moran+mixyboos@gmail.com"));
+
+            if (user == null) {
+                throw new Exception("Unable to find seed user");
+            }
+
+            return new List<LiveShow> {
+                new() {
+                    Title = "Test Show One",
+                    StartDate = DateTime.Now,
+                    Active = true,
+                    User = user
+                }
+            };
         }
 
         public async Task<List<Mix>> GetTestMixes() {
@@ -294,7 +328,7 @@ namespace MixyBoos.Api.Data.Seeders {
             var results = new List<Mix>();
             for (int i = 0; i < MAX_MIX_COUNT; i++) {
                 var mixUrl = $"https://cdn.podnoms.com/audio/${MIXES[mixIndex]}.mp3";
-                var image = _faker.Image.PicsumUrl();
+                var image = _faker.Image.LoremFlickrUrl();
                 var m = new Mix {
                     Title = _faker.Lorem.Sentence(),
                     Description = _faker.Lorem.Paragraphs(_rand.Next(1, 5)),

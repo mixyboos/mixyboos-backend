@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,18 +16,23 @@ using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
+
 namespace MixyBoos.Api.Controllers {
     public class AuthorizationController : _Controller {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        const int ACCESS_TOKEN_EXPIRY = 60; //minutes
+        const int REFRESH_TOKEN_EXPIRY = 30;
+
+        private readonly SignInManager<MixyBoosUser> _signInManager;
+        private readonly UserManager<MixyBoosUser> _userManager;
 
         public AuthorizationController(
-            SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager,
+            SignInManager<MixyBoosUser> signInManager,
+            UserManager<MixyBoosUser> userManager,
             ILogger<AuthorizationController> logger) : base(logger) {
             _signInManager = signInManager;
             _userManager = userManager;
         }
+
 
         [HttpPost("~/connect/token")]
         [Produces("application/json")]
@@ -44,7 +50,16 @@ namespace MixyBoos.Api.Controllers {
                     return Forbid(properties, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
                 }
 
-                // Validate the username/password parameters and ensure the account is not locked out.
+                if (!await _signInManager.CanSignInAsync(user) ||
+                    (_userManager.SupportsUserLockout && await _userManager.IsLockedOutAsync(user))) {
+                    var properties = new AuthenticationProperties(new Dictionary<string, string> {
+                        [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidGrant,
+                        [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
+                            "This user is currently not allowed to sign in."
+                    });
+                    return Forbid(properties, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+                }
+
                 var result =
                     await _signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: true);
                 if (!result.Succeeded) {
@@ -53,9 +68,14 @@ namespace MixyBoos.Api.Controllers {
                         [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
                             "The username/password couple is invalid."
                     });
-
                     return Forbid(properties, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
                 }
+
+                if (_userManager.SupportsUserLockout) {
+                    await _userManager.ResetAccessFailedCountAsync(user);
+                }
+
+                //TODO: This probably shouldn't be here
 
                 // Create a new ClaimsPrincipal containing the claims that
                 // will be used to create an id_token, a token or a code.
@@ -71,12 +91,16 @@ namespace MixyBoos.Api.Controllers {
                     Scopes.OfflineAccess,
                     Scopes.Roles
                 }.Intersect(request.GetScopes()));
-                
-                principal.SetAccessTokenLifetime(TimeSpan.FromMinutes(1));
-                principal.SetAuthorizationCodeLifetime(TimeSpan.FromMinutes(1));
-                principal.SetIdentityTokenLifetime(TimeSpan.FromMinutes(1));
-                principal.SetRefreshTokenLifetime(TimeSpan.FromDays(2));
-                
+
+                principal.SetAccessTokenLifetime(TimeSpan.FromMinutes(ACCESS_TOKEN_EXPIRY))
+                    .SetAuthorizationCodeLifetime(TimeSpan.FromMinutes(ACCESS_TOKEN_EXPIRY))
+                    .SetIdentityTokenLifetime(TimeSpan.FromMinutes(ACCESS_TOKEN_EXPIRY))
+                    .SetRefreshTokenLifetime(TimeSpan.FromDays(REFRESH_TOKEN_EXPIRY));
+
+                principal.Claims.Append(new Claim(Claims.Subject, user.DisplayName));
+                principal.Claims.Append(new Claim("image", user.Image));
+                principal.Claims.Append(new Claim("slug", user.Slug));
+
                 foreach (var claim in principal.Claims) {
                     claim.SetDestinations(GetDestinations(claim, principal));
                 }

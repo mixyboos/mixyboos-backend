@@ -8,15 +8,17 @@ namespace MixyBoos.Api {
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseDefaultServiceProvider(o => {
+                    o.ValidateOnBuild = false;
+                })
                 .ConfigureWebHostDefaults(webBuilder => {
                     webBuilder.UseKestrel(options => {
-                            options.Listen(IPAddress.Any, 5000); // http
                             options.Listen(IPAddress.Any, 5001, listenOptions => // https
                             {
                                 listenOptions.UseHttps(
-                                    "/home/fergalm/dev/mixyboos/certs/dev.mixyboos.com.pfx", 
+                                    "/home/fergalm/dev/mixyboos/certs/dev.mixyboos.com.pfx",
                                     "secret");
                             });
                         })
