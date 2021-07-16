@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Validation.AspNetCore;
+using Quartz;
 
 namespace MixyBoos.Api.Controllers {
     public class UploadFormData {
@@ -29,9 +30,11 @@ namespace MixyBoos.Api.Controllers {
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class UploadController : _Controller {
+        private readonly ISchedulerFactory _schedulerFactory;
         const long FileSizeLimit = 2147483648;
 
-        public UploadController(ILogger<UploadController> logger) : base(logger) {
+        public UploadController(ISchedulerFactory schedulerFactory, ILogger<UploadController> logger) : base(logger) {
+            _schedulerFactory = schedulerFactory;
         }
 
         [HttpPost]
@@ -135,7 +138,19 @@ namespace MixyBoos.Api.Controllers {
                 return BadRequest(ModelState);
             }
 
-            await System.IO.File.WriteAllBytesAsync($"/tmp/{formData.Id}.mp3", streamedFileContent);
+            var outputFile = $"/tmp/{formData.Id}.mp3";
+            await System.IO.File.WriteAllBytesAsync(outputFile, streamedFileContent);
+
+
+            var scheduler = await _schedulerFactory.GetScheduler();
+            var jobData = new Dictionary<string, string>() {
+                {"Id", formData.Id},
+                {"FileLocation", outputFile}
+            };
+            await scheduler.TriggerJob(
+                new JobKey("ProcessUploadedAudioJob"),
+                new JobDataMap(jobData));
+
             return Created(nameof(UploadController), null);
         }
 
@@ -145,7 +160,9 @@ namespace MixyBoos.Api.Controllers {
 
             // UTF-7 is insecure and shouldn't be honored. UTF-8 succeeds in 
             // most cases.
+#pragma warning disable 618
             if (!hasMediaTypeHeader || Encoding.UTF7.Equals(mediaType.Encoding)) {
+#pragma warning restore 618
                 return Encoding.UTF8;
             }
 

@@ -1,4 +1,5 @@
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using IdentityModel.Client;
@@ -13,7 +14,7 @@ namespace MixyBoos.Api.Tests {
         const string ApiUrl = "https://dev.mixyboos.com:5001";
         private const string ClientId = "testharness";
         private const string ClientSecret = "e83ec86b-d234-4a09-bb91-6a36c43ccf77";
-        private const string Scope = "openid api";
+        private const string Scope = "api offline_access";
         private const string StsUrl = "https://dev.mixyboos.com:5001";
 
         private readonly WebApplicationFactory<Startup> _factory;
@@ -60,11 +61,7 @@ namespace MixyBoos.Api.Tests {
             }
 
             // Assert
-            response.EnsureSuccessStatusCode();
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            Assert.NotEmpty(responseString);
-            Assert.Equal(expectedContentType, response.Content.Headers.ContentType.ToString());
+            Assert.StrictEqual(HttpStatusCode.Created, response.StatusCode);
 
             response.Dispose();
             client.Dispose();

@@ -27,29 +27,40 @@ namespace MixyBoos.Api.Data.Seeders {
             var logger = serviceScope.ServiceProvider.GetService<ILogger<DbInitializer>>();
             var seeder = new TestData(context, logger);
 
-            if (await context.Users.CountAsync() == 0) {
-                var user = (await seeder.GetTestUsers()).FirstOrDefault();
-                if (!context.Users.Any(u => u.UserName == user.UserName)) {
-                    var password = new PasswordHasher<ApplicationUser>();
-                    var hashed = password.HashPassword(user, "SVqVKJWZh5dIaM7JsNY1h0E/xbzPCD7y7Veedxa1Q/k=");
-                    user.PasswordHash = hashed;
+            if (!await context.Users.AnyAsync()) {
+                var users = await seeder.GetTestUsers();
+                foreach (var user in users) {
+                    if (!context.Users.Any(u => u.UserName == user.UserName)) {
+                        var password = new PasswordHasher<MixyBoosUser>();
+                        var hashed = password.HashPassword(user, "SVqVKJWZh5dIaM7JsNY1h0E/xbzPCD7y7Veedxa1Q/k=");
+                        user.PasswordHash = hashed;
 
-                    var userStore = new UserStore<ApplicationUser>(context);
-                    await userStore.CreateAsync(user);
+                        var userStore = new UserStore<MixyBoosUser>(context);
+                        await userStore.CreateAsync(user);
+                    }
                 }
             }
 
-            await context.SaveChangesAsync();
-
-            if (await context.Mixes.CountAsync() == 0) {
+            if (!await context.Mixes.AnyAsync()) {
                 var mixes = await seeder.GetTestMixes();
                 try {
                     await context.Mixes.AddRangeAsync(mixes);
+                } catch (Exception e) {
+                    logger.LogError(e.Message);
+                }
+            }
+
+            if (!await context.LiveShows.AnyAsync()) {
+                var shows = await seeder.GetTestShows();
+                try {
+                    await context.LiveShows.AddRangeAsync(shows);
                     await context.SaveChangesAsync();
                 } catch (Exception e) {
                     logger.LogError(e.Message);
                 }
             }
+
+            await context.SaveChangesAsync();
         }
     }
 }

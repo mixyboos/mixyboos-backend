@@ -1,20 +1,18 @@
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using MixyBoos.Api.Data.Utils;
+
+#nullable disable
 
 namespace MixyBoos.Api.Data.Models {
-    public class Mix {
-        public int Id { get; set; }
-        public MixyBoosUser User { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+    [Index(nameof(Slug), IsUnique = true)]
+    public class Mix : BaseEntity, ISluggedEntity {
+        [SlugField(SourceField = "Title")] public string Slug { get; set; }
+        [Required] public string Title { get; set; }
+        [Required] public string Description { get; set; }
+        public string Image { get; set; }
+        public string AudioUrl { get; set; }
 
-        public bool Active { get; set; }
-
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime Inserted { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime Updated { get; set; }
+        [Required] public virtual MixyBoosUser User { get; set; }
     }
 }

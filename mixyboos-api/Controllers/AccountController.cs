@@ -10,12 +10,11 @@ namespace MixyBoos.Api.Controllers {
     [Authorize]
     [Route("[controller]")]
     public class AccountController : _Controller {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<MixyBoosUser> _userManager;
         private readonly MixyBoosContext _context;
-        private static bool _databaseChecked;
 
         public AccountController(
-            UserManager<ApplicationUser> userManager,
+            UserManager<MixyBoosUser> userManager,
             MixyBoosContext dbContext,
             ILogger<AccountController> logger) : base(logger) {
             _userManager = userManager;
@@ -31,7 +30,7 @@ namespace MixyBoos.Api.Controllers {
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser {UserName = model.UserName, Email = model.UserName};
+            var user = new MixyBoosUser {UserName = model.UserName, Email = model.UserName};
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded) {
                 return Ok();

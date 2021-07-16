@@ -3,14 +3,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MixyBoos.Api.Data.Models;
+using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Extensions;
-using MixyBoos.Api.Services.Helpers;
 
 #nullable disable
 
 namespace MixyBoos.Api.Data {
-    public class MixyBoosContext : IdentityDbContext<ApplicationUser> {
+    public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
         public DbSet<Mix> Mixes { get; set; }
+        public DbSet<LiveShow> LiveShows { get; set; }
+        public DbSet<ShowChat> ShowChat { get; set; }
 
         public MixyBoosContext() {
         }
@@ -21,7 +24,10 @@ namespace MixyBoos.Api.Data {
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
             if (!optionsBuilder.IsConfigured) {
-                optionsBuilder.UseNpgsql("Name=MixyBoosContext");
+                optionsBuilder
+                    .UseNpgsql("Name=MixyBoos")
+                    .UseSnakeCaseNamingConvention();
+                // optionsBuilder.UseSqlite("Name=MixyBoosSqlite");
             }
         }
 

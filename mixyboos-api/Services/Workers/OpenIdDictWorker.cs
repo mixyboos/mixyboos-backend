@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MixyBoos.Api.Data;
 using OpenIddict.Abstractions;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
@@ -17,11 +16,9 @@ namespace MixyBoos.Api.Services.Workers {
         public async Task StartAsync(CancellationToken cancellationToken) {
             using var scope = _serviceProvider.CreateScope();
 
-            var context = scope.ServiceProvider.GetRequiredService<MixyBoosContext>();
-            await context.Database.EnsureCreatedAsync();
-
-            var manager =
-                scope.ServiceProvider.GetRequiredService<IOpenIddictApplicationManager>();
+            var manager = scope
+                .ServiceProvider
+                .GetRequiredService<IOpenIddictApplicationManager>();
 
             if (await manager.FindByClientIdAsync("webclient", cancellationToken) is null) {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor {
@@ -42,14 +39,15 @@ namespace MixyBoos.Api.Services.Workers {
             if (await manager.FindByClientIdAsync("testharness", cancellationToken) is null) {
                 await manager.CreateAsync(new OpenIddictApplicationDescriptor {
                     ClientId = "testharness",
-                    ClientSecret = "e83ec86b-d234-4a09-bb91-6a36c43ccf77",
                     DisplayName = "Test Harness",
+                    ConsentType = ConsentTypes.Explicit,
                     Permissions = {
                         Permissions.Endpoints.Authorization,
+                        Permissions.Endpoints.Logout,
                         Permissions.Endpoints.Token,
                         Permissions.GrantTypes.Password,
-                        Permissions.Prefixes.Scope + "api",
-                        Permissions.ResponseTypes.Code
+                        Permissions.GrantTypes.RefreshToken,
+                        Permissions.Prefixes.Scope + "api"
                     }
                 }, cancellationToken);
             }

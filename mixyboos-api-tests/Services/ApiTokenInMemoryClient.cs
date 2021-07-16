@@ -60,8 +60,7 @@ namespace MixyBoos.Api.Tests.Services {
                             new("password", "SVqVKJWZh5dIaM7JsNY1h0E/xbzPCD7y7Veedxa1Q/k="),
                             new("scope", scope),
                             new("client_id", clientId),
-                            new("client_secret", clientSecret),
-                            new("grant_type", "client_credentials")
+                            new("grant_type", "password")
                         })
                     };
 
