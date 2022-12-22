@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MixyBoos.Api.Migrations
 {
@@ -96,7 +97,8 @@ namespace MixyBoos.Api.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     role_id = table.Column<string>(type: "text", nullable: false),
                     claim_type = table.Column<string>(type: "text", nullable: true),
                     claim_value = table.Column<string>(type: "text", nullable: true)
@@ -116,7 +118,8 @@ namespace MixyBoos.Api.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     user_id = table.Column<string>(type: "text", nullable: false),
                     claim_type = table.Column<string>(type: "text", nullable: true),
                     claim_value = table.Column<string>(type: "text", nullable: true)

@@ -2,9 +2,9 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MixyBoos.Api.Data;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MixyBoos.Api.Migrations
 {
@@ -17,7 +17,7 @@ namespace MixyBoos.Api.Migrations
             modelBuilder
                 .HasAnnotation("Relational:Collation", "en_US.utf8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "6.0.0-preview.5.21301.9")
+                .HasAnnotation("ProductVersion", "6.0.0-preview.6.21352.1")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -48,7 +48,7 @@ namespace MixyBoos.Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -56,7 +56,8 @@ namespace MixyBoos.Api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text")
@@ -77,7 +78,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("RoleId")
                         .HasDatabaseName("ix_asp_net_role_claims_role_id");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -85,7 +86,8 @@ namespace MixyBoos.Api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text")
@@ -106,7 +108,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_asp_net_user_claims_user_id");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -134,7 +136,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_asp_net_user_logins_user_id");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -153,7 +155,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("RoleId")
                         .HasDatabaseName("ix_asp_net_user_roles_role_id");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -177,7 +179,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name")
                         .HasName("pk_asp_net_user_tokens");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.MixyBoosUser", b =>
@@ -277,7 +279,7 @@ namespace MixyBoos.Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_asp_net_users_slug");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.LiveShow", b =>
@@ -321,7 +323,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_live_shows_user_id");
 
-                    b.ToTable("live_shows");
+                    b.ToTable("live_shows", (string)null);
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.Mix", b =>
@@ -379,7 +381,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_mixes_user_id");
 
-                    b.ToTable("mixes");
+                    b.ToTable("mixes", (string)null);
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.ShowChat", b =>
@@ -429,7 +431,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("ToUserId")
                         .HasDatabaseName("ix_show_chat_to_user_id");
 
-                    b.ToTable("show_chat");
+                    b.ToTable("show_chat", (string)null);
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
@@ -499,7 +501,7 @@ namespace MixyBoos.Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_open_iddict_applications_client_id");
 
-                    b.ToTable("OpenIddictApplications");
+                    b.ToTable("OpenIddictApplications", (string)null);
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
@@ -552,7 +554,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("ApplicationId", "Status", "Subject", "Type")
                         .HasDatabaseName("ix_open_iddict_authorizations_application_id_status_subject_type");
 
-                    b.ToTable("OpenIddictAuthorizations");
+                    b.ToTable("OpenIddictAuthorizations", (string)null);
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreScope", b =>
@@ -604,7 +606,7 @@ namespace MixyBoos.Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_open_iddict_scopes_name");
 
-                    b.ToTable("OpenIddictScopes");
+                    b.ToTable("OpenIddictScopes", (string)null);
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreToken", b =>
@@ -681,7 +683,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("ApplicationId", "Status", "Subject", "Type")
                         .HasDatabaseName("ix_open_iddict_tokens_application_id_status_subject_type");
 
-                    b.ToTable("OpenIddictTokens");
+                    b.ToTable("OpenIddictTokens", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -11,7 +11,7 @@ using Xunit;
 
 namespace MixyBoos.Api.Tests {
     public class TestAudioUpload : IClassFixture<WebApplicationFactory<Startup>> {
-        const string ApiUrl = "https://dev.mixyboos.com:5001";
+        const string ApiUrl = "https://mixyboos.dev.fergl.ie:5001";
         private const string ClientId = "testharness";
         private const string ClientSecret = "e83ec86b-d234-4a09-bb91-6a36c43ccf77";
         private const string Scope = "api offline_access";

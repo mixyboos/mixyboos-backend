@@ -13,15 +13,12 @@ namespace MixyBoos.Api.Services.Helpers {
             string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890") =>
             RandomString(random.NextBytes, length, charset.ToCharArray());
 
-        public static string GenerateRandomCryptoString(int length,
-            string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890") {
-            using var crypto = new System.Security.Cryptography.RNGCryptoServiceProvider();
-            return crypto.GenerateRandomCryptoString(length, charset);
+        public static string GenerateRandomCryptoString(int length) {
+            using var rng = RandomNumberGenerator.Create();
+            var randomNumber = new byte[length];
+            rng.GetBytes(randomNumber);
+            return Convert.ToBase64String(randomNumber);
         }
-
-        public static string GenerateRandomCryptoString(this RNGCryptoServiceProvider random, int length,
-            string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890") =>
-            RandomString(random.GetBytes, length, charset.ToCharArray());
 
         private static string RandomString(Action<byte[]> fillRandomBuffer, int length, char[] charset) {
             if (length < 0)

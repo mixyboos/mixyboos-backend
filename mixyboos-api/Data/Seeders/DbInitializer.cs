@@ -50,15 +50,15 @@ namespace MixyBoos.Api.Data.Seeders {
                 }
             }
 
-            if (!await context.LiveShows.AnyAsync()) {
-                var shows = await seeder.GetTestShows();
-                try {
-                    await context.LiveShows.AddRangeAsync(shows);
-                    await context.SaveChangesAsync();
-                } catch (Exception e) {
-                    logger.LogError(e.Message);
-                }
-            }
+            // if (!await context.LiveShows.AnyAsync()) {
+            //     var shows = await seeder.GetTestShows();
+            //     try {
+            //         await context.LiveShows.AddRangeAsync(shows);
+            //         await context.SaveChangesAsync();
+            //     } catch (Exception e) {
+            //         logger.LogError(e.Message);
+            //     }
+            // }
 
             await context.SaveChangesAsync();
         }

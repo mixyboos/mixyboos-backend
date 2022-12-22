@@ -115,7 +115,7 @@ namespace MixyBoos.Api {
             services.AddHostedService<OpenIdDictWorker>();
             // services.AddHostedService<UploadFileProcessor>();
             services.AddQuartz(q => {
-                q.UseMicrosoftDependencyInjectionScopedJobFactory();
+                q.UseMicrosoftDependencyInjectionJobFactory();
                 var jobKey = new JobKey("ProcessUploadedAudioJob");
                 q.AddJob<ConvertAudioJob>(opts => {
                     opts.WithIdentity(jobKey).StoreDurably();
@@ -144,8 +144,8 @@ namespace MixyBoos.Api {
             app.UseHttpsRedirection();
 
             app.UseCors(builder => builder
-                .WithOrigins("https://dev.mixyboos.com:3000")
-                .WithOrigins("http://dev.mixyboos.com:3000")
+                .WithOrigins("https://mixyboos.dev.fergl.ie:3000")
+                .WithOrigins("http://mixyboos.dev.fergl.ie:3000")
                 .WithOrigins("https://mixyboos.com")
                 .AllowCredentials()
                 .AllowAnyHeader()
@@ -156,8 +156,8 @@ namespace MixyBoos.Api {
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
-            
+
+
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
                 endpoints.MapDefaultControllerRoute();

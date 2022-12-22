@@ -82,12 +82,12 @@ namespace MixyBoos.Api.Controllers {
                 .FirstOrDefaultAsync();
 
             if (show is null) {
-                return Unauthorized("Invalid stream key");
+                return NoContent();
             }
 
             return show.Adapt<LiveShowDTO>();
-        }        
-        
+        }
+
         [HttpGet("current/{userSlug}")]
         [Produces("application/json")]
         [AllowAnonymous]

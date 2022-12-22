@@ -19,8 +19,8 @@ using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace MixyBoos.Api.Controllers {
     public class AuthorizationController : _Controller {
-        const int ACCESS_TOKEN_EXPIRY = 60; //minutes
-        const int REFRESH_TOKEN_EXPIRY = 30;
+        const int ACCESS_TOKEN_EXPIRY = 43800; //minutes
+        const int REFRESH_TOKEN_EXPIRY = 30; //days
 
         private readonly SignInManager<MixyBoosUser> _signInManager;
         private readonly UserManager<MixyBoosUser> _userManager;

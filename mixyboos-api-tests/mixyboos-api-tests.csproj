@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <RootNamespace>MixyBoos.Api.Tests</RootNamespace>
 
         <IsPackable>false</IsPackable>
@@ -9,7 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.0-preview.5.21301.17" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
         <PackageReference Include="Moq" Version="4.16.1" />
         <PackageReference Include="xunit" Version="2.4.1" />
@@ -23,9 +23,6 @@
         </PackageReference>
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\mixyboos-api\mixyboos-api.csproj" />
-    </ItemGroup>
 
     <ItemGroup>
         <Folder Include="Fixtures\Audio" />
@@ -34,5 +31,8 @@
         <Content Include="Fixtures\**\*">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\mixyboos-api\mixyboos-api.csproj" />
     </ItemGroup>
 </Project>
