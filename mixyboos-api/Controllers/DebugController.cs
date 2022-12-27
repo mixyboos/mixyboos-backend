@@ -11,8 +11,7 @@ namespace MixyBoos.Api.Controllers {
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class DebugController : _Controller {
-        public DebugController(ILogger<DebugController> logger) : base(logger) {
-        }
+        public DebugController(ILogger<DebugController> logger) : base(logger) { }
 
         [HttpGet]
         public async Task<DebugDTO> GetOsInfo() {

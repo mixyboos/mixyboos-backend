@@ -70,7 +70,7 @@ namespace MixyBoos.Api {
                         .AllowRefreshTokenFlow()
                         .RequireProofKeyForCodeExchange()
                         .AcceptAnonymousClients();
-
+                    
                     options
                         .SetAuthorizationEndpointUris("/connect/authorize")
                         .SetTokenEndpointUris("/connect/token")
