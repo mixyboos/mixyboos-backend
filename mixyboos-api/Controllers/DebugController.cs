@@ -15,8 +15,8 @@ namespace MixyBoos.Api.Controllers {
 
         [HttpGet]
         public async Task<DebugDTO> GetOsInfo() {
-            return await Task.FromResult<DebugDTO>(new DebugDTO {
-                NetCoreVersion = Assembly
+            return await Task.FromResult(new DebugDTO {
+                LibVersion = Assembly
                     .GetEntryAssembly()?
                     .GetCustomAttribute<TargetFrameworkAttribute>()?
                     .FrameworkName,

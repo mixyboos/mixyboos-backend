@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MixyBoos.Api.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+#nullable disable
+
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
@@ -15,10 +17,11 @@ namespace MixyBoos.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:Collation", "en_US.utf8")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "6.0.0-preview.6.21352.1")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .UseCollation("en_US.utf8")
+                .HasAnnotation("ProductVersion", "7.0.1")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -42,13 +45,13 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("normalized_name");
 
                     b.HasKey("Id")
-                        .HasName("pk_asp_net_roles");
+                        .HasName("pk_user_role");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("user_role", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -56,8 +59,9 @@ namespace MixyBoos.Api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text")
@@ -73,12 +77,80 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("role_id");
 
                     b.HasKey("Id")
-                        .HasName("pk_asp_net_role_claims");
+                        .HasName("pk_role_claim");
 
                     b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_asp_net_role_claims_role_id");
+                        .HasDatabaseName("ix_role_claim_role_id");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("role_claim", "auth");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("access_failed_count");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("text")
+                        .HasColumnName("concurrency_stamp");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text")
+                        .HasColumnName("email");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("email_confirmed");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("lockout_enabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("lockout_end");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("text")
+                        .HasColumnName("normalized_email");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("text")
+                        .HasColumnName("normalized_user_name");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text")
+                        .HasColumnName("password_hash");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text")
+                        .HasColumnName("phone_number");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("phone_number_confirmed");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text")
+                        .HasColumnName("security_stamp");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("two_factor_enabled");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("text")
+                        .HasColumnName("user_name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_identity_user");
+
+                    b.ToTable("identity_user", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -86,8 +158,9 @@ namespace MixyBoos.Api.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("id")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text")
@@ -103,12 +176,12 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
-                        .HasName("pk_asp_net_user_claims");
+                        .HasName("pk_user_claim");
 
                     b.HasIndex("UserId")
-                        .HasDatabaseName("ix_asp_net_user_claims_user_id");
+                        .HasDatabaseName("ix_user_claim_user_id");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("user_claim", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -131,12 +204,12 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("user_id");
 
                     b.HasKey("LoginProvider", "ProviderKey")
-                        .HasName("pk_asp_net_user_logins");
+                        .HasName("pk_user_login");
 
                     b.HasIndex("UserId")
-                        .HasDatabaseName("ix_asp_net_user_logins_user_id");
+                        .HasDatabaseName("ix_user_login_user_id");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("user_login", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -150,12 +223,12 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("role_id");
 
                     b.HasKey("UserId", "RoleId")
-                        .HasName("pk_asp_net_user_roles");
+                        .HasName("pk_user_identity_role");
 
                     b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_asp_net_user_roles_role_id");
+                        .HasDatabaseName("ix_user_identity_role_role_id");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("user_identity_role", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -177,9 +250,9 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("value");
 
                     b.HasKey("UserId", "LoginProvider", "Name")
-                        .HasName("pk_asp_net_user_tokens");
+                        .HasName("pk_user_token");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("user_token", "auth");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.MixyBoosUser", b =>
@@ -266,7 +339,7 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("user_name");
 
                     b.HasKey("Id")
-                        .HasName("pk_asp_net_users");
+                        .HasName("pk_user");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -277,9 +350,9 @@ namespace MixyBoos.Api.Migrations
 
                     b.HasIndex("Slug")
                         .IsUnique()
-                        .HasDatabaseName("ix_asp_net_users_slug");
+                        .HasDatabaseName("ix_user_slug");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("user", "auth");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.LiveShow", b =>
@@ -295,18 +368,18 @@ namespace MixyBoos.Api.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_created")
-                        .HasDefaultValueSql("NOW()");
+                        .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_updated")
-                        .HasDefaultValueSql("NOW()");
+                        .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("start_date");
 
                     b.Property<string>("Title")
@@ -339,15 +412,15 @@ namespace MixyBoos.Api.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_created")
-                        .HasDefaultValueSql("NOW()");
+                        .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_updated")
-                        .HasDefaultValueSql("NOW()");
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -368,6 +441,7 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("title");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("user_id");
 
@@ -393,25 +467,25 @@ namespace MixyBoos.Api.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_created")
-                        .HasDefaultValueSql("NOW()");
+                        .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateSent")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_sent");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_updated")
-                        .HasDefaultValueSql("NOW()");
+                        .HasDefaultValueSql("now()");
 
                     b.Property<string>("FromUserId")
                         .HasColumnType("text")
                         .HasColumnName("from_user_id");
 
-                    b.Property<Guid?>("ShowId")
+                    b.Property<Guid>("ShowId")
                         .HasColumnType("uuid")
                         .HasColumnName("show_id");
 
@@ -495,13 +569,13 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("type");
 
                     b.HasKey("Id")
-                        .HasName("pk_open_iddict_applications");
+                        .HasName("pk_openiddict_application");
 
                     b.HasIndex("ClientId")
                         .IsUnique()
-                        .HasDatabaseName("ix_open_iddict_applications_client_id");
+                        .HasDatabaseName("ix_openiddict_application_client_id");
 
-                    b.ToTable("OpenIddictApplications", (string)null);
+                    b.ToTable("openiddict_application", "auth");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
@@ -522,7 +596,7 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("concurrency_token");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("creation_date");
 
                     b.Property<string>("Properties")
@@ -549,12 +623,12 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("type");
 
                     b.HasKey("Id")
-                        .HasName("pk_open_iddict_authorizations");
+                        .HasName("pk_openiddict_authorization");
 
                     b.HasIndex("ApplicationId", "Status", "Subject", "Type")
-                        .HasDatabaseName("ix_open_iddict_authorizations_application_id_status_subject_type");
+                        .HasDatabaseName("ix_openiddict_authorization_application_id_status_subject_type");
 
-                    b.ToTable("OpenIddictAuthorizations", (string)null);
+                    b.ToTable("openiddict_authorization", "auth");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreScope", b =>
@@ -600,13 +674,13 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("resources");
 
                     b.HasKey("Id")
-                        .HasName("pk_open_iddict_scopes");
+                        .HasName("pk_openiddict_scope");
 
                     b.HasIndex("Name")
                         .IsUnique()
-                        .HasDatabaseName("ix_open_iddict_scopes_name");
+                        .HasDatabaseName("ix_openiddict_scope_name");
 
-                    b.ToTable("OpenIddictScopes", (string)null);
+                    b.ToTable("openiddict_scope", "auth");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreToken", b =>
@@ -631,11 +705,11 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("concurrency_token");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("creation_date");
 
                     b.Property<DateTime?>("ExpirationDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("expiration_date");
 
                     b.Property<string>("Payload")
@@ -647,7 +721,7 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("properties");
 
                     b.Property<DateTime?>("RedemptionDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("redemption_date");
 
                     b.Property<string>("ReferenceId")
@@ -671,19 +745,19 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("type");
 
                     b.HasKey("Id")
-                        .HasName("pk_open_iddict_tokens");
+                        .HasName("pk_openiddict_token");
 
                     b.HasIndex("AuthorizationId")
-                        .HasDatabaseName("ix_open_iddict_tokens_authorization_id");
+                        .HasDatabaseName("ix_openiddict_token_authorization_id");
 
                     b.HasIndex("ReferenceId")
                         .IsUnique()
-                        .HasDatabaseName("ix_open_iddict_tokens_reference_id");
+                        .HasDatabaseName("ix_openiddict_token_reference_id");
 
                     b.HasIndex("ApplicationId", "Status", "Subject", "Type")
-                        .HasDatabaseName("ix_open_iddict_tokens_application_id_status_subject_type");
+                        .HasDatabaseName("ix_openiddict_token_application_id_status_subject_type");
 
-                    b.ToTable("OpenIddictTokens", (string)null);
+                    b.ToTable("openiddict_token", "auth");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -691,9 +765,9 @@ namespace MixyBoos.Api.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .HasConstraintName("fk_asp_net_role_claims_asp_net_roles_role_id")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_role_claim_user_role_role_id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -701,9 +775,9 @@ namespace MixyBoos.Api.Migrations
                     b.HasOne("MixyBoos.Api.Data.MixyBoosUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .HasConstraintName("fk_asp_net_user_claims_asp_net_users_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_user_claim_user_user_id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -711,9 +785,9 @@ namespace MixyBoos.Api.Migrations
                     b.HasOne("MixyBoos.Api.Data.MixyBoosUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .HasConstraintName("fk_asp_net_user_logins_asp_net_users_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_user_login_user_user_id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -721,16 +795,16 @@ namespace MixyBoos.Api.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .HasConstraintName("fk_asp_net_user_roles_asp_net_roles_role_id")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_user_identity_role_user_role_role_id");
 
                     b.HasOne("MixyBoos.Api.Data.MixyBoosUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .HasConstraintName("fk_asp_net_user_roles_asp_net_users_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_user_identity_role_user_user_id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -738,9 +812,9 @@ namespace MixyBoos.Api.Migrations
                     b.HasOne("MixyBoos.Api.Data.MixyBoosUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .HasConstraintName("fk_asp_net_user_tokens_asp_net_users_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_user_token_user_user_id");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.LiveShow", b =>
@@ -758,6 +832,8 @@ namespace MixyBoos.Api.Migrations
                     b.HasOne("MixyBoos.Api.Data.MixyBoosUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_mixes_users_user_id");
 
                     b.Navigation("User");
@@ -773,6 +849,8 @@ namespace MixyBoos.Api.Migrations
                     b.HasOne("MixyBoos.Api.Data.Models.LiveShow", "Show")
                         .WithMany()
                         .HasForeignKey("ShowId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_show_chat_live_shows_show_id");
 
                     b.HasOne("MixyBoos.Api.Data.MixyBoosUser", "ToUser")
@@ -792,7 +870,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", "Application")
                         .WithMany("Authorizations")
                         .HasForeignKey("ApplicationId")
-                        .HasConstraintName("fk_open_iddict_authorizations_open_iddict_applications_application");
+                        .HasConstraintName("fk_openiddict_authorization_openiddict_application_application");
 
                     b.Navigation("Application");
                 });
@@ -802,12 +880,12 @@ namespace MixyBoos.Api.Migrations
                     b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", "Application")
                         .WithMany("Tokens")
                         .HasForeignKey("ApplicationId")
-                        .HasConstraintName("fk_open_iddict_tokens_open_iddict_applications_application_id");
+                        .HasConstraintName("fk_openiddict_token_openiddict_application_application_id");
 
                     b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", "Authorization")
                         .WithMany("Tokens")
                         .HasForeignKey("AuthorizationId")
-                        .HasConstraintName("fk_open_iddict_tokens_open_iddict_authorizations_authorization_id");
+                        .HasConstraintName("fk_openiddict_token_openiddict_authorization_authorization_id");
 
                     b.Navigation("Application");
 

@@ -41,7 +41,7 @@ namespace MixyBoos.Api.Controllers {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var newShow = new LiveShow {
                 Title = show.Title,
-                StartDate = DateTime.Now,
+                StartDate = DateTime.UtcNow,
                 Active = true,
                 User = user
             };

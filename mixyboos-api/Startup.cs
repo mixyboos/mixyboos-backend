@@ -40,7 +40,9 @@ namespace MixyBoos.Api {
 
             services.AddDbContext<MixyBoosContext>(options => {
                 options
-                    .UseNpgsql(_configuration.GetConnectionString("MixyBoos"))
+                    .UseNpgsql(_configuration.GetConnectionString("MixyBoos"), pgoptions => {
+                        pgoptions.MigrationsHistoryTable("migrations", "sys");
+                    })
                     .UseSnakeCaseNamingConvention()
                     .UseOpenIddict();
             });
@@ -70,7 +72,7 @@ namespace MixyBoos.Api {
                         .AllowRefreshTokenFlow()
                         .RequireProofKeyForCodeExchange()
                         .AcceptAnonymousClients();
-                    
+
                     options
                         .SetAuthorizationEndpointUris("/connect/authorize")
                         .SetTokenEndpointUris("/connect/token")

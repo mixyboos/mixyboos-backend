@@ -309,7 +309,7 @@ namespace MixyBoos.Api.Data.Seeders {
             return new List<LiveShow> {
                 new() {
                     Title = "Test Show One",
-                    StartDate = DateTime.Now,
+                    StartDate = DateTime.UtcNow,
                     Active = true,
                     User = user
                 }
