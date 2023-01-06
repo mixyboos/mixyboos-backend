@@ -1,13 +1,16 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Extensions;
+using Npgsql;
 using OpenIddict.EntityFrameworkCore.Models;
 
 #nullable disable
@@ -18,6 +21,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
     private const string IDENTITY_PREFIX = "openiddict";
     public DbSet<Mix> Mixes { get; set; }
     public DbSet<LiveShow> LiveShows { get; set; }
+    public DbSet<Tag> Tags { get; set; }
     public DbSet<ShowChat> ShowChat { get; set; }
 
     public MixyBoosContext() { }
@@ -25,17 +29,29 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
     public MixyBoosContext(DbContextOptions<MixyBoosContext> options)
         : base(options) { }
 
+    private IEnumerable<PropertyBuilder> __getColumns(ModelBuilder modelBuilder, string columnName) {
+        //helper function to only return models which are part of this project
+        //not models created by separate libs (auth, openiddict etc.)
+        return modelBuilder.Model
+            .GetEntityTypes()
+            .SelectMany(t => t.GetProperties())
+            .Where(p => p.DeclaringEntityType.ClrType.IsSubclassOf(typeof(BaseEntity)))
+            .Where(p => p.Name == columnName)
+            .Select(p => modelBuilder.Entity(p.DeclaringEntityType.ClrType).Property(p.Name));
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
         if (!optionsBuilder.IsConfigured) {
             optionsBuilder
                 .UseNpgsql("Name=MixyBoos")
                 .UseSnakeCaseNamingConvention();
-            // optionsBuilder.UseSqlite("Name=MixyBoosSqlite");
         }
     }
 
     protected override void OnModelCreating(ModelBuilder mb) {
         base.OnModelCreating(mb);
+
+        mb.HasPostgresExtension("uuid-ossp");
         mb.HasAnnotation("Relational:Collation", "en_US.utf8");
 
         //give the identity tables proper names and schema
@@ -54,22 +70,23 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
         mb.Entity<OpenIddictEntityFrameworkCoreToken>().ToTable($"{IDENTITY_PREFIX}_{"token"}", "auth");
         //end identity stuff
 
-        foreach (var pb in mb.GetColumn("DateCreated")) {
+        foreach (var pb in __getColumns(mb, "DateCreated")) {
             pb.ValueGeneratedOnAdd()
                 .HasDefaultValueSql("now()");
         }
 
-        foreach (var pb in mb.GetColumn("DateUpdated")) {
+        foreach (var pb in __getColumns(mb, "DateUpdated")) {
             pb.ValueGeneratedOnAddOrUpdate()
                 .HasDefaultValueSql("now()");
         }
-        // foreach (var pb in modelBuilder.GetColumn("Id")) {
-        //     pb.ValueGeneratedOnAddOrUpdate()
-        //         .HasColumnName("identifier")
-        //         .HasColumnType("uuid")
-        //         .HasDefaultValueSql("uuid_generate_v4()") // Use 
-        //         .IsRequired();
-        // }
+
+        foreach (var pb in __getColumns(mb, "Id")) {
+            pb.ValueGeneratedOnAdd()
+                .HasColumnName("identifier")
+                .HasColumnType("uuid")
+                .HasDefaultValueSql("uuid_generate_v4()") // Use 
+                .IsRequired();
+        }
     }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,

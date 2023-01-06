@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230105174110_Initial")]
+    [Migration("20230106031651_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -24,7 +24,27 @@ namespace MixyBoos.Api.Migrations
                 .HasAnnotation("ProductVersion", "7.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("LiveShowTag", b =>
+                {
+                    b.Property<Guid>("LiveShowsId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("live_shows_id");
+
+                    b.Property<Guid>("TagsId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tags_id");
+
+                    b.HasKey("LiveShowsId", "TagsId")
+                        .HasName("pk_live_show_tag");
+
+                    b.HasIndex("TagsId")
+                        .HasDatabaseName("ix_live_show_tag_tags_id");
+
+                    b.ToTable("live_show_tag", (string)null);
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -363,11 +383,8 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("boolean")
-                        .HasColumnName("active");
+                        .HasColumnName("identifier")
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
@@ -380,6 +397,14 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("IsFinished")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_finished");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp with time zone")
@@ -407,7 +432,8 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnName("identifier")
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<string>("AudioUrl")
                         .HasColumnType("text")
@@ -466,7 +492,8 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnName("identifier")
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
@@ -509,6 +536,40 @@ namespace MixyBoos.Api.Migrations
                         .HasDatabaseName("ix_show_chat_to_user_id");
 
                     b.ToTable("show_chat", (string)null);
+                });
+
+            modelBuilder.Entity("MixyBoos.Api.Data.Models.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("identifier")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_created")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_updated")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<string>("TagName")
+                        .HasColumnType("text")
+                        .HasColumnName("tag_name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_tags");
+
+                    b.HasIndex("TagName")
+                        .IsUnique()
+                        .HasDatabaseName("ix_tags_tag_name");
+
+                    b.ToTable("tags", (string)null);
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
@@ -761,6 +822,23 @@ namespace MixyBoos.Api.Migrations
                         .HasDatabaseName("ix_openiddict_token_application_id_status_subject_type");
 
                     b.ToTable("openiddict_token", "auth");
+                });
+
+            modelBuilder.Entity("LiveShowTag", b =>
+                {
+                    b.HasOne("MixyBoos.Api.Data.Models.LiveShow", null)
+                        .WithMany()
+                        .HasForeignKey("LiveShowsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_live_show_tag_live_shows_live_shows_id");
+
+                    b.HasOne("MixyBoos.Api.Data.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_live_show_tag_tags_tags_id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

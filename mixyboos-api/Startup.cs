@@ -15,6 +15,7 @@ using MixyBoos.Api.Data.Seeders;
 using MixyBoos.Api.Services.Auth;
 using MixyBoos.Api.Services.Helpers.Audio;
 using MixyBoos.Api.Services.Jobs;
+using MixyBoos.Api.Services.Startup.Mapster;
 using MixyBoos.Api.Services.Workers;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
@@ -57,6 +58,7 @@ namespace MixyBoos.Api {
                 options.ClaimsIdentity.RoleClaimType = OpenIddictConstants.Claims.Role;
             });
 
+            services.RegisterMapsterConfiguration();
             services.AddSignalR();
 
             // .AddCore()

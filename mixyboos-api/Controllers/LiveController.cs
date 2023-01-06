@@ -13,6 +13,7 @@ using MixyBoos.Api.Controllers.Hubs;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
+using MixyBoos.Api.Services.Extensions;
 using OpenIddict.Validation.AspNetCore;
 
 namespace MixyBoos.Api.Controllers {
@@ -41,15 +42,16 @@ namespace MixyBoos.Api.Controllers {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var newShow = new LiveShow {
                 Title = show.Title,
+                Description = show.Description,
+                Tags = await _context.MapTags(show.Tags),
                 StartDate = DateTime.UtcNow,
-                Active = true,
                 User = user
             };
 
             await _context.LiveShows.AddAsync(newShow);
             await _context.SaveChangesAsync();
 
-            return Created(nameof(LiveController), newShow);
+            return Created(nameof(LiveController), newShow.Adapt<CreateLiveShowDTO>());
         }
 
         [HttpPost("start_stream")]
@@ -58,6 +60,7 @@ namespace MixyBoos.Api.Controllers {
         public async Task<IActionResult> ValidateAndStartStream([FromForm] string name) {
             var show = await _context.LiveShows
                 .Include(s => s.User)
+                .Where(s => !s.IsFinished)
                 .Where(s => s.User.StreamKey.Equals(name))
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefaultAsync();
@@ -71,13 +74,35 @@ namespace MixyBoos.Api.Controllers {
             return Redirect($"{show.Id}");
         }
 
+        [HttpPost("stop_stream")]
+        [AllowAnonymous]
+        [Consumes("application/x-www-form-urlencoded")]
+        public async Task<IActionResult> StopStream([FromForm] string name) {
+            var show = await _context.LiveShows
+                .Include(s => s.User)
+                .Where(s => !s.IsFinished)
+                .Where(s => s.User.StreamKey.Equals(name))
+                .OrderByDescending(s => s.StartDate)
+                .FirstOrDefaultAsync();
+
+            if (show is null) {
+                return Unauthorized("Invalid stream key");
+            }
+
+            show.IsFinished = true;
+            await _context.SaveChangesAsync();
+            //TODO: this should be in a background job... put it here for now
+            return Ok();
+        }
+
         [HttpGet("current")]
         [Produces("application/json")]
         public async Task<ActionResult<LiveShowDTO>> GetCurrentShow() {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var show = await _context.LiveShows
                 .Where(s => s.User.Equals(user))
-                .Where(s => s.Active)
+                .Where(s => !s.IsFinished)
+                .Include(s => s.Tags)
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefaultAsync();
 
@@ -94,7 +119,7 @@ namespace MixyBoos.Api.Controllers {
         public async Task<ActionResult<LiveShowDTO>> GetCurrentShow(string userSlug) {
             var show = await _context.LiveShows
                 .Where(s => s.User.Slug.Equals(userSlug))
-                .Where(s => s.Active)
+                .Where(s => s.IsFinished)
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefaultAsync();
 

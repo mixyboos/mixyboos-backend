@@ -310,7 +310,7 @@ namespace MixyBoos.Api.Data.Seeders {
                 new() {
                     Title = "Test Show One",
                     StartDate = DateTime.UtcNow,
-                    Active = true,
+                    IsFinished = true,
                     User = user
                 }
             };
