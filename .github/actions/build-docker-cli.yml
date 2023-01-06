@@ -1,0 +1,17 @@
+name: mixyboos-api deployment
+
+on:
+  push:
+    branches:
+      [ trunk ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
