@@ -6,8 +6,4 @@ using OpenIddict.Validation.AspNetCore;
 namespace MixyBoos.Api.Controllers.Hubs;
 
 [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
-public class LiveHub : Hub {
-    public async Task SendMessage(string userId, string message) {
-        await Clients.User(userId).SendAsync("ReceiveMessage", message);
-    }
-}
+public class DebugHub : Hub { }

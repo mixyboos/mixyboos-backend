@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +33,9 @@ namespace MixyBoos.Api.Controllers {
 
             var user = new MixyBoosUser {UserName = model.UserName, Email = model.UserName};
             var result = await _userManager.CreateAsync(user, model.Password);
+
             if (result.Succeeded) {
+                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
                 return Ok();
             }
 

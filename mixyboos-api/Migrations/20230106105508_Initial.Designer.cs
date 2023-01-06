@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230106031651_Initial")]
+    [Migration("20230106105508_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -383,7 +383,7 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("identifier")
+                        .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<DateTime>("DateCreated")
@@ -432,7 +432,7 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("identifier")
+                        .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<string>("AudioUrl")
@@ -492,7 +492,7 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("identifier")
+                        .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<DateTime>("DateCreated")
@@ -543,7 +543,7 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("identifier")
+                        .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<DateTime>("DateCreated")

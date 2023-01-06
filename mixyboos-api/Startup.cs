@@ -1,9 +1,11 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,6 +17,7 @@ using MixyBoos.Api.Data.Seeders;
 using MixyBoos.Api.Services.Auth;
 using MixyBoos.Api.Services.Helpers.Audio;
 using MixyBoos.Api.Services.Jobs;
+using MixyBoos.Api.Services.Startup;
 using MixyBoos.Api.Services.Startup.Mapster;
 using MixyBoos.Api.Services.Workers;
 using OpenIddict.Abstractions;
@@ -38,6 +41,7 @@ namespace MixyBoos.Api {
             services.AddScoped<IClaimsTransformation, ClaimsTransformer>();
             services.AddScoped<IUserClaimsPrincipalFactory<MixyBoosUser>, ClaimsPrincipalFactory>();
             services.AddSingleton<IAudioFileConverter, AudioFileConverter>();
+            services.AddSingleton<IUserIdProvider, CustomEmailProvider>();
 
             services.AddDbContext<MixyBoosContext>(options => {
                 options
@@ -59,6 +63,8 @@ namespace MixyBoos.Api {
             });
 
             services.RegisterMapsterConfiguration();
+            services.RegisterHttpClients();
+
             services.AddSignalR();
 
             // .AddCore()
@@ -118,17 +124,14 @@ namespace MixyBoos.Api {
 
             services.AddHostedService<OpenIdDictWorker>();
             // services.AddHostedService<UploadFileProcessor>();
-            services.AddQuartz(q => {
-                q.UseMicrosoftDependencyInjectionJobFactory();
-                var jobKey = new JobKey("ProcessUploadedAudioJob");
-                q.AddJob<ConvertAudioJob>(opts => {
-                    opts.WithIdentity(jobKey).StoreDurably();
-                });
-            });
+            services.LoadScheduler();
 
             services
                 .AddAuthentication(options => {
                     options.DefaultScheme = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme;
+                })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => {
+                    options.LoginPath = "/auth/login";
                 });
 
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -165,8 +168,9 @@ namespace MixyBoos.Api {
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapHub<DebugHub>("/hubs/debug");
                 endpoints.MapHub<LiveHub>("/hubs/live");
-                endpoints.MapHub<Chat>("/hubs/chat");
+                endpoints.MapHub<ChatHub>("/hubs/chat");
             });
 
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();

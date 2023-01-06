@@ -1,9 +1,14 @@
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
+using MixyBoos.Api.Controllers.Hubs;
+using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
 using OpenIddict.Validation.AspNetCore;
 
@@ -11,7 +16,14 @@ namespace MixyBoos.Api.Controllers {
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class DebugController : _Controller {
-        public DebugController(ILogger<DebugController> logger) : base(logger) { }
+        private readonly UserManager<MixyBoosUser> _userManager;
+        private readonly IHubContext<DebugHub> _hub;
+
+        public DebugController(UserManager<MixyBoosUser> userManager, ILogger<DebugController> logger,
+            IHubContext<DebugHub> hub) : base(logger) {
+            _userManager = userManager;
+            _hub = hub;
+        }
 
         [HttpGet]
         public async Task<DebugDTO> GetOsInfo() {
@@ -22,6 +34,18 @@ namespace MixyBoos.Api.Controllers {
                     .FrameworkName,
                 OSVersion = System.Runtime.InteropServices.RuntimeInformation.OSDescription
             });
+        }
+
+        [HttpGet("sendhub")]
+        public async Task<IActionResult> SendHubMessage() {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user is null) {
+                return Unauthorized();
+            }
+
+            await _hub.Clients.User(user.Email)
+                .SendAsync("Debuggles", "I'm a little teapot", "Fucking loads of tae");
+            return Ok();
         }
     }
 }

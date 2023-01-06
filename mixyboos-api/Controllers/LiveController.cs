@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapster;
@@ -15,6 +16,7 @@ using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services.Extensions;
 using OpenIddict.Validation.AspNetCore;
+using Quartz;
 
 namespace MixyBoos.Api.Controllers {
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
@@ -23,17 +25,20 @@ namespace MixyBoos.Api.Controllers {
         private readonly UserManager<MixyBoosUser> _userManager;
         private readonly MixyBoosContext _context;
         private readonly IConfiguration _config;
+        private readonly ISchedulerFactory _schedulerFactory;
         private readonly IHubContext<LiveHub> _hub;
 
         public LiveController(
             UserManager<MixyBoosUser> userManager,
             MixyBoosContext context,
             IConfiguration config,
+            ISchedulerFactory schedulerFactory,
             IHubContext<LiveHub> hub,
             ILogger<LiveController> logger) : base(logger) {
             _userManager = userManager;
             _context = context;
             _config = config;
+            _schedulerFactory = schedulerFactory;
             _hub = hub;
         }
 
@@ -54,14 +59,19 @@ namespace MixyBoos.Api.Controllers {
             return Created(nameof(LiveController), newShow.Adapt<CreateLiveShowDTO>());
         }
 
-        [HttpPost("start_stream")]
+        [HttpPost("on_publish")]
         [AllowAnonymous]
         [Consumes("application/x-www-form-urlencoded")]
-        public async Task<IActionResult> ValidateAndStartStream([FromForm] string name) {
+        public async Task<IActionResult> OnPublish([FromForm] string name) {
+            //name is StreamKey
+            var user = await _userManager.FindByStreamKeyAsync(name);
+            if (user is null) {
+                return NotFound("Invalid stream key");
+            }
+
             var show = await _context.LiveShows
                 .Include(s => s.User)
-                .Where(s => !s.IsFinished)
-                .Where(s => s.User.StreamKey.Equals(name))
+                .Where(s => s.User.Equals(user))
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefaultAsync();
 
@@ -69,35 +79,59 @@ namespace MixyBoos.Api.Controllers {
                 return Unauthorized("Invalid stream key");
             }
 
-            //TODO: this should be in a background job... put it here for now
-            await _hub.Clients.All.SendAsync("StreamStatusUpdate", show.Id);
+            if (show.IsFinished) {
+                //obviously a stream glitch, let's reopen it and see what's what
+                show.IsFinished = false;
+                await _context.SaveChangesAsync();
+            }
+
+            try {
+                var scheduler = await _schedulerFactory.GetScheduler();
+                await scheduler.TriggerJob(new JobKey("CheckLiveStreamJob", "DEFAULT"), new JobDataMap(
+                    new Dictionary<string, string> {
+                        {"UserEmail", user.Email},
+                        {"ShowId", show.Id.ToString()}
+                    }
+                ));
+            } catch (Exception e) {
+                _logger.LogError("Error starting job {Message}", e.Message);
+            }
+
             return Redirect($"{show.Id}");
         }
 
-        [HttpPost("stop_stream")]
+        [HttpPost("on_publish_done")]
         [AllowAnonymous]
         [Consumes("application/x-www-form-urlencoded")]
-        public async Task<IActionResult> StopStream([FromForm] string name) {
+        public async Task<IActionResult> OnPublishDone([FromForm] string name) {
+            var user = await _userManager.FindByStreamKeyAsync(name);
+            if (user is null) {
+                return NotFound("Invalid stream key");
+            }
+
             var show = await _context.LiveShows
                 .Include(s => s.User)
-                .Where(s => !s.IsFinished)
-                .Where(s => s.User.StreamKey.Equals(name))
+                .Where(s => s.User.Equals(user))
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefaultAsync();
-
             if (show is null) {
                 return Unauthorized("Invalid stream key");
             }
 
             show.IsFinished = true;
             await _context.SaveChangesAsync();
-            //TODO: this should be in a background job... put it here for now
+
+            await _hub.Clients.User(user.Email).SendAsync("StreamEnded", show.Id);
             return Ok();
         }
 
         [HttpGet("current")]
         [Produces("application/json")]
         public async Task<ActionResult<LiveShowDTO>> GetCurrentShow() {
+            if (User.Identity is not {Name: { }}) {
+                return Unauthorized();
+            }
+
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var show = await _context.LiveShows
                 .Where(s => s.User.Equals(user))

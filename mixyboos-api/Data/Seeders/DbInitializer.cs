@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -24,20 +25,25 @@ namespace MixyBoos.Api.Data.Seeders {
         public async Task SeedData() {
             using var serviceScope = _scopeFactory.CreateScope();
             await using var context = serviceScope.ServiceProvider.GetService<MixyBoosContext>();
+            using var userManager = serviceScope.ServiceProvider.GetService<UserManager<MixyBoosUser>>();
             var logger = serviceScope.ServiceProvider.GetService<ILogger<DbInitializer>>();
             var seeder = new TestData(context, logger);
 
             if (!await context.Users.AnyAsync()) {
                 var users = await seeder.GetTestUsers();
                 foreach (var user in users) {
-                    if (!context.Users.Any(u => u.UserName == user.UserName)) {
-                        var password = new PasswordHasher<MixyBoosUser>();
-                        var hashed = password.HashPassword(user, "SVqVKJWZh5dIaM7JsNY1h0E/xbzPCD7y7Veedxa1Q/k=");
-                        user.PasswordHash = hashed;
-
-                        var userStore = new UserStore<MixyBoosUser>(context);
-                        await userStore.CreateAsync(user);
+                    if (context.Users.Any(u => u.UserName == user.UserName)) {
+                        continue;
                     }
+
+                    var password = new PasswordHasher<MixyBoosUser>();
+                    var hashed = password.HashPassword(user, "SVqVKJWZh5dIaM7JsNY1h0E/xbzPCD7y7Veedxa1Q/k=");
+                    user.PasswordHash = hashed;
+
+                    var userStore = new UserStore<MixyBoosUser>(context);
+                    await userStore.CreateAsync(user);
+                    Console.WriteLine($"Adding ClaimTypes.Email to user {user.Email}");
+                    await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
                 }
             }
 

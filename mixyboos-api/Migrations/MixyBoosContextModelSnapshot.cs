@@ -380,7 +380,7 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("identifier")
+                        .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<DateTime>("DateCreated")
@@ -429,7 +429,7 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("identifier")
+                        .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<string>("AudioUrl")
@@ -489,7 +489,7 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("identifier")
+                        .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<DateTime>("DateCreated")
@@ -540,7 +540,7 @@ namespace MixyBoos.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("identifier")
+                        .HasColumnName("id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<DateTime>("DateCreated")

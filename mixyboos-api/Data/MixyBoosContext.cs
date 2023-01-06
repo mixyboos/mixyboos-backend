@@ -82,7 +82,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
 
         foreach (var pb in __getColumns(mb, "Id")) {
             pb.ValueGeneratedOnAdd()
-                .HasColumnName("identifier")
+                .HasColumnName("id")
                 .HasColumnType("uuid")
                 .HasDefaultValueSql("uuid_generate_v4()") // Use 
                 .IsRequired();

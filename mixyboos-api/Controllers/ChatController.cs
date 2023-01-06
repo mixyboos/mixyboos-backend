@@ -16,13 +16,13 @@ public class ChatController : _Controller {
     private readonly UserManager<MixyBoosUser> _userManager;
     private readonly MixyBoosContext _context;
     private readonly IConfiguration _config;
-    private readonly IHubContext<Chat> _hub;
+    private readonly IHubContext<ChatHub> _hub;
 
     public ChatController(
         UserManager<MixyBoosUser> userManager,
         MixyBoosContext context,
         IConfiguration config,
-        IHubContext<Chat> hub,
+        IHubContext<ChatHub> hub,
         ILogger<ChatController> logger) : base(logger) {
         _userManager = userManager;
         _context = context;

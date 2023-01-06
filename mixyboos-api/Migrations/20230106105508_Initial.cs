@@ -92,14 +92,14 @@ namespace MixyBoos.Api.Migrations
                 name: "tags",
                 columns: table => new
                 {
-                    identifier = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     tagname = table.Column<string>(name: "tag_name", type: "text", nullable: true),
                     datecreated = table.Column<DateTime>(name: "date_created", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     dateupdated = table.Column<DateTime>(name: "date_updated", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_tags", x => x.identifier);
+                    table.PrimaryKey("pk_tags", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,7 +177,7 @@ namespace MixyBoos.Api.Migrations
                 name: "live_shows",
                 columns: table => new
                 {
-                    identifier = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     title = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
                     startdate = table.Column<DateTime>(name: "start_date", type: "timestamp with time zone", nullable: false),
@@ -188,7 +188,7 @@ namespace MixyBoos.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_live_shows", x => x.identifier);
+                    table.PrimaryKey("pk_live_shows", x => x.id);
                     table.ForeignKey(
                         name: "fk_live_shows_users_user_id",
                         column: x => x.userid,
@@ -201,7 +201,7 @@ namespace MixyBoos.Api.Migrations
                 name: "mixes",
                 columns: table => new
                 {
-                    identifier = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     slug = table.Column<string>(type: "text", nullable: true),
                     title = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
@@ -213,7 +213,7 @@ namespace MixyBoos.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_mixes", x => x.identifier);
+                    table.PrimaryKey("pk_mixes", x => x.id);
                     table.ForeignKey(
                         name: "fk_mixes_users_user_id",
                         column: x => x.userid,
@@ -390,13 +390,13 @@ namespace MixyBoos.Api.Migrations
                         name: "fk_live_show_tag_live_shows_live_shows_id",
                         column: x => x.liveshowsid,
                         principalTable: "live_shows",
-                        principalColumn: "identifier",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_live_show_tag_tags_tags_id",
                         column: x => x.tagsid,
                         principalTable: "tags",
-                        principalColumn: "identifier",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -404,7 +404,7 @@ namespace MixyBoos.Api.Migrations
                 name: "show_chat",
                 columns: table => new
                 {
-                    identifier = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     fromuserid = table.Column<string>(name: "from_user_id", type: "text", nullable: true),
                     touserid = table.Column<string>(name: "to_user_id", type: "text", nullable: true),
                     datesent = table.Column<DateTime>(name: "date_sent", type: "timestamp with time zone", nullable: false),
@@ -414,12 +414,12 @@ namespace MixyBoos.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_show_chat", x => x.identifier);
+                    table.PrimaryKey("pk_show_chat", x => x.id);
                     table.ForeignKey(
                         name: "fk_show_chat_live_shows_show_id",
                         column: x => x.showid,
                         principalTable: "live_shows",
-                        principalColumn: "identifier",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_show_chat_users_from_user_id",
