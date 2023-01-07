@@ -97,7 +97,9 @@ namespace MixyBoos.Api.Controllers {
                     .SetIdentityTokenLifetime(TimeSpan.FromMinutes(ACCESS_TOKEN_EXPIRY))
                     .SetRefreshTokenLifetime(TimeSpan.FromDays(REFRESH_TOKEN_EXPIRY));
 
-                principal.Claims.Append(new Claim(Claims.Subject, user.DisplayName));
+                principal.Claims.Append(new Claim(Claims.Subject, user.Id));
+                principal.Claims.Append(new Claim(Claims.Name, user.UserName ?? string.Empty));
+                principal.Claims.Append(new Claim("displayName", user.DisplayName));
                 principal.Claims.Append(new Claim("image", user.Image));
                 principal.Claims.Append(new Claim("slug", user.Slug));
 

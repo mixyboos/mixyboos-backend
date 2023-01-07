@@ -1,10 +1,11 @@
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
@@ -18,14 +19,11 @@ using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.Seeders;
 using MixyBoos.Api.Services.Auth;
 using MixyBoos.Api.Services.Helpers.Audio;
-using MixyBoos.Api.Services.Jobs;
 using MixyBoos.Api.Services.Startup;
 using MixyBoos.Api.Services.Startup.Mapster;
 using MixyBoos.Api.Services.Workers;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
-using OpenIddict.EntityFrameworkCore;
-using Quartz;
 
 namespace MixyBoos.Api {
     public class Startup {
@@ -59,13 +57,13 @@ namespace MixyBoos.Api {
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options => {
-                options.ClaimsIdentity.UserNameClaimType = OpenIddictConstants.Claims.Name;
+                options.ClaimsIdentity.UserNameClaimType = OpenIddictConstants.Claims.Email;
                 options.ClaimsIdentity.UserIdClaimType = OpenIddictConstants.Claims.Subject;
                 options.ClaimsIdentity.RoleClaimType = OpenIddictConstants.Claims.Role;
             });
 
             services.RegisterMapsterConfiguration();
-            services.RegisterHttpClients();
+            services.RegisterHttpClients(_configuration);
 
             services.AddSignalR();
 
@@ -88,31 +86,47 @@ namespace MixyBoos.Api {
                         .SetTokenEndpointUris("/connect/token")
                         .SetUserinfoEndpointUris("/connect/userinfo");
 
-                    if (_env.IsDevelopment()) {
-                        options
-                            .AddEphemeralEncryptionKey()
-                            .AddEphemeralSigningKey()
-                            .DisableAccessTokenEncryption();
+                    // if (_env.IsDevelopment()) {
+                    //     options
+                    //         .AddEphemeralEncryptionKey()
+                    //         .AddEphemeralSigningKey()
+                    //         .DisableAccessTokenEncryption();
+                    //
+                    //     options.AddDevelopmentEncryptionCertificate()
+                    //         .AddDevelopmentSigningCertificate();
+                    // } else {
+                    //     options.AddEncryptionKey(new SymmetricSecurityKey(
+                    //         Convert.FromBase64String(_configuration["Auth:SigningKey"] ?? string.Empty)));
+                    //     options.AddSigningCertificate(SigningCertificateGenerator.CreateSigningCertificate());
+                    //     options.AddEncryptionCertificate(SigningCertificateGenerator.CreateEncryptionCertificate());
+                    // }
+                    options
+                        .AddEphemeralEncryptionKey()
+                        .AddEphemeralSigningKey()
+                        .DisableAccessTokenEncryption();
 
-                        options.AddDevelopmentEncryptionCertificate()
-                            .AddDevelopmentSigningCertificate();
-                    } else {
-                        options.AddEncryptionKey(new SymmetricSecurityKey(
-                            Convert.FromBase64String(_configuration["Auth:SigningKey"] ?? string.Empty)));
-                        options.AddSigningCertificate(SigningCertificateGenerator.CreateSigningCertificate());
-                        options.AddEncryptionCertificate(SigningCertificateGenerator.CreateEncryptionCertificate());
-                    }
+                    options.AddDevelopmentEncryptionCertificate()
+                        .AddDevelopmentSigningCertificate();
 
                     options.RegisterScopes("api");
                     options
                         .UseAspNetCore()
                         .EnableAuthorizationEndpointPassthrough()
-                        .EnableTokenEndpointPassthrough();
+                        .EnableTokenEndpointPassthrough()
+                        .DisableTransportSecurityRequirement();
                 }).AddValidation(options => {
                     options.UseLocalServer();
                     options.UseAspNetCore();
                 });
 
+            services.Configure<ForwardedHeadersOptions>(options => {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
+            services.AddHttpLogging(logging => {
+                // Customize HTTP logging here.
+                logging.LoggingFields = HttpLoggingFields.All;
+            });
             services.AddOpenIddict()
                 .AddCore()
                 .UseEntityFrameworkCore(options => {
@@ -154,16 +168,18 @@ namespace MixyBoos.Api {
                 app.UseHttpsRedirection();
             }
 
+            app.UseForwardedHeaders();
+
             app.UseSwagger();
             app.UseCors(builder => builder
                 .WithOrigins("https://mixyboos.dev.fergl.ie:3000")
                 .WithOrigins("http://mixyboos.dev.fergl.ie:3000")
+                .WithOrigins("https://www.mixyboos.com")
                 .WithOrigins("https://mixyboos.com")
                 .AllowCredentials()
                 .AllowAnyHeader()
                 .AllowAnyMethod()
             );
-
             app.UseRouting();
 
             app.UseAuthentication();

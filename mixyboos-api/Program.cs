@@ -5,6 +5,9 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog;
+using NLog.Web;
 
 namespace MixyBoos.Api;
 
@@ -12,7 +15,19 @@ public class Program {
     private static readonly string _environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
     public static void Main(string[] args) {
-        CreateHostBuilder(args).Build().Run();
+        var logger = LogManager.Setup()
+            .LoadConfigurationFromAppSettings()
+            .GetCurrentClassLogger();
+
+        try {
+            logger.Debug("init main");
+            CreateHostBuilder(args).Build().Run();
+        } catch (Exception exception) {
+            logger.Error(exception, "Stopped program because of exception");
+            throw;
+        } finally {
+            NLog.LogManager.Shutdown();
+        }
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args) {
@@ -21,6 +36,8 @@ public class Program {
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"appsettings.{_environment}.json", optional: true)
             .AddEnvironmentVariables();
+
+
         var configuration = builder.Build();
 
         return Host.CreateDefaultBuilder(args)
@@ -44,7 +61,12 @@ public class Program {
                             listenOptions.UseHttps(x509);
                         });
                     })
-                    .UseStartup<Startup>();
+                    .UseStartup<Startup>()
+                    .ConfigureLogging(logging => {
+                        logging.ClearProviders();
+                        logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                    })
+                    .UseNLog();
             });
     }
 }

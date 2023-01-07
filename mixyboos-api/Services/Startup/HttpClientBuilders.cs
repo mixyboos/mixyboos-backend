@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 using Polly;
@@ -18,9 +19,10 @@ public static class HttpClientBuilders {
             .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
     }
 
-    public static void RegisterHttpClients(this IServiceCollection services) {
+    public static void RegisterHttpClients(this IServiceCollection services, IConfiguration configuration) {
         services.AddHttpClient("RTMP", httpClient => {
-                httpClient.BaseAddress = new Uri("https://live-mixyboos.dev.fergl.ie:9091/");
+                httpClient.BaseAddress =
+                    new Uri(configuration["LiveServices:StreamingUrl"] ?? "https://live.mixyboos.com");
             })
             .SetHandlerLifetime(TimeSpan.FromMinutes(5)) //Set lifetime to five minutes
             .AddPolicyHandler(GetRetryPolicy());

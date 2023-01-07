@@ -11,6 +11,12 @@ services:
       ASPNETCORE_URLS: http://*:80
     labels:
       - "traefik.enable=true"
+      - "traefik.http.middlewares.mixyboos.headers.customrequestheaders.proxy_set_header=Upgrade $http_upgrade;"
+      - "traefik.http.middlewares.mixyboos.headers.customrequestheaders.proxy_set_header=Connection keep-alive;"
+      - "traefik.http.middlewares.mixyboos.headers.customresponseheaders.proxy_set_header=Host $host;"
+      - "traefik.http.middlewares.mixyboos.headers.customresponseheaders.proxy_cache_bypass=$http_upgrade;"
+      - "traefik.http.middlewares.mixyboos.headers.customresponseheaders.proxy_set_header=X-Forwarded-For $proxy_add_x_forwarded_for;"
+      - "traefik.http.middlewares.mixyboos.headers.customresponseheaders.proxy_set_header=X-Forwarded-Proto $scheme;"
       - "traefik.http.routers.mixyboos.rule=Host(`api.mixyboos.com`)"
       - "traefik.http.routers.mixyboos.entrypoints=websecure"
       - "traefik.http.routers.mixyboos.tls.certresolver=noodles-resolver"
