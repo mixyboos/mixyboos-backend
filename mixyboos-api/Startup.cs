@@ -151,12 +151,10 @@ namespace MixyBoos.Api {
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
+                app.UseHttpsRedirection();
             }
 
             app.UseSwagger();
-
-            app.UseHttpsRedirection();
-
             app.UseCors(builder => builder
                 .WithOrigins("https://mixyboos.dev.fergl.ie:3000")
                 .WithOrigins("http://mixyboos.dev.fergl.ie:3000")
