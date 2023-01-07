@@ -7,6 +7,17 @@ using MixyBoos.Api.Data;
 namespace MixyBoos.Api.Services.Extensions;
 
 public static class UserManagerExtensions {
+    public static async Task<MixyBoosUser?> FindByNameWithFollowingAsync(this UserManager<MixyBoosUser> userManager,
+        string name) {
+        var user = await userManager
+            .Users
+            .Include(u => u.Following)
+            .Include(u => u.Followers)
+            .SingleOrDefaultAsync(x => x.UserName.Equals(name));
+
+        return user;
+    }
+
     public static async Task<MixyBoosUser?> FindByStreamKeyAsync(this UserManager<MixyBoosUser> userManager,
         string streamKey) {
         var user = await userManager

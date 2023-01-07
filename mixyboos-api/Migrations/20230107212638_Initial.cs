@@ -247,6 +247,33 @@ namespace MixyBoos.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "user_followers",
+                schema: "auth",
+                columns: table => new
+                {
+                    followersid = table.Column<string>(name: "followers_id", type: "text", nullable: false),
+                    followingid = table.Column<string>(name: "following_id", type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_user_followers", x => new { x.followersid, x.followingid });
+                    table.ForeignKey(
+                        name: "fk_user_followers_user_followers_id",
+                        column: x => x.followersid,
+                        principalSchema: "auth",
+                        principalTable: "user",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_user_followers_user_following_id",
+                        column: x => x.followingid,
+                        principalSchema: "auth",
+                        principalTable: "user",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "user_login",
                 schema: "auth",
                 columns: table => new
@@ -549,6 +576,12 @@ namespace MixyBoos.Api.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_user_followers_following_id",
+                schema: "auth",
+                table: "user_followers",
+                column: "following_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_user_identity_role_role_id",
                 schema: "auth",
                 table: "user_identity_role",
@@ -598,6 +631,10 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "user_claim",
+                schema: "auth");
+
+            migrationBuilder.DropTable(
+                name: "user_followers",
                 schema: "auth");
 
             migrationBuilder.DropTable(

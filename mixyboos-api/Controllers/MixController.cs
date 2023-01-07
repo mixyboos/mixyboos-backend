@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Mapster;
@@ -32,6 +33,20 @@ public class MixController : _Controller {
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<MixDTO>>> Get() {
         var mixes = await _context.Mixes.Include(m => m.User).ToListAsync();
+        var result = mixes.Adapt<List<MixDTO>>();
+        return Ok(result);
+    }
+
+    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+    [HttpGet("feed")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<MixDTO>>> GetFeed() {
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        var mixes = await _context.Mixes.Include(m => m.User)
+            .Where(m => m.User.Id.Equals(user.Id))
+            .OrderByDescending(m => m.DateCreated)
+            .ToListAsync();
         var result = mixes.Adapt<List<MixDTO>>();
         return Ok(result);
     }

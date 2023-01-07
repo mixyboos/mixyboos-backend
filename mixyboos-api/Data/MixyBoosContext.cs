@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -87,6 +88,11 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
                 .HasDefaultValueSql("uuid_generate_v4()") // Use 
                 .IsRequired();
         }
+
+        mb.Entity<MixyBoosUser>()
+            .HasMany(p => p.Following)
+            .WithMany(p => p.Followers)
+            .UsingEntity(j => j.ToTable("user_followers"));
     }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,

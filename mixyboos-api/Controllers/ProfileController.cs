@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
+using MixyBoos.Api.Services.Extensions;
 using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Validation.AspNetCore;
 
@@ -26,12 +28,34 @@ namespace MixyBoos.Api.Controllers {
 
         [HttpGet("me")]
         public async Task<ActionResult<ProfileDTO>> GetProfile() {
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await _userManager.FindByNameWithFollowingAsync(User.Identity.Name);
+            if (user is null) {
+                return Unauthorized();
+            }
+
             return Ok(user.Adapt<ProfileDTO>());
 
             // return Ok(new ProfileDTO {
             //     DisplayName = user.UserName
             // });
+        }
+
+        [HttpPost("follow")]
+        public async Task<IActionResult> FollowUser([FromQuery] string userId) {
+            var userToFollow = await _userManager.FindByIdAsync(userId);
+            var me = await _userManager.FindByNameWithFollowingAsync(User.Identity.Name);
+
+            if (userToFollow is null && me is not null) {
+                return BadRequest();
+            }
+
+            if (!me.Following.Any(f => f.Id.Equals(userToFollow.Id))) {
+                me.Following.Add(userToFollow);
+                userToFollow.Followers.Add(me);
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok();
         }
 
         [HttpGet("apikey")]

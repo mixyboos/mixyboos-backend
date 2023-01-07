@@ -47,14 +47,14 @@ namespace MixyBoos.Api.Data.Seeders {
                 }
             }
 
-            if (!await context.Mixes.AnyAsync()) {
-                var mixes = await seeder.GetTestMixes();
-                try {
-                    await context.Mixes.AddRangeAsync(mixes);
-                } catch (Exception e) {
-                    logger.LogError(e.Message);
-                }
-            }
+            // if (!await context.Mixes.AnyAsync()) {
+            //     var mixes = await seeder.GetTestMixes();
+            //     try {
+            //         await context.Mixes.AddRangeAsync(mixes);
+            //     } catch (Exception e) {
+            //         logger.LogError(e.Message);
+            //     }
+            // }
 
             // if (!await context.LiveShows.AnyAsync()) {
             //     var shows = await seeder.GetTestShows();

@@ -98,7 +98,7 @@ namespace MixyBoos.Api.Services.Extensions {
 
                     var t = entity.GetType();
                     var tableName = context.Model.FindEntityType(t).GetTableName();
-                    var schemaName = context.Model.FindEntityType(t).GetSchema();
+                    var schemaName = context.Model.FindEntityType(t).GetSchema() ?? "public";
                     if (!string.IsNullOrEmpty(tableName)) {
                         var sourceField = (attribute as SlugFieldAttribute)?.SourceField;
                         if (string.IsNullOrEmpty(sourceField)) {

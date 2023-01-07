@@ -102,7 +102,7 @@ namespace MixyBoos.Api.Controllers {
                         var value = await streamReader.ReadToEndAsync();
 
                         if (string.Equals(value, "undefined",
-                            StringComparison.OrdinalIgnoreCase)) {
+                                StringComparison.OrdinalIgnoreCase)) {
                             value = string.Empty;
                         }
 

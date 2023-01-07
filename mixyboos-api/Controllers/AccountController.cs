@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Bogus;
@@ -8,9 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
+using MixyBoos.Api.Services.Extensions;
+using OpenIddict.Validation.AspNetCore;
 
 namespace MixyBoos.Api.Controllers {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class AccountController : _Controller {
         private readonly UserManager<MixyBoosUser> _userManager;
@@ -52,6 +55,7 @@ namespace MixyBoos.Api.Controllers {
             // If we got this far, something failed.
             return BadRequest(ModelState);
         }
+
 
         #region Helpers
 

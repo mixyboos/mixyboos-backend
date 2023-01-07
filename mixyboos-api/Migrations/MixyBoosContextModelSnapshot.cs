@@ -570,6 +570,25 @@ namespace MixyBoos.Api.Migrations
                     b.ToTable("tags", (string)null);
                 });
 
+            modelBuilder.Entity("MixyBoosUserMixyBoosUser", b =>
+                {
+                    b.Property<string>("FollowersId")
+                        .HasColumnType("text")
+                        .HasColumnName("followers_id");
+
+                    b.Property<string>("FollowingId")
+                        .HasColumnType("text")
+                        .HasColumnName("following_id");
+
+                    b.HasKey("FollowersId", "FollowingId")
+                        .HasName("pk_user_followers");
+
+                    b.HasIndex("FollowingId")
+                        .HasDatabaseName("ix_user_followers_following_id");
+
+                    b.ToTable("user_followers", "auth");
+                });
+
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
                 {
                     b.Property<string>("Id")
@@ -942,6 +961,23 @@ namespace MixyBoos.Api.Migrations
                     b.Navigation("Show");
 
                     b.Navigation("ToUser");
+                });
+
+            modelBuilder.Entity("MixyBoosUserMixyBoosUser", b =>
+                {
+                    b.HasOne("MixyBoos.Api.Data.MixyBoosUser", null)
+                        .WithMany()
+                        .HasForeignKey("FollowersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_followers_user_followers_id");
+
+                    b.HasOne("MixyBoos.Api.Data.MixyBoosUser", null)
+                        .WithMany()
+                        .HasForeignKey("FollowingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_followers_user_following_id");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
