@@ -9,8 +9,7 @@ using Microsoft.Extensions.Hosting;
 namespace MixyBoos.Api;
 
 public class Program {
-    private static readonly string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-    private static readonly bool isDevelopment = environment == Environments.Development;
+    private static readonly string _environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
     public static void Main(string[] args) {
         CreateHostBuilder(args).Build().Run();
@@ -20,7 +19,7 @@ public class Program {
         var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{environment}.json", optional: true)
+            .AddJsonFile($"appsettings.{_environment}.json", optional: true)
             .AddEnvironmentVariables();
         var configuration = builder.Build();
 
@@ -31,14 +30,13 @@ public class Program {
             .ConfigureWebHostDefaults(webBuilder => {
                 webBuilder
                     .UseKestrel(options => {
-                        options.Listen(IPAddress.Any, 5001, listenOptions => // https
-                        {
-                            var pemFile = configuration["SSL:PemFile"];
-                            var keyFile = configuration["SSL:KeyFile"];
-                            if (string.IsNullOrEmpty(pemFile) || string.IsNullOrEmpty(keyFile)) {
-                                return;
-                            }
+                        var pemFile = configuration["SSL:PemFile"];
+                        var keyFile = configuration["SSL:KeyFile"];
+                        if (string.IsNullOrEmpty(pemFile) || string.IsNullOrEmpty(keyFile)) {
+                            return;
+                        }
 
+                        options.Listen(IPAddress.Any, 5001, listenOptions => {
                             var certPem = File.ReadAllText("/etc/letsencrypt/live/dev.fergl.ie/fullchain.pem");
                             var keyPem = File.ReadAllText("/etc/letsencrypt/live/dev.fergl.ie/privkey.pem");
                             var x509 = X509Certificate2.CreateFromPem(certPem, keyPem);

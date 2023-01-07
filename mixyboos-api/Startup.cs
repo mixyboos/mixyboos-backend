@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MixyBoos.Api.Controllers.Hubs;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.Seeders;
@@ -94,6 +96,11 @@ namespace MixyBoos.Api {
 
                         options.AddDevelopmentEncryptionCertificate()
                             .AddDevelopmentSigningCertificate();
+                    } else {
+                        options.AddEncryptionKey(new SymmetricSecurityKey(
+                            Convert.FromBase64String(_configuration["Auth:SigningKey"] ?? string.Empty)));
+                        options.AddSigningCertificate(SigningCertificateGenerator.CreateSigningCertificate());
+                        options.AddEncryptionCertificate(SigningCertificateGenerator.CreateEncryptionCertificate());
                     }
 
                     options.RegisterScopes("api");
@@ -144,9 +151,9 @@ namespace MixyBoos.Api {
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MixyBoos Api v1"));
             }
+
+            app.UseSwagger();
 
             app.UseHttpsRedirection();
 
@@ -172,6 +179,8 @@ namespace MixyBoos.Api {
                 endpoints.MapHub<LiveHub>("/hubs/live");
                 endpoints.MapHub<ChatHub>("/hubs/chat");
             });
+
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MixyBoos Api v1"));
 
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using var scope = scopeFactory.CreateScope();

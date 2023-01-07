@@ -19,37 +19,40 @@ namespace MixyBoos.Api.Services.Workers {
             var manager = scope
                 .ServiceProvider
                 .GetRequiredService<IOpenIddictApplicationManager>();
+            try {
+                if (await manager.FindByClientIdAsync("webclient", cancellationToken) is null) {
+                    await manager.CreateAsync(new OpenIddictApplicationDescriptor {
+                        ClientId = "webclient",
+                        DisplayName = "MixyBoos Web Client",
+                        ConsentType = ConsentTypes.Implicit,
+                        Permissions = {
+                            Permissions.Endpoints.Authorization,
+                            Permissions.Endpoints.Logout,
+                            Permissions.Endpoints.Token,
+                            Permissions.GrantTypes.Password,
+                            Permissions.GrantTypes.RefreshToken,
+                            Permissions.Prefixes.Scope + "api"
+                        }
+                    }, cancellationToken);
+                }
 
-            if (await manager.FindByClientIdAsync("webclient", cancellationToken) is null) {
-                await manager.CreateAsync(new OpenIddictApplicationDescriptor {
-                    ClientId = "webclient",
-                    DisplayName = "MixyBoos Web Client",
-                    ConsentType = ConsentTypes.Implicit,
-                    Permissions = {
-                        Permissions.Endpoints.Authorization,
-                        Permissions.Endpoints.Logout,
-                        Permissions.Endpoints.Token,
-                        Permissions.GrantTypes.Password,
-                        Permissions.GrantTypes.RefreshToken,
-                        Permissions.Prefixes.Scope + "api"
-                    }
-                }, cancellationToken);
-            }
-
-            if (await manager.FindByClientIdAsync("testharness", cancellationToken) is null) {
-                await manager.CreateAsync(new OpenIddictApplicationDescriptor {
-                    ClientId = "testharness",
-                    DisplayName = "Test Harness",
-                    ConsentType = ConsentTypes.Explicit,
-                    Permissions = {
-                        Permissions.Endpoints.Authorization,
-                        Permissions.Endpoints.Logout,
-                        Permissions.Endpoints.Token,
-                        Permissions.GrantTypes.Password,
-                        Permissions.GrantTypes.RefreshToken,
-                        Permissions.Prefixes.Scope + "api"
-                    }
-                }, cancellationToken);
+                if (await manager.FindByClientIdAsync("testharness", cancellationToken) is null) {
+                    await manager.CreateAsync(new OpenIddictApplicationDescriptor {
+                        ClientId = "testharness",
+                        DisplayName = "Test Harness",
+                        ConsentType = ConsentTypes.Explicit,
+                        Permissions = {
+                            Permissions.Endpoints.Authorization,
+                            Permissions.Endpoints.Logout,
+                            Permissions.Endpoints.Token,
+                            Permissions.GrantTypes.Password,
+                            Permissions.GrantTypes.RefreshToken,
+                            Permissions.Prefixes.Scope + "api"
+                        }
+                    }, cancellationToken);
+                }
+            } catch (Npgsql.PostgresException) {
+                //most likely the db hasn't been created yet
             }
         }
 
