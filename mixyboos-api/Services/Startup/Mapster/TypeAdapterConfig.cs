@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
 using Mapster;
+using MixyBoos.Api.Data;
 
 namespace MixyBoos.Api.Services.Startup.Mapster;
 
@@ -21,6 +22,5 @@ public static class TypeAdapterConfig {
         TypeAdapterConfig<LiveShow, CreateLiveShowDTO>
             .NewConfig()
             .Map(dest => dest.Tags, src => src.Tags.Select(r => r.TagName));
-        
     }
 }

@@ -16,5 +16,10 @@ namespace MixyBoos.Api.Data.DTO {
         [Required]
         [Compare("Password", ErrorMessage = "Password and Confirm Password must match")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "Profile name cannot be longer than 30 characters")]
+        [Display(Name = "DisplayName")]
+        public string DisplayName { get; set; }
     }
 }

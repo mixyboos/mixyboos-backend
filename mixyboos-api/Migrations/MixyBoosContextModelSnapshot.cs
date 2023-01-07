@@ -291,7 +291,8 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("concurrency_stamp");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("text")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
                         .HasColumnName("display_name");
 
                     b.Property<string>("Email")

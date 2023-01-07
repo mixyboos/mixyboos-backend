@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -42,6 +43,10 @@ namespace MixyBoos.Api {
             services.AddScoped<IUserClaimsPrincipalFactory<MixyBoosUser>, ClaimsPrincipalFactory>();
             services.AddSingleton<IAudioFileConverter, AudioFileConverter>();
             services.AddSingleton<IUserIdProvider, CustomEmailProvider>();
+
+            //register the codepages (required for slugify)
+            var instance = CodePagesEncodingProvider.Instance;
+            Encoding.RegisterProvider(instance);
 
             services.AddDbContext<MixyBoosContext>(options => {
                 options
@@ -155,6 +160,17 @@ namespace MixyBoos.Api {
                     options.LoginPath = "/auth/login";
                 });
 
+            services.Configure<IdentityOptions>(options => {
+                // Default Password settings.
+                //jp1QhhMTysXddk6LiYv2UUU3tVubLvJrjwpsYt1fkM0=
+
+                options.Password.RequireDigit = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+            });
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
             services.AddSwaggerGen(c => {

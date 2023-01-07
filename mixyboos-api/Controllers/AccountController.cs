@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Bogus;
+using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,12 +33,18 @@ namespace MixyBoos.Api.Controllers {
                 return BadRequest(ModelState);
             }
 
-            var user = new MixyBoosUser {UserName = model.UserName, Email = model.UserName};
+            var faker = new Faker("en");
+            var user = new MixyBoosUser {
+                UserName = model.UserName,
+                Email = model.UserName,
+                DisplayName = model.DisplayName,
+                Image = faker.Internet.Avatar()
+            };
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded) {
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
-                return Ok();
+                return Ok(model);
             }
 
             AddErrors(result);

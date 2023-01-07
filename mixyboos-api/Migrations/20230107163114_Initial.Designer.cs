@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230106105508_Initial")]
+    [Migration("20230107163114_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -294,7 +294,8 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("concurrency_stamp");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("text")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
                         .HasColumnName("display_name");
 
                     b.Property<string>("Email")

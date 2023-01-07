@@ -108,7 +108,7 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
-                    displayname = table.Column<string>(name: "display_name", type: "text", nullable: true),
+                    displayname = table.Column<string>(name: "display_name", type: "character varying(30)", maxLength: 30, nullable: true),
                     image = table.Column<string>(type: "text", nullable: true),
                     slug = table.Column<string>(type: "text", nullable: true),
                     streamkey = table.Column<string>(name: "stream_key", type: "text", nullable: true),

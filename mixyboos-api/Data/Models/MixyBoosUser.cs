@@ -1,12 +1,13 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MixyBoos.Api.Data.Utils;
 
-namespace MixyBoos.Api.Data; 
+namespace MixyBoos.Api.Data;
 
 [Index(nameof(Slug), IsUnique = true)]
 public class MixyBoosUser : IdentityUser, ISluggedEntity {
-    public string DisplayName { get; set; }
+    [MaxLength(30)] public string DisplayName { get; set; }
     public string Image { get; set; }
 
     [SlugField(SourceField = "DisplayName")]

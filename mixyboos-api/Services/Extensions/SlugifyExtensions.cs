@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using Bogus;
+using Bogus.DataSets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
@@ -47,6 +51,40 @@ namespace MixyBoos.Api.Services.Extensions {
             }
         }
 
+        public static string RemoveNonAlphaChars(this string str) {
+            var rgx = new Regex("[^a-zA-Z0-9 -]");
+            return rgx.Replace(str, "");
+        }
+
+        public static string RemoveInvalidUrlChars(this string str) {
+            var regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+            var r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
+            return r.Replace(str, "");
+        }
+
+        public static string Slugify(this string phrase, IEnumerable<string> source) {
+            var str = phrase.RemoveAccent().ToLower().RemoveInvalidUrlChars().RemoveNonAlphaChars();
+            // invalid chars           
+            str = Regex.Replace(str, @"[^a-z0-9\s-]", "");
+            // convert multiple spaces into one space   
+            str = Regex.Replace(str, @"\s+", " ").Trim();
+            // cut and trim 
+            str = str.Substring(0, str.Length <= 45 ? str.Length : 45).Trim();
+            str = Regex.Replace(str, @"\s", "-"); // hyphens   
+            str = str.RemoveAccent().ToLower();
+
+            str = str.Replace(" ", "");
+            var count = 1;
+            var origStr = str;
+            while (source != null && source.Count() != 0 &&
+                   !string.IsNullOrEmpty(source.Where(e => e == str).Select(e => e).DefaultIfEmpty("")
+                       .FirstOrDefault())) {
+                str = $"{origStr}-{count++}";
+            }
+
+            return str;
+        }
+
         public static string GenerateSlug(this IUniqueFieldEntity entity, DbContext context,
             ILogger logger = null) {
             try {
@@ -60,6 +98,7 @@ namespace MixyBoos.Api.Services.Extensions {
 
                     var t = entity.GetType();
                     var tableName = context.Model.FindEntityType(t).GetTableName();
+                    var schemaName = context.Model.FindEntityType(t).GetSchema();
                     if (!string.IsNullOrEmpty(tableName)) {
                         var sourceField = (attribute as SlugFieldAttribute)?.SourceField;
                         if (string.IsNullOrEmpty(sourceField)) {
@@ -73,7 +112,10 @@ namespace MixyBoos.Api.Services.Extensions {
                             ?.GetValue(entity, null)
                             ?.ToString() ?? string.Empty;
 
-                        return Slugifier.GetFriendlyTitle(slugSource);
+                        var source = context.ExecSQL<ProxySluggedModel>($"SELECT Slug FROM {schemaName}.{tableName}")
+                            .Select(m => m.Slug);
+
+                        return slugSource.Slugify(source);
                         //TODO: for loop to check for unique slugs
                     }
                 }
