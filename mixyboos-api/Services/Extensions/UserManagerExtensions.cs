@@ -13,8 +13,16 @@ public static class UserManagerExtensions {
             .Users
             .Include(u => u.Following)
             .Include(u => u.Followers)
-            .SingleOrDefaultAsync(x => x.UserName.Equals(name));
+            .SingleOrDefaultAsync(x => x.UserName != null && x.UserName.Equals(name));
 
+        return user;
+    }
+
+    public static async Task<MixyBoosUser?> FindBySlugAsync(this UserManager<MixyBoosUser> userManager,
+        string slug) {
+        var user = await userManager
+            .Users
+            .SingleOrDefaultAsync(x => x.Slug.Equals(slug));
         return user;
     }
 

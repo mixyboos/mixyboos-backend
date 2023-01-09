@@ -160,9 +160,9 @@ namespace MixyBoos.Api.Controllers {
 
             // UTF-7 is insecure and shouldn't be honored. UTF-8 succeeds in 
             // most cases.
-#pragma warning disable 618
+#pragma warning disable SYSLIB0001
             if (!hasMediaTypeHeader || Encoding.UTF7.Equals(mediaType.Encoding)) {
-#pragma warning restore 618
+#pragma warning restore SYSLIB0001
                 return Encoding.UTF8;
             }
 

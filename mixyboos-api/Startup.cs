@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
@@ -14,7 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using MixyBoos.Api.Controllers.Hubs;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.Seeders;
@@ -25,6 +23,7 @@ using MixyBoos.Api.Services.Startup.Mapster;
 using MixyBoos.Api.Services.Workers;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
+using Serilog;
 
 namespace MixyBoos.Api {
     public class Startup {
@@ -55,6 +54,9 @@ namespace MixyBoos.Api {
                     })
                     .UseSnakeCaseNamingConvention()
                     .UseOpenIddict();
+                if (_env.IsDevelopment()) {
+                    options.EnableSensitiveDataLogging();
+                }
             });
 
             services.AddIdentity<MixyBoosUser, IdentityRole>()
@@ -128,10 +130,7 @@ namespace MixyBoos.Api {
                 options.ForwardedHeaders =
                     ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
             });
-            services.AddHttpLogging(logging => {
-                // Customize HTTP logging here.
-                logging.LoggingFields = HttpLoggingFields.All;
-            });
+
             services.AddOpenIddict()
                 .AddCore()
                 .UseEntityFrameworkCore(options => {
@@ -201,6 +200,7 @@ namespace MixyBoos.Api {
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSerilogRequestLogging();
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();

@@ -280,7 +280,9 @@ namespace MixyBoos.Api.Data.Seeders {
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
                     SecurityStamp = Guid.NewGuid().ToString("D"),
-                    Image = _faker.Internet.Avatar()
+                    ProfileImage = _faker.Internet.Avatar(),
+                    HeaderImage = _faker.Image.LoremFlickrUrl(),
+                    Title = _faker.Name.JobTitle()
                 },
                 new() {
                     DisplayName = "I am follower",
@@ -292,7 +294,9 @@ namespace MixyBoos.Api.Data.Seeders {
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
                     SecurityStamp = Guid.NewGuid().ToString("D"),
-                    Image = _faker.Internet.Avatar()
+                    ProfileImage = _faker.Internet.Avatar(),
+                    HeaderImage = _faker.Image.LoremFlickrUrl(),
+                    Title = _faker.Name.JobTitle()
                 },
             };
             return await Task.FromResult(users);

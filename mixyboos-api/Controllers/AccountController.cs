@@ -41,7 +41,9 @@ namespace MixyBoos.Api.Controllers {
                 UserName = model.UserName,
                 Email = model.UserName,
                 DisplayName = model.DisplayName,
-                Image = faker.Internet.Avatar()
+                ProfileImage = faker.Internet.Avatar(),
+                HeaderImage = faker.Image.PicsumUrl(),
+                Title = faker.Name.JobTitle()
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 

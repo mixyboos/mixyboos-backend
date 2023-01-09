@@ -17,6 +17,9 @@ public static class SchedulerBuilders {
             q.AddJob<CheckLiveStreamJob>(opts => {
                 opts.WithIdentity(new JobKey("CheckLiveStreamJob")).StoreDurably();
             });
+            q.AddJob<SaveLiveShowJob>(opts => {
+                opts.WithIdentity(new JobKey("SaveLiveShowJob")).StoreDurably();
+            });
         });
         services.AddQuartzServer(options => {
             // when shutting down we want jobs to complete gracefully

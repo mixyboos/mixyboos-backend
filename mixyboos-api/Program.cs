@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using NLog;
-using NLog.Web;
+using Serilog;
 
 namespace MixyBoos.Api;
 
@@ -15,19 +14,11 @@ public class Program {
     private static readonly string _environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
     public static void Main(string[] args) {
-        var logger = LogManager.Setup()
-            .LoadConfigurationFromAppSettings()
-            .GetCurrentClassLogger();
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .CreateBootstrapLogger();
 
-        try {
-            logger.Debug("init main");
-            CreateHostBuilder(args).Build().Run();
-        } catch (Exception exception) {
-            logger.Error(exception, "Stopped program because of exception");
-            throw;
-        } finally {
-            NLog.LogManager.Shutdown();
-        }
+        CreateHostBuilder(args).Build().Run();
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args) {
@@ -39,8 +30,12 @@ public class Program {
 
 
         var configuration = builder.Build();
-
         return Host.CreateDefaultBuilder(args)
+            .UseSerilog((context, services, seriLogConfig) => seriLogConfig
+                .ReadFrom.Configuration(context.Configuration)
+                .ReadFrom.Services(services)
+                .Enrich.FromLogContext()
+                .WriteTo.Console())
             .UseDefaultServiceProvider(o => {
                 o.ValidateOnBuild = false;
             })
@@ -61,12 +56,7 @@ public class Program {
                             listenOptions.UseHttps(x509);
                         });
                     })
-                    .UseStartup<Startup>()
-                    .ConfigureLogging(logging => {
-                        logging.ClearProviders();
-                        logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-                    })
-                    .UseNLog();
+                    .UseStartup<Startup>();
             });
     }
 }

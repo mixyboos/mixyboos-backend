@@ -100,7 +100,7 @@ namespace MixyBoos.Api.Controllers {
                 principal.Claims.Append(new Claim(Claims.Subject, user.Id));
                 principal.Claims.Append(new Claim(Claims.Name, user.UserName ?? string.Empty));
                 principal.Claims.Append(new Claim("displayName", user.DisplayName));
-                principal.Claims.Append(new Claim("image", user.Image));
+                principal.Claims.Append(new Claim("profileImage", user.ProfileImage));
                 principal.Claims.Append(new Claim("slug", user.Slug));
 
                 foreach (var claim in principal.Claims) {

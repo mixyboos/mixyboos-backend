@@ -120,6 +120,16 @@ namespace MixyBoos.Api.Controllers {
 
             show.IsFinished = true;
             await _context.SaveChangesAsync();
+            try {
+                var scheduler = await _schedulerFactory.GetScheduler();
+                await scheduler.TriggerJob(new JobKey("SaveLiveShowJob", "DEFAULT"), new JobDataMap(
+                    new Dictionary<string, string> {
+                        {"ShowId", show.Id.ToString()}
+                    }
+                ));
+            } catch (Exception e) {
+                _logger.LogError("Error starting job {Message}", e.Message);
+            }
 
             await _hub.Clients.User(user.Email).SendAsync("StreamEnded", show.Id);
             return Ok();

@@ -304,9 +304,9 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("email_confirmed");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("HeaderImage")
                         .HasColumnType("text")
-                        .HasColumnName("image");
+                        .HasColumnName("header_image");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean")
@@ -338,6 +338,10 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("phone_number_confirmed");
 
+                    b.Property<string>("ProfileImage")
+                        .HasColumnType("text")
+                        .HasColumnName("profile_image");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text")
                         .HasColumnName("security_stamp");
@@ -349,6 +353,11 @@ namespace MixyBoos.Api.Migrations
                     b.Property<string>("StreamKey")
                         .HasColumnType("text")
                         .HasColumnName("stream_key");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("title");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean")

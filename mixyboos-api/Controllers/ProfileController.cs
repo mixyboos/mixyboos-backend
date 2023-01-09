@@ -71,5 +71,15 @@ namespace MixyBoos.Api.Controllers {
                 ApiKey = user.StreamKey
             });
         }
+
+        [HttpGet]
+        public async Task<ActionResult<ProfileDTO>> GetById([FromQuery] string slug) {
+            var user = await _userManager.FindBySlugAsync(slug);
+            if (user is null) {
+                return NotFound();
+            }
+
+            return Ok(user.Adapt<ProfileDTO>());
+        }
     }
 }
