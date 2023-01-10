@@ -4,11 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using MixyBoos.Api.Controllers.Hubs;
 using Quartz;
-using SilkierQuartz;
 
 namespace MixyBoos.Api.Services.Jobs;
 
-[SilkierQuartz(0, 0, 5, Desciption = "On-demand job to check when the live stream comes up for a show")]
 public class CheckLiveStreamJob : IJob {
     private readonly IHubContext<LiveHub> _hub;
     private readonly IHttpClientFactory _httpClientFactory;

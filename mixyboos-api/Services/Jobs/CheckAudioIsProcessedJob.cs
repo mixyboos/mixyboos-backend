@@ -9,11 +9,9 @@ using Microsoft.Extensions.Configuration;
 using MixyBoos.Api.Controllers.Hubs;
 using MixyBoos.Api.Data;
 using Quartz;
-using SilkierQuartz;
 
 namespace MixyBoos.Api.Services.Jobs;
 
-[SilkierQuartz(0, 0, 5, Desciption = "Check any unprocessed audio")]
 public class CheckAudioIsProcessedJob : IJob {
     private readonly MixyBoosContext _context;
     private readonly IHubContext<LiveHub> _hub;

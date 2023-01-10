@@ -4,10 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mixyboos-api", "mixyboos-ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mixyboos-api-tests", "mixyboos-api-tests\mixyboos-api-tests.csproj", "{BE8D22D9-8B78-4F0D-824E-B3E598899349}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilkierQuartz", "..\..\working\SilkierQuartz\src\SilkierQuartz\SilkierQuartz.csproj", "{54C7E716-D2FE-4FCA-9B87-C1A64F845A5A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartz.Plugins.RecentHistory", "..\..\working\SilkierQuartz\src\Quartz.Plugins.RecentHistory\Quartz.Plugins.RecentHistory.csproj", "{B2C61786-42F7-431F-9D69-523734E78A39}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -23,6 +23,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+        
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.1" />
         <PackageReference Include="Microsoft.Identity.Web" Version="1.25.10" />
@@ -41,7 +42,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\working\SilkierQuartz\src\SilkierQuartz\SilkierQuartz.csproj" />
+      <_ContentIncludedByDefault Remove="deps\Silkier\net7.0\SilkierQuartz.deps.json" />
+      <_ContentIncludedByDefault Remove="deps\Silkier\net7.0\src\Quartz.Plugins.RecentHistory\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="deps\Silkier\net7.0\src\Quartz.Plugins.RecentHistory\obj\Quartz.Plugins.RecentHistory.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="deps\Silkier\net7.0\src\SilkierQuartz\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="deps\Silkier\net7.0\src\SilkierQuartz\obj\SilkierQuartz.csproj.nuget.dgspec.json" />
     </ItemGroup>
 
 </Project>

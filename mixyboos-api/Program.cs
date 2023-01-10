@@ -5,10 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Events;
-using SilkierQuartz;
 
 namespace MixyBoos.Api;
 
@@ -59,7 +56,6 @@ public class Program {
                         });
                     })
                     .UseStartup<Startup>();
-            })
-            .ConfigureSilkierQuartzHost();
+            });
     }
 }

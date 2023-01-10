@@ -22,8 +22,6 @@ using MixyBoos.Api.Services.Startup.Mapster;
 using MixyBoos.Api.Services.Workers;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
-using Quartz.Impl;
-using SilkierQuartz;
 
 namespace MixyBoos.Api {
     public class Startup {

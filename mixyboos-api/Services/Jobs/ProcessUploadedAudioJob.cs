@@ -12,11 +12,9 @@ using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Controllers.Hubs;
 using MixyBoos.Api.Data;
 using Quartz;
-using SilkierQuartz;
 
 namespace MixyBoos.Api.Services.Jobs;
 
-[SilkierQuartz(0, 0, 5, Desciption = "On-demand job to process uploaded audio into HLS files")]
 public class ProcessUploadedAudioJob : IJob {
     private readonly MixyBoosContext _context;
     private readonly IHubContext<UpdatesHub> _hub;

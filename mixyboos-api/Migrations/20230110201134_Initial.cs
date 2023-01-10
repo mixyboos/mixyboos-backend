@@ -210,6 +210,7 @@ namespace MixyBoos.Api.Migrations
                     description = table.Column<string>(type: "text", nullable: false),
                     image = table.Column<string>(type: "text", nullable: true),
                     audiourl = table.Column<string>(name: "audio_url", type: "text", nullable: true),
+                    isprocessed = table.Column<bool>(name: "is_processed", type: "boolean", nullable: false),
                     userid = table.Column<string>(name: "user_id", type: "text", nullable: false),
                     datecreated = table.Column<DateTime>(name: "date_created", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     dateupdated = table.Column<DateTime>(name: "date_updated", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
