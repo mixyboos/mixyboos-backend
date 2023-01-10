@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230109123000_Initial")]
-    partial class Initial
+    [Migration("20230110040913_IsProcessed flag on Mix")]
+    partial class IsProcessedflagonMix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -288,6 +288,11 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("access_failed_count");
 
+                    b.Property<string>("Biography")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("biography");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text")
@@ -469,6 +474,10 @@ namespace MixyBoos.Api.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("text")
                         .HasColumnName("image");
+
+                    b.Property<bool>("IsProcessed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_processed");
 
                     b.Property<string>("Slug")
                         .HasColumnType("text")

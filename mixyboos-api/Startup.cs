@@ -1,4 +1,3 @@
-using System;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -23,7 +22,8 @@ using MixyBoos.Api.Services.Startup.Mapster;
 using MixyBoos.Api.Services.Workers;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
-using Serilog;
+using Quartz.Impl;
+using SilkierQuartz;
 
 namespace MixyBoos.Api {
     public class Startup {
@@ -69,7 +69,7 @@ namespace MixyBoos.Api {
                 options.ClaimsIdentity.RoleClaimType = OpenIddictConstants.Claims.Role;
             });
 
-            services.RegisterMapsterConfiguration();
+            services.RegisterMapsterConfiguration(_configuration);
             services.RegisterHttpClients(_configuration);
 
             services.AddSignalR();
@@ -146,10 +146,16 @@ namespace MixyBoos.Api {
                     return Task.CompletedTask;
                 };
             });
-
             services.AddHostedService<OpenIdDictWorker>();
             // services.AddHostedService<UploadFileProcessor>();
             services.LoadScheduler();
+            services.AddSilkierQuartz(options => {
+                options.VirtualPathRoot = "/jobs";
+            }, authenticationOptions => {
+                authenticationOptions.AccessRequirement =
+                    SilkierQuartzAuthenticationOptions.SimpleAccessRequirement.AllowAnonymous;
+            });
+
 
             services
                 .AddAuthentication(options => {
@@ -199,15 +205,15 @@ namespace MixyBoos.Api {
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseSerilogRequestLogging();
-
+            app.UseSilkierQuartz();
+            // app.UseSerilogRequestLogging();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapHub<DebugHub>("/hubs/debug");
                 endpoints.MapHub<LiveHub>("/hubs/live");
                 endpoints.MapHub<ChatHub>("/hubs/chat");
+                endpoints.MapHub<UpdatesHub>("/hubs/updates");
             });
 
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MixyBoos Api v1"));

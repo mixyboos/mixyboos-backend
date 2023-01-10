@@ -58,6 +58,27 @@ namespace MixyBoos.Api.Controllers {
             return Ok();
         }
 
+        [HttpPost("togglefollow")]
+        public async Task<IActionResult> ToggleFollow([FromQuery] string slug) {
+            var userToFollow = await _userManager.FindBySlugWithFollowingAsync(slug);
+            var me = await _userManager.FindByNameWithFollowingAsync(User.Identity.Name);
+
+            if (userToFollow is null && me is not null) {
+                return BadRequest();
+            }
+
+            if (!me.Following.Any(f => f.Id.Equals(userToFollow.Id))) {
+                me.Following.Add(userToFollow);
+                userToFollow.Followers.Add(me);
+            } else {
+                me.Following.Remove(userToFollow);
+                userToFollow.Followers.Remove(userToFollow);
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+
         [HttpGet("apikey")]
         public async Task<ActionResult<GetApiKeyDTO>> GetApiKey() {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);

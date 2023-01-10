@@ -11,7 +11,7 @@ public static class SchedulerBuilders {
             q.SchedulerName = "MixyBoos Scheduler";
 
             q.UseMicrosoftDependencyInjectionJobFactory();
-            q.AddJob<ConvertAudioJob>(opts => {
+            q.AddJob<ProcessUploadedAudioJob>(opts => {
                 opts.WithIdentity(new JobKey("ProcessUploadedAudioJob")).StoreDurably();
             });
             q.AddJob<CheckLiveStreamJob>(opts => {
@@ -20,6 +20,16 @@ public static class SchedulerBuilders {
             q.AddJob<SaveLiveShowJob>(opts => {
                 opts.WithIdentity(new JobKey("SaveLiveShowJob")).StoreDurably();
             });
+            q.AddJob<CheckAudioIsProcessedJob>(opts => {
+                opts.WithIdentity(new JobKey("CheckAudioIsProcessedJob")).StoreDurably();
+            });
+
+            q.AddTrigger(opts => opts
+                .ForJob(new JobKey("CheckAudioIsProcessedJob"))
+                .WithIdentity("trigger-CheckAudioIsProcessedJob")
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInMinutes(5)
+                    .RepeatForever()));
         });
         services.AddQuartzServer(options => {
             // when shutting down we want jobs to complete gracefully

@@ -21,6 +21,7 @@ public class MixyBoosUser : IdentityUser, ISluggedEntity {
     [SlugField(SourceField = "DisplayName")]
     public string Slug { get; set; }
 
+    [MaxLength(1000)] public string Biography { get; set; }
     public string StreamKey { get; set; }
 
     public ICollection<MixyBoosUser> Followers { get; set; }

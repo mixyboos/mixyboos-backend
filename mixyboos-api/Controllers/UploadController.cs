@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
+using MixyBoos.Api.Data;
 using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Validation.AspNetCore;
 using Quartz;
@@ -22,18 +24,16 @@ namespace MixyBoos.Api.Controllers {
         public string Id { get; set; }
     }
 
-    public class AppFile {
-        public string Id { get; set; }
-        public byte[] Content { get; set; }
-    }
-
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class UploadController : _Controller {
+        private readonly UserManager<MixyBoosUser> _userManager;
         private readonly ISchedulerFactory _schedulerFactory;
         const long FileSizeLimit = 2147483648;
 
-        public UploadController(ISchedulerFactory schedulerFactory, ILogger<UploadController> logger) : base(logger) {
+        public UploadController(UserManager<MixyBoosUser> userManager, ISchedulerFactory schedulerFactory,
+            ILogger<UploadController> logger) : base(logger) {
+            _userManager = userManager;
             _schedulerFactory = schedulerFactory;
         }
 
@@ -41,6 +41,11 @@ namespace MixyBoos.Api.Controllers {
         [RequestFormLimits(MultipartBodyLengthLimit = FileSizeLimit)] //2Gb
         [RequestSizeLimit(FileSizeLimit)] //2Gb
         public async Task<IActionResult> UploadAudio() {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user is null) {
+                return Unauthorized();
+            }
+
             if (!MultipartRequestHelper.IsMultipartContentType(Request.ContentType)) {
                 ModelState.AddModelError("File",
                     $"The request couldn't be processed (Error 1).");
@@ -145,7 +150,8 @@ namespace MixyBoos.Api.Controllers {
             var scheduler = await _schedulerFactory.GetScheduler();
             var jobData = new Dictionary<string, string>() {
                 {"Id", formData.Id},
-                {"FileLocation", outputFile}
+                {"FileLocation", outputFile},
+                {"UserId", User.Identity.Name}
             };
             await scheduler.TriggerJob(
                 new JobKey("ProcessUploadedAudioJob"),

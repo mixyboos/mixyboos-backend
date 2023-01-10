@@ -12,7 +12,7 @@ namespace MixyBoos.Api.Data.Models {
         [Required] public string Description { get; set; }
         public string Image { get; set; }
         public string AudioUrl { get; set; }
-
+        public bool IsProcessed { get; set; } = false;
         [Required] public virtual MixyBoosUser User { get; set; }
     }
 }

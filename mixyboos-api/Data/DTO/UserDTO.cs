@@ -4,5 +4,6 @@
         string Slug,
         string DisplayName,
         string Image
+        
     );
 }

@@ -26,6 +26,5 @@ public static class HttpClientBuilders {
             })
             .SetHandlerLifetime(TimeSpan.FromMinutes(5)) //Set lifetime to five minutes
             .AddPolicyHandler(GetRetryPolicy());
-        ;
     }
 }

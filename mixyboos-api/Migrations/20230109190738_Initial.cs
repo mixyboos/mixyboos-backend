@@ -113,6 +113,7 @@ namespace MixyBoos.Api.Migrations
                     profileimage = table.Column<string>(name: "profile_image", type: "text", nullable: true),
                     headerimage = table.Column<string>(name: "header_image", type: "text", nullable: true),
                     slug = table.Column<string>(type: "text", nullable: true),
+                    biography = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
                     streamkey = table.Column<string>(name: "stream_key", type: "text", nullable: true),
                     username = table.Column<string>(name: "user_name", type: "character varying(256)", maxLength: 256, nullable: true),
                     normalizedusername = table.Column<string>(name: "normalized_user_name", type: "character varying(256)", maxLength: 256, nullable: true),

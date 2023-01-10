@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
 using Mapster;
+using Microsoft.Extensions.Configuration;
 using MixyBoos.Api.Data;
 
 namespace MixyBoos.Api.Services.Startup.Mapster;
@@ -21,10 +22,12 @@ public static class TypeAdapterConfig {
         }).ToList();
     }
 
-    public static void RegisterMapsterConfiguration(this IServiceCollection services) {
+    public static void RegisterMapsterConfiguration(this IServiceCollection services, IConfiguration config) {
         TypeAdapterConfig<Mix, MixDTO>
             .NewConfig()
-            .Map(dest => dest.AudioUrl, src => $"http://localhost:8080/hls/{src.Id}/pl.m3u8")
+            .Map(dest => dest.AudioUrl,
+                src => Flurl.Url.Combine(config["LiveServices:StreamingUrl"], "mixes", src.Id.ToString(), "manifest.mpd"))
+            .Map(dest => dest.DateUploaded, src => src.DateCreated)
             .Map(dest => dest.Image, src => _runImageMap(src.Image));
 
         TypeAdapterConfig<LiveShow, LiveShowDTO>
