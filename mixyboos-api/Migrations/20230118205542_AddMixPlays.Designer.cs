@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230110201134_Initial")]
-    partial class Initial
+    [Migration("20230118205542_AddMixPlays")]
+    partial class AddMixPlays
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -506,6 +506,46 @@ namespace MixyBoos.Api.Migrations
                     b.ToTable("mixes", (string)null);
                 });
 
+            modelBuilder.Entity("MixyBoos.Api.Data.Models.MixPlay", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_created")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_updated")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<Guid>("MixId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("mix_id");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_mix_plays");
+
+                    b.HasIndex("MixId")
+                        .HasDatabaseName("ix_mix_plays_mix_id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_mix_plays_user_id");
+
+                    b.ToTable("mix_plays", (string)null);
+                });
+
             modelBuilder.Entity("MixyBoos.Api.Data.Models.ShowChat", b =>
                 {
                     b.Property<Guid>("Id")
@@ -958,6 +998,25 @@ namespace MixyBoos.Api.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MixyBoos.Api.Data.Models.MixPlay", b =>
+                {
+                    b.HasOne("MixyBoos.Api.Data.Models.Mix", "Mix")
+                        .WithMany("Plays")
+                        .HasForeignKey("MixId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_mix_plays_mixes_mix_id");
+
+                    b.HasOne("MixyBoos.Api.Data.MixyBoosUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_mix_plays_users_user_id");
+
+                    b.Navigation("Mix");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MixyBoos.Api.Data.Models.ShowChat", b =>
                 {
                     b.HasOne("MixyBoos.Api.Data.MixyBoosUser", "FromUser")
@@ -1026,6 +1085,11 @@ namespace MixyBoos.Api.Migrations
                     b.Navigation("Application");
 
                     b.Navigation("Authorization");
+                });
+
+            modelBuilder.Entity("MixyBoos.Api.Data.Models.Mix", b =>
+                {
+                    b.Navigation("Plays");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>

@@ -25,10 +25,9 @@ public static class TypeAdapterConfig {
     public static void RegisterMapsterConfiguration(this IServiceCollection services, IConfiguration config) {
         TypeAdapterConfig<Mix, MixDTO>
             .NewConfig()
-            .Map(dest => dest.AudioUrl,
-                src => Flurl.Url.Combine(config["LiveServices:StreamingUrl"], "mixes", src.Id.ToString(), "manifest.mpd"))
             .Map(dest => dest.DateUploaded, src => src.DateCreated)
-            .Map(dest => dest.Image, src => _runImageMap(src.Image));
+            .Map(dest => dest.Image, src => _runImageMap(src.Image))
+            .Map(dest => dest.PlayCount, src => src.Plays.Count);
 
         TypeAdapterConfig<LiveShow, LiveShowDTO>
             .NewConfig()

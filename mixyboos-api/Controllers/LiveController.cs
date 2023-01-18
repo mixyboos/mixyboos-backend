@@ -97,7 +97,8 @@ namespace MixyBoos.Api.Controllers {
                 _logger.LogError("Error starting job {Message}", e.Message);
             }
 
-            return Redirect($"{show.Id}");
+            // return Redirect($"rtmp://127.0.0.1:1935/hls-live/{show.Id}");
+            return Redirect(show.Id.ToString());
         }
 
         [HttpPost("on_publish_done")]

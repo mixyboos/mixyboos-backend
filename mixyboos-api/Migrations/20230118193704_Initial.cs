@@ -466,6 +466,33 @@ namespace MixyBoos.Api.Migrations
                         principalColumn: "id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "mix_play",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    mixid = table.Column<Guid>(name: "mix_id", type: "uuid", nullable: false),
+                    userid = table.Column<string>(name: "user_id", type: "text", nullable: true),
+                    datecreated = table.Column<DateTime>(name: "date_created", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    dateupdated = table.Column<DateTime>(name: "date_updated", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_mix_play", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_mix_play_mixes_mix_id",
+                        column: x => x.mixid,
+                        principalTable: "mixes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_mix_play_users_user_id",
+                        column: x => x.userid,
+                        principalSchema: "auth",
+                        principalTable: "user",
+                        principalColumn: "id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "ix_live_show_tag_tags_id",
                 table: "live_show_tag",
@@ -474,6 +501,16 @@ namespace MixyBoos.Api.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_live_shows_user_id",
                 table: "live_shows",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_mix_play_mix_id",
+                table: "mix_play",
+                column: "mix_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_mix_play_user_id",
+                table: "mix_play",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
@@ -616,7 +653,7 @@ namespace MixyBoos.Api.Migrations
                 name: "live_show_tag");
 
             migrationBuilder.DropTable(
-                name: "mixes");
+                name: "mix_play");
 
             migrationBuilder.DropTable(
                 name: "openiddict_scope",
@@ -655,6 +692,9 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "tags");
+
+            migrationBuilder.DropTable(
+                name: "mixes");
 
             migrationBuilder.DropTable(
                 name: "openiddict_authorization",

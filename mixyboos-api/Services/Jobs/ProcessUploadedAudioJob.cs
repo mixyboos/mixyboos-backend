@@ -15,6 +15,7 @@ using Quartz;
 
 namespace MixyBoos.Api.Services.Jobs;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public class ProcessUploadedAudioJob : IJob {
     private readonly MixyBoosContext _context;
     private readonly IHubContext<UpdatesHub> _hub;
@@ -89,7 +90,7 @@ public class ProcessUploadedAudioJob : IJob {
         if (context.CancellationToken.IsCancellationRequested) return;
 
         //TODO: What if they haven't created the mix yet in the web ui?
-        var mix = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(showId));
+        var mix = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(showId)));
         if (mix is not null) {
             mix.IsProcessed = true;
             await _context.SaveChangesAsync();

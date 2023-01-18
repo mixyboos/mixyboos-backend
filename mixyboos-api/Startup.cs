@@ -144,16 +144,8 @@ namespace MixyBoos.Api {
                     return Task.CompletedTask;
                 };
             });
-            services.AddHostedService<OpenIdDictWorker>();
             // services.AddHostedService<UploadFileProcessor>();
             services.LoadScheduler();
-            services.AddSilkierQuartz(options => {
-                options.VirtualPathRoot = "/jobs";
-            }, authenticationOptions => {
-                authenticationOptions.AccessRequirement =
-                    SilkierQuartzAuthenticationOptions.SimpleAccessRequirement.AllowAnonymous;
-            });
-
 
             services
                 .AddAuthentication(options => {
@@ -179,14 +171,21 @@ namespace MixyBoos.Api {
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "MixyBoos.Api", Version = "v1"});
             });
+            
+            services.AddHostedService<OpenIdDictWorker>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MixyBoosContext context) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 app.UseHttpsRedirection();
             }
-
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using var scope = scopeFactory.CreateScope();
+            var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
+            dbInitializer.Initialize();
+            dbInitializer.SeedData();
+            
             app.UseForwardedHeaders();
 
             app.UseSwagger();
@@ -203,7 +202,6 @@ namespace MixyBoos.Api {
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSilkierQuartz();
             // app.UseSerilogRequestLogging();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
@@ -215,12 +213,6 @@ namespace MixyBoos.Api {
             });
 
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MixyBoos Api v1"));
-
-            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
-            using var scope = scopeFactory.CreateScope();
-            var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
-            dbInitializer.Initialize();
-            dbInitializer.SeedData();
         }
     }
 }

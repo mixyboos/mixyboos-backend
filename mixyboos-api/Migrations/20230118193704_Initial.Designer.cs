@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MixyBoos.Api.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    partial class MixyBoosContextModelSnapshot : ModelSnapshot
+    [Migration("20230118193704_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -532,15 +535,15 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
-                        .HasName("pk_mix_plays");
+                        .HasName("pk_mix_play");
 
                     b.HasIndex("MixId")
-                        .HasDatabaseName("ix_mix_plays_mix_id");
+                        .HasDatabaseName("ix_mix_play_mix_id");
 
                     b.HasIndex("UserId")
-                        .HasDatabaseName("ix_mix_plays_user_id");
+                        .HasDatabaseName("ix_mix_play_user_id");
 
-                    b.ToTable("mix_plays", (string)null);
+                    b.ToTable("mix_play", (string)null);
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.ShowChat", b =>
@@ -1002,12 +1005,12 @@ namespace MixyBoos.Api.Migrations
                         .HasForeignKey("MixId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_mix_plays_mixes_mix_id");
+                        .HasConstraintName("fk_mix_play_mixes_mix_id");
 
                     b.HasOne("MixyBoos.Api.Data.MixyBoosUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .HasConstraintName("fk_mix_plays_users_user_id");
+                        .HasConstraintName("fk_mix_play_users_user_id");
 
                     b.Navigation("Mix");
 

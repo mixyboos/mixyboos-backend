@@ -10,6 +10,7 @@ using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Services.Extensions;
 using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Validation.AspNetCore;
+using Guid = System.Guid;
 
 namespace MixyBoos.Api.Controllers {
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
@@ -49,7 +50,7 @@ namespace MixyBoos.Api.Controllers {
                 return BadRequest();
             }
 
-            if (!me.Following.Any(f => f.Id.Equals(userToFollow.Id))) {
+            if (!me.Following.Any(f => f.Id.Equals(Guid.Parse(userToFollow.Id)))) {
                 me.Following.Add(userToFollow);
                 userToFollow.Followers.Add(me);
                 await _context.SaveChangesAsync();

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Extensions;
-using Npgsql;
 using OpenIddict.EntityFrameworkCore.Models;
 
 #nullable disable
@@ -21,6 +18,7 @@ namespace MixyBoos.Api.Data;
 public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
     private const string IDENTITY_PREFIX = "openiddict";
     public DbSet<Mix> Mixes { get; set; }
+    public DbSet<MixPlay> MixPlays { get; set; }
     public DbSet<LiveShow> LiveShows { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<ShowChat> ShowChat { get; set; }
@@ -93,6 +91,18 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
             .HasMany(p => p.Following)
             .WithMany(p => p.Followers)
             .UsingEntity(j => j.ToTable("user_followers"));
+
+        mb.Entity<Mix>()
+            .HasMany(m => m.Plays)
+            .WithOne(m => m.Mix);
+
+        mb.Entity<Mix>()
+            .Navigation(m => m.Plays)
+            .AutoInclude();
+
+        mb.Entity<Mix>()
+            .Navigation(m => m.User)
+            .AutoInclude();
     }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,

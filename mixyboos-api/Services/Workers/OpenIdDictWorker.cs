@@ -3,15 +3,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using OpenIddict.Abstractions;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace MixyBoos.Api.Services.Workers {
     public class OpenIdDictWorker : IHostedService {
         private readonly IServiceProvider _serviceProvider;
+        private readonly ILogger<OpenIddictBuilder> _logger;
 
-        public OpenIdDictWorker(IServiceProvider serviceProvider)
-            => _serviceProvider = serviceProvider;
+        public OpenIdDictWorker(IServiceProvider serviceProvider, ILogger<OpenIddictBuilder> logger) {
+            _serviceProvider = serviceProvider;
+            _logger = logger;
+        }
 
         public async Task StartAsync(CancellationToken cancellationToken) {
             using var scope = _serviceProvider.CreateScope();
@@ -20,7 +24,9 @@ namespace MixyBoos.Api.Services.Workers {
                 .ServiceProvider
                 .GetRequiredService<IOpenIddictApplicationManager>();
             try {
+                _logger.LogInformation("Creating the webclient OpenIddict application");
                 if (await manager.FindByClientIdAsync("webclient", cancellationToken) is null) {
+                    _logger.LogInformation("App webclient does not exist, creating");
                     await manager.CreateAsync(new OpenIddictApplicationDescriptor {
                         ClientId = "webclient",
                         DisplayName = "MixyBoos Web Client",
@@ -34,6 +40,7 @@ namespace MixyBoos.Api.Services.Workers {
                             Permissions.Prefixes.Scope + "api"
                         }
                     }, cancellationToken);
+                    _logger.LogInformation("App webclient created");
                 }
 
                 if (await manager.FindByClientIdAsync("testharness", cancellationToken) is null) {
@@ -51,7 +58,8 @@ namespace MixyBoos.Api.Services.Workers {
                         }
                     }, cancellationToken);
                 }
-            } catch (Npgsql.PostgresException) {
+            } catch (Npgsql.PostgresException e) {
+                _logger.LogInformation("Error creating openiddict app {Error}", e.Message);
                 //most likely the db hasn't been created yet
             }
         }
