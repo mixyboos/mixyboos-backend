@@ -9,6 +9,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine as runtime
 
 RUN apk add  --no-cache ffmpeg
 RUN mkdir /images
+ENV ASPNETCORE_ENVIRONMENT Production
 
 WORKDIR /publish
 COPY --from=build-env /publish .
