@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using MixyBoos.Api.Data;
+using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using static OpenIddict.Abstractions.OpenIddictConstants;
@@ -25,13 +26,16 @@ namespace MixyBoos.Api.Controllers {
 
         private readonly SignInManager<MixyBoosUser> _signInManager;
         private readonly UserManager<MixyBoosUser> _userManager;
+        private readonly ImageHelper _imageHelper;
 
         public AuthorizationController(
             SignInManager<MixyBoosUser> signInManager,
             UserManager<MixyBoosUser> userManager,
+            ImageHelper imageHelper,
             ILogger<AuthorizationController> logger) : base(logger) {
             _signInManager = signInManager;
             _userManager = userManager;
+            _imageHelper = imageHelper;
         }
 
 
@@ -141,12 +145,6 @@ namespace MixyBoos.Api.Controllers {
                     .SetAuthorizationCodeLifetime(TimeSpan.FromMinutes(ACCESS_TOKEN_EXPIRY))
                     .SetIdentityTokenLifetime(TimeSpan.FromMinutes(ACCESS_TOKEN_EXPIRY))
                     .SetRefreshTokenLifetime(TimeSpan.FromDays(REFRESH_TOKEN_EXPIRY));
-
-                principal.Claims.Append(new Claim(Claims.Subject, user.Id));
-                principal.Claims.Append(new Claim(Claims.Name, user.UserName ?? string.Empty));
-                principal.Claims.Append(new Claim("displayName", user.DisplayName));
-                principal.Claims.Append(new Claim("profileImage", user.ProfileImage));
-                principal.Claims.Append(new Claim("slug", user.Slug));
 
                 foreach (var claim in principal.Claims) {
                     claim.SetDestinations(GetDestinations(claim, principal));

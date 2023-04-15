@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -6,10 +7,13 @@ using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
+using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Extensions;
+using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Validation.AspNetCore;
 
 namespace MixyBoos.Api.Controllers {
@@ -18,13 +22,19 @@ namespace MixyBoos.Api.Controllers {
     public class AccountController : _Controller {
         private readonly UserManager<MixyBoosUser> _userManager;
         private readonly MixyBoosContext _context;
+        private readonly IConfiguration _config;
+        private readonly ImageCacher _imageCacher;
 
         public AccountController(
             UserManager<MixyBoosUser> userManager,
             MixyBoosContext dbContext,
+            IConfiguration config,
+            ImageCacher imageCacher,
             ILogger<AccountController> logger) : base(logger) {
             _userManager = userManager;
             _context = dbContext;
+            _config = config;
+            _imageCacher = imageCacher;
         }
 
         //
@@ -41,13 +51,14 @@ namespace MixyBoos.Api.Controllers {
                 UserName = model.UserName,
                 Email = model.UserName,
                 DisplayName = model.DisplayName,
-                ProfileImage = faker.Internet.Avatar(),
-                HeaderImage = faker.Image.PicsumUrl(),
                 Title = faker.Name.JobTitle()
             };
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded) {
+                await _imageCacher.CacheUserImages(user, _config);
+
+                await _userManager.UpdateAsync(user);
                 await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
                 return Ok(model);
             }

@@ -26,4 +26,5 @@ public class MixyBoosUser : IdentityUser, ISluggedEntity {
 
     public ICollection<MixyBoosUser> Followers { get; set; }
     public ICollection<MixyBoosUser> Following { get; set; }
+
 }

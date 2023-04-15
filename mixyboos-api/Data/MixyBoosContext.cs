@@ -43,6 +43,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
         if (!optionsBuilder.IsConfigured) {
             optionsBuilder
                 .UseNpgsql("Name=MixyBoos")
+                .AddInterceptors(new MixyBoosDbEventsInterceptor())
                 .UseSnakeCaseNamingConvention();
         }
     }

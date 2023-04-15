@@ -37,6 +37,7 @@
         <PackageReference Include="Quartz.AspNetCore" Version="3.6.2" />
         <PackageReference Include="Quartz.Extensions.Hosting" Version="3.6.2" />
         <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+        <PackageReference Include="SixLabors.ImageSharp.Web" Version="3.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
         <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
     </ItemGroup>
@@ -47,6 +48,10 @@
       <_ContentIncludedByDefault Remove="deps\Silkier\net7.0\src\Quartz.Plugins.RecentHistory\obj\Quartz.Plugins.RecentHistory.csproj.nuget.dgspec.json" />
       <_ContentIncludedByDefault Remove="deps\Silkier\net7.0\src\SilkierQuartz\obj\project.assets.json" />
       <_ContentIncludedByDefault Remove="deps\Silkier\net7.0\src\SilkierQuartz\obj\SilkierQuartz.csproj.nuget.dgspec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\" />
     </ItemGroup>
 
 </Project>
