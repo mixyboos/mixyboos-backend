@@ -24,30 +24,44 @@ public class ProcessUploadedImageJob : IJob {
     }
 
     public async Task Execute(IJobExecutionContext context) {
-        var data = context.Trigger.JobDataMap;
-        var mixId = data["Id"]?.ToString();
-        var imageType = data["ImageType"]?.ToString();
-        var fileLocation = data["FileLocation"]?.ToString();
-        var outputPath = _config[$"ImageProcessing:{imageType}Dir"];
-        if (string.IsNullOrEmpty(outputPath)) {
-            _logger.LogError("Unable to create output path for {FileLocation}", fileLocation);
-            return;
+        try {
+            var data = context.Trigger.JobDataMap;
+            var mixId = data["Id"]?.ToString();
+            var imageType = data["ImageType"]?.ToString();
+            var fileLocation = data["FileLocation"]?.ToString();
+            var outputPath = _config[$"ImageProcessing:{imageType}Dir"];
+            if (string.IsNullOrEmpty(outputPath)) {
+                _logger.LogError("Unable to create output path for {FileLocation}", fileLocation);
+                return;
+            }
+
+            _logger.LogInformation("Caching image for {Id} from {FileLocation} to {OutputPath}",
+                mixId, fileLocation, outputPath);
+            if (!Directory.Exists(outputPath)) {
+                Directory.CreateDirectory(outputPath);
+            }
+
+            var destinationFile = Path.Combine(outputPath, Path.GetFileName(fileLocation));
+            if (File.Exists(fileLocation) && Directory.Exists(outputPath)) {
+                File.Move(fileLocation, destinationFile);
+            }
+
+            _logger.LogInformation("Successfully moved {Source} to {Destination}",
+                fileLocation, destinationFile);
+
+            _logger.LogInformation("Updating mix record");
+            var mix = await _context
+                .Mixes
+                .AsTracking()
+                .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(mixId)));
+            mix.Image = Path.GetFileName(fileLocation);
+
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Successfully Updated mix record");
+        } catch (Exception e) {
+            _logger.LogError("Error caching image file\n\t{Error}", e.Message);
+            throw;
         }
-
-        if (!Directory.Exists(outputPath)) {
-            Directory.CreateDirectory(outputPath);
-        }
-
-        if (File.Exists(fileLocation) && Directory.Exists(outputPath)) {
-            File.Move(fileLocation, Path.Combine(outputPath, Path.GetFileName(fileLocation)));
-        }
-
-        var mix = await _context
-            .Mixes
-            .AsTracking()
-            .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(mixId)));
-        mix.Image = Path.GetFileName(fileLocation);
-
-        await _context.SaveChangesAsync();
     }
 }
