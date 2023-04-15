@@ -288,7 +288,6 @@ __pycache__/
 .idea/
 .krud/
 appsettings.Development.json
-appsettings.Production.json
 Persistence/TempContextFactory.cs
 out/pushsubscription.db
 pushsubscription.db
