@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230415060116_AddNullables")]
-    partial class AddNullables
+    [Migration("20230415191727_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,7 +74,7 @@ namespace MixyBoos.Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("user_role", "auth");
+                    b.ToTable("user_role", "oid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -105,7 +105,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("RoleId")
                         .HasDatabaseName("ix_role_claim_role_id");
 
-                    b.ToTable("role_claim", "auth");
+                    b.ToTable("role_claim", "oid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -173,7 +173,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasKey("Id")
                         .HasName("pk_identity_user");
 
-                    b.ToTable("identity_user", "auth");
+                    b.ToTable("identity_user", "oid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -204,7 +204,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_user_claim_user_id");
 
-                    b.ToTable("user_claim", "auth");
+                    b.ToTable("user_claim", "oid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -232,7 +232,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_user_login_user_id");
 
-                    b.ToTable("user_login", "auth");
+                    b.ToTable("user_login", "oid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -251,7 +251,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("RoleId")
                         .HasDatabaseName("ix_user_identity_role_role_id");
 
-                    b.ToTable("user_identity_role", "auth");
+                    b.ToTable("user_identity_role", "oid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -275,7 +275,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name")
                         .HasName("pk_user_token");
 
-                    b.ToTable("user_token", "auth");
+                    b.ToTable("user_token", "oid");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.MixyBoosUser", b =>
@@ -390,7 +390,7 @@ namespace MixyBoos.Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_user_slug");
 
-                    b.ToTable("user", "auth");
+                    b.ToTable("user", "oid");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.LiveShow", b =>
@@ -647,7 +647,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("FollowingId")
                         .HasDatabaseName("ix_user_followers_following_id");
 
-                    b.ToTable("user_followers", "auth");
+                    b.ToTable("user_followers", "oid");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", b =>
@@ -717,7 +717,7 @@ namespace MixyBoos.Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_openiddict_application_client_id");
 
-                    b.ToTable("openiddict_application", "auth");
+                    b.ToTable("openiddict_application", "oid");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
@@ -770,7 +770,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("ApplicationId", "Status", "Subject", "Type")
                         .HasDatabaseName("ix_openiddict_authorization_application_id_status_subject_type");
 
-                    b.ToTable("openiddict_authorization", "auth");
+                    b.ToTable("openiddict_authorization", "oid");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreScope", b =>
@@ -822,7 +822,7 @@ namespace MixyBoos.Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_openiddict_scope_name");
 
-                    b.ToTable("openiddict_scope", "auth");
+                    b.ToTable("openiddict_scope", "oid");
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreToken", b =>
@@ -899,7 +899,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("ApplicationId", "Status", "Subject", "Type")
                         .HasDatabaseName("ix_openiddict_token_application_id_status_subject_type");
 
-                    b.ToTable("openiddict_token", "auth");
+                    b.ToTable("openiddict_token", "oid");
                 });
 
             modelBuilder.Entity("LiveShowTag", b =>

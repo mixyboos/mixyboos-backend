@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -13,16 +14,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using MixyBoos.Api.Controllers.Hubs;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.Seeders;
+using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Auth;
+using MixyBoos.Api.Services.Helpers;
 using MixyBoos.Api.Services.Helpers.Audio;
 using MixyBoos.Api.Services.Startup;
 using MixyBoos.Api.Services.Startup.Mapster;
 using MixyBoos.Api.Services.Workers;
 using OpenIddict.Abstractions;
 using OpenIddict.Validation.AspNetCore;
+using SixLabors.ImageSharp.Web.DependencyInjection;
 
 namespace MixyBoos.Api {
     public class Startup {
@@ -41,14 +46,21 @@ namespace MixyBoos.Api {
             services.AddScoped<IUserClaimsPrincipalFactory<MixyBoosUser>, ClaimsPrincipalFactory>();
             services.AddSingleton<IAudioFileConverter, AudioFileConverter>();
             services.AddSingleton<IUserIdProvider, CustomEmailProvider>();
+            services.AddSingleton<ImageCacher>();
+            services.AddSingleton<ImageHelper>();
+            services.AddSingleton<IFileProvider, PhysicalFileProvider>(_ =>
+                new PhysicalFileProvider(_configuration["ImageProcessing:ImageRootFolder"] ?? ".pn-cache"));
 
             //register the codepages (required for slugify)
             var instance = CodePagesEncodingProvider.Instance;
             Encoding.RegisterProvider(instance);
+            var connectionString = _configuration.GetConnectionString("MixyBoos");
+            Console.WriteLine("Connecting to database");
+            Console.WriteLine($"\t{connectionString}");
 
             services.AddDbContext<MixyBoosContext>(options => {
                 options
-                    .UseNpgsql(_configuration.GetConnectionString("MixyBoos"), pgoptions => {
+                    .UseNpgsql(connectionString, pgoptions => {
                         pgoptions.MigrationsHistoryTable("migrations", "sys");
                     })
                     .UseSnakeCaseNamingConvention()
@@ -61,6 +73,9 @@ namespace MixyBoos.Api {
             services.AddIdentity<MixyBoosUser, IdentityRole>()
                 .AddEntityFrameworkStores<MixyBoosContext>()
                 .AddDefaultTokenProviders();
+
+
+            services.AddImaging(_configuration);
 
             services.Configure<IdentityOptions>(options => {
                 options.ClaimsIdentity.UserNameClaimType = OpenIddictConstants.Claims.Email;
@@ -87,7 +102,8 @@ namespace MixyBoos.Api {
                         .AcceptAnonymousClients()
                         .AllowRefreshTokenFlow()
                         .RequireProofKeyForCodeExchange()
-                        .AcceptAnonymousClients();
+                        .AcceptAnonymousClients()
+                        .AllowCustomFlow("urn:ietf:params:oauth:grant-type:google_identity_token");
 
                     options
                         .SetAuthorizationEndpointUris("/connect/authorize")
@@ -99,7 +115,7 @@ namespace MixyBoos.Api {
                     //         .AddEphemeralEncryptionKey()
                     //         .AddEphemeralSigningKey()
                     //         .DisableAccessTokenEncryption();
-                    //
+                    //ConnectionStrings
                     //     options.AddDevelopmentEncryptionCertificate()
                     //         .AddDevelopmentSigningCertificate();
                     // } else {
@@ -190,6 +206,8 @@ namespace MixyBoos.Api {
             dbInitializer.Initialize();
             dbInitializer.SeedData();
 
+            app.UseStaticFiles();
+            app.UseImageSharp();
             app.UseForwardedHeaders();
 
             app.UseSwagger();

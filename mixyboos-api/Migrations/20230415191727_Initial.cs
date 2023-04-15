@@ -13,14 +13,14 @@ namespace MixyBoos.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "auth");
+                name: "oid");
 
             migrationBuilder.AlterDatabase()
                 .Annotation("Npgsql:PostgresExtension:uuid-ossp", ",,");
 
             migrationBuilder.CreateTable(
                 name: "identity_user",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -46,7 +46,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "openiddict_application",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -70,7 +70,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "openiddict_scope",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -104,7 +104,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "user",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -137,7 +137,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "user_role",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -152,7 +152,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "openiddict_authorization",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -171,7 +171,7 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_openiddict_authorization_openiddict_application_application",
                         column: x => x.application_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "openiddict_application",
                         principalColumn: "id");
                 });
@@ -195,7 +195,7 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_live_shows_users_user_id",
                         column: x => x.user_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id");
                 });
@@ -221,7 +221,7 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_mixes_users_user_id",
                         column: x => x.user_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -229,7 +229,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "user_claim",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -244,7 +244,7 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_user_claim_user_user_id",
                         column: x => x.user_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -252,7 +252,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "user_followers",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     followers_id = table.Column<string>(type: "text", nullable: false),
@@ -264,14 +264,14 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_user_followers_user_followers_id",
                         column: x => x.followers_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_user_followers_user_following_id",
                         column: x => x.following_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -279,7 +279,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "user_login",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     login_provider = table.Column<string>(type: "text", nullable: false),
@@ -293,7 +293,7 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_user_login_user_user_id",
                         column: x => x.user_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -301,7 +301,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "user_token",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     user_id = table.Column<string>(type: "text", nullable: false),
@@ -315,7 +315,7 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_user_token_user_user_id",
                         column: x => x.user_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -323,7 +323,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "role_claim",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -338,7 +338,7 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_role_claim_user_role_role_id",
                         column: x => x.role_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user_role",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -346,7 +346,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "user_identity_role",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     user_id = table.Column<string>(type: "text", nullable: false),
@@ -358,14 +358,14 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_user_identity_role_user_role_role_id",
                         column: x => x.role_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user_role",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_user_identity_role_user_user_id",
                         column: x => x.user_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -373,7 +373,7 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "openiddict_token",
-                schema: "auth",
+                schema: "oid",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
@@ -396,13 +396,13 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_openiddict_token_openiddict_application_application_id",
                         column: x => x.application_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "openiddict_application",
                         principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_openiddict_token_openiddict_authorization_authorization_id",
                         column: x => x.authorization_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "openiddict_authorization",
                         principalColumn: "id");
                 });
@@ -455,13 +455,13 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_show_chat_users_from_user_id",
                         column: x => x.from_user_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_show_chat_users_to_user_id",
                         column: x => x.to_user_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id");
                 });
@@ -488,7 +488,7 @@ namespace MixyBoos.Api.Migrations
                     table.ForeignKey(
                         name: "fk_mix_plays_users_user_id",
                         column: x => x.user_id,
-                        principalSchema: "auth",
+                        principalSchema: "oid",
                         principalTable: "user",
                         principalColumn: "id");
                 });
@@ -526,46 +526,46 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "ix_openiddict_application_client_id",
-                schema: "auth",
+                schema: "oid",
                 table: "openiddict_application",
                 column: "client_id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_openiddict_authorization_application_id_status_subject_type",
-                schema: "auth",
+                schema: "oid",
                 table: "openiddict_authorization",
                 columns: new[] { "application_id", "status", "subject", "type" });
 
             migrationBuilder.CreateIndex(
                 name: "ix_openiddict_scope_name",
-                schema: "auth",
+                schema: "oid",
                 table: "openiddict_scope",
                 column: "name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_openiddict_token_application_id_status_subject_type",
-                schema: "auth",
+                schema: "oid",
                 table: "openiddict_token",
                 columns: new[] { "application_id", "status", "subject", "type" });
 
             migrationBuilder.CreateIndex(
                 name: "ix_openiddict_token_authorization_id",
-                schema: "auth",
+                schema: "oid",
                 table: "openiddict_token",
                 column: "authorization_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_openiddict_token_reference_id",
-                schema: "auth",
+                schema: "oid",
                 table: "openiddict_token",
                 column: "reference_id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_role_claim_role_id",
-                schema: "auth",
+                schema: "oid",
                 table: "role_claim",
                 column: "role_id");
 
@@ -592,51 +592,51 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                schema: "auth",
+                schema: "oid",
                 table: "user",
                 column: "normalized_email");
 
             migrationBuilder.CreateIndex(
                 name: "ix_user_slug",
-                schema: "auth",
+                schema: "oid",
                 table: "user",
                 column: "slug",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                schema: "auth",
+                schema: "oid",
                 table: "user",
                 column: "normalized_user_name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_user_claim_user_id",
-                schema: "auth",
+                schema: "oid",
                 table: "user_claim",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_user_followers_following_id",
-                schema: "auth",
+                schema: "oid",
                 table: "user_followers",
                 column: "following_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_user_identity_role_role_id",
-                schema: "auth",
+                schema: "oid",
                 table: "user_identity_role",
                 column: "role_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_user_login_user_id",
-                schema: "auth",
+                schema: "oid",
                 table: "user_login",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                schema: "auth",
+                schema: "oid",
                 table: "user_role",
                 column: "normalized_name",
                 unique: true);
@@ -647,7 +647,7 @@ namespace MixyBoos.Api.Migrations
         {
             migrationBuilder.DropTable(
                 name: "identity_user",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "live_show_tag");
@@ -657,38 +657,38 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "openiddict_scope",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "openiddict_token",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "role_claim",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "show_chat");
 
             migrationBuilder.DropTable(
                 name: "user_claim",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "user_followers",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "user_identity_role",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "user_login",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "user_token",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "tags");
@@ -698,22 +698,22 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "openiddict_authorization",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "live_shows");
 
             migrationBuilder.DropTable(
                 name: "user_role",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "openiddict_application",
-                schema: "auth");
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "user",
-                schema: "auth");
+                schema: "oid");
         }
     }
 }

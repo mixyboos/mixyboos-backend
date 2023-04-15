@@ -15,13 +15,20 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using MixyBoos.Api.Data;
+using MixyBoos.Api.Services;
+using MixyBoos.Api.Services.Extensions;
 using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Validation.AspNetCore;
 using Quartz;
 
+public class InvalidFileUploadException : Exception {
+    public InvalidFileUploadException(string message) : base(message) { }
+}
+
 namespace MixyBoos.Api.Controllers {
-    public class UploadFormData {
+    public class FileUploadModel {
         public string Id { get; set; }
+        public IFormFile File { get; set; }
     }
 
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
@@ -29,7 +36,8 @@ namespace MixyBoos.Api.Controllers {
     public class UploadController : _Controller {
         private readonly UserManager<MixyBoosUser> _userManager;
         private readonly ISchedulerFactory _schedulerFactory;
-        const long FileSizeLimit = 2147483648;
+        const long AudioFileSizeLimit = 2147483648;
+        const long ImageFileSizeLimit = 52428800;
 
         public UploadController(UserManager<MixyBoosUser> userManager, ISchedulerFactory schedulerFactory,
             ILogger<UploadController> logger) : base(logger) {
@@ -37,127 +45,76 @@ namespace MixyBoos.Api.Controllers {
             _schedulerFactory = schedulerFactory;
         }
 
-        [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = FileSizeLimit)] //2Gb
-        [RequestSizeLimit(FileSizeLimit)] //2Gb
-        public async Task<IActionResult> UploadAudio() {
+        private async Task<(IActionResult, string)> _preProcessUpload(string id, IFormFile file) {
+            if (!ModelState.IsValid || id is null || file is null) {
+                return (BadRequest(), string.Empty);
+            }
+
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user is null) {
-                return Unauthorized();
+                return (Unauthorized(), string.Empty);
             }
 
-            if (!MultipartRequestHelper.IsMultipartContentType(Request.ContentType)) {
-                ModelState.AddModelError("File",
-                    $"The request couldn't be processed (Error 1).");
-                // Log error
+            var fileName = file.FileName;
+            var extension = Path.GetExtension(fileName);
+            var localPath = Path.Combine(Constants.TempFolder, $"{id}{extension}");
 
-                return BadRequest(ModelState);
+            await using (var stream = new FileStream(localPath, FileMode.Create)) {
+                await file.CopyToAsync(stream);
             }
 
-            // Accumulate the form data key-value pairs in the request (formAccumulator).
-            var formAccumulator = new KeyValueAccumulator();
-            var streamedFileContent = Array.Empty<byte>();
+            return (Created(nameof(UploadController), null), localPath);
+        }
 
-            var boundary = MultipartRequestHelper.GetBoundary(
-                MediaTypeHeaderValue.Parse(Request.ContentType),
-                2147483648);
-            var reader = new MultipartReader(boundary, HttpContext.Request.Body);
+        [HttpPost("image/{id}")]
+        [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
+        [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
+        [DisableFormValueModelBinding]
+        public async Task<IActionResult> UploadImage([FromRoute] string id, [FromForm] IFormFile file,
+            [FromQuery] string imageType) {
+            var (response, localFile) = await _preProcessUpload(id, file);
 
-            var section = await reader.ReadNextSectionAsync();
-
-            while (section != null) {
-                var hasContentDispositionHeader =
-                    ContentDispositionHeaderValue.TryParse(
-                        section.ContentDisposition, out var contentDisposition);
-
-                if (hasContentDispositionHeader) {
-                    if (MultipartRequestHelper
-                        .HasFileContentDisposition(contentDisposition)) {
-                        streamedFileContent = await FileHelpers.ProcessStreamedFile(
-                            section,
-                            contentDisposition,
-                            ModelState,
-                            FileSizeLimit
-                        );
-
-                        if (!ModelState.IsValid) {
-                            return BadRequest(ModelState);
-                        }
-                    } else if (MultipartRequestHelper.HasFormDataContentDisposition(contentDisposition)) {
-                        // Don't limit the key name length because the 
-                        // multipart headers length limit is already in effect.
-                        var key = HeaderUtilities
-                            .RemoveQuotes(contentDisposition.Name).Value;
-                        var encoding = GetEncoding(section);
-
-                        if (encoding == null) {
-                            ModelState.AddModelError("File", $"The request couldn't be processed (Error 2).");
-                            // Log error
-                            return BadRequest(ModelState);
-                        }
-
-                        using var streamReader = new StreamReader(
-                            section.Body,
-                            encoding,
-                            detectEncodingFromByteOrderMarks: true,
-                            bufferSize: 1024,
-                            leaveOpen: true);
-                        // The value length limit is enforced by 
-                        // MultipartBodyLengthLimit
-                        var value = await streamReader.ReadToEndAsync();
-
-                        if (string.Equals(value, "undefined",
-                                StringComparison.OrdinalIgnoreCase)) {
-                            value = string.Empty;
-                        }
-
-                        formAccumulator.Append(key, value);
-
-                        if (formAccumulator.ValueCount > 1) {
-                            ModelState.AddModelError("File",
-                                $"The request couldn't be processed (Error 3).");
-                            return BadRequest(ModelState);
-                        }
-                    }
-                }
-
-                // Drain any remaining section body that hasn't been consumed and
-                // read the headers for the next section.
-                section = await reader.ReadNextSectionAsync();
+            if (string.IsNullOrEmpty(localFile)) {
+                return response;
             }
 
-            // Bind form data to the model
-            var formData = new UploadFormData();
-            var formValueProvider = new FormValueProvider(
-                BindingSource.Form,
-                new FormCollection(formAccumulator.GetResults()),
-                CultureInfo.CurrentCulture);
-
-            var bindingSuccessful = await TryUpdateModelAsync(
-                formData,
-                "",
-                formValueProvider);
-
-            if (!bindingSuccessful) {
-                ModelState.AddModelError("File", "The request couldn't be processed (Error 5).");
-                return BadRequest(ModelState);
-            }
-
-            var outputFile = $"/tmp/{formData.Id}.mp3";
-            await System.IO.File.WriteAllBytesAsync(outputFile, streamedFileContent);
-
-
-            var scheduler = await _schedulerFactory.GetScheduler();
             var jobData = new Dictionary<string, string>() {
-                {"Id", formData.Id},
-                {"FileLocation", outputFile},
+                {"Id", id},
+                {"FileLocation", localFile},
+                {"ImageType", imageType},
                 {"UserId", User.Identity.Name}
             };
+            var scheduler = await _schedulerFactory.GetScheduler();
+            await scheduler.TriggerJob(
+                new JobKey("ProcessUploadedImageJob"),
+                new JobDataMap(jobData));
+
+            return response;
+        }
+
+
+        [HttpPost("{id}")]
+        [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
+        [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
+        [DisableFormValueModelBinding]
+        public async Task<IActionResult> UploadAudio([FromRoute] string id, [FromForm] IFormFile file) {
+            var (response, localFile) = await _preProcessUpload(id, file);
+
+            if (string.IsNullOrEmpty(localFile)) {
+                return response;
+            }
+
+            var jobData = new Dictionary<string, string>() {
+                {"Id", id},
+                {"FileLocation", localFile},
+                {"UserId", User.Identity.Name}
+            };
+            var scheduler = await _schedulerFactory.GetScheduler();
             await scheduler.TriggerJob(
                 new JobKey("ProcessUploadedAudioJob"),
                 new JobDataMap(jobData));
 
-            return Created(nameof(UploadController), null);
+            return response;
         }
 
         private static Encoding GetEncoding(MultipartSection section) {

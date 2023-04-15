@@ -10,9 +10,9 @@ using static OpenIddict.Abstractions.OpenIddictConstants;
 namespace MixyBoos.Api.Services.Workers {
     public class OpenIdDictWorker : IHostedService {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ILogger<OpenIddictBuilder> _logger;
+        private readonly ILogger<OpenIdDictWorker> _logger;
 
-        public OpenIdDictWorker(IServiceProvider serviceProvider, ILogger<OpenIddictBuilder> logger) {
+        public OpenIdDictWorker(IServiceProvider serviceProvider, ILogger<OpenIdDictWorker> logger) {
             _serviceProvider = serviceProvider;
             _logger = logger;
         }
@@ -37,6 +37,7 @@ namespace MixyBoos.Api.Services.Workers {
                             Permissions.Endpoints.Token,
                             Permissions.GrantTypes.Password,
                             Permissions.GrantTypes.RefreshToken,
+                            "urn:ietf:params:oauth:grant-type:google_identity_token",
                             Permissions.Prefixes.Scope + "api"
                         }
                     }, cancellationToken);

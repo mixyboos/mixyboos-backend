@@ -43,6 +43,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
         if (!optionsBuilder.IsConfigured) {
             optionsBuilder
                 .UseNpgsql("Name=MixyBoos")
+                .AddInterceptors(new MixyBoosDbEventsInterceptor())
                 .UseSnakeCaseNamingConvention();
         }
     }
@@ -54,19 +55,19 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
         mb.HasAnnotation("Relational:Collation", "en_US.utf8");
 
         //give the identity tables proper names and schema
-        mb.Entity<MixyBoosUser>().ToTable("user", "auth");
-        mb.Entity<IdentityUser>().ToTable("identity_user", "auth");
-        mb.Entity<IdentityRole>().ToTable("user_role", "auth");
-        mb.Entity<IdentityUserClaim<string>>().ToTable("user_claim", "auth");
-        mb.Entity<IdentityUserLogin<string>>().ToTable("user_login", "auth");
-        mb.Entity<IdentityRoleClaim<string>>().ToTable("role_claim", "auth");
-        mb.Entity<IdentityUserToken<string>>().ToTable("user_token", "auth");
-        mb.Entity<IdentityUserRole<string>>().ToTable("user_identity_role", "auth");
+        mb.Entity<MixyBoosUser>().ToTable("user", "oid");
+        mb.Entity<IdentityUser>().ToTable("identity_user", "oid");
+        mb.Entity<IdentityRole>().ToTable("user_role", "oid");
+        mb.Entity<IdentityUserClaim<string>>().ToTable("user_claim", "oid");
+        mb.Entity<IdentityUserLogin<string>>().ToTable("user_login", "oid");
+        mb.Entity<IdentityRoleClaim<string>>().ToTable("role_claim", "oid");
+        mb.Entity<IdentityUserToken<string>>().ToTable("user_token", "oid");
+        mb.Entity<IdentityUserRole<string>>().ToTable("user_identity_role", "oid");
 
-        mb.Entity<OpenIddictEntityFrameworkCoreApplication>().ToTable($"{IDENTITY_PREFIX}_{"application"}", "auth");
-        mb.Entity<OpenIddictEntityFrameworkCoreAuthorization>().ToTable($"{IDENTITY_PREFIX}_{"authorization"}", "auth");
-        mb.Entity<OpenIddictEntityFrameworkCoreScope>().ToTable($"{IDENTITY_PREFIX}_{"scope"}", "auth");
-        mb.Entity<OpenIddictEntityFrameworkCoreToken>().ToTable($"{IDENTITY_PREFIX}_{"token"}", "auth");
+        mb.Entity<OpenIddictEntityFrameworkCoreApplication>().ToTable($"{IDENTITY_PREFIX}_{"application"}", "oid");
+        mb.Entity<OpenIddictEntityFrameworkCoreAuthorization>().ToTable($"{IDENTITY_PREFIX}_{"authorization"}", "oid");
+        mb.Entity<OpenIddictEntityFrameworkCoreScope>().ToTable($"{IDENTITY_PREFIX}_{"scope"}", "oid");
+        mb.Entity<OpenIddictEntityFrameworkCoreToken>().ToTable($"{IDENTITY_PREFIX}_{"token"}", "oid");
         //end identity stuff
 
         foreach (var pb in __getColumns(mb, "DateCreated")) {

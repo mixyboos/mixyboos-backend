@@ -11,7 +11,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using MixyBoos.Api.Data;
+using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using static OpenIddict.Abstractions.OpenIddictConstants;
@@ -24,13 +26,16 @@ namespace MixyBoos.Api.Controllers {
 
         private readonly SignInManager<MixyBoosUser> _signInManager;
         private readonly UserManager<MixyBoosUser> _userManager;
+        private readonly ImageHelper _imageHelper;
 
         public AuthorizationController(
             SignInManager<MixyBoosUser> signInManager,
             UserManager<MixyBoosUser> userManager,
+            ImageHelper imageHelper,
             ILogger<AuthorizationController> logger) : base(logger) {
             _signInManager = signInManager;
             _userManager = userManager;
+            _imageHelper = imageHelper;
         }
 
 
@@ -38,6 +43,50 @@ namespace MixyBoos.Api.Controllers {
         [Produces("application/json")]
         public async Task<IActionResult> Exchange() {
             var request = HttpContext.GetOpenIddictServerRequest();
+            if (request.GrantType == "urn:ietf:params:oauth:grant-type:google_identity_token") {
+                // Reject the request if the "assertion" parameter is missing.
+                if (string.IsNullOrEmpty(request.Assertion)) {
+                    return Forbid(
+                        authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
+                        properties: new AuthenticationProperties(new Dictionary<string, string> {
+                            [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidRequest,
+                            [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
+                                "The mandatory 'assertion' parameter was missing."
+                        }));
+                }
+
+                // Create a new ClaimsIdentity containing the claims that
+                // will be used to create an id_token and/or an access token.
+                var identity = new ClaimsIdentity(TokenValidationParameters.DefaultAuthenticationType);
+
+                // Manually validate the identity token issued by Google, including the
+                // issuer, the signature and the audience. Then, copy the claims you need
+                // to the "identity" instance and call SetDestinations on each claim to
+                // allow them to be persisted to either access or identity tokens (or both).
+                //
+                // Note: the identity MUST contain a "sub" claim containing the user ID.
+
+                var principal = new ClaimsPrincipal(identity);
+                principal.Claims.Append(new Claim(Claims.Subject, "Claims.Subject"));
+                principal.Claims.Append(new Claim(Claims.Name, "Claims.Name"));
+                principal.Claims.Append(new Claim("displayName", "displayName"));
+                principal.Claims.Append(new Claim("profileImage", "ProfileImage"));
+                principal.Claims.Append(new Claim("slug", "Slug"));
+
+                foreach (var claim in principal.Claims) {
+                    claim.SetDestinations(claim.Type switch {
+                        "name" => new[] {
+                            Destinations.AccessToken,
+                            Destinations.IdentityToken
+                        },
+
+                        _ => new[] {Destinations.AccessToken},
+                    });
+                }
+
+                return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+            }
+
             if (request.IsClientCredentialsGrantType() || request.IsPasswordGrantType()) {
                 var user = await _userManager.FindByNameAsync(request.Username);
                 if (user == null) {
@@ -96,12 +145,6 @@ namespace MixyBoos.Api.Controllers {
                     .SetAuthorizationCodeLifetime(TimeSpan.FromMinutes(ACCESS_TOKEN_EXPIRY))
                     .SetIdentityTokenLifetime(TimeSpan.FromMinutes(ACCESS_TOKEN_EXPIRY))
                     .SetRefreshTokenLifetime(TimeSpan.FromDays(REFRESH_TOKEN_EXPIRY));
-
-                principal.Claims.Append(new Claim(Claims.Subject, user.Id));
-                principal.Claims.Append(new Claim(Claims.Name, user.UserName ?? string.Empty));
-                principal.Claims.Append(new Claim("displayName", user.DisplayName));
-                principal.Claims.Append(new Claim("profileImage", user.ProfileImage));
-                principal.Claims.Append(new Claim("slug", user.Slug));
 
                 foreach (var claim in principal.Claims) {
                     claim.SetDestinations(GetDestinations(claim, principal));

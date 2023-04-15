@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MixyBoos.Api.Data.Utils;
 
 namespace MixyBoos.Api.Data.Seeders {
     public class DbInitializer : IDbInitializer {
@@ -25,6 +27,8 @@ namespace MixyBoos.Api.Data.Seeders {
         public async Task SeedData() {
             using var serviceScope = _scopeFactory.CreateScope();
             await using var context = serviceScope.ServiceProvider.GetService<MixyBoosContext>();
+            var config = serviceScope.ServiceProvider.GetService<IConfiguration>();
+            var cacher = serviceScope.ServiceProvider.GetService<ImageCacher>();
             using var userManager = serviceScope.ServiceProvider.GetService<UserManager<MixyBoosUser>>();
             var logger = serviceScope.ServiceProvider.GetService<ILogger<DbInitializer>>();
             var seeder = new TestData(context, logger);
@@ -43,6 +47,8 @@ namespace MixyBoos.Api.Data.Seeders {
                     var userStore = new UserStore<MixyBoosUser>(context);
                     await userStore.CreateAsync(user);
                     Console.WriteLine($"Adding ClaimTypes.Email to user {user.Email}");
+                    await cacher.CacheUserImages(user, config);
+                    await userStore.UpdateAsync(user);
                     await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
                 }
             }
