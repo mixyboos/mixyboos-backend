@@ -49,7 +49,7 @@ namespace MixyBoos.Api {
             var connectionString = _configuration.GetConnectionString("MixyBoos");
             Console.WriteLine("Connecting to database");
             Console.WriteLine($"\t{connectionString}");
-            
+
             services.AddDbContext<MixyBoosContext>(options => {
                 options
                     .UseNpgsql(connectionString, pgoptions => {
@@ -91,7 +91,8 @@ namespace MixyBoos.Api {
                         .AcceptAnonymousClients()
                         .AllowRefreshTokenFlow()
                         .RequireProofKeyForCodeExchange()
-                        .AcceptAnonymousClients();
+                        .AcceptAnonymousClients()
+                        .AllowCustomFlow("urn:ietf:params:oauth:grant-type:google_identity_token");
 
                     options
                         .SetAuthorizationEndpointUris("/connect/authorize")

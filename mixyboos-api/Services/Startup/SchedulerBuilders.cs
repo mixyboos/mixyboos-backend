@@ -14,6 +14,9 @@ public static class SchedulerBuilders {
             q.AddJob<ProcessUploadedAudioJob>(opts => {
                 opts.WithIdentity(new JobKey("ProcessUploadedAudioJob")).StoreDurably();
             });
+            q.AddJob<ProcessUploadedImageJob>(opts => {
+                opts.WithIdentity(new JobKey("ProcessUploadedImageJob")).StoreDurably();
+            });
             q.AddJob<CheckLiveStreamJob>(opts => {
                 opts.WithIdentity(new JobKey("CheckLiveStreamJob")).StoreDurably();
             });

@@ -37,6 +37,7 @@ namespace MixyBoos.Api.Services.Workers {
                             Permissions.Endpoints.Token,
                             Permissions.GrantTypes.Password,
                             Permissions.GrantTypes.RefreshToken,
+                            "urn:ietf:params:oauth:grant-type:google_identity_token",
                             Permissions.Prefixes.Scope + "api"
                         }
                     }, cancellationToken);
