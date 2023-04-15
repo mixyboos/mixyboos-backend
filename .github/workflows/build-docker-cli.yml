@@ -3,7 +3,7 @@ name: mixyboos-api deployment
 on:
   push:
     branches:
-      [ develop ]
+      [ develop, trunk ]
 
 env:
   REGISTRY: ghcr.io
