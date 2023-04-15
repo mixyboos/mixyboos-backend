@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230118193704_Initial")]
+    [Migration("20230414180652_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -21,7 +21,7 @@ namespace MixyBoos.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .UseCollation("en_US.utf8")
-                .HasAnnotation("ProductVersion", "7.0.1")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
@@ -535,15 +535,15 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
-                        .HasName("pk_mix_play");
+                        .HasName("pk_mix_plays");
 
                     b.HasIndex("MixId")
-                        .HasDatabaseName("ix_mix_play_mix_id");
+                        .HasDatabaseName("ix_mix_plays_mix_id");
 
                     b.HasIndex("UserId")
-                        .HasDatabaseName("ix_mix_play_user_id");
+                        .HasDatabaseName("ix_mix_plays_user_id");
 
-                    b.ToTable("mix_play", (string)null);
+                    b.ToTable("mix_plays", (string)null);
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.ShowChat", b =>
@@ -1005,12 +1005,12 @@ namespace MixyBoos.Api.Migrations
                         .HasForeignKey("MixId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_mix_play_mixes_mix_id");
+                        .HasConstraintName("fk_mix_plays_mixes_mix_id");
 
                     b.HasOne("MixyBoos.Api.Data.MixyBoosUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .HasConstraintName("fk_mix_play_users_user_id");
+                        .HasConstraintName("fk_mix_plays_users_user_id");
 
                     b.Navigation("Mix");
 

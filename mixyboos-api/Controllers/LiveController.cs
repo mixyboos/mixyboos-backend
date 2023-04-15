@@ -132,7 +132,11 @@ namespace MixyBoos.Api.Controllers {
                 _logger.LogError("Error starting job {Message}", e.Message);
             }
 
-            await _hub.Clients.User(user.Email).SendAsync("StreamEnded", show.Id);
+            if (!string.IsNullOrEmpty(user.Email)) {
+                await _hub.Clients.User(user.Email).SendAsync(
+                    "StreamEnded",
+                    show.Adapt<LiveShowDTO>());
+            }
             return Ok();
         }
 

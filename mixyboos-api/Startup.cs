@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -70,7 +71,9 @@ namespace MixyBoos.Api {
             services.RegisterMapsterConfiguration(_configuration);
             services.RegisterHttpClients(_configuration);
 
-            services.AddSignalR();
+            services.AddSignalR().AddJsonProtocol(options => {
+                options.PayloadSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            });
 
             // .AddCore()
             // .AddServer(options => {
@@ -171,7 +174,7 @@ namespace MixyBoos.Api {
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "MixyBoos.Api", Version = "v1"});
             });
-            
+
             services.AddHostedService<OpenIdDictWorker>();
         }
 
@@ -180,12 +183,13 @@ namespace MixyBoos.Api {
                 app.UseDeveloperExceptionPage();
                 app.UseHttpsRedirection();
             }
+
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             using var scope = scopeFactory.CreateScope();
             var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
             dbInitializer.Initialize();
             dbInitializer.SeedData();
-            
+
             app.UseForwardedHeaders();
 
             app.UseSwagger();

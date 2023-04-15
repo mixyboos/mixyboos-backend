@@ -22,7 +22,7 @@ public static class HttpClientBuilders {
     public static void RegisterHttpClients(this IServiceCollection services, IConfiguration configuration) {
         services.AddHttpClient("RTMP", httpClient => {
                 httpClient.BaseAddress =
-                    new Uri(configuration["LiveServices:StreamingUrl"] ?? "https://live.mixyboos.com");
+                    new Uri(configuration["LiveServices:RtmpUrl"] ?? "https://live.mixyboos.com");
             })
             .SetHandlerLifetime(TimeSpan.FromMinutes(5)) //Set lifetime to five minutes
             .AddPolicyHandler(GetRetryPolicy());

@@ -24,20 +24,20 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
-                    username = table.Column<string>(name: "user_name", type: "text", nullable: true),
-                    normalizedusername = table.Column<string>(name: "normalized_user_name", type: "text", nullable: true),
+                    user_name = table.Column<string>(type: "text", nullable: true),
+                    normalized_user_name = table.Column<string>(type: "text", nullable: true),
                     email = table.Column<string>(type: "text", nullable: true),
-                    normalizedemail = table.Column<string>(name: "normalized_email", type: "text", nullable: true),
-                    emailconfirmed = table.Column<bool>(name: "email_confirmed", type: "boolean", nullable: false),
-                    passwordhash = table.Column<string>(name: "password_hash", type: "text", nullable: true),
-                    securitystamp = table.Column<string>(name: "security_stamp", type: "text", nullable: true),
-                    concurrencystamp = table.Column<string>(name: "concurrency_stamp", type: "text", nullable: true),
-                    phonenumber = table.Column<string>(name: "phone_number", type: "text", nullable: true),
-                    phonenumberconfirmed = table.Column<bool>(name: "phone_number_confirmed", type: "boolean", nullable: false),
-                    twofactorenabled = table.Column<bool>(name: "two_factor_enabled", type: "boolean", nullable: false),
-                    lockoutend = table.Column<DateTimeOffset>(name: "lockout_end", type: "timestamp with time zone", nullable: true),
-                    lockoutenabled = table.Column<bool>(name: "lockout_enabled", type: "boolean", nullable: false),
-                    accessfailedcount = table.Column<int>(name: "access_failed_count", type: "integer", nullable: false)
+                    normalized_email = table.Column<string>(type: "text", nullable: true),
+                    email_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    password_hash = table.Column<string>(type: "text", nullable: true),
+                    security_stamp = table.Column<string>(type: "text", nullable: true),
+                    concurrency_stamp = table.Column<string>(type: "text", nullable: true),
+                    phone_number = table.Column<string>(type: "text", nullable: true),
+                    phone_number_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    two_factor_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    lockout_end = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    lockout_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    access_failed_count = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,16 +50,16 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
-                    clientid = table.Column<string>(name: "client_id", type: "character varying(100)", maxLength: 100, nullable: true),
-                    clientsecret = table.Column<string>(name: "client_secret", type: "text", nullable: true),
-                    concurrencytoken = table.Column<string>(name: "concurrency_token", type: "character varying(50)", maxLength: 50, nullable: true),
-                    consenttype = table.Column<string>(name: "consent_type", type: "character varying(50)", maxLength: 50, nullable: true),
-                    displayname = table.Column<string>(name: "display_name", type: "text", nullable: true),
-                    displaynames = table.Column<string>(name: "display_names", type: "text", nullable: true),
+                    client_id = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    client_secret = table.Column<string>(type: "text", nullable: true),
+                    concurrency_token = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    consent_type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    display_name = table.Column<string>(type: "text", nullable: true),
+                    display_names = table.Column<string>(type: "text", nullable: true),
                     permissions = table.Column<string>(type: "text", nullable: true),
-                    postlogoutredirecturis = table.Column<string>(name: "post_logout_redirect_uris", type: "text", nullable: true),
+                    post_logout_redirect_uris = table.Column<string>(type: "text", nullable: true),
                     properties = table.Column<string>(type: "text", nullable: true),
-                    redirecturis = table.Column<string>(name: "redirect_uris", type: "text", nullable: true),
+                    redirect_uris = table.Column<string>(type: "text", nullable: true),
                     requirements = table.Column<string>(type: "text", nullable: true),
                     type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true)
                 },
@@ -74,11 +74,11 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
-                    concurrencytoken = table.Column<string>(name: "concurrency_token", type: "character varying(50)", maxLength: 50, nullable: true),
+                    concurrency_token = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
                     descriptions = table.Column<string>(type: "text", nullable: true),
-                    displayname = table.Column<string>(name: "display_name", type: "text", nullable: true),
-                    displaynames = table.Column<string>(name: "display_names", type: "text", nullable: true),
+                    display_name = table.Column<string>(type: "text", nullable: true),
+                    display_names = table.Column<string>(type: "text", nullable: true),
                     name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     properties = table.Column<string>(type: "text", nullable: true),
                     resources = table.Column<string>(type: "text", nullable: true)
@@ -93,9 +93,9 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    tagname = table.Column<string>(name: "tag_name", type: "text", nullable: true),
-                    datecreated = table.Column<DateTime>(name: "date_created", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    dateupdated = table.Column<DateTime>(name: "date_updated", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                    tag_name = table.Column<string>(type: "text", nullable: true),
+                    date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
@@ -109,26 +109,26 @@ namespace MixyBoos.Api.Migrations
                 {
                     id = table.Column<string>(type: "text", nullable: false),
                     title = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    displayname = table.Column<string>(name: "display_name", type: "character varying(30)", maxLength: 30, nullable: true),
-                    profileimage = table.Column<string>(name: "profile_image", type: "text", nullable: true),
-                    headerimage = table.Column<string>(name: "header_image", type: "text", nullable: true),
+                    display_name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
+                    profile_image = table.Column<string>(type: "text", nullable: true),
+                    header_image = table.Column<string>(type: "text", nullable: true),
                     slug = table.Column<string>(type: "text", nullable: true),
                     biography = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
-                    streamkey = table.Column<string>(name: "stream_key", type: "text", nullable: true),
-                    username = table.Column<string>(name: "user_name", type: "character varying(256)", maxLength: 256, nullable: true),
-                    normalizedusername = table.Column<string>(name: "normalized_user_name", type: "character varying(256)", maxLength: 256, nullable: true),
+                    stream_key = table.Column<string>(type: "text", nullable: true),
+                    user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    normalized_user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    normalizedemail = table.Column<string>(name: "normalized_email", type: "character varying(256)", maxLength: 256, nullable: true),
-                    emailconfirmed = table.Column<bool>(name: "email_confirmed", type: "boolean", nullable: false),
-                    passwordhash = table.Column<string>(name: "password_hash", type: "text", nullable: true),
-                    securitystamp = table.Column<string>(name: "security_stamp", type: "text", nullable: true),
-                    concurrencystamp = table.Column<string>(name: "concurrency_stamp", type: "text", nullable: true),
-                    phonenumber = table.Column<string>(name: "phone_number", type: "text", nullable: true),
-                    phonenumberconfirmed = table.Column<bool>(name: "phone_number_confirmed", type: "boolean", nullable: false),
-                    twofactorenabled = table.Column<bool>(name: "two_factor_enabled", type: "boolean", nullable: false),
-                    lockoutend = table.Column<DateTimeOffset>(name: "lockout_end", type: "timestamp with time zone", nullable: true),
-                    lockoutenabled = table.Column<bool>(name: "lockout_enabled", type: "boolean", nullable: false),
-                    accessfailedcount = table.Column<int>(name: "access_failed_count", type: "integer", nullable: false)
+                    normalized_email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    email_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    password_hash = table.Column<string>(type: "text", nullable: true),
+                    security_stamp = table.Column<string>(type: "text", nullable: true),
+                    concurrency_stamp = table.Column<string>(type: "text", nullable: true),
+                    phone_number = table.Column<string>(type: "text", nullable: true),
+                    phone_number_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    two_factor_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    lockout_end = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    lockout_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    access_failed_count = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,8 +142,8 @@ namespace MixyBoos.Api.Migrations
                 {
                     id = table.Column<string>(type: "text", nullable: false),
                     name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    normalizedname = table.Column<string>(name: "normalized_name", type: "character varying(256)", maxLength: 256, nullable: true),
-                    concurrencystamp = table.Column<string>(name: "concurrency_stamp", type: "text", nullable: true)
+                    normalized_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    concurrency_stamp = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,9 +156,9 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
-                    applicationid = table.Column<string>(name: "application_id", type: "text", nullable: true),
-                    concurrencytoken = table.Column<string>(name: "concurrency_token", type: "character varying(50)", maxLength: 50, nullable: true),
-                    creationdate = table.Column<DateTime>(name: "creation_date", type: "timestamp with time zone", nullable: true),
+                    application_id = table.Column<string>(type: "text", nullable: true),
+                    concurrency_token = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    creation_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     properties = table.Column<string>(type: "text", nullable: true),
                     scopes = table.Column<string>(type: "text", nullable: true),
                     status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
@@ -170,7 +170,7 @@ namespace MixyBoos.Api.Migrations
                     table.PrimaryKey("pk_openiddict_authorization", x => x.id);
                     table.ForeignKey(
                         name: "fk_openiddict_authorization_openiddict_application_application",
-                        column: x => x.applicationid,
+                        column: x => x.application_id,
                         principalSchema: "auth",
                         principalTable: "openiddict_application",
                         principalColumn: "id");
@@ -183,18 +183,18 @@ namespace MixyBoos.Api.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     title = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
-                    startdate = table.Column<DateTime>(name: "start_date", type: "timestamp with time zone", nullable: false),
-                    isfinished = table.Column<bool>(name: "is_finished", type: "boolean", nullable: false),
-                    userid = table.Column<string>(name: "user_id", type: "text", nullable: true),
-                    datecreated = table.Column<DateTime>(name: "date_created", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    dateupdated = table.Column<DateTime>(name: "date_updated", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                    start_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    is_finished = table.Column<bool>(type: "boolean", nullable: false),
+                    user_id = table.Column<string>(type: "text", nullable: true),
+                    date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_live_shows", x => x.id);
                     table.ForeignKey(
                         name: "fk_live_shows_users_user_id",
-                        column: x => x.userid,
+                        column: x => x.user_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id");
@@ -209,18 +209,18 @@ namespace MixyBoos.Api.Migrations
                     title = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
                     image = table.Column<string>(type: "text", nullable: true),
-                    audiourl = table.Column<string>(name: "audio_url", type: "text", nullable: true),
-                    isprocessed = table.Column<bool>(name: "is_processed", type: "boolean", nullable: false),
-                    userid = table.Column<string>(name: "user_id", type: "text", nullable: false),
-                    datecreated = table.Column<DateTime>(name: "date_created", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    dateupdated = table.Column<DateTime>(name: "date_updated", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                    audio_url = table.Column<string>(type: "text", nullable: true),
+                    is_processed = table.Column<bool>(type: "boolean", nullable: false),
+                    user_id = table.Column<string>(type: "text", nullable: false),
+                    date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_mixes", x => x.id);
                     table.ForeignKey(
                         name: "fk_mixes_users_user_id",
-                        column: x => x.userid,
+                        column: x => x.user_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id",
@@ -234,16 +234,16 @@ namespace MixyBoos.Api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    userid = table.Column<string>(name: "user_id", type: "text", nullable: false),
-                    claimtype = table.Column<string>(name: "claim_type", type: "text", nullable: true),
-                    claimvalue = table.Column<string>(name: "claim_value", type: "text", nullable: true)
+                    user_id = table.Column<string>(type: "text", nullable: false),
+                    claim_type = table.Column<string>(type: "text", nullable: true),
+                    claim_value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_user_claim", x => x.id);
                     table.ForeignKey(
                         name: "fk_user_claim_user_user_id",
-                        column: x => x.userid,
+                        column: x => x.user_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id",
@@ -255,22 +255,22 @@ namespace MixyBoos.Api.Migrations
                 schema: "auth",
                 columns: table => new
                 {
-                    followersid = table.Column<string>(name: "followers_id", type: "text", nullable: false),
-                    followingid = table.Column<string>(name: "following_id", type: "text", nullable: false)
+                    followers_id = table.Column<string>(type: "text", nullable: false),
+                    following_id = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_user_followers", x => new { x.followersid, x.followingid });
+                    table.PrimaryKey("pk_user_followers", x => new { x.followers_id, x.following_id });
                     table.ForeignKey(
                         name: "fk_user_followers_user_followers_id",
-                        column: x => x.followersid,
+                        column: x => x.followers_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_user_followers_user_following_id",
-                        column: x => x.followingid,
+                        column: x => x.following_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id",
@@ -282,17 +282,17 @@ namespace MixyBoos.Api.Migrations
                 schema: "auth",
                 columns: table => new
                 {
-                    loginprovider = table.Column<string>(name: "login_provider", type: "text", nullable: false),
-                    providerkey = table.Column<string>(name: "provider_key", type: "text", nullable: false),
-                    providerdisplayname = table.Column<string>(name: "provider_display_name", type: "text", nullable: true),
-                    userid = table.Column<string>(name: "user_id", type: "text", nullable: false)
+                    login_provider = table.Column<string>(type: "text", nullable: false),
+                    provider_key = table.Column<string>(type: "text", nullable: false),
+                    provider_display_name = table.Column<string>(type: "text", nullable: true),
+                    user_id = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_user_login", x => new { x.loginprovider, x.providerkey });
+                    table.PrimaryKey("pk_user_login", x => new { x.login_provider, x.provider_key });
                     table.ForeignKey(
                         name: "fk_user_login_user_user_id",
-                        column: x => x.userid,
+                        column: x => x.user_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id",
@@ -304,17 +304,17 @@ namespace MixyBoos.Api.Migrations
                 schema: "auth",
                 columns: table => new
                 {
-                    userid = table.Column<string>(name: "user_id", type: "text", nullable: false),
-                    loginprovider = table.Column<string>(name: "login_provider", type: "text", nullable: false),
+                    user_id = table.Column<string>(type: "text", nullable: false),
+                    login_provider = table.Column<string>(type: "text", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_user_token", x => new { x.userid, x.loginprovider, x.name });
+                    table.PrimaryKey("pk_user_token", x => new { x.user_id, x.login_provider, x.name });
                     table.ForeignKey(
                         name: "fk_user_token_user_user_id",
-                        column: x => x.userid,
+                        column: x => x.user_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id",
@@ -328,16 +328,16 @@ namespace MixyBoos.Api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    roleid = table.Column<string>(name: "role_id", type: "text", nullable: false),
-                    claimtype = table.Column<string>(name: "claim_type", type: "text", nullable: true),
-                    claimvalue = table.Column<string>(name: "claim_value", type: "text", nullable: true)
+                    role_id = table.Column<string>(type: "text", nullable: false),
+                    claim_type = table.Column<string>(type: "text", nullable: true),
+                    claim_value = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_role_claim", x => x.id);
                     table.ForeignKey(
                         name: "fk_role_claim_user_role_role_id",
-                        column: x => x.roleid,
+                        column: x => x.role_id,
                         principalSchema: "auth",
                         principalTable: "user_role",
                         principalColumn: "id",
@@ -349,22 +349,22 @@ namespace MixyBoos.Api.Migrations
                 schema: "auth",
                 columns: table => new
                 {
-                    userid = table.Column<string>(name: "user_id", type: "text", nullable: false),
-                    roleid = table.Column<string>(name: "role_id", type: "text", nullable: false)
+                    user_id = table.Column<string>(type: "text", nullable: false),
+                    role_id = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_user_identity_role", x => new { x.userid, x.roleid });
+                    table.PrimaryKey("pk_user_identity_role", x => new { x.user_id, x.role_id });
                     table.ForeignKey(
                         name: "fk_user_identity_role_user_role_role_id",
-                        column: x => x.roleid,
+                        column: x => x.role_id,
                         principalSchema: "auth",
                         principalTable: "user_role",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_user_identity_role_user_user_id",
-                        column: x => x.userid,
+                        column: x => x.user_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id",
@@ -377,15 +377,15 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "text", nullable: false),
-                    applicationid = table.Column<string>(name: "application_id", type: "text", nullable: true),
-                    authorizationid = table.Column<string>(name: "authorization_id", type: "text", nullable: true),
-                    concurrencytoken = table.Column<string>(name: "concurrency_token", type: "character varying(50)", maxLength: 50, nullable: true),
-                    creationdate = table.Column<DateTime>(name: "creation_date", type: "timestamp with time zone", nullable: true),
-                    expirationdate = table.Column<DateTime>(name: "expiration_date", type: "timestamp with time zone", nullable: true),
+                    application_id = table.Column<string>(type: "text", nullable: true),
+                    authorization_id = table.Column<string>(type: "text", nullable: true),
+                    concurrency_token = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    creation_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    expiration_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     payload = table.Column<string>(type: "text", nullable: true),
                     properties = table.Column<string>(type: "text", nullable: true),
-                    redemptiondate = table.Column<DateTime>(name: "redemption_date", type: "timestamp with time zone", nullable: true),
-                    referenceid = table.Column<string>(name: "reference_id", type: "character varying(100)", maxLength: 100, nullable: true),
+                    redemption_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    reference_id = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     subject = table.Column<string>(type: "character varying(400)", maxLength: 400, nullable: true),
                     type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true)
@@ -395,13 +395,13 @@ namespace MixyBoos.Api.Migrations
                     table.PrimaryKey("pk_openiddict_token", x => x.id);
                     table.ForeignKey(
                         name: "fk_openiddict_token_openiddict_application_application_id",
-                        column: x => x.applicationid,
+                        column: x => x.application_id,
                         principalSchema: "auth",
                         principalTable: "openiddict_application",
                         principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_openiddict_token_openiddict_authorization_authorization_id",
-                        column: x => x.authorizationid,
+                        column: x => x.authorization_id,
                         principalSchema: "auth",
                         principalTable: "openiddict_authorization",
                         principalColumn: "id");
@@ -411,21 +411,21 @@ namespace MixyBoos.Api.Migrations
                 name: "live_show_tag",
                 columns: table => new
                 {
-                    liveshowsid = table.Column<Guid>(name: "live_shows_id", type: "uuid", nullable: false),
-                    tagsid = table.Column<Guid>(name: "tags_id", type: "uuid", nullable: false)
+                    live_shows_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tags_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_live_show_tag", x => new { x.liveshowsid, x.tagsid });
+                    table.PrimaryKey("pk_live_show_tag", x => new { x.live_shows_id, x.tags_id });
                     table.ForeignKey(
                         name: "fk_live_show_tag_live_shows_live_shows_id",
-                        column: x => x.liveshowsid,
+                        column: x => x.live_shows_id,
                         principalTable: "live_shows",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_live_show_tag_tags_tags_id",
-                        column: x => x.tagsid,
+                        column: x => x.tags_id,
                         principalTable: "tags",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -436,58 +436,58 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    fromuserid = table.Column<string>(name: "from_user_id", type: "text", nullable: true),
-                    touserid = table.Column<string>(name: "to_user_id", type: "text", nullable: true),
-                    datesent = table.Column<DateTime>(name: "date_sent", type: "timestamp with time zone", nullable: false),
-                    showid = table.Column<Guid>(name: "show_id", type: "uuid", nullable: false),
-                    datecreated = table.Column<DateTime>(name: "date_created", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    dateupdated = table.Column<DateTime>(name: "date_updated", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                    from_user_id = table.Column<string>(type: "text", nullable: true),
+                    to_user_id = table.Column<string>(type: "text", nullable: true),
+                    date_sent = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    show_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_show_chat", x => x.id);
                     table.ForeignKey(
                         name: "fk_show_chat_live_shows_show_id",
-                        column: x => x.showid,
+                        column: x => x.show_id,
                         principalTable: "live_shows",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_show_chat_users_from_user_id",
-                        column: x => x.fromuserid,
+                        column: x => x.from_user_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_show_chat_users_to_user_id",
-                        column: x => x.touserid,
+                        column: x => x.to_user_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "mix_play",
+                name: "mix_plays",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    mixid = table.Column<Guid>(name: "mix_id", type: "uuid", nullable: false),
-                    userid = table.Column<string>(name: "user_id", type: "text", nullable: true),
-                    datecreated = table.Column<DateTime>(name: "date_created", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    dateupdated = table.Column<DateTime>(name: "date_updated", type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                    mix_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id = table.Column<string>(type: "text", nullable: true),
+                    date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_mix_play", x => x.id);
+                    table.PrimaryKey("pk_mix_plays", x => x.id);
                     table.ForeignKey(
-                        name: "fk_mix_play_mixes_mix_id",
-                        column: x => x.mixid,
+                        name: "fk_mix_plays_mixes_mix_id",
+                        column: x => x.mix_id,
                         principalTable: "mixes",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_mix_play_users_user_id",
-                        column: x => x.userid,
+                        name: "fk_mix_plays_users_user_id",
+                        column: x => x.user_id,
                         principalSchema: "auth",
                         principalTable: "user",
                         principalColumn: "id");
@@ -504,13 +504,13 @@ namespace MixyBoos.Api.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_mix_play_mix_id",
-                table: "mix_play",
+                name: "ix_mix_plays_mix_id",
+                table: "mix_plays",
                 column: "mix_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_mix_play_user_id",
-                table: "mix_play",
+                name: "ix_mix_plays_user_id",
+                table: "mix_plays",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
@@ -653,7 +653,7 @@ namespace MixyBoos.Api.Migrations
                 name: "live_show_tag");
 
             migrationBuilder.DropTable(
-                name: "mix_play");
+                name: "mix_plays");
 
             migrationBuilder.DropTable(
                 name: "openiddict_scope",

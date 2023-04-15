@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Bogus;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,11 +28,11 @@ public static class TypeAdapterConfig {
             .NewConfig()
             .Map(dest => dest.DateUploaded, src => src.DateCreated)
             .Map(dest => dest.Image, src => _runImageMap(src.Image))
-            .Map(dest => dest.PlayCount, src => src.Plays.Count);
+            .Map(dest => dest.PlayCount, src => src.Plays != null ? src.Plays.Count : 0);
 
         TypeAdapterConfig<LiveShow, LiveShowDTO>
             .NewConfig()
-            .Map(dest => dest.Tags, src => src.Tags.Select(r => r.TagName));
+            .Map(dest => dest.Tags, src => src.Tags == null ? Array.Empty<string>() : src.Tags.Select(r => r.TagName));
 
         TypeAdapterConfig<LiveShow, CreateLiveShowDTO>
             .NewConfig()
