@@ -29,7 +29,7 @@ git flow release start $release
 git push origin release/$release
 
 export GIT_MERGE_AUTOEDIT=no
-gitversion /updateassemblyinfo
+dotnet gitversion /updateassemblyinfo
 
 git commit -am "Updating assembly for ${release}"
 git flow release finish $release -m "Release: ${release}"
