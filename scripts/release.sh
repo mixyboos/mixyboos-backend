@@ -26,7 +26,7 @@ echo Current version is $current
 echo New release is $release
 
 git flow release start $release
-git push origin release/$release
+git push origin @release/$release
 
 export GIT_MERGE_AUTOEDIT=no
 dotnet gitversion /updateassemblyinfo
