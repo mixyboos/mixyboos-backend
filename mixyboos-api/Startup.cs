@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -45,10 +46,13 @@ namespace MixyBoos.Api {
             //register the codepages (required for slugify)
             var instance = CodePagesEncodingProvider.Instance;
             Encoding.RegisterProvider(instance);
-
+            var connectionString = _configuration.GetConnectionString("MixyBoos");
+            Console.WriteLine("Connecting to database");
+            Console.WriteLine($"\t{connectionString}");
+            
             services.AddDbContext<MixyBoosContext>(options => {
                 options
-                    .UseNpgsql(_configuration.GetConnectionString("MixyBoos"), pgoptions => {
+                    .UseNpgsql(connectionString, pgoptions => {
                         pgoptions.MigrationsHistoryTable("migrations", "sys");
                     })
                     .UseSnakeCaseNamingConvention()
@@ -99,7 +103,7 @@ namespace MixyBoos.Api {
                     //         .AddEphemeralEncryptionKey()
                     //         .AddEphemeralSigningKey()
                     //         .DisableAccessTokenEncryption();
-                    //
+                    //ConnectionStrings
                     //     options.AddDevelopmentEncryptionCertificate()
                     //         .AddDevelopmentSigningCertificate();
                     // } else {
