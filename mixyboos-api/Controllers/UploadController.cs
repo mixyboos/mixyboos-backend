@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using MixyBoos.Api.Data;
+using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services;
 using MixyBoos.Api.Services.Extensions;
 using MixyBoos.Api.Services.Helpers;

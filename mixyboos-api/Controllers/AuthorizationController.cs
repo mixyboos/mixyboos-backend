@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using MixyBoos.Api.Data;
+using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;

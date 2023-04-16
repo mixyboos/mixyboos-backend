@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Bogus;
+using ExpressionDebugger;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -41,6 +42,10 @@ public class MixController : _Controller {
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<MixDTO>>> Get() {
         var mixes = await _context.Mixes.Include(m => m.User).ToListAsync();
+        var script = mixes.BuildAdapter()
+            .CreateMapExpression<MixDTO>()
+            .ToScript();
+
         var result = mixes.Adapt<List<MixDTO>>();
         return Ok(result);
     }
@@ -85,7 +90,7 @@ public class MixController : _Controller {
         }
 
         //track this as a play
-        _context.MixPlays.Add(new MixPlay {
+        await _context.MixPlays.AddAsync(new MixPlay {
             Mix = mix,
             User = user
         });
@@ -144,7 +149,7 @@ public class MixController : _Controller {
     public async Task<ActionResult<MixDTO>> Patch([FromBody] MixDTO mix) {
         try {
             var entity = mix.Adapt<Mix>();
-            var existing = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(mix.Id));
+            var existing = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(mix.Id)));
             if (existing is null) {
                 return NotFound();
             }
@@ -164,6 +169,31 @@ public class MixController : _Controller {
         }
     }
 
+    [HttpPost("addlike")]
+    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<MixDTO>> AddLike([FromBody] string id) {
+        var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        if (user is null) {
+            return BadRequest();
+        }
+
+        var mix = await _context
+            .Mixes
+            .FirstOrDefaultAsync(m => m.Id.Equals(id));
+        if (mix is null) {
+            return NotFound();
+        }
+
+        await _context.MixLikes.AddAsync(new MixLike {
+            Mix = mix,
+            User = user
+        });
+        return Ok();
+    }
+
     [HttpDelete]
     [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -171,12 +201,19 @@ public class MixController : _Controller {
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete([FromQuery] string id) {
         try {
-            var entity = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
-            if (entity is null) {
+            var user = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
+            if (user is null) {
                 return NotFound();
             }
 
-            _context.Remove(entity);
+            var mix = await _context
+                .Mixes
+                .FirstOrDefaultAsync(m => m.Id.Equals(id));
+            if (mix is null) {
+                return NotFound();
+            }
+
+            _context.Remove(user);
             await _context.SaveChangesAsync();
             return Ok(StatusCodes.Status204NoContent);
         } catch (DbUpdateException ex) {

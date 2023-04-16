@@ -12,10 +12,11 @@ using MixyBoos.Api.Services.Helpers;
 
 namespace MixyBoos.Api.Services.Startup.Mapster;
 
-public static class TypeAdapterConfig {
+public static class MappingProvider {
     private static List<FollowDTO> _runMap(ICollection<MixyBoosUser> src) {
         return src.Select(s => new FollowDTO {
-            Id = s.Id, Name = s.DisplayName
+            Id = s.Id.ToString(),
+            Name = s.DisplayName
         }).ToList();
     }
 
@@ -23,15 +24,24 @@ public static class TypeAdapterConfig {
         var imageHelper = services.BuildServiceProvider().GetService<ImageHelper>();
         TypeAdapterConfig<Mix, MixDTO>
             .NewConfig()
+            .Map(dest => dest.Id, src => src.Id.ToString())
             .Map(dest => dest.DateUploaded, src => src.DateCreated)
             .Map(dest => dest.Image,
                 src => src.Image.StartsWith("http")
                     ? src.Image
                     : imageHelper.GetLargeImageUrl("mixes", src.Image))
-            .Map(dest => dest.PlayCount, src => src.Plays != null ? src.Plays.Count : 0);
+            .Map(dest => dest.Tags, src => src.Tags.Select(r => r))
+            .Map(dest => dest.LikeCount, src => src.Likes != null ? src.Likes.Count : 0)
+            .Map(dest => dest.PlayCount, src => src.Plays != null ? src.Plays.Count : 0)
+            .Map(dest => dest.ShareCount, src => src.Shares != null ? src.Shares.Count : 0)
+            .Map(dest => dest.DownloadCount, src => src.Downloads != null ? src.Downloads.Count : 0);
+        TypeAdapterConfig<MixDTO, Mix>
+            .NewConfig()
+            .Map(dest => dest.Id, src => Guid.Parse(src.Id));
 
         TypeAdapterConfig<LiveShow, LiveShowDTO>
             .NewConfig()
+            .Map(dest => dest.Id, src => src.Id.ToString())
             .Map(dest => dest.Tags, src => src.Tags == null ? Array.Empty<string>() : src.Tags.Select(r => r.TagName));
 
         TypeAdapterConfig<LiveShow, CreateLiveShowDTO>
@@ -40,11 +50,11 @@ public static class TypeAdapterConfig {
 
         TypeAdapterConfig<ProfileDTO, MixyBoosUser>
             .NewConfig()
-            .Ignore(src => src.Id)
             .Map(src => src.PhoneNumber, dest => dest.PhoneNumber);
 
         TypeAdapterConfig<MixyBoosUser, ProfileDTO>
             .NewConfig()
+            .Map(dest => dest.Id, src => src.Id.ToString())
             .Map(dest => dest.HeaderImage,
                 src => src.HeaderImage.StartsWith("http")
                     ? src.HeaderImage

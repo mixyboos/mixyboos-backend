@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
+using MixyBoos.Api.Data.Models;
 using OpenIddict.Validation.AspNetCore;
 
 namespace MixyBoos.Api.Controllers;

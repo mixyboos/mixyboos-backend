@@ -26,7 +26,7 @@ public class ProcessUploadedImageJob : IJob {
         _logger.LogInformation("Updating user record");
         var user = await _context
             .Users
-            .FirstOrDefaultAsync(m => m.Id.Equals(id));
+            .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
         if (user is null) {
             _logger.LogError("Unable to fond user in db {MixId}", id);
             return;

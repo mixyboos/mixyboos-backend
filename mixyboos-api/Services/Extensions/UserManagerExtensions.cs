@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MixyBoos.Api.Data;
+using MixyBoos.Api.Data.Models;
 
 namespace MixyBoos.Api.Services.Extensions;
 

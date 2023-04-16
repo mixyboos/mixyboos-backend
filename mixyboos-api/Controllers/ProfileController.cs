@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
+using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services.Extensions;
 using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Validation.AspNetCore;
@@ -53,7 +54,7 @@ public class ProfileController : _Controller {
             return BadRequest();
         }
 
-        if (!me.Following.Any(f => f.Id.Equals(Guid.Parse(userToFollow.Id)))) {
+        if (!me.Following.Any(f => f.Id.Equals(userToFollow.Id))) {
             me.Following.Add(userToFollow);
             userToFollow.Followers.Add(me);
             await _context.SaveChangesAsync();
@@ -98,13 +99,13 @@ public class ProfileController : _Controller {
     }
 
     [HttpGet]
-    public async Task<ActionResult<ProfileDTO>> GetBySlug([FromBody] ProfileDTO incoming) {
-        var user = await _userManager.FindBySlugAsync(incoming.Slug);
+    public async Task<ActionResult<ProfileDTO>> GetBySlug([FromQuery] string slug) {
+        var user = await _userManager.FindBySlugAsync(slug);
         if (user is null) {
             return NotFound();
         }
 
-        return Ok(incoming.Adapt<ProfileDTO>());
+        return Ok(user.Adapt<ProfileDTO>());
     }
 
     [HttpPost]
@@ -118,17 +119,21 @@ public class ProfileController : _Controller {
             return BadRequest();
         }
 
-        // var user = await _userManager.FindByIdAsync(incoming.Id);
-        // if (user is null) {
-        //     return NotFound();
-        // }
-        //
+        var user = await _userManager.FindByIdAsync(incoming.Id);
+        if (user is null) {
+            return NotFound();
+        }
 
-        var user = incoming.Adapt<MixyBoosUser>();
-        _context.Attach(user);
+        user.UserName = incoming.UserName;
+        user.Title = incoming.Title;
+        user.DisplayName = incoming.DisplayName;
+        user.City = incoming.City;
+        user.Country = incoming.Country;
+        user.Biography = incoming.Biography;
+        user.PhoneNumber = incoming.PhoneNumber;
+
         await _userManager.UpdateAsync(user);
 
-        await _context.SaveChangesAsync();
         return Ok(user.Adapt<ProfileDTO>());
     }
 }

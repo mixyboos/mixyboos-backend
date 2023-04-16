@@ -1,0 +1,42 @@
+2023-04-16 15:56:45.159 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-04-16 15:56:45.184 +01:00 [INF] Quartz Scheduler created
+2023-04-16 15:56:45.185 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-04-16 15:56:45.185 +01:00 [INF] RAMJobStore initialized.
+2023-04-16 15:56:45.186 +01:00 [INF] Quartz Scheduler 3.6.2.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-04-16 15:56:45.186 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-04-16 15:56:45.187 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-04-16 15:56:45.198 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-04-16 15:56:45.200 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-04-16 15:56:45.204 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-04-16 15:56:45.204 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-04-16 15:56:45.204 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-04-16 15:56:45.204 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-04-16 15:56:45.447 +01:00 [INF] Creating the webclient OpenIddict application
+2023-04-16 15:56:46.317 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-16 15:56:48.566 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-04-16 15:56:48.803 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-04-16 15:56:48.808 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-16 15:56:48.808 +01:00 [INF] Hosting environment: Development
+2023-04-16 15:56:48.808 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-04-16 15:56:48.816 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-04-16 15:58:58.219 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-04-16 15:58:58.239 +01:00 [INF] Quartz Scheduler created
+2023-04-16 15:58:58.239 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-04-16 15:58:58.240 +01:00 [INF] RAMJobStore initialized.
+2023-04-16 15:58:58.240 +01:00 [INF] Quartz Scheduler 3.6.2.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-04-16 15:58:58.241 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-04-16 15:58:58.241 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-04-16 15:58:58.251 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-04-16 15:58:58.253 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-04-16 15:58:58.257 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-04-16 15:58:58.257 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-04-16 15:58:58.257 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-04-16 15:58:58.258 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-04-16 15:58:58.504 +01:00 [INF] Creating the webclient OpenIddict application
+2023-04-16 15:58:59.333 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-16 15:59:01.596 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-04-16 15:59:01.877 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-04-16 15:59:01.883 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-04-16 15:59:01.883 +01:00 [INF] Hosting environment: Development
+2023-04-16 15:59:01.883 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-04-16 15:59:01.888 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.

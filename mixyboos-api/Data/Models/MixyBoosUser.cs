@@ -1,13 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MixyBoos.Api.Data.Utils;
 
-namespace MixyBoos.Api.Data;
+namespace MixyBoos.Api.Data.Models;
 
 [Index(nameof(Slug), IsUnique = true)]
-public class MixyBoosUser : IdentityUser, ISluggedEntity {
+public class MixyBoosUser : IdentityUser<Guid>, ISluggedEntity {
     public MixyBoosUser() {
         Followers = new List<MixyBoosUser>();
         Following = new List<MixyBoosUser>();
@@ -21,6 +22,7 @@ public class MixyBoosUser : IdentityUser, ISluggedEntity {
     [SlugField(SourceField = "DisplayName")]
     public string Slug { get; set; }
 
+    [MaxLength(100)] public string City { get; set; }
     [MaxLength(100)] public string Country { get; set; }
     [MaxLength(2048)] public string Biography { get; set; }
     public string StreamKey { get; set; }
