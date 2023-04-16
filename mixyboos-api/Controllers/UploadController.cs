@@ -71,7 +71,7 @@ namespace MixyBoos.Api.Controllers {
         [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
         [DisableFormValueModelBinding]
         public async Task<IActionResult> UploadImage([FromRoute] string id, [FromForm] IFormFile file,
-            [FromQuery] string imageType) {
+            [FromQuery] string imageSource, [FromQuery] string imageType) {
             var (response, localFile) = await _preProcessUpload(id, file);
 
             if (string.IsNullOrEmpty(localFile)) {
@@ -81,6 +81,7 @@ namespace MixyBoos.Api.Controllers {
             var jobData = new Dictionary<string, string>() {
                 {"Id", id},
                 {"FileLocation", localFile},
+                {"ImageSource", imageSource},
                 {"ImageType", imageType},
                 {"UserId", User.Identity.Name}
             };

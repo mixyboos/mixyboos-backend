@@ -27,9 +27,10 @@ public class ProcessUploadedImageJob : IJob {
         try {
             var data = context.Trigger.JobDataMap;
             var mixId = data["Id"]?.ToString();
+            var imageSource = data["ImageSource"]?.ToString();
             var imageType = data["ImageType"]?.ToString();
             var fileLocation = data["FileLocation"]?.ToString();
-            var outputPath = _config[$"ImageProcessing:{imageType}Dir"];
+            var outputPath = _config[$"ImageProcessing:{imageSource}Dir"];
             if (string.IsNullOrEmpty(outputPath)) {
                 _logger.LogError("Unable to create output path for {FileLocation}", fileLocation);
                 return;
@@ -41,7 +42,7 @@ public class ProcessUploadedImageJob : IJob {
                 Directory.CreateDirectory(outputPath);
             }
 
-            var destinationFile = Path.Combine(outputPath, Path.GetFileName(fileLocation));
+            var destinationFile = Path.Combine(outputPath, imageType, Path.GetFileName(fileLocation));
             if (File.Exists(fileLocation) && Directory.Exists(outputPath)) {
                 File.Move(fileLocation, destinationFile);
             }
