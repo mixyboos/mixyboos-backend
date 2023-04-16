@@ -19,11 +19,25 @@ namespace MixyBoos.Api.Migrations
                 .Annotation("Npgsql:PostgresExtension:uuid-ossp", ",,");
 
             migrationBuilder.CreateTable(
+                name: "AspNetRoles",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    normalized_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    concurrency_stamp = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_asp_net_roles", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "identity_user",
                 schema: "oid",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "text", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     user_name = table.Column<string>(type: "text", nullable: true),
                     normalized_user_name = table.Column<string>(type: "text", nullable: true),
                     email = table.Column<string>(type: "text", nullable: true),
@@ -92,7 +106,7 @@ namespace MixyBoos.Api.Migrations
                 name: "tags",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    id = table.Column<string>(type: "character varying(36)", nullable: false),
                     tag_name = table.Column<string>(type: "text", nullable: true),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
@@ -107,13 +121,15 @@ namespace MixyBoos.Api.Migrations
                 schema: "oid",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "text", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     title = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     display_name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: true),
                     profile_image = table.Column<string>(type: "text", nullable: true),
                     header_image = table.Column<string>(type: "text", nullable: true),
                     slug = table.Column<string>(type: "text", nullable: true),
-                    biography = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
+                    city = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    country = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    biography = table.Column<string>(type: "character varying(2048)", maxLength: 2048, nullable: true),
                     stream_key = table.Column<string>(type: "text", nullable: true),
                     user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     normalized_user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -140,14 +156,36 @@ namespace MixyBoos.Api.Migrations
                 schema: "oid",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "text", nullable: false),
-                    name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    normalized_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
+                    normalized_name = table.Column<string>(type: "text", nullable: true),
                     concurrency_stamp = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_user_role", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "role_claim",
+                schema: "oid",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    role_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    claim_type = table.Column<string>(type: "text", nullable: true),
+                    claim_value = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_role_claim", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_role_claim_asp_net_roles_role_id",
+                        column: x => x.role_id,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -180,12 +218,12 @@ namespace MixyBoos.Api.Migrations
                 name: "live_shows",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    id = table.Column<string>(type: "character varying(36)", nullable: false),
                     title = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
                     start_date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     is_finished = table.Column<bool>(type: "boolean", nullable: false),
-                    user_id = table.Column<string>(type: "text", nullable: true),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
@@ -204,14 +242,14 @@ namespace MixyBoos.Api.Migrations
                 name: "mixes",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    id = table.Column<string>(type: "character varying(36)", nullable: false),
                     slug = table.Column<string>(type: "text", nullable: true),
                     title = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
                     image = table.Column<string>(type: "text", nullable: true),
                     audio_url = table.Column<string>(type: "text", nullable: true),
                     is_processed = table.Column<bool>(type: "boolean", nullable: false),
-                    user_id = table.Column<string>(type: "text", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
@@ -234,7 +272,7 @@ namespace MixyBoos.Api.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    user_id = table.Column<string>(type: "text", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     claim_type = table.Column<string>(type: "text", nullable: true),
                     claim_value = table.Column<string>(type: "text", nullable: true)
                 },
@@ -255,8 +293,8 @@ namespace MixyBoos.Api.Migrations
                 schema: "oid",
                 columns: table => new
                 {
-                    followers_id = table.Column<string>(type: "text", nullable: false),
-                    following_id = table.Column<string>(type: "text", nullable: false)
+                    followers_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    following_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -278,6 +316,32 @@ namespace MixyBoos.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "user_identity_role",
+                schema: "oid",
+                columns: table => new
+                {
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    role_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_user_identity_role", x => new { x.user_id, x.role_id });
+                    table.ForeignKey(
+                        name: "fk_user_identity_role_asp_net_roles_role_id",
+                        column: x => x.role_id,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_user_identity_role_user_user_id",
+                        column: x => x.user_id,
+                        principalSchema: "oid",
+                        principalTable: "user",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "user_login",
                 schema: "oid",
                 columns: table => new
@@ -285,7 +349,7 @@ namespace MixyBoos.Api.Migrations
                     login_provider = table.Column<string>(type: "text", nullable: false),
                     provider_key = table.Column<string>(type: "text", nullable: false),
                     provider_display_name = table.Column<string>(type: "text", nullable: true),
-                    user_id = table.Column<string>(type: "text", nullable: false)
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -304,7 +368,7 @@ namespace MixyBoos.Api.Migrations
                 schema: "oid",
                 columns: table => new
                 {
-                    user_id = table.Column<string>(type: "text", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     login_provider = table.Column<string>(type: "text", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     value = table.Column<string>(type: "text", nullable: true)
@@ -314,56 +378,6 @@ namespace MixyBoos.Api.Migrations
                     table.PrimaryKey("pk_user_token", x => new { x.user_id, x.login_provider, x.name });
                     table.ForeignKey(
                         name: "fk_user_token_user_user_id",
-                        column: x => x.user_id,
-                        principalSchema: "oid",
-                        principalTable: "user",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "role_claim",
-                schema: "oid",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    role_id = table.Column<string>(type: "text", nullable: false),
-                    claim_type = table.Column<string>(type: "text", nullable: true),
-                    claim_value = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_role_claim", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_role_claim_user_role_role_id",
-                        column: x => x.role_id,
-                        principalSchema: "oid",
-                        principalTable: "user_role",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "user_identity_role",
-                schema: "oid",
-                columns: table => new
-                {
-                    user_id = table.Column<string>(type: "text", nullable: false),
-                    role_id = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_user_identity_role", x => new { x.user_id, x.role_id });
-                    table.ForeignKey(
-                        name: "fk_user_identity_role_user_role_role_id",
-                        column: x => x.role_id,
-                        principalSchema: "oid",
-                        principalTable: "user_role",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_user_identity_role_user_user_id",
                         column: x => x.user_id,
                         principalSchema: "oid",
                         principalTable: "user",
@@ -408,38 +422,14 @@ namespace MixyBoos.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "live_show_tag",
-                columns: table => new
-                {
-                    live_shows_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    tags_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_live_show_tag", x => new { x.live_shows_id, x.tags_id });
-                    table.ForeignKey(
-                        name: "fk_live_show_tag_live_shows_live_shows_id",
-                        column: x => x.live_shows_id,
-                        principalTable: "live_shows",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_live_show_tag_tags_tags_id",
-                        column: x => x.tags_id,
-                        principalTable: "tags",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "show_chat",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    from_user_id = table.Column<string>(type: "text", nullable: true),
-                    to_user_id = table.Column<string>(type: "text", nullable: true),
+                    id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    from_user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    to_user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     date_sent = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    show_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    show_id = table.Column<string>(type: "character varying(36)", nullable: false),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
@@ -457,7 +447,8 @@ namespace MixyBoos.Api.Migrations
                         column: x => x.from_user_id,
                         principalSchema: "oid",
                         principalTable: "user",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_show_chat_users_to_user_id",
                         column: x => x.to_user_id,
@@ -467,12 +458,90 @@ namespace MixyBoos.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "show_tags",
+                columns: table => new
+                {
+                    live_show_id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    tags_id = table.Column<string>(type: "character varying(36)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_show_tags", x => new { x.live_show_id, x.tags_id });
+                    table.ForeignKey(
+                        name: "fk_show_tags_live_shows_live_show_id",
+                        column: x => x.live_show_id,
+                        principalTable: "live_shows",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_show_tags_tags_tags_id",
+                        column: x => x.tags_id,
+                        principalTable: "tags",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "mix_downloads",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_mix_downloads", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_mix_downloads_mixes_mix_id",
+                        column: x => x.mix_id,
+                        principalTable: "mixes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_mix_downloads_users_user_id",
+                        column: x => x.user_id,
+                        principalSchema: "oid",
+                        principalTable: "user",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "mix_likes",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_mix_likes", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_mix_likes_mixes_mix_id",
+                        column: x => x.mix_id,
+                        principalTable: "mixes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_mix_likes_users_user_id",
+                        column: x => x.user_id,
+                        principalSchema: "oid",
+                        principalTable: "user",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "mix_plays",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    mix_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    user_id = table.Column<string>(type: "text", nullable: true),
+                    id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
@@ -493,14 +562,86 @@ namespace MixyBoos.Api.Migrations
                         principalColumn: "id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "mix_shares",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_mix_shares", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_mix_shares_mixes_mix_id",
+                        column: x => x.mix_id,
+                        principalTable: "mixes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_mix_shares_users_user_id",
+                        column: x => x.user_id,
+                        principalSchema: "oid",
+                        principalTable: "user",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "mix_tags",
+                columns: table => new
+                {
+                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    tags_id = table.Column<string>(type: "character varying(36)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_mix_tags", x => new { x.mix_id, x.tags_id });
+                    table.ForeignKey(
+                        name: "fk_mix_tags_mixes_mix_id",
+                        column: x => x.mix_id,
+                        principalTable: "mixes",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_mix_tags_tags_tags_id",
+                        column: x => x.tags_id,
+                        principalTable: "tags",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "ix_live_show_tag_tags_id",
-                table: "live_show_tag",
-                column: "tags_id");
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "normalized_name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_live_shows_user_id",
                 table: "live_shows",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_mix_downloads_mix_id",
+                table: "mix_downloads",
+                column: "mix_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_mix_downloads_user_id",
+                table: "mix_downloads",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_mix_likes_mix_id",
+                table: "mix_likes",
+                column: "mix_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_mix_likes_user_id",
+                table: "mix_likes",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
@@ -512,6 +653,21 @@ namespace MixyBoos.Api.Migrations
                 name: "ix_mix_plays_user_id",
                 table: "mix_plays",
                 column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_mix_shares_mix_id",
+                table: "mix_shares",
+                column: "mix_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_mix_shares_user_id",
+                table: "mix_shares",
+                column: "user_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_mix_tags_tags_id",
+                table: "mix_tags",
+                column: "tags_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_mixes_slug",
@@ -585,6 +741,11 @@ namespace MixyBoos.Api.Migrations
                 column: "to_user_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_show_tags_tags_id",
+                table: "show_tags",
+                column: "tags_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_tags_tag_name",
                 table: "tags",
                 column: "tag_name",
@@ -633,13 +794,6 @@ namespace MixyBoos.Api.Migrations
                 schema: "oid",
                 table: "user_login",
                 column: "user_id");
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                schema: "oid",
-                table: "user_role",
-                column: "normalized_name",
-                unique: true);
         }
 
         /// <inheritdoc />
@@ -650,10 +804,19 @@ namespace MixyBoos.Api.Migrations
                 schema: "oid");
 
             migrationBuilder.DropTable(
-                name: "live_show_tag");
+                name: "mix_downloads");
+
+            migrationBuilder.DropTable(
+                name: "mix_likes");
 
             migrationBuilder.DropTable(
                 name: "mix_plays");
+
+            migrationBuilder.DropTable(
+                name: "mix_shares");
+
+            migrationBuilder.DropTable(
+                name: "mix_tags");
 
             migrationBuilder.DropTable(
                 name: "openiddict_scope",
@@ -669,6 +832,9 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "show_chat");
+
+            migrationBuilder.DropTable(
+                name: "show_tags");
 
             migrationBuilder.DropTable(
                 name: "user_claim",
@@ -687,11 +853,12 @@ namespace MixyBoos.Api.Migrations
                 schema: "oid");
 
             migrationBuilder.DropTable(
-                name: "user_token",
+                name: "user_role",
                 schema: "oid");
 
             migrationBuilder.DropTable(
-                name: "tags");
+                name: "user_token",
+                schema: "oid");
 
             migrationBuilder.DropTable(
                 name: "mixes");
@@ -704,8 +871,10 @@ namespace MixyBoos.Api.Migrations
                 name: "live_shows");
 
             migrationBuilder.DropTable(
-                name: "user_role",
-                schema: "oid");
+                name: "tags");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "openiddict_application",

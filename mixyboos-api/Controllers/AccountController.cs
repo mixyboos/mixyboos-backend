@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
+using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Extensions;
 using MixyBoos.Api.Services.Helpers;

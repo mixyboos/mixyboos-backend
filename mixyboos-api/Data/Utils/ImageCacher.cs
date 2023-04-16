@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Bogus;
 using Microsoft.Extensions.Configuration;
+using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services.Helpers;
 
 namespace MixyBoos.Api.Data.Utils;

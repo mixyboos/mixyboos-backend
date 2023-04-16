@@ -9,6 +9,10 @@ namespace MixyBoos.Api.Data.Models;
 
 [Index(nameof(Slug), IsUnique = true)]
 public class Mix : BaseEntity, ISluggedEntity {
+    public Mix() {
+        this.Tags = new List<Tag>();
+    }
+
     [SlugField(SourceField = "Title")] public string? Slug { get; set; }
     [Required] public string? Title { get; set; }
     [Required] public string? Description { get; set; }
@@ -17,5 +21,9 @@ public class Mix : BaseEntity, ISluggedEntity {
     public bool IsProcessed { get; set; } = false;
     [Required] public virtual MixyBoosUser? User { get; set; }
 
+    public ICollection<MixLike>? Likes { get; set; }
     public ICollection<MixPlay>? Plays { get; set; }
+    public ICollection<MixShare>? Shares { get; set; }
+    public ICollection<MixDownload>? Downloads { get; set; }
+    public ICollection<Tag> Tags { get; }
 }

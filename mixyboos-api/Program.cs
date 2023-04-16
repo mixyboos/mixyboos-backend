@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace MixyBoos.Api;
@@ -17,7 +18,13 @@ public class Program {
             .WriteTo.Console()
             .CreateBootstrapLogger();
 
-        CreateHostBuilder(args).Build().Run();
+        try {
+            CreateHostBuilder(args).Build().Run();
+            Log.Information("Stopped cleanly");
+        } catch (Exception e) {
+            Log.Fatal(e, "An unhandled exception occured during bootstrapping {Error}", e.Message);
+            Log.CloseAndFlush();
+        }
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args) {
@@ -56,6 +63,10 @@ public class Program {
                         });
                     })
                     .UseStartup<Startup>();
+            }).ConfigureLogging(builder => {
+                builder.ClearProviders();
+                builder.AddConsole();
             });
+        ;
     }
 }

@@ -1,7 +1,9 @@
 using System;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Mapster;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -17,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using MixyBoos.Api.Controllers.Hubs;
 using MixyBoos.Api.Data;
+using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Data.Seeders;
 using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Auth;
@@ -70,7 +73,7 @@ namespace MixyBoos.Api {
                 }
             });
 
-            services.AddIdentity<MixyBoosUser, IdentityRole>()
+            services.AddIdentity<MixyBoosUser, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<MixyBoosContext>()
                 .AddDefaultTokenProviders();
 
@@ -82,6 +85,8 @@ namespace MixyBoos.Api {
                 options.ClaimsIdentity.UserIdClaimType = OpenIddictConstants.Claims.Subject;
                 options.ClaimsIdentity.RoleClaimType = OpenIddictConstants.Claims.Role;
             });
+
+            TypeAdapterConfig.GlobalSettings.Compiler = exp => exp.CompileWithDebugInfo();
 
             services.RegisterMapsterConfiguration(_configuration);
             services.RegisterHttpClients(_configuration);

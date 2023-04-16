@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Data.Utils;
 
 namespace MixyBoos.Api.Data.Seeders {
@@ -43,12 +44,10 @@ namespace MixyBoos.Api.Data.Seeders {
                     var password = new PasswordHasher<MixyBoosUser>();
                     var hashed = password.HashPassword(user, "SVqVKJWZh5dIaM7JsNY1h0E/xbzPCD7y7Veedxa1Q/k=");
                     user.PasswordHash = hashed;
-
-                    var userStore = new UserStore<MixyBoosUser>(context);
-                    await userStore.CreateAsync(user);
+                    await userManager.CreateAsync(user);
                     Console.WriteLine($"Adding ClaimTypes.Email to user {user.Email}");
                     await cacher.CacheUserImages(user, config);
-                    await userStore.UpdateAsync(user);
+                    await userManager.UpdateAsync(user);
                     await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Email, user.Email));
                 }
             }
