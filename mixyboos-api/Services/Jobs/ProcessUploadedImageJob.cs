@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,10 +22,47 @@ public class ProcessUploadedImageJob : IJob {
         _logger = logger;
     }
 
+    private async Task _updateUserImageDetails(string id, string imageType, string path) {
+        _logger.LogInformation("Updating user record");
+        var user = await _context
+            .Users
+            .AsTracking()
+            .FirstOrDefaultAsync(m => m.Id.Equals(id));
+        if (user is null) {
+            _logger.LogError("Unable to fond user in db {MixId}", id);
+            return;
+        }
+
+        if (imageType.Equals("headers")) {
+            user.HeaderImage = Path.GetFileName(path);
+        }
+
+        if (imageType.Equals("avatars")) {
+            user.ProfileImage = Path.GetFileName(path);
+        }
+
+        await _context.SaveChangesAsync();
+    }
+
+    private async Task _updateMixImageDetails(string id, string path) {
+        _logger.LogInformation("Updating mix record");
+        var mix = await _context
+            .Mixes
+            .AsTracking()
+            .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
+        if (mix is null) {
+            _logger.LogError("Unable to fond mix in db {MixId}", id);
+            return;
+        }
+
+        mix.Image = Path.GetFileName(path);
+        await _context.SaveChangesAsync();
+    }
+
     public async Task Execute(IJobExecutionContext context) {
         try {
             var data = context.Trigger.JobDataMap;
-            var mixId = data["Id"]?.ToString();
+            var id = data["Id"]?.ToString();
             var imageSource = data["ImageSource"]?.ToString();
             var imageType = data["ImageType"]?.ToString();
             var fileLocation = data["FileLocation"]?.ToString();
@@ -37,29 +73,31 @@ public class ProcessUploadedImageJob : IJob {
             }
 
             _logger.LogInformation("Caching image for {Id} from {FileLocation} to {OutputPath}",
-                mixId, fileLocation, outputPath);
+                id, fileLocation, outputPath);
             if (!Directory.Exists(outputPath)) {
                 Directory.CreateDirectory(outputPath);
             }
 
-            var destinationFile = Path.Combine(outputPath, imageType, Path.GetFileName(fileLocation));
+            var destinationFile = Path.Combine(outputPath, imageType ?? string.Empty, Path.GetFileName(fileLocation));
             if (File.Exists(fileLocation) && Directory.Exists(outputPath)) {
+                if (File.Exists(destinationFile)) {
+                    File.Delete(destinationFile);
+                }
+
                 File.Move(fileLocation, destinationFile);
             }
 
             _logger.LogInformation("Successfully moved {Source} to {Destination}",
                 fileLocation, destinationFile);
 
-            _logger.LogInformation("Updating mix record");
-            var mix = await _context
-                .Mixes
-                .AsTracking()
-                .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(mixId)));
-            mix.Image = Path.GetFileName(fileLocation);
-
-            await _context.SaveChangesAsync();
-
-            _logger.LogInformation("Successfully Updated mix record");
+            switch (imageSource) {
+                case "MixImage":
+                    await _updateMixImageDetails(id, destinationFile);
+                    break;
+                case "UserImage":
+                    await _updateUserImageDetails(id, imageType, destinationFile);
+                    break;
+            }
         } catch (Exception e) {
             _logger.LogError("Error caching image file\n\t{Error}", e.Message);
             throw;

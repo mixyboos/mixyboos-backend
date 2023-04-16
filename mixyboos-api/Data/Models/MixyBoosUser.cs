@@ -21,10 +21,10 @@ public class MixyBoosUser : IdentityUser, ISluggedEntity {
     [SlugField(SourceField = "DisplayName")]
     public string Slug { get; set; }
 
-    [MaxLength(1000)] public string Biography { get; set; }
+    [MaxLength(100)] public string Country { get; set; }
+    [MaxLength(2048)] public string Biography { get; set; }
     public string StreamKey { get; set; }
 
     public ICollection<MixyBoosUser> Followers { get; set; }
     public ICollection<MixyBoosUser> Following { get; set; }
-
 }

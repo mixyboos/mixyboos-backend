@@ -12,16 +12,18 @@ public class ImageHelper {
     public ImageHelper(IConfiguration config) {
         _config = config;
     }
-
+    
+    //TODO: the Guid on the querystring is really yuck
+    //TODO: find a better way to invalidate the cached image
     public string GetLargeImageUrl(string imageType, string imageUrl) =>
         Flurl.Url.Combine(
             _config["Servers:ImageServer"],
-            $"/img/{imageType}/{imageUrl}?width=1024&height=768");
+            $"/img/{imageType}/{imageUrl}?width=1024&height=768&t={Guid.NewGuid().ToString()}");
 
     public string GetSmallImageUrl(string imageType, string imageUrl) =>
         Flurl.Url.Combine(
             _config["Servers:ImageServer"],
-            $"/img/{imageType}/{imageUrl}?width=128&height=128");
+            $"/img/{imageType}/{imageUrl}?width=128&height=128&t={Guid.NewGuid().ToString()}");
 
     public async Task<string> CacheImage(string source, string destination) {
         try {
