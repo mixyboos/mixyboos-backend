@@ -50,9 +50,7 @@ public class MixController : _Controller {
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<MixDTO>>> GetByUser([FromQuery] string user) {
         var mixes = await _context.Mixes
-            .AsNoTracking()
             .Include(m => m.User)
-            .AsNoTracking()
             .Where(m => m.User.Slug.Equals(user))
             .Where(m => m.IsProcessed)
             .ToListAsync();
@@ -102,7 +100,6 @@ public class MixController : _Controller {
     public async Task<ActionResult<List<MixDTO>>> GetFeed() {
         var user = await _userManager.FindByNameAsync(User.Identity.Name);
         var mixes = await _context.Mixes
-            .AsNoTracking()
             .Where(m => m.User.Id.Equals(user.Id))
             .Where(m => m.IsProcessed)
             .OrderByDescending(m => m.DateCreated)

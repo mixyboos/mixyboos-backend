@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230415191727_Initial")]
+    [Migration("20230416035431_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -289,14 +289,19 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("access_failed_count");
 
                     b.Property<string>("Biography")
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)")
                         .HasColumnName("biography");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text")
                         .HasColumnName("concurrency_stamp");
+
+                    b.Property<string>("Country")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("country");
 
                     b.Property<string>("DisplayName")
                         .HasMaxLength(30)

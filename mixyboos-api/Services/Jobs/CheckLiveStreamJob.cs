@@ -39,7 +39,6 @@ public class CheckLiveStreamJob : IJob {
             .FirstOrDefault();
         var show = await _context
             .LiveShows
-            .AsNoTracking()
             .Where(r => r.Id.Equals(Guid.Parse(showId)))
             .FirstOrDefaultAsync();
 

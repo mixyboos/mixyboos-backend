@@ -109,7 +109,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser> {
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
         CancellationToken cancellationToken = default) {
         foreach (var entity in ChangeTracker.Entries()
-                     .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified)
+                     .Where(e => e.State is EntityState.Added or EntityState.Modified)
                      .Where(e => e.Entity is ISluggedEntity)
                      .Select(e => e.Entity as ISluggedEntity)
                      .Where(e => string.IsNullOrEmpty(e.Slug))) {

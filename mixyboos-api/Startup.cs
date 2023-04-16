@@ -72,6 +72,7 @@ namespace MixyBoos.Api {
 
             services.AddIdentity<MixyBoosUser, IdentityRole>()
                 .AddEntityFrameworkStores<MixyBoosContext>()
+                .AddUserStore<IdentityUserStore>()
                 .AddDefaultTokenProviders();
 
 
@@ -82,7 +83,7 @@ namespace MixyBoos.Api {
                 options.ClaimsIdentity.UserIdClaimType = OpenIddictConstants.Claims.Subject;
                 options.ClaimsIdentity.RoleClaimType = OpenIddictConstants.Claims.Role;
             });
-
+            TypeAdapterConfig.GlobalSettings.Default
             services.RegisterMapsterConfiguration(_configuration);
             services.RegisterHttpClients(_configuration);
 

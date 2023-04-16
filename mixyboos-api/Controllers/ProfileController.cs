@@ -1,7 +1,9 @@
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Mapster;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,7 +14,7 @@ using MixyBoos.Api.Services.Helpers;
 using OpenIddict.Validation.AspNetCore;
 using Guid = System.Guid;
 
-namespace MixyBoos.Api.Controllers; 
+namespace MixyBoos.Api.Controllers;
 
 [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
 [Route("[controller]")]
@@ -96,25 +98,37 @@ public class ProfileController : _Controller {
     }
 
     [HttpGet]
-    public async Task<ActionResult<ProfileDTO>> GetBySlug([FromQuery] string slug) {
-        var user = await _userManager.FindBySlugAsync(slug);
+    public async Task<ActionResult<ProfileDTO>> GetBySlug([FromBody] ProfileDTO incoming) {
+        var user = await _userManager.FindBySlugAsync(incoming.Slug);
         if (user is null) {
             return NotFound();
         }
 
-        return Ok(user.Adapt<ProfileDTO>());
+        return Ok(incoming.Adapt<ProfileDTO>());
     }
 
-    [HttpPatch]
     [HttpPost]
-    public async Task<ActionResult<ProfileDTO>> UpdateBySlug([FromQuery] string slug) {
-        var user = await _userManager.FindBySlugAsync(slug);
-        if (user is null) {
-            return NotFound();
+    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ProfileDTO>> UpdateBySlug([FromBody] ProfileDTO incoming) {
+        if (!ModelState.IsValid) {
+            return BadRequest();
         }
 
-        var newUser = user.Adapt<MixyBoosUser>();
-        await _userManager.UpdateAsync(newUser);
-        return Ok(newUser.Adapt<ProfileDTO>());
+        // var user = await _userManager.FindByIdAsync(incoming.Id);
+        // if (user is null) {
+        //     return NotFound();
+        // }
+        //
+
+        var user = incoming.Adapt<MixyBoosUser>();
+        _context.Attach(user);
+        await _userManager.UpdateAsync(user);
+
+        await _context.SaveChangesAsync();
+        return Ok(user.Adapt<ProfileDTO>());
     }
 }

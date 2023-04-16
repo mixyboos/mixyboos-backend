@@ -26,7 +26,6 @@ public class ProcessUploadedImageJob : IJob {
         _logger.LogInformation("Updating user record");
         var user = await _context
             .Users
-            .AsTracking()
             .FirstOrDefaultAsync(m => m.Id.Equals(id));
         if (user is null) {
             _logger.LogError("Unable to fond user in db {MixId}", id);
@@ -48,7 +47,6 @@ public class ProcessUploadedImageJob : IJob {
         _logger.LogInformation("Updating mix record");
         var mix = await _context
             .Mixes
-            .AsTracking()
             .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
         if (mix is null) {
             _logger.LogError("Unable to fond mix in db {MixId}", id);

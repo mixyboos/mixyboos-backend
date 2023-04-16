@@ -38,6 +38,11 @@ public static class TypeAdapterConfig {
             .NewConfig()
             .Map(dest => dest.Tags, src => src.Tags.Select(r => r.TagName));
 
+        TypeAdapterConfig<ProfileDTO, MixyBoosUser>
+            .NewConfig()
+            .Ignore(src => src.Id)
+            .Map(src => src.PhoneNumber, dest => dest.PhoneNumber);
+
         TypeAdapterConfig<MixyBoosUser, ProfileDTO>
             .NewConfig()
             .Map(dest => dest.HeaderImage,
