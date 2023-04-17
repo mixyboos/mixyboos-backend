@@ -1494,3 +1494,62 @@ System.InvalidCastException: Unable to cast object of type 'System.Collections.G
 2023-04-17 02:21:48.314 +01:00 [INF] Hosting environment: Development
 2023-04-17 02:21:48.315 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
 2023-04-17 02:21:48.319 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-04-17 02:23:53.123 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:23:54.400 +01:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    id uuid NOT NULL,
+    name character varying(256) NULL,
+    normalized_name character varying(256) NULL,
+    concurrency_stamp text NULL,
+    CONSTRAINT pk_asp_net_roles PRIMARY KEY (id)
+);
+2023-04-17 02:24:13.517 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:24:20.600 +01:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    id uuid NOT NULL,
+    name character varying(256) NULL,
+    normalized_name character varying(256) NULL,
+    concurrency_stamp text NULL,
+    CONSTRAINT pk_asp_net_roles PRIMARY KEY (id)
+);
+2023-04-17 02:31:14.867 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:31:16.115 +01:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    id uuid NOT NULL,
+    name character varying(256) NULL,
+    normalized_name character varying(256) NULL,
+    concurrency_stamp text NULL,
+    CONSTRAINT pk_asp_net_roles PRIMARY KEY (id)
+);
+2023-04-17 02:31:42.493 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:31:48.427 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:35:57.716 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:36:04.234 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:38:01.271 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:38:07.199 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:38:08.625 +01:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE tags (
+    id character varying(36) NOT NULL,
+    tag_name text NULL,
+    date_created timestamp with time zone NOT NULL DEFAULT (now()),
+    date_updated timestamp with time zone NOT NULL DEFAULT (now()),
+    CONSTRAINT pk_tags PRIMARY KEY (id)
+);
+2023-04-17 02:39:15.233 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:39:21.072 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:39:22.327 +01:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE tags (
+    id character varying(36) NOT NULL,
+    tag_name text NULL,
+    date_created timestamp with time zone NOT NULL DEFAULT (now()),
+    date_updated timestamp with time zone NOT NULL DEFAULT (now()),
+    CONSTRAINT pk_tags PRIMARY KEY (id)
+);
+2023-04-17 02:39:56.966 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:42:45.988 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:42:52.652 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:43:13.807 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:43:20.858 +01:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+2023-04-17 02:44:33.819 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-04-17 02:44:39.465 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.

@@ -12,5 +12,7 @@ export ConnectionStrings__MixyBoos="Host=${PGHOST};Database=${DBNAME};Username=$
 
 psql -c "DROP SCHEMA oid CASCADE"
 psql -c "DROP SCHEMA public CASCADE"
+psql -c "DROP SCHEMA extensions CASCADE"
+psql -c "DROP SCHEMA mixyboos CASCADE"
 
 ./scripts/reset.sh

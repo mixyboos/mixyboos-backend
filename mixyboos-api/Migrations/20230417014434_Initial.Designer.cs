@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230416235448_Initial")]
+    [Migration("20230417014434_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -20,11 +20,11 @@ namespace MixyBoos.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("mixyboos")
                 .UseCollation("en_US.utf8")
                 .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("LiveShowTag", b =>
@@ -43,14 +43,13 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("TagsId")
                         .HasDatabaseName("ix_show_tags_tags_id");
 
-                    b.ToTable("show_tags", (string)null);
+                    b.ToTable("show_tags", "mixyboos");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
                         .HasColumnName("id");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -66,9 +65,41 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("normalized_name");
 
                     b.HasKey("Id")
-                        .HasName("pk_user_role");
+                        .HasName("pk_identity_role");
 
-                    b.ToTable("user_role", "oid");
+                    b.ToTable("identity_role", "oid");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text")
+                        .HasColumnName("concurrency_stamp");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalized_name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_user_user_role");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("user_user_role", "oid");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -286,7 +317,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("TagsId")
                         .HasDatabaseName("ix_mix_tags_tags_id");
 
-                    b.ToTable("mix_tags", (string)null);
+                    b.ToTable("mix_tags", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.LiveShow", b =>
@@ -334,7 +365,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_live_shows_user_id");
 
-                    b.ToTable("live_shows", (string)null);
+                    b.ToTable("live_shows", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.Mix", b =>
@@ -396,7 +427,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_mixes_user_id");
 
-                    b.ToTable("mixes", (string)null);
+                    b.ToTable("mixes", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.MixDownload", b =>
@@ -436,7 +467,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_mix_download_user_id");
 
-                    b.ToTable("mix_download", (string)null);
+                    b.ToTable("mix_download", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.MixLike", b =>
@@ -476,7 +507,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_mix_likes_user_id");
 
-                    b.ToTable("mix_likes", (string)null);
+                    b.ToTable("mix_likes", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.MixPlay", b =>
@@ -513,7 +544,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_mix_plays_user_id");
 
-                    b.ToTable("mix_plays", (string)null);
+                    b.ToTable("mix_plays", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.MixShare", b =>
@@ -553,7 +584,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_mix_shares_user_id");
 
-                    b.ToTable("mix_shares", (string)null);
+                    b.ToTable("mix_shares", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.MixyBoosUser", b =>
@@ -730,7 +761,7 @@ namespace MixyBoos.Api.Migrations
                     b.HasIndex("ToUserId")
                         .HasDatabaseName("ix_show_chat_to_user_id");
 
-                    b.ToTable("show_chat", (string)null);
+                    b.ToTable("show_chat", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.Tag", b =>
@@ -763,39 +794,7 @@ namespace MixyBoos.Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_tags_tag_name");
 
-                    b.ToTable("tags", (string)null);
-                });
-
-            modelBuilder.Entity("MixyBoos.Api.Data.Role", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text")
-                        .HasColumnName("concurrency_stamp");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_name");
-
-                    b.HasKey("Id")
-                        .HasName("pk_asp_net_roles");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
-
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("tags", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoosUserMixyBoosUser", b =>
@@ -1088,12 +1087,12 @@ namespace MixyBoos.Api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("MixyBoos.Api.Data.Role", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_role_claim_asp_net_roles_role_id");
+                        .HasConstraintName("fk_role_claim_user_user_role_role_id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
@@ -1118,12 +1117,12 @@ namespace MixyBoos.Api.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("MixyBoos.Api.Data.Role", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_user_identity_role_asp_net_roles_role_id");
+                        .HasConstraintName("fk_user_identity_role_user_user_role_role_id");
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", null)
                         .WithMany()

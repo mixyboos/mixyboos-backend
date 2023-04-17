@@ -20,9 +20,7 @@ using OpenIddict.EntityFrameworkCore.Models;
 
 namespace MixyBoos.Api.Data;
 
-public class Role : IdentityRole<Guid> { }
-
-public class MixyBoosContext : IdentityDbContext<MixyBoosUser, Role, Guid> {
+public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid>, Guid> {
     private readonly ILogger<MixyBoosContext> _logger;
     private const string IDENTITY_PREFIX = "openiddict";
     public DbSet<Mix> Mixes { get; set; }
@@ -63,15 +61,16 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, Role, Guid> {
 
     protected override void OnModelCreating(ModelBuilder mb) {
         base.OnModelCreating(mb);
+        mb.HasDefaultSchema("mixyboos");
         mb.UseIdentityByDefaultColumns();
 
-        mb.HasPostgresExtension("uuid-ossp");
         mb.HasAnnotation("Relational:Collation", "en_US.utf8");
 
         //give the identity tables proper names and schema
         mb.Entity<MixyBoosUser>().ToTable("user", "oid");
+        mb.Entity<IdentityRole>().ToTable("identity_role", "oid");
         mb.Entity<IdentityUser<Guid>>().ToTable("identity_user", "oid");
-        mb.Entity<IdentityRole<Guid>>().ToTable("user_role", "oid");
+        mb.Entity<IdentityRole<Guid>>().ToTable("user_user_role", "oid");
         mb.Entity<IdentityUserClaim<Guid>>().ToTable("user_claim", "oid");
         mb.Entity<IdentityUserLogin<Guid>>().ToTable("user_login", "oid");
         mb.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claim", "oid");
@@ -83,12 +82,12 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, Role, Guid> {
         mb.Entity<OpenIddictEntityFrameworkCoreScope>().ToTable($"{IDENTITY_PREFIX}_{"scope"}", "oid");
         mb.Entity<OpenIddictEntityFrameworkCoreToken>().ToTable($"{IDENTITY_PREFIX}_{"token"}", "oid");
         //end identity stuff
-        
+
         mb.Entity<MixPlay>().ToTable("mix_plays");
         mb.Entity<MixLike>().ToTable("mix_likes");
         mb.Entity<MixShare>().ToTable("mix_shares");
         mb.Entity<MixDownload>().ToTable("mix_download");
-        
+
         foreach (var pb in __getColumns(mb, "DateCreated")) {
             pb.ValueGeneratedOnAdd()
                 .HasDefaultValueSql("now()");
