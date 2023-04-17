@@ -1,0 +1,25 @@
+ table_schema |    table_name     
+--------------+-------------------
+ auth         | audit_log_entries
+ auth         | flow_state
+ auth         | identities
+ auth         | instances
+ auth         | mfa_amr_claims
+ auth         | mfa_challenges
+ auth         | mfa_factors
+ auth         | refresh_tokens
+ auth         | saml_providers
+ auth         | saml_relay_states
+ auth         | schema_migrations
+ auth         | sessions
+ auth         | sso_domains
+ auth         | sso_providers
+ auth         | users
+ public       | live_show_tag
+ public       | live_shows
+ public       | mix_plays
+ public       | mixes
+ public       | show_chat
+ public       | tags
+(21 rows)
+

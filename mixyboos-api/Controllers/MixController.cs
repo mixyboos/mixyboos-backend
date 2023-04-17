@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
+using MixyBoos.Api.Services.Extensions;
 using OpenIddict.Validation.AspNetCore;
 
 namespace MixyBoos.Api.Controllers;
@@ -90,7 +91,7 @@ public class MixController : _Controller {
         }
 
         //track this as a play
-        await _context.MixPlays.AddAsync(new MixPlay {
+        await _context.MixPlays.AddAsync(new MixPlay() {
             Mix = mix,
             User = user
         });
@@ -124,13 +125,13 @@ public class MixController : _Controller {
             var faker = new Faker();
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             entity.User = user;
-            entity.Image = faker.Image.LoremFlickrUrl();
+            entity.Image = entity.Image ?? faker.Image.LoremFlickrUrl();
 
             //check if the file has been processed
             entity.IsProcessed = System.IO.File.Exists(
                 Path.Combine(_config["AudioProcessing:OutputDir"], entity.Id.ToString(), "manifest.mpd"));
 
-            await _context.Mixes.AddAsync(entity);
+            await _context.AddOrUpdate<Mix>(entity);
             await _context.SaveChangesAsync();
 
             var response = entity.Adapt<MixDTO>();
@@ -187,10 +188,11 @@ public class MixController : _Controller {
             return NotFound();
         }
 
-        await _context.MixLikes.AddAsync(new MixLike {
-            Mix = mix,
-            User = user
-        });
+        //
+        // await _context.MixLikes.AddAsync(new MixLike {
+        //     Mix = mix,
+        //     User = user
+        // });
         return Ok();
     }
 

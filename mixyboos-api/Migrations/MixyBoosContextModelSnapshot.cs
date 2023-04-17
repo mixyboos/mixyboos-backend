@@ -420,20 +420,20 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnType("character varying(36)")
                         .HasColumnName("mix_id");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
-                        .HasName("pk_mix_downloads");
+                        .HasName("pk_mix_download");
 
                     b.HasIndex("MixId")
-                        .HasDatabaseName("ix_mix_downloads_mix_id");
+                        .HasDatabaseName("ix_mix_download_mix_id");
 
                     b.HasIndex("UserId")
-                        .HasDatabaseName("ix_mix_downloads_user_id");
+                        .HasDatabaseName("ix_mix_download_user_id");
 
-                    b.ToTable("mix_downloads", (string)null);
+                    b.ToTable("mix_download", (string)null);
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.MixLike", b =>
@@ -460,7 +460,7 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnType("character varying(36)")
                         .HasColumnName("mix_id");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
@@ -478,10 +478,13 @@ namespace MixyBoos.Api.Migrations
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.MixPlay", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("MixId")
                         .HasColumnType("character varying(36)")
-                        .HasColumnName("id");
+                        .HasColumnName("mix_id");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
@@ -495,20 +498,14 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<string>("MixId")
+                    b.Property<string>("Id")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("character varying(36)")
-                        .HasColumnName("mix_id");
+                        .HasColumnName("id");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id")
+                    b.HasKey("MixId", "UserId")
                         .HasName("pk_mix_plays");
-
-                    b.HasIndex("MixId")
-                        .HasDatabaseName("ix_mix_plays_mix_id");
 
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_mix_plays_user_id");
@@ -540,7 +537,7 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnType("character varying(36)")
                         .HasColumnName("mix_id");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
@@ -1189,12 +1186,14 @@ namespace MixyBoos.Api.Migrations
                         .HasForeignKey("MixId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_mix_downloads_mixes_mix_id");
+                        .HasConstraintName("fk_mix_download_mixes_mix_id");
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "User")
-                        .WithMany()
+                        .WithMany("Downloads")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("fk_mix_downloads_users_user_id");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_mix_download_user_user_id");
 
                     b.Navigation("Mix");
 
@@ -1211,8 +1210,10 @@ namespace MixyBoos.Api.Migrations
                         .HasConstraintName("fk_mix_likes_mixes_mix_id");
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "User")
-                        .WithMany()
+                        .WithMany("Likes")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_mix_likes_users_user_id");
 
                     b.Navigation("Mix");
@@ -1230,8 +1231,10 @@ namespace MixyBoos.Api.Migrations
                         .HasConstraintName("fk_mix_plays_mixes_mix_id");
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "User")
-                        .WithMany()
+                        .WithMany("Plays")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_mix_plays_users_user_id");
 
                     b.Navigation("Mix");
@@ -1249,8 +1252,10 @@ namespace MixyBoos.Api.Migrations
                         .HasConstraintName("fk_mix_shares_mixes_mix_id");
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "User")
-                        .WithMany()
+                        .WithMany("Shares")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_mix_shares_users_user_id");
 
                     b.Navigation("Mix");
@@ -1331,6 +1336,17 @@ namespace MixyBoos.Api.Migrations
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.Mix", b =>
+                {
+                    b.Navigation("Downloads");
+
+                    b.Navigation("Likes");
+
+                    b.Navigation("Plays");
+
+                    b.Navigation("Shares");
+                });
+
+            modelBuilder.Entity("MixyBoos.Api.Data.Models.MixyBoosUser", b =>
                 {
                     b.Navigation("Downloads");
 

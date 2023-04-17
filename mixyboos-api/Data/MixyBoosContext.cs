@@ -26,10 +26,12 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, Role, Guid> {
     private readonly ILogger<MixyBoosContext> _logger;
     private const string IDENTITY_PREFIX = "openiddict";
     public DbSet<Mix> Mixes { get; set; }
+
     public DbSet<MixPlay> MixPlays { get; set; }
+    public DbSet<MixLike> MixLikes { get; set; }
     public DbSet<MixShare> MixShares { get; set; }
     public DbSet<MixDownload> MixDownloads { get; set; }
-    public DbSet<MixLike> MixLikes { get; set; }
+
     public DbSet<LiveShow> LiveShows { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<ShowChat> ShowChat { get; set; }
@@ -81,7 +83,12 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, Role, Guid> {
         mb.Entity<OpenIddictEntityFrameworkCoreScope>().ToTable($"{IDENTITY_PREFIX}_{"scope"}", "oid");
         mb.Entity<OpenIddictEntityFrameworkCoreToken>().ToTable($"{IDENTITY_PREFIX}_{"token"}", "oid");
         //end identity stuff
-
+        
+        mb.Entity<MixPlay>().ToTable("mix_plays");
+        mb.Entity<MixLike>().ToTable("mix_likes");
+        mb.Entity<MixShare>().ToTable("mix_shares");
+        mb.Entity<MixDownload>().ToTable("mix_download");
+        
         foreach (var pb in __getColumns(mb, "DateCreated")) {
             pb.ValueGeneratedOnAdd()
                 .HasDefaultValueSql("now()");
@@ -105,6 +112,25 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, Role, Guid> {
             .WithMany(p => p.Followers)
             .UsingEntity(j => j.ToTable("user_followers"));
 
+        // mb.Entity<MixyBoosUser>()
+        //     .HasMany(p => p.Plays)
+        //     .WithMany()
+        //     .UsingEntity(j => j.ToTable("mix_plays"));
+        // mb.Entity<MixyBoosUser>()
+        //     .HasMany(p => p.Shares)
+        //     .WithMany()
+        //     .UsingEntity(j => j.ToTable("mix_shares"));
+        //
+        // mb.Entity<MixyBoosUser>()
+        //     .HasMany(p => p.Likes)
+        //     .WithMany()
+        //     .UsingEntity(j => j.ToTable("mix_likes"));
+        //
+        // mb.Entity<MixyBoosUser>()
+        //     .HasMany(p => p.Downloads)
+        //     .WithMany()
+        //     .UsingEntity(j => j.ToTable("mix_downloads"));
+
         mb.Entity<Mix>()
             .HasMany(m => m.Tags)
             .WithMany()
@@ -116,17 +142,18 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, Role, Guid> {
             .UsingEntity(j => j.ToTable("show_tags"));
 
         mb.Entity<Mix>()
-            .HasMany(m => m.Likes)
-            .WithOne(m => m.Mix);
-        mb.Entity<Mix>()
             .HasMany(m => m.Plays)
             .WithOne(m => m.Mix);
-        mb.Entity<Mix>()
-            .HasMany(m => m.Shares)
-            .WithOne(m => m.Mix);
-        mb.Entity<Mix>()
-            .HasMany(m => m.Downloads)
-            .WithOne(m => m.Mix);
+
+        mb.Entity<MixPlay>()
+            .HasKey(i => new {i.MixId, i.UserId});
+
+        // mb.Entity<Mix>()
+        //     .HasMany(m => m.Shares)
+        //     .WithOne(m => m.Mix);
+        // mb.Entity<Mix>()
+        //     .HasMany(m => m.Downloads)
+        //     .WithOne(m => m.Mix);
 
         mb.Entity<Mix>()
             .Navigation(m => m.Plays)

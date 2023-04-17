@@ -482,30 +482,31 @@ namespace MixyBoos.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "mix_downloads",
+                name: "mix_download",
                 columns: table => new
                 {
                     id = table.Column<string>(type: "character varying(36)", nullable: false),
-                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_mix_downloads", x => x.id);
+                    table.PrimaryKey("pk_mix_download", x => x.id);
                     table.ForeignKey(
-                        name: "fk_mix_downloads_mixes_mix_id",
+                        name: "fk_mix_download_mixes_mix_id",
                         column: x => x.mix_id,
                         principalTable: "mixes",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_mix_downloads_users_user_id",
+                        name: "fk_mix_download_user_user_id",
                         column: x => x.user_id,
                         principalSchema: "oid",
                         principalTable: "user",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -513,10 +514,10 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "character varying(36)", nullable: false),
-                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -532,22 +533,23 @@ namespace MixyBoos.Api.Migrations
                         column: x => x.user_id,
                         principalSchema: "oid",
                         principalTable: "user",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "mix_plays",
                 columns: table => new
                 {
-                    id = table.Column<string>(type: "character varying(36)", nullable: false),
                     mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<string>(type: "character varying(36)", nullable: false),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_mix_plays", x => x.id);
+                    table.PrimaryKey("pk_mix_plays", x => new { x.mix_id, x.user_id });
                     table.ForeignKey(
                         name: "fk_mix_plays_mixes_mix_id",
                         column: x => x.mix_id,
@@ -559,7 +561,8 @@ namespace MixyBoos.Api.Migrations
                         column: x => x.user_id,
                         principalSchema: "oid",
                         principalTable: "user",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -567,10 +570,10 @@ namespace MixyBoos.Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<string>(type: "character varying(36)", nullable: false),
-                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
+                    date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
+                    mix_id = table.Column<string>(type: "character varying(36)", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -586,7 +589,8 @@ namespace MixyBoos.Api.Migrations
                         column: x => x.user_id,
                         principalSchema: "oid",
                         principalTable: "user",
-                        principalColumn: "id");
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -625,13 +629,13 @@ namespace MixyBoos.Api.Migrations
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_mix_downloads_mix_id",
-                table: "mix_downloads",
+                name: "ix_mix_download_mix_id",
+                table: "mix_download",
                 column: "mix_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_mix_downloads_user_id",
-                table: "mix_downloads",
+                name: "ix_mix_download_user_id",
+                table: "mix_download",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
@@ -643,11 +647,6 @@ namespace MixyBoos.Api.Migrations
                 name: "ix_mix_likes_user_id",
                 table: "mix_likes",
                 column: "user_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_mix_plays_mix_id",
-                table: "mix_plays",
-                column: "mix_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_mix_plays_user_id",
@@ -804,7 +803,7 @@ namespace MixyBoos.Api.Migrations
                 schema: "oid");
 
             migrationBuilder.DropTable(
-                name: "mix_downloads");
+                name: "mix_download");
 
             migrationBuilder.DropTable(
                 name: "mix_likes");

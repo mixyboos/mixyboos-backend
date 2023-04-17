@@ -31,10 +31,11 @@ public static class MappingProvider {
                     ? src.Image
                     : imageHelper.GetLargeImageUrl("mixes", src.Image))
             .Map(dest => dest.Tags, src => src.Tags.Select(r => r))
-            .Map(dest => dest.LikeCount, src => src.Likes != null ? src.Likes.Count : 0)
-            .Map(dest => dest.PlayCount, src => src.Plays != null ? src.Plays.Count : 0)
-            .Map(dest => dest.ShareCount, src => src.Shares != null ? src.Shares.Count : 0)
-            .Map(dest => dest.DownloadCount, src => src.Downloads != null ? src.Downloads.Count : 0);
+            .Map(dest => dest.PlayCount, src => src.Plays.Count)
+            .Map(dest => dest.LikeCount, src => src.Likes.Count)
+            .Map(dest => dest.ShareCount, src => src.Shares.Count)
+            .Map(dest => dest.DownloadCount, src => src.Downloads.Count);
+
         TypeAdapterConfig<MixDTO, Mix>
             .NewConfig()
             .Map(dest => dest.Id, src => Guid.Parse(src.Id));
