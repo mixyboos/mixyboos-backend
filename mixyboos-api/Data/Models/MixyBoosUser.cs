@@ -10,8 +10,12 @@ namespace MixyBoos.Api.Data.Models;
 [Index(nameof(Slug), IsUnique = true)]
 public class MixyBoosUser : IdentityUser<Guid>, ISluggedEntity {
     public MixyBoosUser() {
-        Followers = new List<MixyBoosUser>();
-        Following = new List<MixyBoosUser>();
+        this.Followers = new List<MixyBoosUser>();
+        this.Following = new List<MixyBoosUser>();
+        this.Likes = new List<MixLike>();
+        this.Plays = new List<MixPlay>();
+        this.Shares = new List<MixShare>();
+        this.Downloads = new List<MixDownload>();
     }
 
     [MaxLength(50)] public string Title { get; set; }
@@ -29,4 +33,9 @@ public class MixyBoosUser : IdentityUser<Guid>, ISluggedEntity {
 
     public ICollection<MixyBoosUser> Followers { get; set; }
     public ICollection<MixyBoosUser> Following { get; set; }
+
+    public ICollection<MixPlay> Plays { get; set; }
+    public ICollection<MixLike>? Likes { get; set; }
+    public ICollection<MixShare>? Shares { get; set; }
+    public ICollection<MixDownload>? Downloads { get; set; }
 }
