@@ -68,7 +68,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
 
         //give the identity tables proper names and schema
         mb.Entity<MixyBoosUser>().ToTable("user", "oid");
-        mb.Entity<IdentityRole>().ToTable("identity_role", "oid");
+        mb.Entity<IdentityUser>().ToTable("identity_user_base", "oid");
         mb.Entity<IdentityUser<Guid>>().ToTable("identity_user", "oid");
         mb.Entity<IdentityRole<Guid>>().ToTable("user_user_role", "oid");
         mb.Entity<IdentityUserClaim<Guid>>().ToTable("user_claim", "oid");

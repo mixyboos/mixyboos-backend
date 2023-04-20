@@ -19,21 +19,6 @@ namespace MixyBoos.Api.Migrations
                 name: "mixyboos");
 
             migrationBuilder.CreateTable(
-                name: "identity_role",
-                schema: "oid",
-                columns: table => new
-                {
-                    id = table.Column<string>(type: "text", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: true),
-                    normalized_name = table.Column<string>(type: "text", nullable: true),
-                    concurrency_stamp = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_identity_role", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "identity_user",
                 schema: "oid",
                 columns: table => new
@@ -57,6 +42,32 @@ namespace MixyBoos.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_identity_user", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "identity_user_base",
+                schema: "oid",
+                columns: table => new
+                {
+                    id = table.Column<string>(type: "text", nullable: false),
+                    user_name = table.Column<string>(type: "text", nullable: true),
+                    normalized_user_name = table.Column<string>(type: "text", nullable: true),
+                    email = table.Column<string>(type: "text", nullable: true),
+                    normalized_email = table.Column<string>(type: "text", nullable: true),
+                    email_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    password_hash = table.Column<string>(type: "text", nullable: true),
+                    security_stamp = table.Column<string>(type: "text", nullable: true),
+                    concurrency_stamp = table.Column<string>(type: "text", nullable: true),
+                    phone_number = table.Column<string>(type: "text", nullable: true),
+                    phone_number_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    two_factor_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    lockout_end = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    lockout_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    access_failed_count = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_identity_user_base", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -838,11 +849,11 @@ namespace MixyBoos.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "identity_role",
+                name: "identity_user",
                 schema: "oid");
 
             migrationBuilder.DropTable(
-                name: "identity_user",
+                name: "identity_user_base",
                 schema: "oid");
 
             migrationBuilder.DropTable(

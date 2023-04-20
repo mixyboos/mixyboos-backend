@@ -49,6 +49,10 @@ public static class MappingProvider {
             .NewConfig()
             .Map(dest => dest.Tags, src => src.Tags.Select(r => r.TagName));
 
+        TypeAdapterConfig<ShowChat, ShowChatDTO>
+            .NewConfig()
+            .Map(dest => dest.TimeStamp, src => src.DateCreated);
+
         TypeAdapterConfig<ProfileDTO, MixyBoosUser>
             .NewConfig()
             .Map(src => src.PhoneNumber, dest => dest.PhoneNumber);

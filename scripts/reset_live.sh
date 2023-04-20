@@ -14,5 +14,6 @@ psql -c "DROP SCHEMA oid CASCADE"
 psql -c "DROP SCHEMA public CASCADE"
 psql -c "DROP SCHEMA extensions CASCADE"
 psql -c "DROP SCHEMA mixyboos CASCADE"
+psql -c "DROP TABLE sys.migrations"
 
 ./scripts/reset.sh

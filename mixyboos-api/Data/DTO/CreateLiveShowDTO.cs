@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MixyBoos.Api.Data.DTO; 
+namespace MixyBoos.Api.Data.DTO;
 
 public class CreateLiveShowDTO {
     public string Title { get; set; }

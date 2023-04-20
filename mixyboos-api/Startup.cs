@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.FileProviders;
 using MixyBoos.Api.Controllers.Hubs;
 using MixyBoos.Api.Data;
@@ -64,8 +65,11 @@ namespace MixyBoos.Api {
             services.AddDbContext<MixyBoosContext>(options => {
                 options
                     .UseNpgsql(connectionString, pgoptions => {
+                        pgoptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                         pgoptions.MigrationsHistoryTable("migrations", "sys");
                     })
+                    .ConfigureWarnings(w =>
+                        w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))
                     .UseSnakeCaseNamingConvention()
                     .UseOpenIddict();
                 if (_env.IsDevelopment()) {

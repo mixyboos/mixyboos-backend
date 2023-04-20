@@ -26,6 +26,7 @@ namespace MixyBoos.Api.Services.Auth {
             identity.AddClaims(new[] {
                 new Claim(OpenIddictConstants.Claims.Name, user.UserName ?? string.Empty),
                 new Claim(OpenIddictConstants.Claims.Subject, user.Id.ToString()),
+                new Claim("id", user.Id.ToString()),
                 new Claim("displayName", user.DisplayName),
                 new Claim("profileImage", _imageHelper.GetSmallImageUrl("users/avatars", user.ProfileImage)),
                 new Claim("slug", user.Slug)

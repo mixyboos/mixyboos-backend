@@ -137,6 +137,7 @@ namespace MixyBoos.Api.Controllers {
                     "StreamEnded",
                     show.Adapt<LiveShowDTO>());
             }
+
             return Ok();
         }
 
@@ -152,6 +153,7 @@ namespace MixyBoos.Api.Controllers {
                 .Where(s => s.User.Equals(user))
                 .Where(s => !s.IsFinished)
                 .Include(s => s.Tags)
+                .Include(s => s.User)
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefaultAsync();
 
@@ -168,7 +170,7 @@ namespace MixyBoos.Api.Controllers {
         public async Task<ActionResult<LiveShowDTO>> GetCurrentShow(string userSlug) {
             var show = await _context.LiveShows
                 .Where(s => s.User.Slug.Equals(userSlug))
-                .Where(s => s.IsFinished)
+                .Where(s => !s.IsFinished)
                 .OrderByDescending(s => s.StartDate)
                 .FirstOrDefaultAsync();
 
