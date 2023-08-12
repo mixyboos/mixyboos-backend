@@ -5124,3 +5124,89 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2023-04-20 05:41:10.329 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/57ff9879-fcbd-4c09-b1da-8c4a86ec6ac3.jpg?width=128&height=128&t=6eb37616-3295-401a-82a0-d9876f8a3634'. Cached Key: '51bcaca6bea7'
 2023-04-20 05:41:14.077 +01:00 [INF] New chat message - From: 78bcd881-e539-4b3b-842a-cc214ae94f96, Show: 352fdsd, Message: e065e226-0ac4-48ce-94be-08db4116091d
 2023-04-20 05:41:14.241 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/78bcd881-e539-4b3b-842a-cc214ae94f96.jpg?width=128&height=128&t=5685e42a-7b1c-416d-a772-e1ead095cf1f'. Cached Key: 'b2a2d78768f9'
+2023-08-12 20:50:09.063 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-12 20:50:09.070 +01:00 [INF] Quartz Scheduler created
+2023-08-12 20:50:09.071 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-12 20:50:09.071 +01:00 [INF] RAMJobStore initialized.
+2023-08-12 20:50:09.071 +01:00 [INF] Quartz Scheduler 3.6.2.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-12 20:50:09.071 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-12 20:50:09.072 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-12 20:50:09.077 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-12 20:50:09.078 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-12 20:50:09.080 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-12 20:50:09.080 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-12 20:50:09.080 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-12 20:50:09.080 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-12 20:50:09.143 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-12 20:50:09.408 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-12 20:50:09.620 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'MixyBoos.Api.Data.MixyBoosContext'.
+System.ArgumentException: Couldn't set initial catalog (Parameter 'initial catalog')
+ ---> System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at Npgsql.NpgsqlConnectionStringBuilder.GeneratedSetter(String keyword, Object value)
+   at Npgsql.NpgsqlConnectionStringBuilder.set_Item(String keyword, Object value)
+   --- End of inner exception stack trace ---
+   at Npgsql.NpgsqlConnectionStringBuilder.set_Item(String keyword, Object value)
+   at System.Data.Common.DbConnectionStringBuilder.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnectionStringBuilder..ctor(String connectionString)
+   at Npgsql.NpgsqlConnection.SetupDataSource()
+   at Npgsql.NpgsqlConnection.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnection..ctor(String connectionString)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlRelationalConnection.CreateDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.get_DbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.CreateDbCommand(RelationalCommandParameterObject parameterObject, Guid commandId, DbCommandMethod commandMethod)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.ArgumentException: Couldn't set initial catalog (Parameter 'initial catalog')
+ ---> System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at Npgsql.NpgsqlConnectionStringBuilder.GeneratedSetter(String keyword, Object value)
+   at Npgsql.NpgsqlConnectionStringBuilder.set_Item(String keyword, Object value)
+   --- End of inner exception stack trace ---
+   at Npgsql.NpgsqlConnectionStringBuilder.set_Item(String keyword, Object value)
+   at System.Data.Common.DbConnectionStringBuilder.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnectionStringBuilder..ctor(String connectionString)
+   at Npgsql.NpgsqlConnection.SetupDataSource()
+   at Npgsql.NpgsqlConnection.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnection..ctor(String connectionString)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlRelationalConnection.CreateDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.get_DbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.CreateDbCommand(RelationalCommandParameterObject parameterObject, Guid commandId, DbCommandMethod commandMethod)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-08-12 20:50:09.624 +01:00 [FTL] An unhandled exception occured during bootstrapping Couldn't set initial catalog (Parameter 'initial catalog')
+System.ArgumentException: Couldn't set initial catalog (Parameter 'initial catalog')
+ ---> System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at Npgsql.NpgsqlConnectionStringBuilder.GeneratedSetter(String keyword, Object value)
+   at Npgsql.NpgsqlConnectionStringBuilder.set_Item(String keyword, Object value)
+   --- End of inner exception stack trace ---
+   at Npgsql.NpgsqlConnectionStringBuilder.set_Item(String keyword, Object value)
+   at System.Data.Common.DbConnectionStringBuilder.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnectionStringBuilder..ctor(String connectionString)
+   at Npgsql.NpgsqlConnection.SetupDataSource()
+   at Npgsql.NpgsqlConnection.set_ConnectionString(String value)
+   at Npgsql.NpgsqlConnection..ctor(String connectionString)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlRelationalConnection.CreateDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.get_DbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.CreateDbCommand(RelationalCommandParameterObject parameterObject, Guid commandId, DbCommandMethod commandMethod)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at OpenIddict.EntityFrameworkCore.OpenIddictEntityFrameworkCoreApplicationStore`5.FindByClientIdAsync(String identifier, CancellationToken cancellationToken)
+   at OpenIddict.Core.OpenIddictApplicationCache`1.<>c__DisplayClass6_0.<<FindByClientIdAsync>g__ExecuteAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at OpenIddict.Core.OpenIddictApplicationManager`1.FindByClientIdAsync(String identifier, CancellationToken cancellationToken)
+   at OpenIddict.Core.OpenIddictApplicationManager`1.OpenIddict.Abstractions.IOpenIddictApplicationManager.FindByClientIdAsync(String identifier, CancellationToken cancellationToken)
+   at MixyBoos.Api.Services.Workers.OpenIdDictWorker.StartAsync(CancellationToken cancellationToken) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Services/Workers/OpenIdDictWorker.cs:line 28
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at MixyBoos.Api.Program.Main(String[] args) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Program.cs:line 22
+2023-08-12 20:58:52.440 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-12 20:58:56.477 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.

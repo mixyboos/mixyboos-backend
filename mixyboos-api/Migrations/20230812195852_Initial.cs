@@ -447,6 +447,7 @@ namespace MixyBoos.Api.Migrations
                     from_user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     to_user_id = table.Column<Guid>(type: "uuid", nullable: true),
                     date_sent = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    message = table.Column<string>(type: "text", nullable: false),
                     show_id = table.Column<string>(type: "character varying(36)", nullable: false),
                     date_created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
                     date_updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()")
