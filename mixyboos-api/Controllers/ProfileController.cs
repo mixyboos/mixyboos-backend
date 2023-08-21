@@ -39,10 +39,6 @@ public class ProfileController : _Controller {
         }
 
         return Ok(user.Adapt<ProfileDTO>());
-
-        // return Ok(new ProfileDTO {
-        //     DisplayName = user.UserName
-        // });
     }
 
     [HttpPost("follow")]

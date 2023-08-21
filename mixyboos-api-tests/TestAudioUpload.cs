@@ -6,7 +6,6 @@ using IdentityModel.Client;
 using Microsoft.AspNetCore.Mvc.Testing;
 using MixyBoos.Api.Tests.Services;
 using MixyBoos.Api.Tests.Services.AspNetCoreProtobuf.Tests;
-using Moq;
 using Xunit;
 
 namespace MixyBoos.Api.Tests {
@@ -15,7 +14,7 @@ namespace MixyBoos.Api.Tests {
         private const string ClientId = "testharness";
         private const string ClientSecret = "e83ec86b-d234-4a09-bb91-6a36c43ccf77";
         private const string Scope = "api offline_access";
-        private const string StsUrl = "https://dev.mixyboos.com:5001";
+        private const string StsUrl = "https://mixyboos.dev.fergl.ie:5001";
 
         private readonly WebApplicationFactory<Startup> _factory;
         private readonly ApiTokenInMemoryClient _tokenService;
@@ -43,7 +42,7 @@ namespace MixyBoos.Api.Tests {
         public async Task Upload_AudioFile() {
             // Arrange
             var expectedContentType = "text/html; charset=utf-8";
-            var url = $"{ApiUrl}/upload";
+            var url = $"{ApiUrl}/mix";
             var options = new WebApplicationFactoryClientOptions {
                 AllowAutoRedirect = false,
             };

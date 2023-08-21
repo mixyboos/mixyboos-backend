@@ -187,9 +187,9 @@ namespace MixyBoos.Api {
                 // Default Password settings.
                 //jp1QhhMTysXddk6LiYv2UUU3tVubLvJrjwpsYt1fkM0=
 
-                options.Password.RequireDigit = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
@@ -221,6 +221,7 @@ namespace MixyBoos.Api {
 
             app.UseSwagger();
             app.UseCors(builder => builder
+                .WithOrigins("http://localhost:3000")
                 .WithOrigins("https://mixyboos.dev.fergl.ie:3000")
                 .WithOrigins("http://mixyboos.dev.fergl.ie:3000")
                 .WithOrigins("https://www.mixyboos.com")

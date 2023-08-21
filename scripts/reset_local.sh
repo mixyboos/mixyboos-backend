@@ -36,5 +36,6 @@ reset_mssql() {
       -P $PASSWORD \
       -i ./scripts/sql/create_db.sql
 }
-reset_mssql
+#reset_mssql
+reset_pg
 ./scripts/reset.sh
