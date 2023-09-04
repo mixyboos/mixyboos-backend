@@ -72,6 +72,10 @@ public class MixController : _Controller {
       .Where(m => m.User.Slug.Equals(user))
       .Where(m => m.Slug.Equals(mix))
       .Include(m => m.User).FirstOrDefaultAsync();
+    if (mixes is null) {
+      return NoContent();
+    }
+
     var result = mixes.Adapt<MixDTO>();
     return Ok(result);
   }

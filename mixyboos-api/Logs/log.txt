@@ -7847,3 +7847,1795 @@ File name: '/srv/dev/mixyboos/mixyboos-audio/mounts/audio/mixes/4df9ae62-a3f7-43
 2023-08-21 22:50:10.232 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=d6911011-45d3-476f-9572-e215e46f1d7f'. Cached Key: '851850fb3554'
 2023-08-21 22:50:12.724 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=d6911011-45d3-476f-9572-e215e46f1d7f'. Cached Key: '851850fb3554'
 2023-08-21 22:50:57.472 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=02011df4-df2a-40dc-b1fe-7a70dfce7506'. Cached Key: '851850fb3554'
+2023-08-21 23:05:34.032 +01:00 [INF] Application is shutting down...
+2023-08-21 23:16:49.698 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-21 23:16:49.711 +01:00 [INF] Quartz Scheduler created
+2023-08-21 23:16:49.711 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-21 23:16:49.712 +01:00 [INF] RAMJobStore initialized.
+2023-08-21 23:16:49.712 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-21 23:16:49.712 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-21 23:16:49.713 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-21 23:16:49.719 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-21 23:16:49.721 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-21 23:16:49.724 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-21 23:16:49.724 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-21 23:16:49.724 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-21 23:16:49.724 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-21 23:16:49.906 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-21 23:16:50.492 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-21 23:16:52.356 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-21 23:16:52.458 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-21 23:16:52.461 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-21 23:16:52.461 +01:00 [INF] Hosting environment: Development
+2023-08-21 23:16:52.461 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-21 23:16:52.467 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-21 23:21:41.379 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=35c588cf-9d42-453a-b506-0f2d4f95f598'. Cached Key: '851850fb3554'
+2023-08-21 23:21:41.379 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=3898da7c-1f53-4c52-9d90-26d73eb63af4'. Cached Key: 'f1b242656ba5'
+2023-08-21 23:21:41.379 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=08d233f9-dbbe-4029-9176-e26fca903ce6'. Cached Key: '06638ab5abe2'
+2023-08-21 23:53:11.111 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=8a3babab-5586-4de7-a551-e5c8e1b1405d'. Cached Key: '851850fb3554'
+2023-08-21 23:53:11.193 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=996a43ed-af9b-4649-b1aa-aec114248836'. Cached Key: '06638ab5abe2'
+2023-08-21 23:53:11.193 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=4e173d93-7743-4d4a-bebf-1f1fc198a49b'. Cached Key: 'f1b242656ba5'
+2023-08-21 23:53:12.996 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=10c22f93-37bf-4fad-a9a1-163bb429dc09'. Cached Key: 'f1b242656ba5'
+2023-08-21 23:53:12.998 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=8a38b234-91d5-4827-bfac-b63b622b4bc8'. Cached Key: '851850fb3554'
+2023-08-21 23:53:13.039 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=f0080b6d-85b4-4db0-ae01-1577454668d9'. Cached Key: '06638ab5abe2'
+2023-08-22 00:40:25.068 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=6d99385d-7b89-4d01-8862-eb666a8b0ae2'. Cached Key: '851850fb3554'
+2023-08-22 00:40:25.068 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=75170761-bd73-4b8a-abb5-83482eb9e680'. Cached Key: 'f1b242656ba5'
+2023-08-22 00:40:25.109 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=4ec1257c-33ab-4a3c-84d8-5f07190d530a'. Cached Key: '06638ab5abe2'
+2023-08-22 00:40:33.207 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=aa787ee5-45a5-47e7-bbd4-f2856125e143'. Cached Key: '851850fb3554'
+2023-08-22 00:40:33.331 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=dce721f5-a192-4fea-af9e-314f7f2068b9'. Cached Key: '06638ab5abe2'
+2023-08-22 00:40:33.331 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=7b830e2c-0034-4696-9292-6670d76063b1'. Cached Key: 'f1b242656ba5'
+2023-08-22 00:41:24.456 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=e473c733-0c74-4c85-a001-2f27e9071532'. Cached Key: '06638ab5abe2'
+2023-08-22 00:41:24.456 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=223e0821-e8f8-4190-8bdc-fbd2dedd5ab4'. Cached Key: '851850fb3554'
+2023-08-22 00:41:24.456 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=72804b36-3556-4a4c-9ba8-54bdb6955381'. Cached Key: 'f1b242656ba5'
+2023-08-22 00:41:50.856 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=851ae59a-9891-4298-a428-97d7050396f1'. Cached Key: '851850fb3554'
+2023-08-22 00:41:50.940 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=32a605a6-fd26-4d73-ba27-18fc0173287c'. Cached Key: 'f1b242656ba5'
+2023-08-22 00:41:50.941 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=cf1fd5c4-67dc-4766-92fc-0669698d2dd3'. Cached Key: '06638ab5abe2'
+2023-08-22 00:41:56.413 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=201b8f29-b9ae-4e3c-83f2-f2bf59190ac7'. Cached Key: '851850fb3554'
+2023-08-22 00:41:56.596 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=a7e403c3-a0e4-47dd-887b-0b768e148f80'. Cached Key: '06638ab5abe2'
+2023-08-22 00:41:56.596 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=eaf034f8-ae12-488f-bf5b-05050cd3e464'. Cached Key: 'f1b242656ba5'
+2023-08-22 00:42:12.974 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=2de29d7c-c396-4286-836f-0b85f8ba3236'. Cached Key: '851850fb3554'
+2023-08-22 00:42:13.038 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=4f21d3a1-23c4-4c1a-adf6-daf2d3277697'. Cached Key: 'f1b242656ba5'
+2023-08-22 00:42:13.099 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=a4a3937c-0310-45f5-8f67-79baa3b5aefe'. Cached Key: '06638ab5abe2'
+2023-08-22 00:42:29.647 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=ad2eafb5-d468-4db8-801e-789766382760'. Cached Key: '851850fb3554'
+2023-08-22 00:42:29.690 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=957ec85d-841f-40e1-b2d8-9ca8ff593174'. Cached Key: 'f1b242656ba5'
+2023-08-22 00:42:29.690 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=0c2715ab-fddc-4dc1-a312-cbbcf612bc32'. Cached Key: '06638ab5abe2'
+2023-08-22 00:42:59.254 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=206b347a-a5d2-4da3-a8ff-3cd4993e7664'. Cached Key: '851850fb3554'
+2023-08-22 00:42:59.481 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=ec36c318-4e72-476f-99f5-54499a74e092'. Cached Key: 'f1b242656ba5'
+2023-08-22 00:42:59.563 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=ff0a62f9-e792-4039-bb95-4ef477f1eff2'. Cached Key: '06638ab5abe2'
+2023-08-22 00:42:59.934 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=17aca68a-7572-4d05-aa84-3188781732aa'. Cached Key: '06638ab5abe2'
+2023-08-22 00:42:59.934 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=f2b192bf-a1aa-400a-b886-960aa5057e36'. Cached Key: 'f1b242656ba5'
+2023-08-22 00:42:59.934 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=943f68e0-e77e-41c2-94c1-a96ecd80c1ee'. Cached Key: '851850fb3554'
+2023-08-22 00:43:01.281 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=6ed48e3f-cef6-4464-8bcd-3b769685a513'. Cached Key: '851850fb3554'
+2023-08-22 00:43:25.299 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=40ddc0f1-0939-4cee-8444-53f07a25c0c7'. Cached Key: '851850fb3554'
+2023-08-22 00:46:26.336 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=db29863e-8304-44c7-817d-c5de11ad3f1c'. Cached Key: '851850fb3554'
+2023-08-22 00:46:58.210 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=ce57eebb-f634-4f50-b507-f0845445ec93'. Cached Key: '851850fb3554'
+2023-08-22 00:47:00.759 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=ce57eebb-f634-4f50-b507-f0845445ec93'. Cached Key: '851850fb3554'
+2023-08-22 17:07:29.042 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-22 17:07:29.057 +01:00 [INF] Quartz Scheduler created
+2023-08-22 17:07:29.058 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-22 17:07:29.058 +01:00 [INF] RAMJobStore initialized.
+2023-08-22 17:07:29.058 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-22 17:07:29.059 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-22 17:07:29.059 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-22 17:07:29.066 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-22 17:07:29.069 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-22 17:07:29.072 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-22 17:07:29.073 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-22 17:07:29.073 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-22 17:07:29.073 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-22 17:07:29.211 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-22 17:07:29.722 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-22 17:07:31.025 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-22 17:07:31.125 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-22 17:07:31.128 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-22 17:07:31.128 +01:00 [INF] Hosting environment: Development
+2023-08-22 17:07:31.128 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-22 17:07:31.131 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-22 17:07:56.612 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=6eddc9b8-32d4-4db8-b8a4-e955b4eb734d'. Cached Key: 'b2f9d8a8bafc'
+2023-08-22 17:10:29.803 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-22 17:10:29.816 +01:00 [INF] Quartz Scheduler created
+2023-08-22 17:10:29.816 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-22 17:10:29.816 +01:00 [INF] RAMJobStore initialized.
+2023-08-22 17:10:29.817 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-22 17:10:29.817 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-22 17:10:29.817 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-22 17:10:29.823 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-22 17:10:29.825 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-22 17:10:29.828 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-22 17:10:29.828 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-22 17:10:29.828 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-22 17:10:29.828 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-22 17:10:29.959 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-22 17:10:30.432 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-22 17:10:31.752 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-22 17:10:31.848 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-22 17:10:31.851 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-22 17:10:31.851 +01:00 [INF] Hosting environment: Development
+2023-08-22 17:10:31.851 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-22 17:10:31.857 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-22 17:10:44.984 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=6eddc9b8-32d4-4db8-b8a4-e955b4eb734d'. Cached Key: 'b2f9d8a8bafc'
+2023-08-22 17:10:51.405 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=3f3c287e-5e7d-4231-9c4f-e493f77559b3'. Cached Key: 'f1b242656ba5'
+2023-08-22 17:10:51.405 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=4cd2cea9-a53d-4113-b060-5d3559093993'. Cached Key: '851850fb3554'
+2023-08-22 17:10:51.487 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=39de6eee-b6ed-4a76-bcdb-8640f005279c'. Cached Key: '06638ab5abe2'
+2023-08-22 17:10:55.100 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=4cd2cea9-a53d-4113-b060-5d3559093993'. Cached Key: '851850fb3554'
+2023-08-22 17:11:07.232 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=f01e6b0d-1805-46e9-a951-8d83f98009ab'. Cached Key: '851850fb3554'
+2023-08-22 17:20:28.993 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=7771be62-b8b8-4f94-8524-980d2bc4d158'. Cached Key: '851850fb3554'
+2023-08-22 17:30:47.010 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=e727f505-3a2d-480c-a153-8641229ecf44'. Cached Key: 'f1b242656ba5'
+2023-08-22 17:30:47.051 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=7a97bd25-279d-4f29-85f7-9f8b84b79a3a'. Cached Key: '851850fb3554'
+2023-08-22 17:30:47.052 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=a7f84e33-bec0-4df3-9ddd-e29fea38da58'. Cached Key: '06638ab5abe2'
+2023-08-22 17:31:03.612 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=41a53832-5b85-4338-b711-5e1ae2512c15'. Cached Key: '851850fb3554'
+2023-08-22 17:31:03.694 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=57f665da-e343-408b-95f3-300152d94cd1'. Cached Key: 'f1b242656ba5'
+2023-08-22 17:31:03.756 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=9563e874-aa04-4418-bc09-6d223d302d84'. Cached Key: '06638ab5abe2'
+2023-08-22 17:31:07.872 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=a8dabe85-70bb-447b-ab48-a685ef24ab96'. Cached Key: '851850fb3554'
+2023-08-22 17:31:07.872 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=9abedc0c-f535-407b-8213-be79fb46dc94'. Cached Key: 'f1b242656ba5'
+2023-08-22 17:31:07.954 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=1656ddf4-11f4-4d3b-9961-d1b9f4abd864'. Cached Key: '06638ab5abe2'
+2023-08-22 17:59:04.390 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=d0ba03a0-4901-4501-bd65-b7549024a243'. Cached Key: '851850fb3554'
+2023-08-22 18:09:00.819 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-22 18:09:00.831 +01:00 [INF] Quartz Scheduler created
+2023-08-22 18:09:00.832 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-22 18:09:00.832 +01:00 [INF] RAMJobStore initialized.
+2023-08-22 18:09:00.833 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-22 18:09:00.833 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-22 18:09:00.833 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-22 18:09:00.839 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-22 18:09:00.841 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-22 18:09:00.844 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-22 18:09:00.844 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-22 18:09:00.844 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-22 18:09:00.844 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-22 18:09:00.968 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-22 18:09:01.446 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-22 18:09:02.842 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-22 18:09:02.938 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-22 18:09:02.941 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-22 18:09:02.941 +01:00 [INF] Hosting environment: Development
+2023-08-22 18:09:02.941 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-22 18:09:02.946 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-22 20:59:28.199 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=c48492df-b0ec-4b84-bacf-757718aa9c9b'. Cached Key: '851850fb3554'
+2023-08-22 21:33:15.502 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=32e8e285-7754-4b0d-a178-d63cfec6f0c6'. Cached Key: '851850fb3554'
+2023-08-22 21:40:28.203 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=45c9fa85-ba74-4d44-943d-0aefd1b8acdc'. Cached Key: '851850fb3554'
+2023-08-22 22:39:41.496 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=bf40702f-d01f-458e-938e-c1bd23cdc662'. Cached Key: '851850fb3554'
+2023-08-22 23:12:43.419 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=6eddc9b8-32d4-4db8-b8a4-e955b4eb734d'. Cached Key: 'b2f9d8a8bafc'
+2023-08-22 23:12:52.072 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=2e1ff8a1-107d-4099-894a-3ecc3fee73e3'. Cached Key: '851850fb3554'
+2023-08-22 23:12:52.074 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=51a777c0-f2fd-401a-b81c-8d079089cebe'. Cached Key: 'f1b242656ba5'
+2023-08-22 23:12:52.076 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=08e7951f-cd64-418b-89fa-3a60e27d1fc0'. Cached Key: '06638ab5abe2'
+2023-08-22 23:19:43.918 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=4bd0d957-3366-46e3-bb0d-f353625576e4'. Cached Key: '851850fb3554'
+2023-08-22 23:19:44.131 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=c9279879-b123-4736-8f6c-c6ffc643ed8b'. Cached Key: '06638ab5abe2'
+2023-08-22 23:19:44.131 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=9babd704-cd5f-47d8-b0be-4d01fc865ff0'. Cached Key: 'f1b242656ba5'
+2023-08-22 23:19:52.792 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=c78fb27b-628b-4192-912e-1858d59bef72'. Cached Key: 'f1b242656ba5'
+2023-08-22 23:19:52.876 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=964b0115-7237-455c-a8e5-c5fef0b849f4'. Cached Key: '851850fb3554'
+2023-08-22 23:19:52.877 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=d5321b7a-eb7b-448e-abc4-448e01df6dc6'. Cached Key: '06638ab5abe2'
+2023-08-22 23:19:58.739 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=c4664d1c-72a5-4f5d-b890-5360ec05add8'. Cached Key: '851850fb3554'
+2023-08-22 23:19:58.824 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=ce8fe7aa-e030-43f6-bd18-de0f40a11a4d'. Cached Key: 'f1b242656ba5'
+2023-08-22 23:19:58.906 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=e0ec2d17-c404-41f1-96db-cc0f83dbe7df'. Cached Key: '06638ab5abe2'
+2023-08-22 23:20:03.563 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=1d5d8522-2e41-4ad8-a064-cc4e814bee5b'. Cached Key: '851850fb3554'
+2023-08-22 23:20:03.565 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=4620ca6f-80d1-41b3-a76d-6335573af5ca'. Cached Key: '06638ab5abe2'
+2023-08-22 23:20:03.565 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=878f8329-2110-4f3c-b180-372def753255'. Cached Key: 'f1b242656ba5'
+2023-08-22 23:21:23.417 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=3fcda1b2-56b4-4983-a8dd-c67e510e8d41'. Cached Key: 'f1b242656ba5'
+2023-08-22 23:21:23.417 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=756e2465-371c-438d-ad41-2651970a6c11'. Cached Key: '851850fb3554'
+2023-08-22 23:21:23.500 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=d84cd912-b998-412f-9016-11ecaea720e4'. Cached Key: '06638ab5abe2'
+2023-08-22 23:24:37.095 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=ea5bfe20-9684-44fc-b256-6dc453d61c05'. Cached Key: '851850fb3554'
+2023-08-22 23:50:19.127 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=0b086515-bc76-4b3c-b509-e97a399852dc'. Cached Key: '851850fb3554'
+2023-08-23 16:04:32.687 +01:00 [ERR] Failed executing DbCommand (32,060ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT m.id, m.audio_url, m.date_created, m.date_updated, m.description, m.image, m.is_processed, m.slug, m.title, m.user_id, u.id, u.access_failed_count, u.biography, u.city, u.concurrency_stamp, u.country, u.display_name, u.email, u.email_confirmed, u.header_image, u.lockout_enabled, u.lockout_end, u.normalized_email, u.normalized_user_name, u.password_hash, u.phone_number, u.phone_number_confirmed, u.profile_image, u.security_stamp, u.slug, u.stream_key, u.title, u.two_factor_enabled, u.user_name
+FROM mixyboos.mixes AS m
+INNER JOIN oid."user" AS u ON m.user_id = u.id
+WHERE NOT (m.is_processed)
+ORDER BY m.id, u.id
+2023-08-23 16:04:32.718 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'MixyBoos.Api.Data.MixyBoosContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.TimeoutException: Timeout during reading attempt
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|234_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.TimeoutException: Timeout during reading attempt
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|234_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2023-08-23 16:04:32.766 +01:00 [ERR] Job DEFAULT.CheckAudioIsProcessedJob threw an unhandled Exception: 
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.TimeoutException: Timeout during reading attempt
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|234_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MixyBoos.Api.Services.Jobs.CheckAudioIsProcessedJob.Execute(IJobExecutionContext context) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Services/Jobs/CheckAudioIsProcessedJob.cs:line 30
+   at Quartz.Core.JobRunShell.Run(CancellationToken cancellationToken)
+2023-08-23 16:04:32.775 +01:00 [ERR] Job DEFAULT.CheckAudioIsProcessedJob threw an exception.
+Quartz.SchedulerException: Job threw an unhandled exception.
+ ---> System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.TimeoutException: Timeout during reading attempt
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|234_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MixyBoos.Api.Services.Jobs.CheckAudioIsProcessedJob.Execute(IJobExecutionContext context) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Services/Jobs/CheckAudioIsProcessedJob.cs:line 30
+   at Quartz.Core.JobRunShell.Run(CancellationToken cancellationToken)
+   --- End of inner exception stack trace --- [See nested exception: System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.TimeoutException: Timeout during reading attempt
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|234_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MixyBoos.Api.Services.Jobs.CheckAudioIsProcessedJob.Execute(IJobExecutionContext context) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Services/Jobs/CheckAudioIsProcessedJob.cs:line 30
+   at Quartz.Core.JobRunShell.Run(CancellationToken cancellationToken)]
+2023-08-23 16:42:37.004 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=84e65807-2c0c-46d0-8c2b-b459b4fa46be'. Cached Key: '851850fb3554'
+2023-08-23 16:42:37.024 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=0638eeea-ea73-48b6-8024-fdceb053ac60'. Cached Key: '06638ab5abe2'
+2023-08-23 16:42:37.024 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=90a45d36-fd7b-4be8-b158-a66e331b7648'. Cached Key: 'f1b242656ba5'
+2023-08-23 16:43:19.211 +01:00 [INF] Completed conversion: 0
+2023-08-23 16:43:19.286 +01:00 [INF] Finished processing 0b585839-7e56-414f-8c56-6329fe2a7ccb
+2023-08-23 16:43:40.330 +01:00 [INF] Caching image for 0b585839-7e56-414f-8c56-6329fe2a7ccb from /tmp/mixyboos/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg to /srv/dev/mixyboos/mixyboos-audio/mounts/images/mixes
+2023-08-23 16:43:40.331 +01:00 [INF] Successfully moved /tmp/mixyboos/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg to /srv/dev/mixyboos/mixyboos-audio/mounts/images/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg
+2023-08-23 16:43:40.332 +01:00 [INF] Updating mix record
+2023-08-23 16:43:50.655 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=b136e5b0-e5a3-483c-9004-6644e0fbfee3'. Cached Key: '851850fb3554'
+2023-08-23 16:43:50.759 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=9c19d363-4c2b-4ecb-8bdb-54bb2cbeec64'. Cached Key: '06638ab5abe2'
+2023-08-23 16:43:50.841 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=a0d72887-7776-42ae-aa00-6bbdf4e4a884'. Cached Key: 'f1b242656ba5'
+2023-08-23 16:43:51.229 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=9e79562a-3917-4cb5-8779-bebb98c1e38d'. Cached Key: '73cc3cfe9e97'
+2023-08-23 16:43:56.103 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=c9c9c84d-b34c-421a-a703-3d2f0e55d1e5'. Cached Key: '73cc3cfe9e97'
+2023-08-25 00:58:13.332 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-25 00:58:13.343 +01:00 [INF] Quartz Scheduler created
+2023-08-25 00:58:13.343 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-25 00:58:13.343 +01:00 [INF] RAMJobStore initialized.
+2023-08-25 00:58:13.344 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-25 00:58:13.344 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-25 00:58:13.344 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-25 00:58:13.349 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-25 00:58:13.351 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-25 00:58:13.353 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-25 00:58:13.354 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-25 00:58:13.354 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-25 00:58:13.354 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-25 00:58:13.480 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-25 00:58:13.937 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-25 00:58:14.806 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-25 00:58:14.937 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-25 00:58:14.939 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 00:58:14.939 +01:00 [INF] Hosting environment: Development
+2023-08-25 00:58:14.939 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-25 00:58:14.945 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-25 01:01:20.930 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-08-25 01:01:20.946 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-08-25 01:01:20.988 +01:00 [INF] The token request was successfully validated.
+2023-08-25 01:01:21.585 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-08-25 01:01:23.133 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=2b85230d-f678-4376-a647-d820c9a804d4'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 01:01:35.674 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=2b85230d-f678-4376-a647-d820c9a804d4'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 01:43:04.915 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=5c8be236-d3a5-4959-a1d9-d7b75ccf43db'. Cached Key: 'f1b242656ba5'
+2023-08-25 01:43:04.915 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=492b708a-d967-4819-8070-3fa96d0ba578'. Cached Key: '73cc3cfe9e97'
+2023-08-25 01:43:04.915 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=e8ac4f34-9547-4d16-8e12-c83ad4039f35'. Cached Key: '851850fb3554'
+2023-08-25 01:43:04.915 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=2ba2fa6b-a7eb-485d-ab4d-20ae8bfb5ce1'. Cached Key: '06638ab5abe2'
+2023-08-25 01:57:42.534 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=04d3d029-3262-4557-a1bb-41304fbb3adf'. Cached Key: '73cc3cfe9e97'
+2023-08-25 01:57:42.536 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=e5322c1a-fab3-4de6-a3e8-dff8dad2cab1'. Cached Key: '851850fb3554'
+2023-08-25 01:57:42.537 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=9478c9bc-0e76-4437-a757-3a4295265bdf'. Cached Key: 'f1b242656ba5'
+2023-08-25 01:57:42.551 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=d7f024af-9525-4485-afb0-4a5ceff7eb75'. Cached Key: '06638ab5abe2'
+2023-08-25 01:57:46.898 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=f8fd5189-8155-49ef-a9c0-4740cc2c8b59'. Cached Key: 'f1b242656ba5'
+2023-08-25 01:57:46.898 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=7fcec6f4-0e13-41bd-a332-67cadd3de671'. Cached Key: '73cc3cfe9e97'
+2023-08-25 01:57:46.898 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=11428bd2-b6f8-4a75-8904-a75be664c7d7'. Cached Key: '06638ab5abe2'
+2023-08-25 01:57:46.898 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=6e74ad99-26ac-483e-bef2-942de5ea1410'. Cached Key: '851850fb3554'
+2023-08-25 01:57:50.312 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=acf7538c-d26c-43ef-bf3e-232a080fda74'. Cached Key: '851850fb3554'
+2023-08-25 01:57:50.312 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=9733ac5e-1dd5-44be-9ed3-c190aeefcc71'. Cached Key: '73cc3cfe9e97'
+2023-08-25 01:57:50.312 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=59c23c60-24a0-4cdf-8da8-bb774e7ed29a'. Cached Key: 'f1b242656ba5'
+2023-08-25 01:57:50.312 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=6c39868f-44e6-4cd4-adeb-86ad488803c0'. Cached Key: '06638ab5abe2'
+2023-08-25 01:58:16.800 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=76b13736-aef0-453e-8d6f-acd9d5af39e3'. Cached Key: '73cc3cfe9e97'
+2023-08-25 01:58:16.801 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=f242b5a6-1e54-486f-91bb-865ce9c96cc8'. Cached Key: '851850fb3554'
+2023-08-25 01:58:16.809 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=5502336c-51cf-4bde-9530-ac7f12860aa5'. Cached Key: '06638ab5abe2'
+2023-08-25 01:58:16.811 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=993a1919-1223-4b5d-8860-75109456d789'. Cached Key: 'f1b242656ba5'
+2023-08-25 01:58:25.156 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=c5c1d3b3-4ed7-49e2-971f-32eb3778fb83'. Cached Key: '73cc3cfe9e97'
+2023-08-25 01:58:25.161 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=83ae2654-7418-4b7e-91db-e9e765371a9c'. Cached Key: '06638ab5abe2'
+2023-08-25 01:58:25.161 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=27e454dc-0d02-4cd8-95b2-252f61d9b4d5'. Cached Key: '851850fb3554'
+2023-08-25 01:58:25.172 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=b292aaa9-cde1-409e-9fbd-ec90c6bd3ede'. Cached Key: 'f1b242656ba5'
+2023-08-25 02:40:13.636 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=3dc5a55f-3a54-4236-a8c6-6ba9754cb95d'. Cached Key: '73cc3cfe9e97'
+2023-08-25 02:40:13.637 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=03041d7b-0f7f-4a8c-89a5-84563888dbf2'. Cached Key: '851850fb3554'
+2023-08-25 02:40:13.647 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=96a5c714-4166-481f-8518-7ff572f528a7'. Cached Key: '06638ab5abe2'
+2023-08-25 02:40:13.648 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=7fc8cbf4-df4a-4e9a-90b9-221c18e142d4'. Cached Key: 'f1b242656ba5'
+2023-08-25 02:40:53.230 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=f10dc5c8-93ee-4247-a898-426e6ce74b61'. Cached Key: '73cc3cfe9e97'
+2023-08-25 02:40:53.231 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=8a8a51e0-f4ce-4939-b51c-d81af666b6a2'. Cached Key: '851850fb3554'
+2023-08-25 02:40:53.236 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=0ad34180-4ea4-45f8-8c4c-2c8b9a813ccd'. Cached Key: 'f1b242656ba5'
+2023-08-25 02:40:53.243 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=651a1cdd-a18e-4775-b46f-c8ca72578073'. Cached Key: '06638ab5abe2'
+2023-08-25 02:41:01.476 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=05a543b1-4a70-414f-bd0c-b790ff3d69d4'. Cached Key: '851850fb3554'
+2023-08-25 02:41:01.478 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=e1e9e520-4b3a-4b6b-8b6d-c3c4c679f8fc'. Cached Key: '73cc3cfe9e97'
+2023-08-25 02:41:01.492 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=b352a411-e740-4162-a99c-b8b54195e746'. Cached Key: '06638ab5abe2'
+2023-08-25 02:41:01.493 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=e8e57f67-a6b5-4dfc-9f28-6fc2f2d79170'. Cached Key: 'f1b242656ba5'
+2023-08-25 02:41:18.094 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=277c0a47-747e-4592-8cc1-a15d1c788830'. Cached Key: '73cc3cfe9e97'
+2023-08-25 02:41:18.095 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=fd054d14-060a-4560-a02f-122c9233d468'. Cached Key: '851850fb3554'
+2023-08-25 02:41:18.105 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=9e8f37dd-0ad0-4ffb-8ec6-0e26efcea7fd'. Cached Key: 'f1b242656ba5'
+2023-08-25 02:41:18.106 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=c12f365f-5986-45b5-ae51-69d3b618672c'. Cached Key: '06638ab5abe2'
+2023-08-25 02:48:58.114 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=5212dcb6-d869-4fb4-85bf-bd91339eb7f2'. Cached Key: '73cc3cfe9e97'
+2023-08-25 02:48:58.116 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=e9a74fda-c637-4e42-9e60-d5c3bc8ccfce'. Cached Key: '851850fb3554'
+2023-08-25 02:48:58.126 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=1ef4485f-ce43-4471-81a3-53ed33a68161'. Cached Key: '06638ab5abe2'
+2023-08-25 02:48:58.128 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=6eef5b33-abdc-47dc-9f36-f2ac0aceaa1d'. Cached Key: 'f1b242656ba5'
+2023-08-25 02:48:59.609 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=0f83e3e2-e059-4259-9185-ceaa3f2b9b72'. Cached Key: '851850fb3554'
+2023-08-25 02:48:59.609 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=569fe581-3e22-42ec-bbd3-3adac17b52f0'. Cached Key: '73cc3cfe9e97'
+2023-08-25 02:48:59.609 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=8c27e4d1-db3e-445c-9f7e-74cd1b60a18a'. Cached Key: 'f1b242656ba5'
+2023-08-25 02:48:59.620 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=a4e6ff9e-ee4c-44b3-bf5d-50f558d1e99a'. Cached Key: '06638ab5abe2'
+2023-08-25 02:50:50.737 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=a25bc293-7f8c-44a8-85d0-a9262223eb6c'. Cached Key: '851850fb3554'
+2023-08-25 02:50:50.739 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=c7a2e9be-09a9-4699-831a-d7a88e3cbc08'. Cached Key: 'f1b242656ba5'
+2023-08-25 02:50:50.748 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=d1022b06-3e36-4a46-8ae9-7c1cbf5a2400'. Cached Key: '73cc3cfe9e97'
+2023-08-25 02:50:50.748 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=8347db8c-d1e9-4006-94b4-9de6ba32df27'. Cached Key: '06638ab5abe2'
+2023-08-25 02:51:28.790 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=b022416e-b4aa-4262-abab-09b4150dc74c'. Cached Key: '73cc3cfe9e97'
+2023-08-25 02:51:28.791 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=d539c933-5e41-4e2a-a2ee-a68754159cd1'. Cached Key: '851850fb3554'
+2023-08-25 02:51:28.803 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=fafccdd0-a944-4064-bfbb-7a1b5a465aae'. Cached Key: 'f1b242656ba5'
+2023-08-25 02:51:28.807 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=ffee160b-8654-4bbe-919d-8525b4094a8e'. Cached Key: '06638ab5abe2'
+2023-08-25 02:51:33.909 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=b022416e-b4aa-4262-abab-09b4150dc74c'. Cached Key: '73cc3cfe9e97'
+2023-08-25 13:01:58.965 +01:00 [INF] Application is shutting down...
+2023-08-25 13:01:58.974 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-08-25 13:01:58.975 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-08-25 13:01:58.979 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-08-25 13:01:58.980 +01:00 [INF] Stopped cleanly
+2023-08-25 15:52:51.137 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-25 15:52:51.148 +01:00 [INF] Quartz Scheduler created
+2023-08-25 15:52:51.148 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-25 15:52:51.148 +01:00 [INF] RAMJobStore initialized.
+2023-08-25 15:52:51.149 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-25 15:52:51.149 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-25 15:52:51.149 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-25 15:52:51.155 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-25 15:52:51.157 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-25 15:52:51.161 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-25 15:52:51.161 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-25 15:52:51.161 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-25 15:52:51.161 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-25 15:52:51.282 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-25 15:52:51.711 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-25 15:52:52.532 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-25 15:52:52.624 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-25 15:52:52.627 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 15:52:52.627 +01:00 [INF] Hosting environment: Development
+2023-08-25 15:52:52.627 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-25 15:52:52.631 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-25 15:54:03.462 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=9651959c-7912-42f6-972b-f8a7e086528f'. Cached Key: '06638ab5abe2'
+2023-08-25 15:54:03.462 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=967c6558-a2c6-44e7-807f-5647ae7e45f9'. Cached Key: '851850fb3554'
+2023-08-25 15:54:03.462 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=0e1b2adb-1e16-4bea-ad2a-3ef37f55bd4d'. Cached Key: '73cc3cfe9e97'
+2023-08-25 15:54:03.462 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=f7a23e78-2919-4375-bbb5-3cc77c40c40f'. Cached Key: 'f1b242656ba5'
+2023-08-25 15:59:24.208 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=717ce4cf-076c-457a-b1ad-34dca639a6b4'. Cached Key: '73cc3cfe9e97'
+2023-08-25 16:22:31.203 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-08-25 16:22:31.213 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-08-25 16:22:31.236 +01:00 [INF] The token request was successfully validated.
+2023-08-25 16:22:31.601 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-08-25 16:22:31.687 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=3febe5eb-e1a2-4334-b92e-20aa960d1493'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 16:22:32.456 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-08-25 16:22:32.457 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-08-25 16:22:32.461 +01:00 [INF] The token request was successfully validated.
+2023-08-25 16:22:32.514 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-08-25 16:22:32.585 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=9117597e-3838-4967-ac11-5082c14ed11b'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 16:22:35.089 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=9117597e-3838-4967-ac11-5082c14ed11b'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 18:33:40.133 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-08-25 18:33:40.134 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-08-25 18:33:40.139 +01:00 [INF] The token request was successfully validated.
+2023-08-25 18:33:40.198 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2628000,
+  "id_token": "[redacted]"
+}.
+2023-08-25 18:33:40.303 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=6b9932f4-ce59-4666-bbf3-f85830a50a2c'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 18:33:45.343 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=6b9932f4-ce59-4666-bbf3-f85830a50a2c'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 18:36:33.750 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=6b9932f4-ce59-4666-bbf3-f85830a50a2c'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 19:21:39.813 +01:00 [INF] Application is shutting down...
+2023-08-25 19:21:39.820 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-08-25 19:21:39.821 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-08-25 19:21:39.825 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-08-25 19:21:39.828 +01:00 [INF] Stopped cleanly
+2023-08-25 19:22:28.114 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-25 19:22:28.126 +01:00 [INF] Quartz Scheduler created
+2023-08-25 19:22:28.127 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-25 19:22:28.127 +01:00 [INF] RAMJobStore initialized.
+2023-08-25 19:22:28.127 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-25 19:22:28.127 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-25 19:22:28.128 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-25 19:22:28.137 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-25 19:22:28.140 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-25 19:22:28.143 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-25 19:22:28.143 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-25 19:22:28.144 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-25 19:22:28.144 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-25 19:22:28.247 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-25 19:22:28.692 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-25 19:22:29.589 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-25 19:22:29.698 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-25 19:22:29.700 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-25 19:22:29.700 +01:00 [INF] Hosting environment: Development
+2023-08-25 19:22:29.700 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-25 19:22:29.703 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-25 19:46:20.085 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-08-25 19:46:20.101 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-08-25 19:46:20.142 +01:00 [INF] The token request was successfully validated.
+2023-08-25 19:46:20.657 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-08-25 19:46:22.132 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=207489a2-80eb-4f3f-819a-f18944a8a6aa'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 19:46:25.649 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=207489a2-80eb-4f3f-819a-f18944a8a6aa'. Cached Key: 'b2f9d8a8bafc'
+2023-08-25 19:46:29.875 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=25f26d98-63f4-442e-9c8d-da1a4bfd5d66'. Cached Key: '73cc3cfe9e97'
+2023-08-25 19:46:29.875 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=fce16879-69ad-4f6b-b39f-ac2056f61ee1'. Cached Key: '06638ab5abe2'
+2023-08-25 19:46:29.875 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=a69ce798-91fd-45e3-a189-9911f0e284f5'. Cached Key: '851850fb3554'
+2023-08-25 19:46:29.875 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=10cccb8d-b8fc-4b43-91fc-27c5653f5200'. Cached Key: 'f1b242656ba5'
+2023-08-26 23:37:06.959 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-26 23:37:06.959 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-26 23:38:01.555 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-26 23:38:01.555 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-26 23:38:01.555 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-26 23:38:01.555 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:05:30.845 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:05:30.845 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:05:31.914 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:05:31.914 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:05:33.480 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:05:33.480 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:05:35.429 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:05:35.429 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:21.205 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:21.206 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:21.238 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:21.238 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:21.251 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:21.251 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:21.418 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:21.418 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:26.103 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:26.103 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:26.136 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:26.137 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:26.158 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:26.158 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:26.325 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:26.325 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:30.867 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:30.867 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:30.874 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:30.874 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:06:31.090 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-08-27 00:06:31.090 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-08-27 00:23:35.820 +01:00 [INF] Application is shutting down...
+2023-08-27 00:23:35.831 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-08-27 00:23:35.832 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-08-27 00:23:35.837 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-08-27 00:23:35.840 +01:00 [INF] Stopped cleanly
+2023-08-27 00:28:46.147 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-27 00:28:46.159 +01:00 [INF] Quartz Scheduler created
+2023-08-27 00:28:46.160 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-27 00:28:46.160 +01:00 [INF] RAMJobStore initialized.
+2023-08-27 00:28:46.161 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-27 00:28:46.161 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-27 00:28:46.161 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-27 00:28:46.170 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-27 00:28:46.171 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-27 00:28:46.174 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-27 00:28:46.175 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-27 00:28:46.175 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-27 00:28:46.175 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-27 00:28:46.328 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-27 00:28:46.860 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-27 00:28:48.663 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-27 00:28:48.755 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-27 00:28:48.758 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-27 00:28:48.758 +01:00 [INF] Hosting environment: Development
+2023-08-27 00:28:48.758 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-27 00:28:48.763 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-28 09:19:20.544 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-28 09:19:20.555 +01:00 [INF] Quartz Scheduler created
+2023-08-28 09:19:20.555 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-28 09:19:20.555 +01:00 [INF] RAMJobStore initialized.
+2023-08-28 09:19:20.556 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-28 09:19:20.556 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-28 09:19:20.556 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-28 09:19:20.561 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-28 09:19:20.563 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-28 09:19:20.566 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-28 09:19:20.566 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-28 09:19:20.566 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-28 09:19:20.566 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-28 09:19:20.669 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-28 09:19:21.083 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-28 09:19:21.871 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-28 09:19:21.953 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-28 09:19:21.955 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-28 09:19:21.955 +01:00 [INF] Hosting environment: Development
+2023-08-28 09:19:21.955 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-28 09:19:21.958 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-28 09:19:35.365 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-08-28 09:19:35.390 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-08-28 09:19:35.435 +01:00 [INF] The token request was successfully validated.
+2023-08-28 09:19:36.032 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-08-28 09:19:37.795 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=e9c23f91-d53c-4e52-803a-91307d71213d'. Cached Key: 'b2f9d8a8bafc'
+2023-08-28 09:20:55.744 +01:00 [INF] Application is shutting down...
+2023-08-28 09:20:55.762 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-08-28 09:20:55.763 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-08-28 09:20:55.766 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-08-28 09:20:55.767 +01:00 [INF] Stopped cleanly
+2023-08-28 09:21:02.209 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-28 09:21:02.223 +01:00 [INF] Quartz Scheduler created
+2023-08-28 09:21:02.223 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-28 09:21:02.224 +01:00 [INF] RAMJobStore initialized.
+2023-08-28 09:21:02.224 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-28 09:21:02.225 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-28 09:21:02.225 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-28 09:21:02.234 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-28 09:21:02.237 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-28 09:21:02.240 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-28 09:21:02.241 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-28 09:21:02.241 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-28 09:21:02.241 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-28 09:21:02.402 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-28 09:21:02.967 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-28 09:21:04.694 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-28 09:21:04.794 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-28 09:21:04.797 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-28 09:21:04.797 +01:00 [INF] Hosting environment: Development
+2023-08-28 09:21:04.798 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-28 09:21:04.803 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-29 11:31:30.034 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=e9c23f91-d53c-4e52-803a-91307d71213d'. Cached Key: 'b2f9d8a8bafc'
+2023-08-29 11:35:35.735 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/0b585839-7e56-414f-8c56-6329fe2a7ccb.jpg?width=1024&height=768&t=2ab6d3f8-7782-4a53-9666-941eb2ab06ac'. Cached Key: '73cc3cfe9e97'
+2023-08-29 11:35:35.735 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/dba8a2b4-6014-492e-8f8d-521d8cde2e6d.jpg?width=1024&height=768&t=e1fe59c8-2596-4645-bd63-d38121cf8415'. Cached Key: '06638ab5abe2'
+2023-08-29 11:35:35.735 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/6ec83c8e-5553-4764-9b00-d8b408a6b03e.png?width=1024&height=768&t=5f766d01-7688-475e-8b94-dc0a8429f2a2'. Cached Key: '851850fb3554'
+2023-08-29 11:35:35.735 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/mixes/7d224a32-bee0-498a-b0e3-f4878e7b1c44.jpg?width=1024&height=768&t=3ad1bd46-3369-4c79-8d04-98b60453cc33'. Cached Key: 'f1b242656ba5'
+2023-08-31 23:29:57.414 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-31 23:29:57.428 +01:00 [INF] Quartz Scheduler created
+2023-08-31 23:29:57.428 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-31 23:29:57.429 +01:00 [INF] RAMJobStore initialized.
+2023-08-31 23:29:57.429 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-31 23:29:57.429 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-31 23:29:57.429 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-31 23:29:57.435 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-31 23:29:57.437 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-31 23:29:57.439 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-31 23:29:57.440 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-31 23:29:57.440 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-31 23:29:57.440 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-31 23:29:57.539 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-31 23:29:57.984 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-31 23:29:58.772 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-31 23:29:58.854 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-31 23:29:58.856 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-31 23:29:58.856 +01:00 [INF] Hosting environment: Development
+2023-08-31 23:29:58.856 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-31 23:29:58.860 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-31 23:30:28.459 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=e9c23f91-d53c-4e52-803a-91307d71213d'. Cached Key: 'b2f9d8a8bafc'
+2023-08-31 23:40:47.859 +01:00 [INF] Application is shutting down...
+2023-08-31 23:40:47.867 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-08-31 23:40:47.868 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-08-31 23:40:47.873 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-08-31 23:40:47.875 +01:00 [INF] Stopped cleanly
+2023-08-31 23:40:54.899 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-31 23:40:54.914 +01:00 [INF] Quartz Scheduler created
+2023-08-31 23:40:54.914 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-31 23:40:54.915 +01:00 [INF] RAMJobStore initialized.
+2023-08-31 23:40:54.915 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-31 23:40:54.916 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-31 23:40:54.916 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-31 23:40:54.923 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-31 23:40:54.926 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-31 23:40:54.929 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-31 23:40:54.929 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-31 23:40:54.929 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-31 23:40:54.929 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-31 23:40:55.099 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-31 23:40:55.697 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-31 23:40:57.192 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-31 23:40:57.284 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-31 23:40:57.287 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-31 23:40:57.287 +01:00 [INF] Hosting environment: Development
+2023-08-31 23:40:57.287 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-31 23:40:57.293 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-08-31 23:42:05.405 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-08-31 23:42:05.417 +01:00 [INF] Quartz Scheduler created
+2023-08-31 23:42:05.417 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-08-31 23:42:05.418 +01:00 [INF] RAMJobStore initialized.
+2023-08-31 23:42:05.418 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-08-31 23:42:05.419 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-08-31 23:42:05.419 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-08-31 23:42:05.425 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-08-31 23:42:05.427 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-08-31 23:42:05.430 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-08-31 23:42:05.430 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-08-31 23:42:05.430 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-08-31 23:42:05.430 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-08-31 23:42:05.563 +01:00 [INF] Creating the webclient OpenIddict application
+2023-08-31 23:42:06.084 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-08-31 23:42:07.588 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-08-31 23:42:07.682 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-08-31 23:42:07.684 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-08-31 23:42:07.684 +01:00 [INF] Hosting environment: Development
+2023-08-31 23:42:07.685 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-08-31 23:42:07.689 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-02 21:15:31.594 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-02 21:15:31.607 +01:00 [INF] Quartz Scheduler created
+2023-09-02 21:15:31.608 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-02 21:15:31.608 +01:00 [INF] RAMJobStore initialized.
+2023-09-02 21:15:31.609 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-02 21:15:31.609 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-02 21:15:31.610 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-02 21:15:31.617 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-02 21:15:31.619 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-02 21:15:31.622 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-02 21:15:31.623 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-02 21:15:31.623 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-02 21:15:31.623 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-02 21:15:31.788 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-02 21:15:32.338 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-02 21:15:33.650 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-02 21:15:33.771 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-02 21:15:33.774 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-02 21:15:33.774 +01:00 [INF] Hosting environment: Development
+2023-09-02 21:15:33.774 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-02 21:15:33.798 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-02 21:15:42.602 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-02 21:15:42.624 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-02 21:15:42.758 +01:00 [INF] The token request was successfully validated.
+2023-09-02 21:15:43.623 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-02 21:15:45.828 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=0766aef5-cef2-4ac4-99d6-bb1279bcaebe'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 21:15:54.060 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=0766aef5-cef2-4ac4-99d6-bb1279bcaebe'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 21:18:03.226 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-02 21:18:03.230 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-02 21:18:03.403 +01:00 [INF] The token request was successfully validated.
+2023-09-02 21:18:03.843 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-02 21:18:23.435 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=c0e11313-3981-4f5c-beef-7c5fccb5e487'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 21:18:25.546 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=c0e11313-3981-4f5c-beef-7c5fccb5e487'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 21:21:08.591 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-02 21:21:08.592 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-02 21:21:08.865 +01:00 [INF] The token request was successfully validated.
+2023-09-02 21:21:09.396 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2628000,
+  "id_token": "[redacted]"
+}.
+2023-09-02 21:21:18.966 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=e8fea23b-d634-4a0e-b693-382c622f84ad'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 21:21:21.875 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=e8fea23b-d634-4a0e-b693-382c622f84ad'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 23:01:07.942 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-02 23:01:07.951 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-02 23:01:08.240 +01:00 [INF] The token request was successfully validated.
+2023-09-02 23:01:08.664 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-02 23:01:19.592 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=28e4f9a7-a7c3-451f-8017-c055ecd35a30'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 23:02:42.683 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-02 23:02:42.683 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-02 23:02:42.828 +01:00 [INF] The token request was successfully validated.
+2023-09-02 23:02:43.424 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2628000,
+  "id_token": "[redacted]"
+}.
+2023-09-02 23:02:43.816 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=f882f98b-c01a-4e0a-b71d-35d02925f1f3'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 23:02:47.456 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=f882f98b-c01a-4e0a-b71d-35d02925f1f3'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 23:02:58.958 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-02 23:02:58.959 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-02 23:02:59.103 +01:00 [INF] The token request was successfully validated.
+2023-09-02 23:02:59.377 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2628000,
+  "id_token": "[redacted]"
+}.
+2023-09-02 23:02:59.631 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=87d76f76-469e-41b7-bc9b-ecc6eb3c09c3'. Cached Key: 'b2f9d8a8bafc'
+2023-09-02 23:03:08.009 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/58dbddb3-0e2c-4823-8325-33d2cdd37845.jpg?width=128&height=128&t=87d76f76-469e-41b7-bc9b-ecc6eb3c09c3'. Cached Key: 'b2f9d8a8bafc'
+2023-09-03 00:51:11.858 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 00:51:15.798 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 00:51:30.174 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 00:51:30.187 +01:00 [INF] Quartz Scheduler created
+2023-09-03 00:51:30.187 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 00:51:30.187 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 00:51:30.188 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 00:51:30.188 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 00:51:30.188 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 00:51:30.194 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 00:51:30.196 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 00:51:30.199 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 00:51:30.199 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 00:51:30.199 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 00:51:30.199 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 00:51:30.341 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 00:51:30.859 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 00:51:31.431 +01:00 [INF] App webclient does not exist, creating
+2023-09-03 00:51:31.711 +01:00 [INF] App webclient created
+2023-09-03 00:51:32.923 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 00:51:32.999 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 00:51:33.002 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 00:51:33.002 +01:00 [INF] Hosting environment: Development
+2023-09-03 00:51:33.002 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 00:51:33.026 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 00:52:37.334 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-03 00:52:37.360 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-03 00:52:37.420 +01:00 [INF] The token request was successfully validated.
+2023-09-03 00:52:38.276 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-03 00:52:40.798 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/aae232a9-e5d4-4b0b-a720-5e3b05784ce1.jpg?width=128&height=128&t=57a051b6-f06c-4896-96e1-f160765b7dc6'. Cached Key: 'b8d11fdab21e'
+2023-09-03 00:52:44.208 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/aae232a9-e5d4-4b0b-a720-5e3b05784ce1.jpg?width=128&height=128&t=57a051b6-f06c-4896-96e1-f160765b7dc6'. Cached Key: 'b8d11fdab21e'
+2023-09-03 00:55:26.229 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The LINQ expression 'DbSet<LiveShow>()
+    .LeftJoin(
+        inner: DbSet<MixyBoosUser>(), 
+        outerKeySelector: l => EF.Property<Guid?>(l, "UserId"), 
+        innerKeySelector: m => EF.Property<Guid?>(m, "Id"), 
+        resultSelector: (o, i) => new TransparentIdentifier<LiveShow, MixyBoosUser>(
+            Outer = o, 
+            Inner = i
+        ))
+    .Where(l => l.Inner.Equals(__user_0))
+    .Where(l => !(l.Outer.IsFinished))' could not be translated. Additional information: Translation of member 'IsFinished' on entity type 'LiveShow' failed. This commonly occurs when the specified member is unmapped. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.<VisitMethodCall>g__CheckTranslated|15_0(ShapedQueryExpression translated, <>c__DisplayClass15_0&)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass12_0`1.<ExecuteAsync>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.ExecuteAsync[TResult](Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.FirstOrDefaultAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MixyBoos.Api.Controllers.LiveController.GetCurrentShow() in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Controllers/LiveController.cs:line 150
+   at lambda_method930(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext httpContext, Boolean retry)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-09-03 00:56:25.093 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 00:56:25.106 +01:00 [INF] Quartz Scheduler created
+2023-09-03 00:56:25.106 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 00:56:25.107 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 00:56:25.107 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 00:56:25.107 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 00:56:25.107 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 00:56:25.113 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 00:56:25.115 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 00:56:25.118 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 00:56:25.119 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 00:56:25.119 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 00:56:25.119 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 00:56:25.281 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 00:56:25.771 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 00:56:27.355 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 00:56:27.458 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 00:56:27.460 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 00:56:27.461 +01:00 [INF] Hosting environment: Development
+2023-09-03 00:56:27.461 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 00:56:27.466 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 01:26:17.368 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 01:26:17.380 +01:00 [INF] Quartz Scheduler created
+2023-09-03 01:26:17.381 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 01:26:17.381 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 01:26:17.381 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 01:26:17.382 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 01:26:17.382 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 01:26:17.388 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 01:26:17.389 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 01:26:17.392 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 01:26:17.392 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 01:26:17.393 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 01:26:17.393 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 01:26:17.549 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 01:26:18.060 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 01:26:19.624 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 01:26:19.735 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 01:26:19.738 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 01:26:19.738 +01:00 [INF] Hosting environment: Development
+2023-09-03 01:26:19.739 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 01:26:19.741 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 01:27:28.208 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 01:27:28.221 +01:00 [INF] Quartz Scheduler created
+2023-09-03 01:27:28.222 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 01:27:28.222 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 01:27:28.223 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 01:27:28.223 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 01:27:28.223 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 01:27:28.229 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 01:27:28.231 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 01:27:28.234 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 01:27:28.234 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 01:27:28.234 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 01:27:28.234 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 01:27:28.387 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 01:27:28.906 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 01:27:30.277 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 01:27:30.375 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 01:27:30.378 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 01:27:30.378 +01:00 [INF] Hosting environment: Development
+2023-09-03 01:27:30.378 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 01:27:30.381 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 01:30:34.195 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 01:30:34.207 +01:00 [INF] Quartz Scheduler created
+2023-09-03 01:30:34.207 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 01:30:34.207 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 01:30:34.208 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 01:30:34.208 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 01:30:34.208 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 01:30:34.214 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 01:30:34.215 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 01:30:34.218 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 01:30:34.218 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 01:30:34.218 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 01:30:34.219 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 01:30:34.349 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 01:30:34.827 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 01:30:36.238 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 01:30:36.354 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 01:30:36.356 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 01:30:36.357 +01:00 [INF] Hosting environment: Development
+2023-09-03 01:30:36.357 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 01:30:36.380 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 01:34:41.042 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 01:34:41.056 +01:00 [INF] Quartz Scheduler created
+2023-09-03 01:34:41.056 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 01:34:41.056 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 01:34:41.057 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 01:34:41.057 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 01:34:41.057 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 01:34:41.063 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 01:34:41.064 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 01:34:41.067 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 01:34:41.067 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 01:34:41.067 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 01:34:41.067 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 01:34:41.187 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 01:34:41.667 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 01:34:43.105 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 01:34:43.199 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 01:34:43.201 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 01:34:43.201 +01:00 [INF] Hosting environment: Development
+2023-09-03 01:34:43.201 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 01:34:43.204 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 01:35:52.204 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 01:35:52.217 +01:00 [INF] Quartz Scheduler created
+2023-09-03 01:35:52.217 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 01:35:52.217 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 01:35:52.218 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 01:35:52.218 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 01:35:52.218 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 01:35:52.224 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 01:35:52.225 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 01:35:52.228 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 01:35:52.228 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 01:35:52.228 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 01:35:52.229 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 01:35:52.349 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 01:35:52.838 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 01:35:54.211 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 01:35:54.314 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 01:35:54.317 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 01:35:54.317 +01:00 [INF] Hosting environment: Development
+2023-09-03 01:35:54.317 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 01:35:54.320 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 01:35:55.198 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-09-03 01:35:55.201 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 20:19:46.721 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 20:19:46.735 +01:00 [INF] Quartz Scheduler created
+2023-09-03 20:19:46.736 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 20:19:46.736 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 20:19:46.737 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 20:19:46.737 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 20:19:46.738 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 20:19:46.745 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 20:19:46.747 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 20:19:46.750 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 20:19:46.750 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 20:19:46.750 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 20:19:46.750 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 20:19:46.900 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 20:19:47.469 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 20:19:48.866 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 20:19:48.976 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 20:19:48.978 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 20:19:48.979 +01:00 [INF] Hosting environment: Development
+2023-09-03 20:19:48.979 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 20:19:48.982 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 20:20:08.074 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-03 20:20:08.105 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-03 20:20:08.250 +01:00 [INF] The token request was successfully validated.
+2023-09-03 20:20:09.356 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-03 20:20:11.803 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/aae232a9-e5d4-4b0b-a720-5e3b05784ce1.jpg?width=128&height=128&t=00fb0c8e-37b9-4c43-a0f3-b695d7c1f98f'. Cached Key: 'b8d11fdab21e'
+2023-09-03 20:20:16.937 +01:00 [INF] Sending image. Request uri: 'https://mixyboos.dev.fergl.ie:5001/img/users/avatars/aae232a9-e5d4-4b0b-a720-5e3b05784ce1.jpg?width=128&height=128&t=00fb0c8e-37b9-4c43-a0f3-b695d7c1f98f'. Cached Key: 'b8d11fdab21e'
+2023-09-03 20:25:15.645 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-03 20:25:15.655 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The signing key associated to the specified token was not found.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2090"
+}.
+2023-09-03 20:25:15.655 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 20:25:25.641 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-03 20:25:25.650 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The issuer associated to the specified token is not valid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2088"
+}.
+2023-09-03 20:25:25.651 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 20:25:27.364 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-03 20:25:27.365 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The issuer associated to the specified token is not valid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2088"
+}.
+2023-09-03 20:25:27.365 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 20:25:46.520 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-03 20:25:46.520 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-03 20:25:46.520 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 20:25:47.509 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-03 20:25:47.510 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-03 20:25:47.510 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 20:25:58.475 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-03 20:25:58.476 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-03 20:25:58.476 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 20:33:14.273 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 20:33:14.280 +01:00 [INF] Quartz Scheduler created
+2023-09-03 20:33:14.280 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 20:33:14.281 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 20:33:14.281 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 20:33:14.281 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 20:33:14.281 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 20:33:14.285 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 20:33:14.286 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 20:33:14.288 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 20:33:14.288 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 20:33:14.288 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 20:33:14.288 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 20:33:14.347 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 20:33:14.601 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 20:33:15.041 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 20:33:15.113 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 20:33:15.114 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 20:33:15.114 +01:00 [INF] Hosting environment: Development
+2023-09-03 20:33:15.114 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 20:33:15.115 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 20:33:33.181 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 20:33:33.189 +01:00 [INF] Quartz Scheduler created
+2023-09-03 20:33:33.189 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 20:33:33.189 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 20:33:33.189 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 20:33:33.189 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 20:33:33.189 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 20:33:33.194 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 20:33:33.195 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 20:33:33.197 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 20:33:33.197 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 20:33:33.197 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 20:33:33.197 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 20:33:33.253 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 20:33:33.511 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 20:33:33.966 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 20:33:34.037 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 20:33:34.038 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 20:33:34.038 +01:00 [INF] Hosting environment: Development
+2023-09-03 20:33:34.038 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 20:33:34.040 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 20:34:02.196 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Attempted to access a missing method.
+   at MixyBoos.Api.Data.DTO.LiveShowDTO.set_Status(ShowStatus value)
+   at lambda_method553(Closure, Object)
+   at Mapster.TypeAdapter.Adapt[TDestination](Object source, TypeAdapterConfig config)
+   at Mapster.TypeAdapter.Adapt[TDestination](Object source)
+   at MixyBoos.Api.Controllers.LiveController.GetCurrentShow()
+   at lambda_method562(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext httpContext, Boolean retry)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-09-03 20:34:44.688 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Attempted to access a missing method.
+   at MixyBoos.Api.Data.DTO.LiveShowDTO.set_Status(ShowStatus value)
+   at lambda_method553(Closure, Object)
+   at Mapster.TypeAdapter.Adapt[TDestination](Object source, TypeAdapterConfig config)
+   at Mapster.TypeAdapter.Adapt[TDestination](Object source)
+   at MixyBoos.Api.Controllers.LiveController.GetCurrentShow()
+   at lambda_method570(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext httpContext, Boolean retry)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-09-03 20:34:46.304 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Attempted to access a missing method.
+   at MixyBoos.Api.Data.DTO.LiveShowDTO.set_Status(ShowStatus value)
+   at lambda_method553(Closure, Object)
+   at Mapster.TypeAdapter.Adapt[TDestination](Object source, TypeAdapterConfig config)
+   at Mapster.TypeAdapter.Adapt[TDestination](Object source)
+   at MixyBoos.Api.Controllers.LiveController.GetCurrentShow()
+   at lambda_method570(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext httpContext, Boolean retry)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2023-09-03 20:35:58.534 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 20:35:58.541 +01:00 [INF] Quartz Scheduler created
+2023-09-03 20:35:58.541 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 20:35:58.541 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 20:35:58.542 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 20:35:58.542 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 20:35:58.542 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 20:35:58.546 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 20:35:58.547 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 20:35:58.549 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 20:35:58.549 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 20:35:58.549 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 20:35:58.549 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 20:35:58.606 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 20:35:58.865 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 20:35:59.327 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 20:35:59.397 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 20:35:59.398 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 20:35:59.398 +01:00 [INF] Hosting environment: Development
+2023-09-03 20:35:59.398 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 20:35:59.400 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 20:36:21.436 +01:00 [INF] Application is shutting down...
+2023-09-03 20:36:21.452 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-09-03 20:36:21.452 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-09-03 20:36:21.455 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-09-03 20:36:21.456 +01:00 [INF] Stopped cleanly
+2023-09-03 20:36:27.680 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 20:36:27.687 +01:00 [INF] Quartz Scheduler created
+2023-09-03 20:36:27.687 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 20:36:27.687 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 20:36:27.687 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 20:36:27.687 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 20:36:27.688 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 20:36:27.692 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 20:36:27.693 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 20:36:27.695 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 20:36:27.695 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 20:36:27.695 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 20:36:27.695 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 20:36:27.751 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 20:36:28.016 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 20:36:28.526 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 20:36:28.602 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 20:36:28.603 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 20:36:28.603 +01:00 [INF] Hosting environment: Development
+2023-09-03 20:36:28.603 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 20:36:28.605 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 20:36:41.234 +01:00 [INF] Application is shutting down...
+2023-09-03 20:36:41.244 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-09-03 20:36:41.245 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-09-03 20:36:41.247 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-09-03 20:36:41.248 +01:00 [INF] Stopped cleanly
+2023-09-03 20:38:23.084 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 20:38:23.091 +01:00 [INF] Quartz Scheduler created
+2023-09-03 20:38:23.091 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 20:38:23.091 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 20:38:23.091 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 20:38:23.091 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 20:38:23.092 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 20:38:23.096 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 20:38:23.097 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 20:38:23.099 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 20:38:23.099 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 20:38:23.099 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 20:38:23.099 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 20:38:23.154 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 20:38:23.405 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 20:38:23.848 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 20:38:23.920 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 20:38:23.921 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 20:38:23.921 +01:00 [INF] Hosting environment: Development
+2023-09-03 20:38:23.921 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 20:38:23.922 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 20:58:43.457 +01:00 [INF] Application is shutting down...
+2023-09-03 20:58:43.460 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-09-03 20:58:43.461 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-09-03 20:58:43.463 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-09-03 20:58:43.464 +01:00 [INF] Stopped cleanly
+2023-09-03 20:59:09.985 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 20:59:09.992 +01:00 [INF] Quartz Scheduler created
+2023-09-03 20:59:09.992 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 20:59:09.992 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 20:59:09.992 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 20:59:09.993 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 20:59:09.993 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 20:59:09.997 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 20:59:09.998 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 20:59:10.000 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 20:59:10.000 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 20:59:10.000 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 20:59:10.000 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 20:59:10.054 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 20:59:10.308 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 20:59:10.749 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 20:59:10.820 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 20:59:10.821 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 20:59:10.821 +01:00 [INF] Hosting environment: Development
+2023-09-03 20:59:10.821 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 20:59:10.822 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 21:35:56.932 +01:00 [INF] Application is shutting down...
+2023-09-03 21:35:56.936 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-09-03 21:35:56.937 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-09-03 21:35:56.940 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-09-03 21:35:56.942 +01:00 [INF] Stopped cleanly
+2023-09-03 21:37:32.613 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 21:37:32.625 +01:00 [INF] Quartz Scheduler created
+2023-09-03 21:37:32.626 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 21:37:32.626 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 21:37:32.627 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 21:37:32.627 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 21:37:32.627 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 21:37:32.633 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 21:37:32.635 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 21:37:32.638 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 21:37:32.638 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 21:37:32.638 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 21:37:32.638 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 21:37:32.774 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 21:37:33.248 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 21:37:34.909 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 21:37:35.002 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 21:37:35.004 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 21:37:35.005 +01:00 [INF] Hosting environment: Development
+2023-09-03 21:37:35.005 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 21:37:35.009 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 21:37:40.441 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-09-03 21:37:40.443 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 21:38:15.310 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-09-03 21:38:15.310 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 21:39:52.441 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-09-03 21:39:52.441 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 21:40:06.514 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-09-03 21:40:06.514 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 22:56:18.014 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-03 22:56:18.028 +01:00 [INF] Quartz Scheduler created
+2023-09-03 22:56:18.029 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-03 22:56:18.030 +01:00 [INF] RAMJobStore initialized.
+2023-09-03 22:56:18.030 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-03 22:56:18.031 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-03 22:56:18.031 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-03 22:56:18.039 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-03 22:56:18.042 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-03 22:56:18.046 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-03 22:56:18.046 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-03 22:56:18.046 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-03 22:56:18.046 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-03 22:56:18.202 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-03 22:56:18.739 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-03 22:56:20.101 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-03 22:56:20.198 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-03 22:56:20.201 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-03 22:56:20.201 +01:00 [INF] Hosting environment: Development
+2023-09-03 22:56:20.202 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-03 22:56:20.204 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-03 22:58:58.178 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-09-03 22:58:58.180 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 23:18:53.474 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-09-03 23:18:53.478 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 23:20:11.329 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-09-03 23:20:11.329 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-03 23:20:28.054 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "missing_token",
+  "error_description": "The security token is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2000"
+}.
+2023-09-03 23:20:28.054 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-04 12:37:11.708 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 12:37:11.723 +01:00 [INF] Quartz Scheduler created
+2023-09-04 12:37:11.724 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 12:37:11.724 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 12:37:11.725 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 12:37:11.725 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 12:37:11.726 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 12:37:11.734 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 12:37:11.736 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 12:37:11.739 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 12:37:11.739 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 12:37:11.739 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 12:37:11.739 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 12:37:11.878 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 12:37:12.462 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 12:37:14.268 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-04 12:37:14.372 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-04 12:37:14.375 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-04 12:37:14.375 +01:00 [INF] Hosting environment: Development
+2023-09-04 12:37:14.375 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-04 12:37:14.379 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-04 12:48:59.293 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 12:48:59.306 +01:00 [INF] Quartz Scheduler created
+2023-09-04 12:48:59.306 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 12:48:59.306 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 12:48:59.307 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 12:48:59.307 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 12:48:59.307 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 12:48:59.313 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 12:48:59.314 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 12:48:59.317 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 12:48:59.317 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 12:48:59.318 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 12:48:59.318 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 12:48:59.442 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 12:48:59.922 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 12:49:01.159 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-04 12:49:01.273 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-04 12:49:01.276 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-04 12:49:01.276 +01:00 [INF] Hosting environment: Development
+2023-09-04 12:49:01.276 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-04 12:49:01.281 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-04 12:52:48.858 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 12:52:48.870 +01:00 [INF] Quartz Scheduler created
+2023-09-04 12:52:48.870 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 12:52:48.870 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 12:52:48.871 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 12:52:48.871 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 12:52:48.871 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 12:52:48.877 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 12:52:48.879 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 12:52:48.882 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 12:52:48.882 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 12:52:48.883 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 12:52:48.883 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 12:52:49.010 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 12:52:49.483 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 12:52:51.095 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-04 12:52:51.185 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-04 12:52:51.208 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-04 12:52:51.208 +01:00 [INF] Hosting environment: Development
+2023-09-04 12:52:51.208 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-04 12:52:51.213 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-04 12:55:43.821 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 12:55:43.834 +01:00 [INF] Quartz Scheduler created
+2023-09-04 12:55:43.834 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 12:55:43.834 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 12:55:43.835 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 12:55:43.835 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 12:55:43.835 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 12:55:43.841 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 12:55:43.843 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 12:55:43.846 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 12:55:43.846 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 12:55:43.846 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 12:55:43.846 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 12:55:43.987 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 12:55:44.466 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 12:55:45.642 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-04 12:55:45.737 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-04 12:55:45.740 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-04 12:55:45.740 +01:00 [INF] Hosting environment: Development
+2023-09-04 12:55:45.740 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-04 12:55:45.745 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-04 12:58:21.865 +01:00 [ERR] Job DEFAULT.CheckLiveStreamJob threw an unhandled Exception: 
+System.Net.Http.HttpRequestException: Connection refused (live-mixyboos.dev.fergl.ie:9091)
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|281_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionAsync(Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendAsync>g__Core|5_0(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken)
+   at Polly.Retry.AsyncRetryEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, ExceptionPredicates shouldRetryExceptionPredicates, ResultPredicates`1 shouldRetryResultPredicates, Func`5 onRetryAsync, Int32 permittedRetryCount, IEnumerable`1 sleepDurationsEnumerable, Func`4 sleepDurationProvider, Boolean continueOnCapturedContext)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendAsync>g__Core|5_0(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at MixyBoos.Api.Services.Jobs.CheckLiveStreamJob.Execute(IJobExecutionContext context) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Services/Jobs/CheckLiveStreamJob.cs:line 53
+   at Quartz.Core.JobRunShell.Run(CancellationToken cancellationToken)
+2023-09-04 12:58:21.895 +01:00 [ERR] Job DEFAULT.CheckLiveStreamJob threw an exception.
+Quartz.SchedulerException: Job threw an unhandled exception.
+ ---> System.Net.Http.HttpRequestException: Connection refused (live-mixyboos.dev.fergl.ie:9091)
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|281_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionAsync(Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendAsync>g__Core|5_0(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken)
+   at Polly.Retry.AsyncRetryEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, ExceptionPredicates shouldRetryExceptionPredicates, ResultPredicates`1 shouldRetryResultPredicates, Func`5 onRetryAsync, Int32 permittedRetryCount, IEnumerable`1 sleepDurationsEnumerable, Func`4 sleepDurationProvider, Boolean continueOnCapturedContext)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendAsync>g__Core|5_0(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at MixyBoos.Api.Services.Jobs.CheckLiveStreamJob.Execute(IJobExecutionContext context) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Services/Jobs/CheckLiveStreamJob.cs:line 53
+   at Quartz.Core.JobRunShell.Run(CancellationToken cancellationToken)
+   --- End of inner exception stack trace --- [See nested exception: System.Net.Http.HttpRequestException: Connection refused (live-mixyboos.dev.fergl.ie:9091)
+ ---> System.Net.Sockets.SocketException (111): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Net.Sockets.Socket.<ConnectAsync>g__WaitForConnectWithCancellation|281_0(AwaitableSocketAsyncEventArgs saea, ValueTask connectTask, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.AddHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellationAsync(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.HttpConnectionWaiter`1.WaitForConnectionAsync(Boolean async, CancellationToken requestCancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingHttpMessageHandler.<SendAsync>g__Core|5_0(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken)
+   at Polly.Retry.AsyncRetryEngine.ImplementationAsync[TResult](Func`3 action, Context context, CancellationToken cancellationToken, ExceptionPredicates shouldRetryExceptionPredicates, ResultPredicates`1 shouldRetryResultPredicates, Func`5 onRetryAsync, Int32 permittedRetryCount, IEnumerable`1 sleepDurationsEnumerable, Func`4 sleepDurationProvider, Boolean continueOnCapturedContext)
+   at Polly.AsyncPolicy`1.ExecuteAsync(Func`3 action, Context context, CancellationToken cancellationToken, Boolean continueOnCapturedContext)
+   at Microsoft.Extensions.Http.PolicyHttpMessageHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at Microsoft.Extensions.Http.Logging.LoggingScopeHttpMessageHandler.<SendAsync>g__Core|5_0(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+   at MixyBoos.Api.Services.Jobs.CheckLiveStreamJob.Execute(IJobExecutionContext context) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Services/Jobs/CheckLiveStreamJob.cs:line 53
+   at Quartz.Core.JobRunShell.Run(CancellationToken cancellationToken)]
+2023-09-04 12:58:48.576 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 12:58:48.588 +01:00 [INF] Quartz Scheduler created
+2023-09-04 12:58:48.589 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 12:58:48.589 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 12:58:48.590 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 12:58:48.590 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 12:58:48.590 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 12:58:48.596 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 12:58:48.597 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 12:58:48.600 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 12:58:48.600 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 12:58:48.600 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 12:58:48.601 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 12:58:48.722 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 12:58:49.187 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 12:59:38.642 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 12:59:38.654 +01:00 [INF] Quartz Scheduler created
+2023-09-04 12:59:38.655 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 12:59:38.655 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 12:59:38.656 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 12:59:38.656 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 12:59:38.656 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 12:59:38.662 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 12:59:38.665 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 12:59:38.669 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 12:59:38.669 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 12:59:38.669 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 12:59:38.669 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 12:59:38.797 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 12:59:39.286 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 12:59:40.851 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-04 12:59:40.955 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-04 12:59:40.957 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-04 12:59:40.958 +01:00 [INF] Hosting environment: Development
+2023-09-04 12:59:40.958 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-04 12:59:40.960 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-04 13:10:22.065 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 13:10:22.072 +01:00 [INF] Quartz Scheduler created
+2023-09-04 13:10:22.072 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 13:10:22.073 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 13:10:22.073 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 13:10:22.073 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 13:10:22.073 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 13:10:22.077 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 13:10:22.078 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 13:10:22.080 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 13:10:22.080 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 13:10:22.080 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 13:10:22.080 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 13:10:22.143 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 13:10:22.415 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 13:10:22.905 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-04 13:10:22.985 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-04 13:10:22.987 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-04 13:10:22.987 +01:00 [INF] Hosting environment: Development
+2023-09-04 13:10:22.987 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-04 13:10:22.990 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-04 13:10:47.089 +01:00 [INF] Application is shutting down...
+2023-09-04 13:10:47.096 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-09-04 13:10:47.097 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-09-04 13:10:47.099 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-09-04 13:10:47.100 +01:00 [INF] Stopped cleanly
+2023-09-04 13:10:55.747 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 13:10:55.760 +01:00 [INF] Quartz Scheduler created
+2023-09-04 13:10:55.760 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 13:10:55.760 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 13:10:55.761 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 13:10:55.761 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 13:10:55.761 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 13:10:55.767 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 13:10:55.769 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 13:10:55.771 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 13:10:55.772 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 13:10:55.772 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 13:10:55.772 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 13:10:55.922 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 13:10:56.406 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 13:10:57.958 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-04 13:10:58.052 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-04 13:10:58.054 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-04 13:10:58.054 +01:00 [INF] Hosting environment: Development
+2023-09-04 13:10:58.054 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-04 13:10:58.081 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-04 13:13:00.775 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 13:13:00.788 +01:00 [INF] Quartz Scheduler created
+2023-09-04 13:13:00.789 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 13:13:00.789 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 13:13:00.790 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 13:13:00.790 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 13:13:00.790 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 13:13:00.796 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 13:13:00.798 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 13:13:00.800 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 13:13:00.801 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 13:13:00.801 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 13:13:00.801 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 13:13:00.943 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 13:13:01.465 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 13:13:02.737 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-04 13:13:02.828 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-04 13:13:02.830 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-04 13:13:02.830 +01:00 [INF] Hosting environment: Development
+2023-09-04 13:13:02.830 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-04 13:13:02.835 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-04 13:13:23.517 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-04 13:13:23.529 +01:00 [INF] Quartz Scheduler created
+2023-09-04 13:13:23.529 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-04 13:13:23.530 +01:00 [INF] RAMJobStore initialized.
+2023-09-04 13:13:23.530 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-04 13:13:23.530 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-04 13:13:23.531 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-04 13:13:23.536 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-04 13:13:23.538 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-04 13:13:23.541 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-04 13:13:23.541 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-04 13:13:23.541 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-04 13:13:23.541 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-04 13:13:23.658 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-04 13:13:24.123 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-04 13:13:25.320 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-04 13:13:25.411 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-04 13:13:25.414 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-04 13:13:25.414 +01:00 [INF] Hosting environment: Development
+2023-09-04 13:13:25.414 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-04 13:13:25.419 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
