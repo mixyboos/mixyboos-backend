@@ -19,7 +19,7 @@ namespace MixyBoos.Api.Migrations
             modelBuilder
                 .HasDefaultSchema("mixyboos")
                 .UseCollation("en_US.utf8")
-                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("ProductVersion", "8.0.0-rc.1.23419.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -27,18 +27,14 @@ namespace MixyBoos.Api.Migrations
             modelBuilder.Entity("LiveShowTag", b =>
                 {
                     b.Property<string>("LiveShowId")
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("live_show_id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<string>("TagsId")
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("tags_id");
+                        .HasColumnType("character varying(36)");
 
-                    b.HasKey("LiveShowId", "TagsId")
-                        .HasName("pk_show_tags");
+                    b.HasKey("LiveShowId", "TagsId");
 
-                    b.HasIndex("TagsId")
-                        .HasDatabaseName("ix_show_tags_tags_id");
+                    b.HasIndex("TagsId");
 
                     b.ToTable("show_tags", "mixyboos");
                 });
@@ -47,26 +43,21 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text")
-                        .HasColumnName("concurrency_stamp");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("name");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_name");
+                        .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id")
-                        .HasName("pk_user_user_role");
+                    b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
@@ -79,28 +70,22 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("text")
-                        .HasColumnName("claim_type");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("text")
-                        .HasColumnName("claim_value");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("role_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("Id")
-                        .HasName("pk_role_claim");
+                    b.HasKey("Id");
 
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_role_claim_role_id");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("role_claim", "oid");
                 });
@@ -108,67 +93,51 @@ namespace MixyBoos.Api.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("id");
+                        .HasColumnType("text");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer")
-                        .HasColumnName("access_failed_count");
+                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("text")
-                        .HasColumnName("concurrency_stamp");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text")
-                        .HasColumnName("email");
+                        .HasColumnType("text");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("email_confirmed");
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("lockout_enabled");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("lockout_end");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("text")
-                        .HasColumnName("normalized_email");
+                        .HasColumnType("text");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("text")
-                        .HasColumnName("normalized_user_name");
+                        .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("text")
-                        .HasColumnName("password_hash");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("text")
-                        .HasColumnName("phone_number");
+                        .HasColumnType("text");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("phone_number_confirmed");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("text")
-                        .HasColumnName("security_stamp");
+                        .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("two_factor_enabled");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("text")
-                        .HasColumnName("user_name");
+                        .HasColumnType("text");
 
-                    b.HasKey("Id")
-                        .HasName("pk_identity_user_base");
+                    b.HasKey("Id");
 
                     b.ToTable("identity_user_base", "oid");
                 });
@@ -177,67 +146,51 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer")
-                        .HasColumnName("access_failed_count");
+                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("text")
-                        .HasColumnName("concurrency_stamp");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
-                        .HasColumnType("text")
-                        .HasColumnName("email");
+                        .HasColumnType("text");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("email_confirmed");
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("lockout_enabled");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("lockout_end");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("text")
-                        .HasColumnName("normalized_email");
+                        .HasColumnType("text");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("text")
-                        .HasColumnName("normalized_user_name");
+                        .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("text")
-                        .HasColumnName("password_hash");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("text")
-                        .HasColumnName("phone_number");
+                        .HasColumnType("text");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("phone_number_confirmed");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("text")
-                        .HasColumnName("security_stamp");
+                        .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("two_factor_enabled");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("text")
-                        .HasColumnName("user_name");
+                        .HasColumnType("text");
 
-                    b.HasKey("Id")
-                        .HasName("pk_identity_user");
+                    b.HasKey("Id");
 
                     b.ToTable("identity_user", "oid");
                 });
@@ -246,28 +199,22 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
+                        .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("text")
-                        .HasColumnName("claim_type");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("text")
-                        .HasColumnName("claim_value");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("Id")
-                        .HasName("pk_user_claim");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_user_claim_user_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("user_claim", "oid");
                 });
@@ -275,26 +222,20 @@ namespace MixyBoos.Api.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text")
-                        .HasColumnName("login_provider");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("text")
-                        .HasColumnName("provider_key");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("text")
-                        .HasColumnName("provider_display_name");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("LoginProvider", "ProviderKey")
-                        .HasName("pk_user_login");
+                    b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_user_login_user_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("user_login", "oid");
                 });
@@ -302,18 +243,14 @@ namespace MixyBoos.Api.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("role_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("UserId", "RoleId")
-                        .HasName("pk_user_identity_role");
+                    b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_user_identity_role_role_id");
+                    b.HasIndex("RoleId");
 
                     b.ToTable("user_identity_role", "oid");
                 });
@@ -321,23 +258,18 @@ namespace MixyBoos.Api.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text")
-                        .HasColumnName("login_provider");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                        .HasColumnType("text");
 
                     b.Property<string>("Value")
-                        .HasColumnType("text")
-                        .HasColumnName("value");
+                        .HasColumnType("text");
 
-                    b.HasKey("UserId", "LoginProvider", "Name")
-                        .HasName("pk_user_token");
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("user_token", "oid");
                 });
@@ -345,18 +277,14 @@ namespace MixyBoos.Api.Migrations
             modelBuilder.Entity("MixTag", b =>
                 {
                     b.Property<string>("MixId")
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("mix_id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<string>("TagsId")
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("tags_id");
+                        .HasColumnType("character varying(36)");
 
-                    b.HasKey("MixId", "TagsId")
-                        .HasName("pk_mix_tags");
+                    b.HasKey("MixId", "TagsId");
 
-                    b.HasIndex("TagsId")
-                        .HasDatabaseName("ix_mix_tags_tags_id");
+                    b.HasIndex("TagsId");
 
                     b.ToTable("mix_tags", "mixyboos");
                 });
@@ -365,46 +293,36 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_created")
                         .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("start_date");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer")
-                        .HasColumnName("status");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
-                        .HasColumnType("text")
-                        .HasColumnName("title");
+                        .HasColumnType("text");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("Id")
-                        .HasName("pk_live_shows");
+                    b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_live_shows_user_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("live_shows", "mixyboos");
                 });
@@ -413,60 +331,47 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<string>("AudioUrl")
-                        .HasColumnType("text")
-                        .HasColumnName("audio_url");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_created")
                         .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
+                        .HasColumnType("text");
 
                     b.Property<string>("Image")
-                        .HasColumnType("text")
-                        .HasColumnName("image");
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsProcessed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_processed");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Slug")
-                        .HasColumnType("text")
-                        .HasColumnName("slug");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("title");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("Id")
-                        .HasName("pk_mixes");
+                    b.HasKey("Id");
 
                     b.HasIndex("Slug")
-                        .IsUnique()
-                        .HasDatabaseName("ix_mixes_slug");
+                        .IsUnique();
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_mixes_user_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("mixes", "mixyboos");
                 });
@@ -475,38 +380,30 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_created")
                         .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
                     b.Property<string>("MixId")
                         .IsRequired()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("mix_id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("Id")
-                        .HasName("pk_mix_download");
+                    b.HasKey("Id");
 
-                    b.HasIndex("MixId")
-                        .HasDatabaseName("ix_mix_download_mix_id");
+                    b.HasIndex("MixId");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_mix_download_user_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("mix_download", "mixyboos");
                 });
@@ -515,38 +412,30 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_created")
                         .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
                     b.Property<string>("MixId")
                         .IsRequired()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("mix_id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("Id")
-                        .HasName("pk_mix_likes");
+                    b.HasKey("Id");
 
-                    b.HasIndex("MixId")
-                        .HasDatabaseName("ix_mix_likes_mix_id");
+                    b.HasIndex("MixId");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_mix_likes_user_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("mix_likes", "mixyboos");
                 });
@@ -554,36 +443,29 @@ namespace MixyBoos.Api.Migrations
             modelBuilder.Entity("MixyBoos.Api.Data.Models.MixPlay", b =>
                 {
                     b.Property<string>("MixId")
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("mix_id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_created")
                         .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
                     b.Property<string>("Id")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("id");
+                        .HasColumnType("character varying(36)");
 
-                    b.HasKey("MixId", "UserId")
-                        .HasName("pk_mix_plays");
+                    b.HasKey("MixId", "UserId");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_mix_plays_user_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("mix_plays", "mixyboos");
                 });
@@ -592,38 +474,30 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_created")
                         .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
                     b.Property<string>("MixId")
                         .IsRequired()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("mix_id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("Id")
-                        .HasName("pk_mix_shares");
+                    b.HasKey("Id");
 
-                    b.HasIndex("MixId")
-                        .HasDatabaseName("ix_mix_shares_mix_id");
+                    b.HasIndex("MixId");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_mix_shares_user_id");
+                    b.HasIndex("UserId");
 
                     b.ToTable("mix_shares", "mixyboos");
                 });
@@ -632,113 +506,88 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnType("uuid");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer")
-                        .HasColumnName("access_failed_count");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Biography")
                         .HasMaxLength(2048)
-                        .HasColumnType("character varying(2048)")
-                        .HasColumnName("biography");
+                        .HasColumnType("character varying(2048)");
 
                     b.Property<string>("City")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("city");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text")
-                        .HasColumnName("concurrency_stamp");
+                        .HasColumnType("text");
 
                     b.Property<string>("Country")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("country");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("DisplayName")
                         .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
-                        .HasColumnName("display_name");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("email");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("email_confirmed");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("HeaderImage")
-                        .HasColumnType("text")
-                        .HasColumnName("header_image");
+                        .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("lockout_enabled");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("lockout_end");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_email");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_user_name");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("text")
-                        .HasColumnName("password_hash");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("text")
-                        .HasColumnName("phone_number");
+                        .HasColumnType("text");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("phone_number_confirmed");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("ProfileImage")
-                        .HasColumnType("text")
-                        .HasColumnName("profile_image");
+                        .HasColumnType("text");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("text")
-                        .HasColumnName("security_stamp");
+                        .HasColumnType("text");
 
                     b.Property<string>("Slug")
-                        .HasColumnType("text")
-                        .HasColumnName("slug");
+                        .HasColumnType("text");
 
                     b.Property<string>("StreamKey")
-                        .HasColumnType("text")
-                        .HasColumnName("stream_key");
+                        .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("title");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("two_factor_enabled");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("user_name");
+                        .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id")
-                        .HasName("pk_user");
+                    b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -748,8 +597,7 @@ namespace MixyBoos.Api.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.HasIndex("Slug")
-                        .IsUnique()
-                        .HasDatabaseName("ix_user_slug");
+                        .IsUnique();
 
                     b.ToTable("user", "oid");
                 });
@@ -758,87 +606,69 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_created")
                         .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateSent")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_sent");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
                     b.Property<Guid>("FromUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("from_user_id");
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("message");
+                        .HasColumnType("text");
 
                     b.Property<string>("ShowId")
                         .IsRequired()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("show_id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<Guid?>("ToUserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("to_user_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("Id")
-                        .HasName("pk_show_chat");
+                    b.HasKey("Id");
 
-                    b.HasIndex("FromUserId")
-                        .HasDatabaseName("ix_show_chat_from_user_id");
+                    b.HasIndex("FromUserId");
 
-                    b.HasIndex("ShowId")
-                        .HasDatabaseName("ix_show_chat_show_id");
+                    b.HasIndex("ShowId");
 
-                    b.HasIndex("ToUserId")
-                        .HasDatabaseName("ix_show_chat_to_user_id");
+                    b.HasIndex("ToUserId");
 
-                    b.ToTable("show_chat", "mixyboos");
+                    b.ToTable("show_chats", "mixyboos");
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.Tag", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("character varying(36)")
-                        .HasColumnName("id");
+                        .HasColumnType("character varying(36)");
 
                     b.Property<DateTime>("DateCreated")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_created")
                         .HasDefaultValueSql("now()");
 
                     b.Property<DateTime>("DateUpdated")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
                     b.Property<string>("TagName")
-                        .HasColumnType("text")
-                        .HasColumnName("tag_name");
+                        .HasColumnType("text");
 
-                    b.HasKey("Id")
-                        .HasName("pk_tags");
+                    b.HasKey("Id");
 
                     b.HasIndex("TagName")
-                        .IsUnique()
-                        .HasDatabaseName("ix_tags_tag_name");
+                        .IsUnique();
 
                     b.ToTable("tags", "mixyboos");
                 });
@@ -846,18 +676,14 @@ namespace MixyBoos.Api.Migrations
             modelBuilder.Entity("MixyBoosUserMixyBoosUser", b =>
                 {
                     b.Property<Guid>("FollowersId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("followers_id");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("FollowingId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("following_id");
+                        .HasColumnType("uuid");
 
-                    b.HasKey("FollowersId", "FollowingId")
-                        .HasName("pk_user_followers");
+                    b.HasKey("FollowersId", "FollowingId");
 
-                    b.HasIndex("FollowingId")
-                        .HasDatabaseName("ix_user_followers_following_id");
+                    b.HasIndex("FollowingId");
 
                     b.ToTable("user_followers", "oid");
                 });
@@ -866,68 +692,53 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
-                        .HasColumnName("id");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClientId")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("client_id");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("ClientSecret")
-                        .HasColumnType("text")
-                        .HasColumnName("client_secret");
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyToken")
                         .IsConcurrencyToken()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("concurrency_token");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("ConsentType")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("consent_type");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("text")
-                        .HasColumnName("display_name");
+                        .HasColumnType("text");
 
                     b.Property<string>("DisplayNames")
-                        .HasColumnType("text")
-                        .HasColumnName("display_names");
+                        .HasColumnType("text");
 
                     b.Property<string>("Permissions")
-                        .HasColumnType("text")
-                        .HasColumnName("permissions");
+                        .HasColumnType("text");
 
                     b.Property<string>("PostLogoutRedirectUris")
-                        .HasColumnType("text")
-                        .HasColumnName("post_logout_redirect_uris");
+                        .HasColumnType("text");
 
                     b.Property<string>("Properties")
-                        .HasColumnType("text")
-                        .HasColumnName("properties");
+                        .HasColumnType("text");
 
                     b.Property<string>("RedirectUris")
-                        .HasColumnType("text")
-                        .HasColumnName("redirect_uris");
+                        .HasColumnType("text");
 
                     b.Property<string>("Requirements")
-                        .HasColumnType("text")
-                        .HasColumnName("requirements");
+                        .HasColumnType("text");
 
                     b.Property<string>("Type")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("type");
+                        .HasColumnType("character varying(50)");
 
-                    b.HasKey("Id")
-                        .HasName("pk_openiddict_application");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClientId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_openiddict_application_client_id");
+                        .IsUnique();
 
                     b.ToTable("openiddict_application", "oid");
                 });
@@ -936,51 +747,40 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
-                        .HasColumnName("id");
+                        .HasColumnType("text");
 
                     b.Property<string>("ApplicationId")
-                        .HasColumnType("text")
-                        .HasColumnName("application_id");
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyToken")
                         .IsConcurrencyToken()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("concurrency_token");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("creation_date");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Properties")
-                        .HasColumnType("text")
-                        .HasColumnName("properties");
+                        .HasColumnType("text");
 
                     b.Property<string>("Scopes")
-                        .HasColumnType("text")
-                        .HasColumnName("scopes");
+                        .HasColumnType("text");
 
                     b.Property<string>("Status")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("status");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Subject")
                         .HasMaxLength(400)
-                        .HasColumnType("character varying(400)")
-                        .HasColumnName("subject");
+                        .HasColumnType("character varying(400)");
 
                     b.Property<string>("Type")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("type");
+                        .HasColumnType("character varying(50)");
 
-                    b.HasKey("Id")
-                        .HasName("pk_openiddict_authorization");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ApplicationId", "Status", "Subject", "Type")
-                        .HasDatabaseName("ix_openiddict_authorization_application_id_status_subject_type");
+                    b.HasIndex("ApplicationId", "Status", "Subject", "Type");
 
                     b.ToTable("openiddict_authorization", "oid");
                 });
@@ -989,50 +789,39 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
-                        .HasColumnName("id");
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyToken")
                         .IsConcurrencyToken()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("concurrency_token");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
+                        .HasColumnType("text");
 
                     b.Property<string>("Descriptions")
-                        .HasColumnType("text")
-                        .HasColumnName("descriptions");
+                        .HasColumnType("text");
 
                     b.Property<string>("DisplayName")
-                        .HasColumnType("text")
-                        .HasColumnName("display_name");
+                        .HasColumnType("text");
 
                     b.Property<string>("DisplayNames")
-                        .HasColumnType("text")
-                        .HasColumnName("display_names");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("name");
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("Properties")
-                        .HasColumnType("text")
-                        .HasColumnName("properties");
+                        .HasColumnType("text");
 
                     b.Property<string>("Resources")
-                        .HasColumnType("text")
-                        .HasColumnName("resources");
+                        .HasColumnType("text");
 
-                    b.HasKey("Id")
-                        .HasName("pk_openiddict_scope");
+                    b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("ix_openiddict_scope_name");
+                        .IsUnique();
 
                     b.ToTable("openiddict_scope", "oid");
                 });
@@ -1041,75 +830,58 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
-                        .HasColumnName("id");
+                        .HasColumnType("text");
 
                     b.Property<string>("ApplicationId")
-                        .HasColumnType("text")
-                        .HasColumnName("application_id");
+                        .HasColumnType("text");
 
                     b.Property<string>("AuthorizationId")
-                        .HasColumnType("text")
-                        .HasColumnName("authorization_id");
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcurrencyToken")
                         .IsConcurrencyToken()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("concurrency_token");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("creation_date");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("ExpirationDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("expiration_date");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Payload")
-                        .HasColumnType("text")
-                        .HasColumnName("payload");
+                        .HasColumnType("text");
 
                     b.Property<string>("Properties")
-                        .HasColumnType("text")
-                        .HasColumnName("properties");
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("RedemptionDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("redemption_date");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ReferenceId")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)")
-                        .HasColumnName("reference_id");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Status")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("status");
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Subject")
                         .HasMaxLength(400)
-                        .HasColumnType("character varying(400)")
-                        .HasColumnName("subject");
+                        .HasColumnType("character varying(400)");
 
                     b.Property<string>("Type")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("type");
+                        .HasColumnType("character varying(50)");
 
-                    b.HasKey("Id")
-                        .HasName("pk_openiddict_token");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AuthorizationId")
-                        .HasDatabaseName("ix_openiddict_token_authorization_id");
+                    b.HasIndex("AuthorizationId");
 
                     b.HasIndex("ReferenceId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_openiddict_token_reference_id");
+                        .IsUnique();
 
-                    b.HasIndex("ApplicationId", "Status", "Subject", "Type")
-                        .HasDatabaseName("ix_openiddict_token_application_id_status_subject_type");
+                    b.HasIndex("ApplicationId", "Status", "Subject", "Type");
 
                     b.ToTable("openiddict_token", "oid");
                 });
@@ -1120,15 +892,13 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("LiveShowId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_show_tags_live_shows_live_show_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_show_tags_tags_tags_id");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -1137,8 +907,7 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_role_claim_user_user_role_role_id");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
@@ -1147,8 +916,7 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_claim_user_user_id");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
@@ -1157,8 +925,7 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_login_user_user_id");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
@@ -1167,15 +934,13 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_identity_role_user_user_role_role_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_identity_role_user_user_id");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -1184,8 +949,7 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_token_user_user_id");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MixTag", b =>
@@ -1194,23 +958,20 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("MixId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_mix_tags_mixes_mix_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_mix_tags_tags_tags_id");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.LiveShow", b =>
                 {
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("fk_live_shows_users_user_id");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -1221,8 +982,7 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_mixes_users_user_id");
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -1233,13 +993,11 @@ namespace MixyBoos.Api.Migrations
                         .WithMany("Downloads")
                         .HasForeignKey("MixId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_mix_download_mixes_mix_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "User")
                         .WithMany("Downloads")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("fk_mix_download_user_user_id");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Mix");
 
@@ -1252,13 +1010,11 @@ namespace MixyBoos.Api.Migrations
                         .WithMany("Likes")
                         .HasForeignKey("MixId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_mix_likes_mixes_mix_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "User")
                         .WithMany("Likes")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("fk_mix_likes_users_user_id");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Mix");
 
@@ -1271,15 +1027,13 @@ namespace MixyBoos.Api.Migrations
                         .WithMany("Plays")
                         .HasForeignKey("MixId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_mix_plays_mixes_mix_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "User")
                         .WithMany("Plays")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_mix_plays_users_user_id");
+                        .IsRequired();
 
                     b.Navigation("Mix");
 
@@ -1292,13 +1046,11 @@ namespace MixyBoos.Api.Migrations
                         .WithMany("Shares")
                         .HasForeignKey("MixId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_mix_shares_mixes_mix_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "User")
                         .WithMany("Shares")
-                        .HasForeignKey("UserId")
-                        .HasConstraintName("fk_mix_shares_users_user_id");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Mix");
 
@@ -1311,20 +1063,17 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("FromUserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_show_chat_users_from_user_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.LiveShow", "Show")
                         .WithMany()
                         .HasForeignKey("ShowId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_show_chat_live_shows_show_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", "ToUser")
                         .WithMany()
-                        .HasForeignKey("ToUserId")
-                        .HasConstraintName("fk_show_chat_users_to_user_id");
+                        .HasForeignKey("ToUserId");
 
                     b.Navigation("FromUser");
 
@@ -1339,23 +1088,20 @@ namespace MixyBoos.Api.Migrations
                         .WithMany()
                         .HasForeignKey("FollowersId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_followers_user_followers_id");
+                        .IsRequired();
 
                     b.HasOne("MixyBoos.Api.Data.Models.MixyBoosUser", null)
                         .WithMany()
                         .HasForeignKey("FollowingId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_followers_user_following_id");
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", b =>
                 {
                     b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", "Application")
                         .WithMany("Authorizations")
-                        .HasForeignKey("ApplicationId")
-                        .HasConstraintName("fk_openiddict_authorization_openiddict_application_application");
+                        .HasForeignKey("ApplicationId");
 
                     b.Navigation("Application");
                 });
@@ -1364,13 +1110,11 @@ namespace MixyBoos.Api.Migrations
                 {
                     b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreApplication", "Application")
                         .WithMany("Tokens")
-                        .HasForeignKey("ApplicationId")
-                        .HasConstraintName("fk_openiddict_token_openiddict_application_application_id");
+                        .HasForeignKey("ApplicationId");
 
                     b.HasOne("OpenIddict.EntityFrameworkCore.Models.OpenIddictEntityFrameworkCoreAuthorization", "Authorization")
                         .WithMany("Tokens")
-                        .HasForeignKey("AuthorizationId")
-                        .HasConstraintName("fk_openiddict_token_openiddict_authorization_authorization_id");
+                        .HasForeignKey("AuthorizationId");
 
                     b.Navigation("Application");
 

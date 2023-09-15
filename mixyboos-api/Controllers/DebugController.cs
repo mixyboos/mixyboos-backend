@@ -16,7 +16,7 @@ using MixyBoos.Api.Data.Models;
 using OpenIddict.Validation.AspNetCore;
 
 namespace MixyBoos.Api.Controllers {
-    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+  [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
     [Route("[controller]")]
     public class DebugController : _Controller {
         private readonly UserManager<MixyBoosUser> _userManager;

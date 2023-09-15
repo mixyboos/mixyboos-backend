@@ -60,15 +60,15 @@ namespace MixyBoos.Api.Controllers {
       await _context.LiveShows.AddAsync(newShow);
       await _context.SaveChangesAsync();
 
-      return Created(nameof(LiveController), newShow.Adapt<CreateLiveShowDTO>());
+      return Created(nameof(LiveController), newShow.Adapt<LiveShowDTO>());
     }
 
     [HttpPost("on_publish")]
     [AllowAnonymous]
-    [AllowEmptyJsonBody]
-    public async Task<IActionResult> OnPublish([FromBody] RTMPEventModel request) {
+    [Consumes("application/x-www-form-urlencoded")]
+    public async Task<IActionResult> OnPublish([FromForm] string name) {
       //name is StreamKey
-      var user = await _userManager.FindByStreamKeyAsync(request.Publish.identifier.Rtmp.stream_name);
+      var user = await _userManager.FindByStreamKeyAsync(name);
       if (user is null) {
         return NotFound("Invalid stream key");
       }
@@ -101,7 +101,6 @@ namespace MixyBoos.Api.Controllers {
         _logger.LogError("Error starting job {Message}", e.Message);
       }
 
-      // return Redirect($"rtmp://127.0.0.1:1935/hls-live/{show.Id}");
       return Redirect(show.Id.ToString());
     }
 

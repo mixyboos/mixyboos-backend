@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Net.Http.Headers;
 
-namespace MixyBoos.Api.Services.Helpers.IO; 
+namespace MixyBoos.Api.Services.Helpers.IO;
 
 public static class FileHelpers {
   // If you require a check on specific characters in the IsValidFileExtensionAndSignature
@@ -254,4 +254,7 @@ public static class FileHelpers {
       File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
     }
   }
+
+  public static string? GetFirstMatchingFile(string path, string filename) =>
+    Directory.GetFiles(path, $"{filename}.*").FirstOrDefault();
 }

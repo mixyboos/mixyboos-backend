@@ -23,6 +23,7 @@ public class Mix : BaseEntity, ISluggedEntity {
     public string? Image { get; set; }
     public string? AudioUrl { get; set; }
     public bool IsProcessed { get; set; } = false;
+
     [Required] public virtual MixyBoosUser? User { get; set; }
 
     public ICollection<MixPlay>? Plays { get; set; }

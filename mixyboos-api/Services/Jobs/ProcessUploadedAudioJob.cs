@@ -72,6 +72,7 @@ public class ProcessUploadedAudioJob : IJob {
     TimeSpan duration = reader.Duration;
 
     Directory.CreateDirectory(tempProcessingPath);
+    await _hub.Clients.User(userId).SendAsync("ConversionStarted", showId);
 
     var progressHandler = new Action<string>(async p => {
       _logger.LogInformation("Progress on encode: {Percentage}", p);
@@ -106,6 +107,7 @@ public class ProcessUploadedAudioJob : IJob {
       _logger.LogInformation("Finished processing {Id}", showId);
     } catch (Exception e) {
       _logger.LogError("Error processing audio upload {Error}", e.Message);
+      await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
     }
   }
 }

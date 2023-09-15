@@ -23,115 +23,115 @@ using OpenIddict.Validation.AspNetCore;
 using Quartz;
 
 public class InvalidFileUploadException : Exception {
-    public InvalidFileUploadException(string message) : base(message) { }
+  public InvalidFileUploadException(string message) : base(message) { }
 }
 
 namespace MixyBoos.Api.Controllers {
-    public class FileUploadModel {
-        public string Id { get; set; }
-        public IFormFile File { get; set; }
+  public class FileUploadModel {
+    public string Id { get; set; }
+    public IFormFile File { get; set; }
+  }
+
+  [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+  [Route("[controller]")]
+  public class UploadController : _Controller {
+    private readonly UserManager<MixyBoosUser> _userManager;
+    private readonly ISchedulerFactory _schedulerFactory;
+    const long AudioFileSizeLimit = 2147483648;
+    const long ImageFileSizeLimit = 52428800;
+
+    public UploadController(UserManager<MixyBoosUser> userManager, ISchedulerFactory schedulerFactory,
+      ILogger<UploadController> logger) : base(logger) {
+      _userManager = userManager;
+      _schedulerFactory = schedulerFactory;
     }
 
-    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
-    [Route("[controller]")]
-    public class UploadController : _Controller {
-        private readonly UserManager<MixyBoosUser> _userManager;
-        private readonly ISchedulerFactory _schedulerFactory;
-        const long AudioFileSizeLimit = 2147483648;
-        const long ImageFileSizeLimit = 52428800;
+    private async Task<(IActionResult, string)> _preProcessUpload(string id, IFormFile file) {
+      if (!ModelState.IsValid || id is null || file is null) {
+        return (BadRequest(), string.Empty);
+      }
 
-        public UploadController(UserManager<MixyBoosUser> userManager, ISchedulerFactory schedulerFactory,
-            ILogger<UploadController> logger) : base(logger) {
-            _userManager = userManager;
-            _schedulerFactory = schedulerFactory;
-        }
+      var user = await _userManager.FindByNameAsync(User.Identity.Name);
+      if (user is null) {
+        return (Unauthorized(), string.Empty);
+      }
 
-        private async Task<(IActionResult, string)> _preProcessUpload(string id, IFormFile file) {
-            if (!ModelState.IsValid || id is null || file is null) {
-                return (BadRequest(), string.Empty);
-            }
+      var fileName = file.FileName;
+      var extension = Path.GetExtension(fileName);
+      var localPath = Path.Combine(Constants.TempFolder, $"{id}{extension}");
 
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (user is null) {
-                return (Unauthorized(), string.Empty);
-            }
+      await using (var stream = new FileStream(localPath, FileMode.Create)) {
+        await file.CopyToAsync(stream);
+      }
 
-            var fileName = file.FileName;
-            var extension = Path.GetExtension(fileName);
-            var localPath = Path.Combine(Constants.TempFolder, $"{id}{extension}");
+      return (Created(nameof(UploadController), null), localPath);
+    }
 
-            await using (var stream = new FileStream(localPath, FileMode.Create)) {
-                await file.CopyToAsync(stream);
-            }
+    [HttpPost("image/{id}")]
+    [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
+    [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
+    [DisableFormValueModelBinding]
+    public async Task<IActionResult> UploadImage([FromRoute] string id, [FromForm] IFormFile file,
+      [FromQuery] string imageSource, [FromQuery] string imageType) {
+      var (response, localFile) = await _preProcessUpload(id, file);
 
-            return (Created(nameof(UploadController), null), localPath);
-        }
+      if (string.IsNullOrEmpty(localFile)) {
+        return response;
+      }
 
-        [HttpPost("image/{id}")]
-        [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
-        [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
-        [DisableFormValueModelBinding]
-        public async Task<IActionResult> UploadImage([FromRoute] string id, [FromForm] IFormFile file,
-            [FromQuery] string imageSource, [FromQuery] string imageType) {
-            var (response, localFile) = await _preProcessUpload(id, file);
+      var jobData = new Dictionary<string, string>() {
+        {"Id", id},
+        {"FileLocation", localFile},
+        {"ImageSource", imageSource},
+        {"ImageType", imageType},
+        {"UserId", User.Identity.Name}
+      };
+      var scheduler = await _schedulerFactory.GetScheduler();
+      await scheduler.TriggerJob(
+        new JobKey("ProcessUploadedImageJob"),
+        new JobDataMap(jobData));
 
-            if (string.IsNullOrEmpty(localFile)) {
-                return response;
-            }
-
-            var jobData = new Dictionary<string, string>() {
-                {"Id", id},
-                {"FileLocation", localFile},
-                {"ImageSource", imageSource},
-                {"ImageType", imageType},
-                {"UserId", User.Identity.Name}
-            };
-            var scheduler = await _schedulerFactory.GetScheduler();
-            await scheduler.TriggerJob(
-                new JobKey("ProcessUploadedImageJob"),
-                new JobDataMap(jobData));
-
-            return response;
-        }
+      return response;
+    }
 
 
-        [HttpPost("{id}")]
-        [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
-        [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
-        [DisableFormValueModelBinding]
-        public async Task<IActionResult> UploadAudio([FromRoute] string id, [FromForm] IFormFile file) {
-            var (response, localFile) = await _preProcessUpload(id, file);
+    [HttpPost("{id}")]
+    [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
+    [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
+    [DisableFormValueModelBinding]
+    public async Task<IActionResult> UploadAudio([FromRoute] string id, [FromForm] IFormFile file) {
+      var (response, localFile) = await _preProcessUpload(id, file);
 
-            if (string.IsNullOrEmpty(localFile)) {
-                return response;
-            }
+      if (string.IsNullOrEmpty(localFile)) {
+        return response;
+      }
 
-            var jobData = new Dictionary<string, string>() {
-                {"Id", id},
-                {"FileLocation", localFile},
-                {"UserId", User.Identity.Name}
-            };
-            var scheduler = await _schedulerFactory.GetScheduler();
-            await scheduler.TriggerJob(
-                new JobKey("ProcessUploadedAudioJob"),
-                new JobDataMap(jobData));
+      var jobData = new Dictionary<string, string>() {
+        {"Id", id},
+        {"FileLocation", localFile},
+        {"UserId", User.Identity.Name}
+      };
+      var scheduler = await _schedulerFactory.GetScheduler();
+      await scheduler.TriggerJob(
+        new JobKey("ProcessUploadedAudioJob"),
+        new JobDataMap(jobData));
 
-            return response;
-        }
+      return response;
+    }
 
-        private static Encoding GetEncoding(MultipartSection section) {
-            var hasMediaTypeHeader =
-                MediaTypeHeaderValue.TryParse(section.ContentType, out var mediaType);
+    private static Encoding GetEncoding(MultipartSection section) {
+      var hasMediaTypeHeader =
+        MediaTypeHeaderValue.TryParse(section.ContentType, out var mediaType);
 
-            // UTF-7 is insecure and shouldn't be honored. UTF-8 succeeds in 
-            // most cases.
+      // UTF-7 is insecure and shouldn't be honored. UTF-8 succeeds in 
+      // most cases.
 #pragma warning disable SYSLIB0001
-            if (!hasMediaTypeHeader || Encoding.UTF7.Equals(mediaType.Encoding)) {
+      if (!hasMediaTypeHeader || Encoding.UTF7.Equals(mediaType.Encoding)) {
 #pragma warning restore SYSLIB0001
-                return Encoding.UTF8;
-            }
+        return Encoding.UTF8;
+      }
 
-            return mediaType.Encoding;
-        }
+      return mediaType.Encoding;
     }
+  }
 }
