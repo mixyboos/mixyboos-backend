@@ -71,50 +71,6 @@ namespace MixyBoos.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "openiddict_application",
-                schema: "oid",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    ClientId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    ClientSecret = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyToken = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    ConsentType = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    DisplayName = table.Column<string>(type: "text", nullable: true),
-                    DisplayNames = table.Column<string>(type: "text", nullable: true),
-                    Permissions = table.Column<string>(type: "text", nullable: true),
-                    PostLogoutRedirectUris = table.Column<string>(type: "text", nullable: true),
-                    Properties = table.Column<string>(type: "text", nullable: true),
-                    RedirectUris = table.Column<string>(type: "text", nullable: true),
-                    Requirements = table.Column<string>(type: "text", nullable: true),
-                    Type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_openiddict_application", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "openiddict_scope",
-                schema: "oid",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    ConcurrencyToken = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    Descriptions = table.Column<string>(type: "text", nullable: true),
-                    DisplayName = table.Column<string>(type: "text", nullable: true),
-                    DisplayNames = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    Properties = table.Column<string>(type: "text", nullable: true),
-                    Resources = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_openiddict_scope", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "tags",
                 schema: "mixyboos",
                 columns: table => new
@@ -177,32 +133,6 @@ namespace MixyBoos.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_user_user_role", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "openiddict_authorization",
-                schema: "oid",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    ApplicationId = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyToken = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Properties = table.Column<string>(type: "text", nullable: true),
-                    Scopes = table.Column<string>(type: "text", nullable: true),
-                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    Subject = table.Column<string>(type: "character varying(400)", maxLength: 400, nullable: true),
-                    Type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_openiddict_authorization", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_openiddict_authorization_openiddict_application_Application~",
-                        column: x => x.ApplicationId,
-                        principalSchema: "oid",
-                        principalTable: "openiddict_application",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -400,42 +330,6 @@ namespace MixyBoos.Api.Migrations
                         principalTable: "user_user_role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "openiddict_token",
-                schema: "oid",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    ApplicationId = table.Column<string>(type: "text", nullable: true),
-                    AuthorizationId = table.Column<string>(type: "text", nullable: true),
-                    ConcurrencyToken = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    ExpirationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Payload = table.Column<string>(type: "text", nullable: true),
-                    Properties = table.Column<string>(type: "text", nullable: true),
-                    RedemptionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    ReferenceId = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    Subject = table.Column<string>(type: "character varying(400)", maxLength: 400, nullable: true),
-                    Type = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_openiddict_token", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_openiddict_token_openiddict_application_ApplicationId",
-                        column: x => x.ApplicationId,
-                        principalSchema: "oid",
-                        principalTable: "openiddict_application",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_openiddict_token_openiddict_authorization_AuthorizationId",
-                        column: x => x.AuthorizationId,
-                        principalSchema: "oid",
-                        principalTable: "openiddict_authorization",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -716,45 +610,6 @@ namespace MixyBoos.Api.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_openiddict_application_ClientId",
-                schema: "oid",
-                table: "openiddict_application",
-                column: "ClientId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_openiddict_authorization_ApplicationId_Status_Subject_Type",
-                schema: "oid",
-                table: "openiddict_authorization",
-                columns: new[] { "ApplicationId", "Status", "Subject", "Type" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_openiddict_scope_Name",
-                schema: "oid",
-                table: "openiddict_scope",
-                column: "Name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_openiddict_token_ApplicationId_Status_Subject_Type",
-                schema: "oid",
-                table: "openiddict_token",
-                columns: new[] { "ApplicationId", "Status", "Subject", "Type" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_openiddict_token_AuthorizationId",
-                schema: "oid",
-                table: "openiddict_token",
-                column: "AuthorizationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_openiddict_token_ReferenceId",
-                schema: "oid",
-                table: "openiddict_token",
-                column: "ReferenceId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_role_claim_RoleId",
                 schema: "oid",
                 table: "role_claim",
@@ -875,14 +730,6 @@ namespace MixyBoos.Api.Migrations
                 schema: "mixyboos");
 
             migrationBuilder.DropTable(
-                name: "openiddict_scope",
-                schema: "oid");
-
-            migrationBuilder.DropTable(
-                name: "openiddict_token",
-                schema: "oid");
-
-            migrationBuilder.DropTable(
                 name: "role_claim",
                 schema: "oid");
 
@@ -919,10 +766,6 @@ namespace MixyBoos.Api.Migrations
                 schema: "mixyboos");
 
             migrationBuilder.DropTable(
-                name: "openiddict_authorization",
-                schema: "oid");
-
-            migrationBuilder.DropTable(
                 name: "live_shows",
                 schema: "mixyboos");
 
@@ -932,10 +775,6 @@ namespace MixyBoos.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "user_user_role",
-                schema: "oid");
-
-            migrationBuilder.DropTable(
-                name: "openiddict_application",
                 schema: "oid");
 
             migrationBuilder.DropTable(

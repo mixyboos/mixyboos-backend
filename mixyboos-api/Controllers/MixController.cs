@@ -19,7 +19,6 @@ using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services.Extensions;
-using OpenIddict.Validation.AspNetCore;
 
 namespace MixyBoos.Api.Controllers;
 
@@ -103,7 +102,7 @@ public class MixController : _Controller {
     return Ok(Flurl.Url.Combine(_config["LiveServices:ListenUrl"], mix.Id.ToString(), $"{mix.Id}.m3u8"));
   }
 
-  [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+  [Authorize]
   [HttpGet("feed")]
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
@@ -119,7 +118,7 @@ public class MixController : _Controller {
   }
 
   [HttpPost]
-  [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+  [Authorize]
   [Consumes(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status201Created)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -147,7 +146,7 @@ public class MixController : _Controller {
   }
 
   [HttpPatch]
-  [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+  [Authorize]
   [Consumes(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status201Created)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -175,7 +174,7 @@ public class MixController : _Controller {
   }
 
   [HttpPost("addlike")]
-  [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+  [Authorize]
   [Consumes(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status204NoContent)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -201,7 +200,7 @@ public class MixController : _Controller {
   }
 
   [HttpDelete]
-  [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+  [Authorize]
   [ProducesResponseType(StatusCodes.Status204NoContent)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]

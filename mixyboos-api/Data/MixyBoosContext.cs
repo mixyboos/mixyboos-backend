@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Extensions;
-using OpenIddict.EntityFrameworkCore.Models;
 
 #nullable disable
 
@@ -77,11 +76,6 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
     mb.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claim", "oid");
     mb.Entity<IdentityUserToken<Guid>>().ToTable("user_token", "oid");
     mb.Entity<IdentityUserRole<Guid>>().ToTable("user_identity_role", "oid");
-
-    mb.Entity<OpenIddictEntityFrameworkCoreApplication>().ToTable($"{IDENTITY_PREFIX}_{"application"}", "oid");
-    mb.Entity<OpenIddictEntityFrameworkCoreAuthorization>().ToTable($"{IDENTITY_PREFIX}_{"authorization"}", "oid");
-    mb.Entity<OpenIddictEntityFrameworkCoreScope>().ToTable($"{IDENTITY_PREFIX}_{"scope"}", "oid");
-    mb.Entity<OpenIddictEntityFrameworkCoreToken>().ToTable($"{IDENTITY_PREFIX}_{"token"}", "oid");
     //end identity stuff
 
     mb.Entity<Mix>().ToTable("mixes");
