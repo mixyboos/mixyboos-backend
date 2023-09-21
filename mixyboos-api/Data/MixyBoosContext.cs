@@ -18,7 +18,6 @@ namespace MixyBoos.Api.Data;
 
 public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid>, Guid> {
   private readonly ILogger<MixyBoosContext> _logger;
-  private const string IDENTITY_PREFIX = "openiddict";
   public DbSet<Mix> Mixes { get; set; }
 
   public DbSet<MixPlay> MixPlays { get; set; }
