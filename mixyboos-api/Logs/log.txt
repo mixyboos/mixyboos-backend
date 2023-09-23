@@ -12691,3 +12691,1204 @@ Npgsql.PostgresException (0x80004005): 57P01: terminating connection due to admi
   "error_uri": "https://documentation.openiddict.com/errors/ID2004"
 }.
 2023-09-15 19:36:46.592 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:19:11.637 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-21 22:19:11.649 +01:00 [INF] Quartz Scheduler created
+2023-09-21 22:19:11.650 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-21 22:19:11.650 +01:00 [INF] RAMJobStore initialized.
+2023-09-21 22:19:11.650 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-21 22:19:11.651 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-21 22:19:11.651 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-21 22:19:11.656 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-21 22:19:11.657 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-21 22:19:11.659 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-21 22:19:11.659 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-21 22:19:11.659 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-21 22:19:11.660 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-21 22:19:11.750 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-21 22:19:12.252 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-21 22:19:12.693 +01:00 [ERR] Failed executing DbCommand (35ms) [Parameters=[@__identifier_0='webclient'], CommandType='"Text"', CommandTimeout='30']
+SELECT o."Id", o."ClientId", o."ClientSecret", o."ConcurrencyToken", o."ConsentType", o."DisplayName", o."DisplayNames", o."Permissions", o."PostLogoutRedirectUris", o."Properties", o."RedirectUris", o."Requirements", o."Type"
+FROM oid.openiddict_application AS o
+WHERE o."ClientId" = @__identifier_0
+LIMIT 1
+2023-09-21 22:19:12.718 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'MixyBoos.Api.Data.MixyBoosContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+2023-09-21 22:19:12.726 +01:00 [INF] Error creating openiddict app 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+2023-09-21 22:19:12.943 +01:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE oid.identity_user (
+    "Id" uuid NOT NULL,
+    "UserName" text,
+    "NormalizedUserName" text,
+    "Email" text,
+    "NormalizedEmail" text,
+    "EmailConfirmed" boolean NOT NULL,
+    "PasswordHash" text,
+    "SecurityStamp" text,
+    "ConcurrencyStamp" text,
+    "PhoneNumber" text,
+    "PhoneNumberConfirmed" boolean NOT NULL,
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockoutEnd" timestamp with time zone,
+    "LockoutEnabled" boolean NOT NULL,
+    "AccessFailedCount" integer NOT NULL,
+    CONSTRAINT "PK_identity_user" PRIMARY KEY ("Id")
+);
+2023-09-21 22:19:13.049 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-21 22:19:13.135 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-21 22:19:13.137 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-21 22:19:13.137 +01:00 [INF] Hosting environment: Development
+2023-09-21 22:19:13.137 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-21 22:19:13.139 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-21 22:22:13.338 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:22:13.351 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-21 22:22:13.366 +01:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__identifier_0='webclient'], CommandType='"Text"', CommandTimeout='30']
+SELECT o."Id", o."ClientId", o."ClientSecret", o."ConcurrencyToken", o."ConsentType", o."DisplayName", o."DisplayNames", o."Permissions", o."PostLogoutRedirectUris", o."Properties", o."RedirectUris", o."Requirements", o."Type"
+FROM oid.openiddict_application AS o
+WHERE o."ClientId" = @__identifier_0
+LIMIT 1
+2023-09-21 22:22:13.368 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'MixyBoos.Api.Data.MixyBoosContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+2023-09-21 22:22:13.376 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at OpenIddict.EntityFrameworkCore.OpenIddictEntityFrameworkCoreApplicationStore`5.FindByClientIdAsync(String identifier, CancellationToken cancellationToken)
+   at OpenIddict.Core.OpenIddictApplicationCache`1.<>c__DisplayClass6_0.<<FindByClientIdAsync>g__ExecuteAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at OpenIddict.Core.OpenIddictApplicationManager`1.FindByClientIdAsync(String identifier, CancellationToken cancellationToken)
+   at OpenIddict.Core.OpenIddictApplicationManager`1.OpenIddict.Abstractions.IOpenIddictApplicationManager.FindByClientIdAsync(String identifier, CancellationToken cancellationToken)
+   at OpenIddict.Server.OpenIddictServerHandlers.Exchange.ValidateClientId.HandleAsync(ValidateTokenRequestContext context)
+   at OpenIddict.Server.OpenIddictServerDispatcher.DispatchAsync[TContext](TContext context)
+   at OpenIddict.Server.OpenIddictServerDispatcher.DispatchAsync[TContext](TContext context)
+   at OpenIddict.Server.OpenIddictServerHandlers.Exchange.ValidateTokenRequest.HandleAsync(ProcessRequestContext context)
+   at OpenIddict.Server.OpenIddictServerDispatcher.DispatchAsync[TContext](TContext context)
+   at OpenIddict.Server.OpenIddictServerDispatcher.DispatchAsync[TContext](TContext context)
+   at OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandler.HandleRequestAsync()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext httpContext, Boolean retry)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+2023-09-21 22:22:21.964 +01:00 [INF] Application is shutting down...
+2023-09-21 22:22:21.968 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-09-21 22:22:21.969 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-09-21 22:22:21.972 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-09-21 22:22:21.974 +01:00 [INF] Stopped cleanly
+2023-09-21 22:22:40.602 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-21 22:22:40.614 +01:00 [INF] Quartz Scheduler created
+2023-09-21 22:22:40.614 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-21 22:22:40.614 +01:00 [INF] RAMJobStore initialized.
+2023-09-21 22:22:40.615 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-21 22:22:40.615 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-21 22:22:40.615 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-21 22:22:40.620 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-21 22:22:40.622 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-21 22:22:40.624 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-21 22:22:40.624 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-21 22:22:40.624 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-21 22:22:40.624 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-21 22:22:40.706 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-21 22:22:41.128 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-21 22:22:41.523 +01:00 [ERR] Failed executing DbCommand (30ms) [Parameters=[@__identifier_0='webclient'], CommandType='"Text"', CommandTimeout='30']
+SELECT o."Id", o."ClientId", o."ClientSecret", o."ConcurrencyToken", o."ConsentType", o."DisplayName", o."DisplayNames", o."Permissions", o."PostLogoutRedirectUris", o."Properties", o."RedirectUris", o."Requirements", o."Type"
+FROM oid.openiddict_application AS o
+WHERE o."ClientId" = @__identifier_0
+LIMIT 1
+2023-09-21 22:22:41.547 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'MixyBoos.Api.Data.MixyBoosContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+2023-09-21 22:22:41.554 +01:00 [INF] Error creating openiddict app 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+2023-09-21 22:22:41.746 +01:00 [ERR] Failed executing DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE oid.identity_user (
+    "Id" uuid NOT NULL,
+    "UserName" text,
+    "NormalizedUserName" text,
+    "Email" text,
+    "NormalizedEmail" text,
+    "EmailConfirmed" boolean NOT NULL,
+    "PasswordHash" text,
+    "SecurityStamp" text,
+    "ConcurrencyStamp" text,
+    "PhoneNumber" text,
+    "PhoneNumberConfirmed" boolean NOT NULL,
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockoutEnd" timestamp with time zone,
+    "LockoutEnabled" boolean NOT NULL,
+    "AccessFailedCount" integer NOT NULL,
+    CONSTRAINT "PK_identity_user" PRIMARY KEY ("Id")
+);
+2023-09-21 22:22:41.839 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-21 22:22:41.921 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-21 22:22:41.923 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-21 22:22:41.923 +01:00 [INF] Hosting environment: Development
+2023-09-21 22:22:41.923 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-21 22:22:41.925 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-21 22:22:54.727 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:22:54.738 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-21 22:22:54.752 +01:00 [ERR] Failed executing DbCommand (1ms) [Parameters=[@__identifier_0='webclient'], CommandType='"Text"', CommandTimeout='30']
+SELECT o."Id", o."ClientId", o."ClientSecret", o."ConcurrencyToken", o."ConsentType", o."DisplayName", o."DisplayNames", o."Permissions", o."PostLogoutRedirectUris", o."Properties", o."RedirectUris", o."Requirements", o."Type"
+FROM oid.openiddict_application AS o
+WHERE o."ClientId" = @__identifier_0
+LIMIT 1
+2023-09-21 22:22:54.754 +01:00 [ERR] An exception occurred while iterating over the results of a query for context type 'MixyBoos.Api.Data.MixyBoosContext'.
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+2023-09-21 22:22:54.764 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+Npgsql.PostgresException (0x80004005): 42P01: relation "oid.openiddict_application" does not exist
+
+POSITION: 233
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SplitQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at OpenIddict.EntityFrameworkCore.OpenIddictEntityFrameworkCoreApplicationStore`5.FindByClientIdAsync(String identifier, CancellationToken cancellationToken)
+   at OpenIddict.Core.OpenIddictApplicationCache`1.<>c__DisplayClass6_0.<<FindByClientIdAsync>g__ExecuteAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at OpenIddict.Core.OpenIddictApplicationManager`1.FindByClientIdAsync(String identifier, CancellationToken cancellationToken)
+   at OpenIddict.Core.OpenIddictApplicationManager`1.OpenIddict.Abstractions.IOpenIddictApplicationManager.FindByClientIdAsync(String identifier, CancellationToken cancellationToken)
+   at OpenIddict.Server.OpenIddictServerHandlers.Exchange.ValidateClientId.HandleAsync(ValidateTokenRequestContext context)
+   at OpenIddict.Server.OpenIddictServerDispatcher.DispatchAsync[TContext](TContext context)
+   at OpenIddict.Server.OpenIddictServerDispatcher.DispatchAsync[TContext](TContext context)
+   at OpenIddict.Server.OpenIddictServerHandlers.Exchange.ValidateTokenRequest.HandleAsync(ProcessRequestContext context)
+   at OpenIddict.Server.OpenIddictServerDispatcher.DispatchAsync[TContext](TContext context)
+   at OpenIddict.Server.OpenIddictServerDispatcher.DispatchAsync[TContext](TContext context)
+   at OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreHandler.HandleRequestAsync()
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext httpContext, Boolean retry)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42P01
+    MessageText: relation "oid.openiddict_application" does not exist
+    Position: 233
+    File: parse_relation.c
+    Line: 1371
+    Routine: parserOpenTable
+2023-09-21 22:22:57.957 +01:00 [INF] Application is shutting down...
+2023-09-21 22:22:57.962 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-09-21 22:22:57.963 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-09-21 22:22:57.965 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-09-21 22:22:57.967 +01:00 [INF] Stopped cleanly
+2023-09-21 22:23:08.759 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-21 22:23:13.535 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-21 22:23:18.067 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-21 22:23:18.079 +01:00 [INF] Quartz Scheduler created
+2023-09-21 22:23:18.080 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-21 22:23:18.080 +01:00 [INF] RAMJobStore initialized.
+2023-09-21 22:23:18.081 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-21 22:23:18.081 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-21 22:23:18.081 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-21 22:23:18.088 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-21 22:23:18.090 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-21 22:23:18.092 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-21 22:23:18.092 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-21 22:23:18.092 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-21 22:23:18.092 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-21 22:23:18.174 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-21 22:23:18.586 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-21 22:23:19.007 +01:00 [INF] App webclient does not exist, creating
+2023-09-21 22:23:19.134 +01:00 [INF] App webclient created
+2023-09-21 22:23:19.377 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-21 22:23:19.454 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-21 22:23:19.456 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-21 22:23:19.456 +01:00 [INF] Hosting environment: Development
+2023-09-21 22:23:19.456 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-21 22:23:19.458 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-21 22:25:52.568 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:25:52.581 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboossecondfarts@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-21 22:25:52.606 +01:00 [INF] The token request was successfully validated.
+2023-09-21 22:25:52.651 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "error": "invalid_grant",
+  "error_description": "The username/password couple is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2024"
+}.
+2023-09-21 22:25:52.655 +01:00 [INF] AuthenticationScheme: OpenIddict.Server.AspNetCore was forbidden.
+2023-09-21 22:25:57.524 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:25:57.525 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-21 22:25:57.530 +01:00 [INF] The token request was successfully validated.
+2023-09-21 22:25:57.731 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-21 22:25:57.831 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:25:57.838 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:25:57.838 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:26:32.704 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:26:32.705 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-21 22:26:32.712 +01:00 [INF] The token request was successfully validated.
+2023-09-21 22:26:32.775 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-21 22:26:32.811 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:26:32.811 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:26:32.811 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:27:36.231 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:27:36.231 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-21 22:27:36.233 +01:00 [INF] The token request was successfully validated.
+2023-09-21 22:27:36.280 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2628000,
+  "id_token": "[redacted]"
+}.
+2023-09-21 22:27:36.316 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:27:36.316 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:27:36.316 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:35:34.837 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:35:34.837 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-21 22:35:34.839 +01:00 [INF] The token request was successfully validated.
+2023-09-21 22:35:34.905 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-21 22:36:09.420 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:36:09.421 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:36:09.421 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:37:11.822 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:37:11.822 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:37:11.823 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:37:25.639 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:37:25.639 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:37:25.639 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:37:27.477 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:37:27.478 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:37:27.478 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:39:09.468 +01:00 [INF] Application is shutting down...
+2023-09-21 22:39:09.475 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core shutting down.
+2023-09-21 22:39:09.475 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core paused.
+2023-09-21 22:39:09.479 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core Shutdown complete.
+2023-09-21 22:39:09.481 +01:00 [INF] Stopped cleanly
+th instanceId 'MixyBoos-Server-Core' initialized
+2023-09-21 22:39:08.619 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-21 22:39:08.619 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-21 22:39:08.624 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-21 22:39:08.626 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-21 22:39:08.628 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-21 22:39:08.629 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-21 22:39:08.629 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-21 22:39:08.629 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-21 22:39:08.746 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-21 22:39:09.212 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-21 22:39:23.297 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-21 22:39:23.310 +01:00 [INF] Quartz Scheduler created
+2023-09-21 22:39:23.310 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-21 22:39:23.311 +01:00 [INF] RAMJobStore initialized.
+2023-09-21 22:39:23.311 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-21 22:39:23.311 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-21 22:39:23.312 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-21 22:39:23.317 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-21 22:39:23.318 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-21 22:39:23.322 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-21 22:39:23.322 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-21 22:39:23.322 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-21 22:39:23.322 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-21 22:39:23.451 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-21 22:39:23.932 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-21 22:39:25.302 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-21 22:39:25.394 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-21 22:39:25.396 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-21 22:39:25.396 +01:00 [INF] Hosting environment: Development
+2023-09-21 22:39:25.396 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-21 22:39:25.399 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-21 22:40:18.159 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:40:18.187 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-21 22:40:18.342 +01:00 [INF] The token request was successfully validated.
+2023-09-21 22:40:19.234 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-21 22:40:41.441 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:40:41.450 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:40:41.451 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:41:15.146 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:41:15.146 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:41:15.146 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:41:43.051 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:41:43.052 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "IsRefreshTokenGrantType",
+  "scope": "openid api",
+  "client_id": "postman",
+  "client_secret": "[redacted]"
+}.
+2023-09-21 22:41:43.054 +01:00 [INF] The token request was rejected because the 'IsRefreshTokenGrantType' grant type is not supported.
+2023-09-21 22:41:43.056 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "error": "unsupported_grant_type",
+  "error_description": "The specified 'grant_type' is not supported.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2032"
+}.
+2023-09-21 22:42:28.063 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:42:28.064 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "postman",
+  "client_secret": "[redacted]"
+}.
+2023-09-21 22:42:28.160 +01:00 [INF] The token request was rejected because the client application was not found: 'postman'.
+2023-09-21 22:42:28.161 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "error": "invalid_client",
+  "error_description": "The specified 'client_id' is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2052"
+}.
+2023-09-21 22:42:38.728 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:42:38.728 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient",
+  "client_secret": "[redacted]"
+}.
+2023-09-21 22:42:38.893 +01:00 [INF] The token request was rejected because the public application 'webclient' was not allowed to send a client secret.
+2023-09-21 22:42:38.894 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "error": "invalid_client",
+  "error_description": "The 'client_secret' parameter is not valid for this client application.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2053"
+}.
+2023-09-21 22:42:52.960 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:42:52.960 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient"
+}.
+2023-09-21 22:42:53.005 +01:00 [INF] The token request was successfully validated.
+2023-09-21 22:42:53.556 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "scope": "openid",
+  "id_token": "[redacted]"
+}.
+2023-09-21 22:43:05.822 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 22:43:05.822 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient"
+}.
+2023-09-21 22:43:06.027 +01:00 [INF] The token request was successfully validated.
+2023-09-21 22:43:06.661 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "scope": "openid",
+  "id_token": "[redacted]"
+}.
+2023-09-21 22:43:14.287 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:43:14.287 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:43:14.287 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:45:12.521 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 22:45:12.521 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 22:45:12.521 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 22:46:00.442 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-21 22:46:00.455 +01:00 [INF] Quartz Scheduler created
+2023-09-21 22:46:00.455 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-21 22:46:00.455 +01:00 [INF] RAMJobStore initialized.
+2023-09-21 22:46:00.456 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-21 22:46:00.456 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-21 22:46:00.456 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-21 22:46:00.461 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-21 22:46:00.463 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-21 22:46:00.465 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-21 22:46:00.465 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-21 22:46:00.465 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-21 22:46:00.465 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-21 22:46:00.569 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-21 22:46:01.019 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-21 22:46:02.560 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-21 22:46:02.652 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-21 22:46:02.655 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-21 22:46:02.655 +01:00 [INF] Hosting environment: Development
+2023-09-21 22:46:02.655 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-21 22:46:02.657 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-21 23:07:51.212 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-21 23:07:51.239 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient"
+}.
+2023-09-21 23:07:51.304 +01:00 [INF] The token request was successfully validated.
+2023-09-21 23:07:52.079 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "scope": "openid",
+  "id_token": "[redacted]"
+}.
+2023-09-21 23:08:03.844 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 23:08:03.852 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 23:08:03.852 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 23:08:05.022 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 23:08:05.022 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 23:08:05.022 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 23:08:05.446 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 23:08:05.447 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 23:08:05.447 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 23:08:24.226 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 23:08:24.227 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 23:08:24.227 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 23:08:25.173 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 23:08:25.174 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 23:08:25.174 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 23:12:41.293 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-21 23:12:41.306 +01:00 [INF] Quartz Scheduler created
+2023-09-21 23:12:41.306 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-21 23:12:41.306 +01:00 [INF] RAMJobStore initialized.
+2023-09-21 23:12:41.307 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-21 23:12:41.307 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-21 23:12:41.307 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-21 23:12:41.312 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-21 23:12:41.314 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-21 23:12:41.316 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-21 23:12:41.317 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-21 23:12:41.317 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-21 23:12:41.317 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-21 23:12:41.435 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-21 23:12:41.878 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-21 23:12:43.372 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-21 23:12:43.473 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-21 23:12:43.476 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-21 23:12:43.476 +01:00 [INF] Hosting environment: Development
+2023-09-21 23:12:43.477 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-21 23:12:43.479 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-21 23:13:08.978 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 23:13:09.472 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 23:13:09.473 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-21 23:14:21.067 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-21 23:14:21.067 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-21 23:14:21.067 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-22 00:48:32.832 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-22 00:48:32.852 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid",
+  "client_id": "webclient"
+}.
+2023-09-22 00:48:32.927 +01:00 [INF] The token request was successfully validated.
+2023-09-22 00:48:33.971 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "id_token": "[redacted]"
+}.
+2023-09-22 00:49:14.809 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-22 00:49:14.810 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-22 00:49:14.810 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-23 15:38:55.240 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-23 15:38:55.251 +01:00 [INF] Quartz Scheduler created
+2023-09-23 15:38:55.252 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-23 15:38:55.252 +01:00 [INF] RAMJobStore initialized.
+2023-09-23 15:38:55.253 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-23 15:38:55.253 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-23 15:38:55.253 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-23 15:38:55.259 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-23 15:38:55.260 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-23 15:38:55.263 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-23 15:38:55.263 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-23 15:38:55.263 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-23 15:38:55.263 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-23 15:38:55.356 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-23 15:38:55.765 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-23 15:38:56.440 +01:00 [FTL] Application startup exception
+System.IO.DirectoryNotFoundException: /srv/dev/mixyboos/mixyboos-audio/mounts/images/
+   at Microsoft.Extensions.FileProviders.PhysicalFileProvider..ctor(String root, ExclusionFilters filters)
+   at MixyBoos.Api.Startup.<>c__DisplayClass3_0.<ConfigureServices>b__0(IServiceProvider _) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Startup.cs:line 56
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitIEnumerable(IEnumerableCallSite enumerableCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+2023-09-23 15:38:56.446 +01:00 [ERR] Hosting failed to start
+System.IO.DirectoryNotFoundException: /srv/dev/mixyboos/mixyboos-audio/mounts/images/
+   at Microsoft.Extensions.FileProviders.PhysicalFileProvider..ctor(String root, ExclusionFilters filters)
+   at MixyBoos.Api.Startup.<>c__DisplayClass3_0.<ConfigureServices>b__0(IServiceProvider _) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Startup.cs:line 56
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitIEnumerable(IEnumerableCallSite enumerableCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2023-09-23 15:38:56.450 +01:00 [FTL] An unhandled exception occured during bootstrapping /srv/dev/mixyboos/mixyboos-audio/mounts/images/
+System.IO.DirectoryNotFoundException: /srv/dev/mixyboos/mixyboos-audio/mounts/images/
+   at Microsoft.Extensions.FileProviders.PhysicalFileProvider..ctor(String root, ExclusionFilters filters)
+   at MixyBoos.Api.Startup.<>c__DisplayClass3_0.<ConfigureServices>b__0(IServiceProvider _) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Startup.cs:line 56
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitIEnumerable(IEnumerableCallSite enumerableCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.ConstructorMatcher.CreateInstance(IServiceProvider provider)
+   at Microsoft.Extensions.Internal.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.ReflectionMiddlewareBinder.CreateMiddleware(RequestDelegate next)
+   at Microsoft.AspNetCore.Builder.ApplicationBuilder.Build()
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host)
+   at MixyBoos.Api.Program.Main(String[] args) in /srv/dev/mixyboos/mixyboos-backend/mixyboos-api/Program.cs:line 22
+2023-09-23 15:40:27.182 +01:00 [INF] Initialized Scheduler Signaller of type: Quartz.Core.SchedulerSignalerImpl
+2023-09-23 15:40:27.195 +01:00 [INF] Quartz Scheduler created
+2023-09-23 15:40:27.196 +01:00 [INF] JobFactory set to: Quartz.Simpl.MicrosoftDependencyInjectionJobFactory
+2023-09-23 15:40:27.196 +01:00 [INF] RAMJobStore initialized.
+2023-09-23 15:40:27.197 +01:00 [INF] Quartz Scheduler 3.7.0.0 - 'MixyBoos Scheduler' with instanceId 'MixyBoos-Server-Core' initialized
+2023-09-23 15:40:27.197 +01:00 [INF] Using thread pool 'Quartz.Simpl.DefaultThreadPool', size: 10
+2023-09-23 15:40:27.197 +01:00 [INF] Using job store 'Quartz.Simpl.RAMJobStore', supports persistence: False, clustered: False
+2023-09-23 15:40:27.202 +01:00 [INF] Adding 5 jobs, 1 triggers.
+2023-09-23 15:40:27.204 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedAudioJob
+2023-09-23 15:40:27.207 +01:00 [INF] Adding job: DEFAULT.ProcessUploadedImageJob
+2023-09-23 15:40:27.207 +01:00 [INF] Adding job: DEFAULT.CheckLiveStreamJob
+2023-09-23 15:40:27.207 +01:00 [INF] Adding job: DEFAULT.SaveLiveShowJob
+2023-09-23 15:40:27.207 +01:00 [INF] Adding job: DEFAULT.CheckAudioIsProcessedJob
+2023-09-23 15:40:27.325 +01:00 [INF] Creating the webclient OpenIddict application
+2023-09-23 15:40:27.790 +01:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2023-09-23 15:40:29.349 +01:00 [WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2023-09-23 15:40:29.451 +01:00 [INF] Now listening on: https://0.0.0.0:5001
+2023-09-23 15:40:29.454 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-09-23 15:40:29.454 +01:00 [INF] Hosting environment: Development
+2023-09-23 15:40:29.454 +01:00 [INF] Content root path: /srv/dev/mixyboos/mixyboos-backend/mixyboos-api
+2023-09-23 15:40:29.456 +01:00 [INF] Scheduler MixyBoos Scheduler_$_MixyBoos-Server-Core started.
+2023-09-23 15:40:36.838 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-23 15:40:36.856 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-23 15:40:36.857 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-23 15:40:54.566 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-23 15:40:54.576 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "postman",
+  "client_secret": "[redacted]"
+}.
+2023-09-23 15:40:54.670 +01:00 [INF] The token request was rejected because the client application was not found: 'postman'.
+2023-09-23 15:40:54.677 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "error": "invalid_client",
+  "error_description": "The specified 'client_id' is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2052"
+}.
+2023-09-23 15:41:00.979 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-23 15:41:00.979 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient"
+}.
+2023-09-23 15:41:01.178 +01:00 [INF] The token request was successfully validated.
+2023-09-23 15:41:01.971 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "scope": "openid",
+  "id_token": "[redacted]"
+}.
+2023-09-23 15:41:12.217 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-23 15:41:12.218 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-23 15:41:12.218 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.
+2023-09-23 15:42:35.336 +01:00 [INF] The request URI matched a server endpoint: "Authorization".
+2023-09-23 15:42:35.338 +01:00 [INF] The authorization request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient"
+}.
+2023-09-23 15:42:35.341 +01:00 [INF] The authorization request was rejected because the mandatory 'redirect_uri' parameter was missing.
+2023-09-23 15:42:35.348 +01:00 [INF] The response was successfully returned as a plain-text document: {
+  "error": "invalid_request",
+  "error_description": "The mandatory 'redirect_uri' parameter is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2029"
+}.
+2023-09-23 15:42:36.936 +01:00 [INF] The request URI matched a server endpoint: "Authorization".
+2023-09-23 15:42:36.937 +01:00 [INF] The authorization request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient"
+}.
+2023-09-23 15:42:36.937 +01:00 [INF] The authorization request was rejected because the mandatory 'redirect_uri' parameter was missing.
+2023-09-23 15:42:36.938 +01:00 [INF] The response was successfully returned as a plain-text document: {
+  "error": "invalid_request",
+  "error_description": "The mandatory 'redirect_uri' parameter is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2029"
+}.
+2023-09-23 15:42:59.077 +01:00 [INF] The request URI matched a server endpoint: "Configuration".
+2023-09-23 15:42:59.079 +01:00 [INF] The configuration request was successfully extracted: {}.
+2023-09-23 15:42:59.080 +01:00 [INF] The configuration request was successfully validated.
+2023-09-23 15:42:59.087 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "issuer": "https://localhost:5001/",
+  "authorization_endpoint": "https://localhost:5001/connect/authorize",
+  "token_endpoint": "https://localhost:5001/connect/token",
+  "userinfo_endpoint": "https://localhost:5001/connect/userinfo",
+  "jwks_uri": "https://localhost:5001/.well-known/jwks",
+  "grant_types_supported": [
+    "password",
+    "client_credentials",
+    "authorization_code",
+    "refresh_token",
+    "urn:ietf:params:oauth:grant-type:google_identity_token"
+  ],
+  "response_types_supported": [
+    "code"
+  ],
+  "response_modes_supported": [
+    "form_post",
+    "fragment",
+    "query"
+  ],
+  "scopes_supported": [
+    "openid",
+    "offline_access",
+    "api"
+  ],
+  "claims_supported": [
+    "aud",
+    "exp",
+    "iat",
+    "iss",
+    "sub"
+  ],
+  "id_token_signing_alg_values_supported": [
+    "RS256"
+  ],
+  "code_challenge_methods_supported": [
+    "plain",
+    "S256"
+  ],
+  "subject_types_supported": [
+    "public"
+  ],
+  "token_endpoint_auth_methods_supported": [
+    "client_secret_basic",
+    "client_secret_post"
+  ],
+  "claims_parameter_supported": false,
+  "request_parameter_supported": false,
+  "request_uri_parameter_supported": false,
+  "authorization_response_iss_parameter_supported": true
+}.
+2023-09-23 15:43:06.125 +01:00 [INF] The request URI matched a server endpoint: "Authorization".
+2023-09-23 15:43:06.126 +01:00 [INF] The authorization request was successfully extracted: {}.
+2023-09-23 15:43:06.126 +01:00 [INF] The authorization request was rejected because the mandatory 'client_id' parameter was missing.
+2023-09-23 15:43:06.127 +01:00 [INF] The response was successfully returned as a plain-text document: {
+  "error": "invalid_request",
+  "error_description": "The mandatory 'client_id' parameter is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2029"
+}.
+2023-09-23 15:43:12.516 +01:00 [INF] The request URI matched a server endpoint: "Authorization".
+2023-09-23 15:43:12.516 +01:00 [INF] The authorization request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient"
+}.
+2023-09-23 15:43:12.516 +01:00 [INF] The authorization request was rejected because the mandatory 'redirect_uri' parameter was missing.
+2023-09-23 15:43:12.516 +01:00 [INF] The response was successfully returned as a plain-text document: {
+  "error": "invalid_request",
+  "error_description": "The mandatory 'redirect_uri' parameter is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2029"
+}.
+2023-09-23 15:43:19.276 +01:00 [INF] The request URI matched a server endpoint: "Authorization".
+2023-09-23 15:43:19.276 +01:00 [INF] The authorization request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient",
+  "redirect_url": "/"
+}.
+2023-09-23 15:43:19.276 +01:00 [INF] The authorization request was rejected because the mandatory 'redirect_uri' parameter was missing.
+2023-09-23 15:43:19.276 +01:00 [INF] The response was successfully returned as a plain-text document: {
+  "error": "invalid_request",
+  "error_description": "The mandatory 'redirect_uri' parameter is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2029"
+}.
+2023-09-23 15:43:24.394 +01:00 [INF] The request URI matched a server endpoint: "Authorization".
+2023-09-23 15:43:24.394 +01:00 [INF] The authorization request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient",
+  "redirect_uri": "/"
+}.
+2023-09-23 15:43:24.394 +01:00 [INF] The authorization request was rejected because the 'redirect_uri' parameter wasn't a valid absolute URI: /.
+2023-09-23 15:43:24.395 +01:00 [INF] The response was successfully returned as a plain-text document: {
+  "error": "invalid_request",
+  "error_description": "The 'redirect_uri' parameter must be a valid absolute URI.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2030"
+}.
+2023-09-23 15:43:37.454 +01:00 [INF] The request URI matched a server endpoint: "Authorization".
+2023-09-23 15:43:37.454 +01:00 [INF] The authorization request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient",
+  "redirect_uri": "https://mixyboos.dev.fergl.ie:3000/"
+}.
+2023-09-23 15:43:37.455 +01:00 [INF] The authorization request was rejected because the mandatory 'response_type' parameter was missing.
+2023-09-23 15:43:37.455 +01:00 [INF] The response was successfully returned as a plain-text document: {
+  "error": "invalid_request",
+  "error_description": "The mandatory 'response_type' parameter is missing.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2029"
+}.
+2023-09-23 15:43:48.782 +01:00 [INF] The request URI matched a server endpoint: "Authorization".
+2023-09-23 15:43:48.783 +01:00 [INF] The authorization request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient",
+  "redirect_uri": "https://mixyboos.dev.fergl.ie:3000/",
+  "response_type": "text/plain"
+}.
+2023-09-23 15:43:48.784 +01:00 [INF] The authorization request was rejected because the 'text/plain' response type is not supported.
+2023-09-23 15:43:48.784 +01:00 [INF] The response was successfully returned as a plain-text document: {
+  "error": "unsupported_response_type",
+  "error_description": "The specified 'response_type' is not supported.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2032"
+}.
+2023-09-23 15:43:57.702 +01:00 [INF] The request URI matched a server endpoint: "Authorization".
+2023-09-23 15:43:57.703 +01:00 [INF] The authorization request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient",
+  "redirect_uri": "https://mixyboos.dev.fergl.ie:3000/",
+  "response_type": "application/json"
+}.
+2023-09-23 15:43:57.703 +01:00 [INF] The authorization request was rejected because the 'application/json' response type is not supported.
+2023-09-23 15:43:57.703 +01:00 [INF] The response was successfully returned as a plain-text document: {
+  "error": "unsupported_response_type",
+  "error_description": "The specified 'response_type' is not supported.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2032"
+}.
+2023-09-23 15:45:12.109 +01:00 [INF] The request URI matched a server endpoint: "Token".
+2023-09-23 15:45:12.110 +01:00 [INF] The token request was successfully extracted: {
+  "username": "fergal.moran+mixyboos@gmail.com",
+  "password": "[redacted]",
+  "grant_type": "password",
+  "scope": "openid api",
+  "client_id": "webclient",
+  "redirect_uri": "https://mixyboos.dev.fergl.ie:3000/",
+  "response_type": "application/json"
+}.
+2023-09-23 15:45:12.257 +01:00 [INF] The token request was successfully validated.
+2023-09-23 15:45:13.035 +01:00 [INF] The response was successfully returned as a JSON document: {
+  "access_token": "[redacted]",
+  "token_type": "Bearer",
+  "expires_in": 2627999,
+  "scope": "openid",
+  "id_token": "[redacted]"
+}.
+2023-09-23 15:45:28.265 +01:00 [INF] OpenIddict.Validation.AspNetCore was not authenticated. Failure message: An error occurred while authenticating the current request.
+2023-09-23 15:45:28.266 +01:00 [INF] The response was successfully returned as a challenge response: {
+  "error": "invalid_token",
+  "error_description": "The specified token is invalid.",
+  "error_uri": "https://documentation.openiddict.com/errors/ID2004"
+}.
+2023-09-23 15:45:28.266 +01:00 [INF] AuthenticationScheme: OpenIddict.Validation.AspNetCore was challenged.

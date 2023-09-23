@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20230913185146_Initial")]
+    [Migration("20230921212309_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

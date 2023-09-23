@@ -67,7 +67,5 @@ public class Program {
         builder.ClearProviders();
         builder.AddConsole();
       });
-
-    ;
   }
 }
