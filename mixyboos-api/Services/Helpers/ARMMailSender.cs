@@ -26,8 +26,8 @@ public class ARMMailSender : IEmailSender {
 
       var client = new EmailClient(connectionString);
       var operation = await client.SendAsync(
-        wait: WaitUntil.Completed,
-        senderAddress: _config["Email:FromAddress"].ToString(),
+        wait: WaitUntil.Started,
+        senderAddress: _config["Email:FromAddress"],
         recipientAddress: email,
         subject: subject,
         htmlContent: htmlMessage
