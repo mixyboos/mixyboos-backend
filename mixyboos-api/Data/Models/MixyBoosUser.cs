@@ -23,7 +23,7 @@ public class MixyBoosUser : IdentityUser<Guid>, ISluggedEntity {
     public string ProfileImage { get; set; }
     public string HeaderImage { get; set; }
 
-    [SlugField(SourceField = "DisplayName")]
+    [SlugField(SourceField = "UserName")]
     public string Slug { get; set; }
 
     [MaxLength(100)] public string City { get; set; }

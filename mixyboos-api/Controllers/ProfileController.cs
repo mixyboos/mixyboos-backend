@@ -12,12 +12,10 @@ using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services.Extensions;
 using MixyBoos.Api.Services.Helpers;
-using OpenIddict.Validation.AspNetCore;
-using Guid = System.Guid;
 
 namespace MixyBoos.Api.Controllers;
 
-[Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+[Authorize]
 [Route("[controller]")]
 public class ProfileController : _Controller {
     private readonly UserManager<MixyBoosUser> _userManager;
@@ -105,7 +103,7 @@ public class ProfileController : _Controller {
     }
 
     [HttpPost]
-    [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+    [Authorize]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

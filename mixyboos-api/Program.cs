@@ -1,71 +1,108 @@
-using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Serilog;
+using MixyBoos.Api.Data;
+using MixyBoos.Api.Data.Models;
+using MixyBoos.Api.Data.Seeders;
+using MixyBoos.Api.Data.Utils;
+using MixyBoos.Api.Services.Auth;
+using MixyBoos.Api.Services.Helpers;
+using MixyBoos.Api.Services.Helpers.Audio;
 
-namespace MixyBoos.Api;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Program {
-  private static readonly string _environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var instance = CodePagesEncodingProvider.Instance;
+Encoding.RegisterProvider(instance);
 
-  public static void Main(string[] args) {
-    Log.Logger = new LoggerConfiguration()
-      .WriteTo.Console()
-      .CreateBootstrapLogger();
-
-    try {
-      CreateHostBuilder(args).Build().Run();
-      Log.Information("Stopped cleanly");
-    } catch (Exception e) {
-      Log.Fatal(e, "An unhandled exception occured during bootstrapping {Error}", e.Message);
-      Log.CloseAndFlush();
-    }
+builder.WebHost.ConfigureKestrel(options => {
+  var pemFile = builder.Configuration["SSL:PemFile"];
+  var keyFile = builder.Configuration["SSL:KeyFile"];
+  if (string.IsNullOrEmpty(pemFile) || string.IsNullOrEmpty(keyFile)) {
+    return;
   }
 
-  private static IHostBuilder CreateHostBuilder(string[] args) {
-    var builder = new ConfigurationBuilder()
-      .SetBasePath(Directory.GetCurrentDirectory())
-      .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-      .AddJsonFile($"appsettings.{_environment}.json", optional: true)
-      .AddEnvironmentVariables();
+  options.Listen(IPAddress.Any, 5001, listenOptions => {
+    var certPem = File.ReadAllText("/etc/letsencrypt/live/dev.fergl.ie/fullchain.pem");
+    var keyPem = File.ReadAllText("/etc/letsencrypt/live/dev.fergl.ie/privkey.pem");
+    var x509 = X509Certificate2.CreateFromPem(certPem, keyPem);
+    listenOptions.UseHttps(x509);
+  });
+});
 
 
-    var configuration = builder.Build();
-    return Host.CreateDefaultBuilder(args)
-      .UseSerilog((context, services, seriLogConfig) => seriLogConfig
-        .ReadFrom.Configuration(context.Configuration)
-        .ReadFrom.Services(services)
-        .Enrich.FromLogContext()
-        .WriteTo.Console())
-      .UseDefaultServiceProvider(o => {
-        o.ValidateOnBuild = false;
-      })
-      .ConfigureWebHostDefaults(webBuilder => {
-        webBuilder
-          .UseKestrel(options => {
-            var pemFile = configuration["SSL:PemFile"];
-            var keyFile = configuration["SSL:KeyFile"];
-            if (string.IsNullOrEmpty(pemFile) || string.IsNullOrEmpty(keyFile)) {
-              return;
-            }
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddScoped<IClaimsTransformation, ClaimsTransformer>();
+builder.Services.AddTransient<IEmailSender, ARMMailSender>();
+builder.Services.AddSingleton<IAudioFileConverter, AudioFileConverter>();
+builder.Services.AddSingleton<IUserIdProvider, CustomEmailProvider>();
+builder.Services.AddSingleton<ImageCacher>();
+builder.Services.AddSingleton<ImageHelper>();
+builder.Services.AddSingleton<IFileProvider, PhysicalFileProvider>(_ =>
+  new PhysicalFileProvider(
+    builder.Configuration["ImageProcessing:ImageRootFolder"] ?? ".pn-cache"));
 
-            options.Listen(IPAddress.Any, 5001, listenOptions => {
-              var certPem = File.ReadAllText("/etc/letsencrypt/live/dev.fergl.ie/fullchain.pem");
-              var keyPem = File.ReadAllText("/etc/letsencrypt/live/dev.fergl.ie/privkey.pem");
-              var x509 = X509Certificate2.CreateFromPem(certPem, keyPem);
+builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddAuthorizationBuilder();
 
-              listenOptions.UseHttps(x509);
-            });
-          })
-          .UseStartup<Startup>();
-      }).ConfigureLogging(builder => {
-        builder.ClearProviders();
-        builder.AddConsole();
-      });
-  }
+builder.Services.AddDbContext<MixyBoosContext>(options =>
+  options
+    .UseNpgsql(builder.Configuration.GetConnectionString("MixyBoos"), options => {
+      options
+        .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)
+        .MigrationsHistoryTable("migrations", "sys");
+    }).EnableSensitiveDataLogging(builder.Environment.IsDevelopment()));
+
+builder.Services
+  .AddIdentityCore<MixyBoosUser>()
+  .AddEntityFrameworkStores<MixyBoosContext>()
+  .AddApiEndpoints();
+
+builder.Services.Configure<IdentityOptions>(options => {
+  // Default Password settings.
+  options.Password.RequireDigit = false;
+  options.Password.RequireLowercase = false;
+  options.Password.RequireNonAlphanumeric = false;
+  options.Password.RequireUppercase = false;
+  options.Password.RequiredLength = 4;
+  options.Password.RequiredUniqueChars = 0;
+});
+
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+
+builder.Services.Configure<RouteOptions>(options => {
+  options.LowercaseUrls = true;
+});
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment()) {
+  app.UseSwagger();
+  app.UseSwaggerUI();
 }
+
+app.MapGroup("/auth")
+  .MapIdentityApi<MixyBoosUser>()
+  .WithTags("Auth");
+
+app.UseHttpsRedirection();
+app.MapControllers();
+app.Run();

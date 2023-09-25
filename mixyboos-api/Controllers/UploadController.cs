@@ -18,8 +18,6 @@ using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services;
 using MixyBoos.Api.Services.Extensions;
-using MixyBoos.Api.Services.Helpers;
-using OpenIddict.Validation.AspNetCore;
 using Quartz;
 
 public class InvalidFileUploadException : Exception {
@@ -32,7 +30,7 @@ namespace MixyBoos.Api.Controllers {
     public IFormFile File { get; set; }
   }
 
-  [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+  [Authorize]
   [Route("[controller]")]
   public class UploadController : _Controller {
     private readonly UserManager<MixyBoosUser> _userManager;

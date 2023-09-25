@@ -18,11 +18,10 @@ using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.DTO.Wire;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services.Extensions;
-using OpenIddict.Validation.AspNetCore;
 using Quartz;
 
 namespace MixyBoos.Api.Controllers {
-  [Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+  [Authorize]
   [Route("[controller]")]
   public class LiveController : _Controller {
     private readonly UserManager<MixyBoosUser> _userManager;

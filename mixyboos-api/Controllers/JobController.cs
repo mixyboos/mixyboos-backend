@@ -9,12 +9,11 @@ using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Services;
 using MixyBoos.Api.Services.Helpers.IO;
-using OpenIddict.Validation.AspNetCore;
 using Quartz;
 
 namespace MixyBoos.Api.Controllers;
 
-[Authorize(AuthenticationSchemes = OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme)]
+[Authorize]
 [Route("[controller]")]
 public class JobController : _Controller {
   private readonly MixyBoosContext _context;
