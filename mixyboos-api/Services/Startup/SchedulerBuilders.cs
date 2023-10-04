@@ -11,7 +11,6 @@ public static class SchedulerBuilders {
       q.SchedulerId = "MixyBoos-Server-Core";
       q.SchedulerName = "MixyBoos Scheduler";
 
-      q.UseMicrosoftDependencyInjectionJobFactory();
       q.AddJob<ProcessUploadedAudioJob>(opts => {
         opts.WithIdentity(new JobKey("ProcessUploadedAudioJob")).StoreDurably();
       });

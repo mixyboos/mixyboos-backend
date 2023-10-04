@@ -8,15 +8,16 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MixyBoos.Api.Data.Models;
+using MixyBoos.Api.Data.Options;
 using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Extensions;
-
-#nullable disable
 
 namespace MixyBoos.Api.Data;
 
 public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid>, Guid> {
+  private readonly DbScaffoldOptions _settings;
   private readonly ILogger<MixyBoosContext> _logger;
   public DbSet<Mix> Mixes { get; set; }
 
@@ -30,8 +31,10 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
   public DbSet<ShowChat> ShowChat { get; set; }
 
 
-  public MixyBoosContext(DbContextOptions<MixyBoosContext> options, ILogger<MixyBoosContext> logger)
+  public MixyBoosContext(DbContextOptions<MixyBoosContext> options, IOptions<DbScaffoldOptions> settings,
+    ILogger<MixyBoosContext> logger)
     : base(options) {
+    _settings = settings.Value;
     _logger = logger;
   }
 
@@ -60,6 +63,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
 
   protected override void OnModelCreating(ModelBuilder mb) {
     base.OnModelCreating(mb);
+
     mb.HasDefaultSchema("mixyboos");
     mb.UseIdentityByDefaultColumns();
 
@@ -97,8 +101,6 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
     }
 
     foreach (var pb in __getColumns(mb, "Id")) {
-      _logger.LogDebug("Creating value generators for {GeneratorName}",
-        pb.Metadata.DeclaringEntityType.Name);
       pb.IsRequired()
         .HasConversion<string>()
         .ValueGeneratedOnAdd();
@@ -159,6 +161,8 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
     mb.Entity<Mix>()
       .Navigation(m => m.User)
       .AutoInclude();
+
+    mb.SeedAuthenticationUsers(_settings);
   }
 
   public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,

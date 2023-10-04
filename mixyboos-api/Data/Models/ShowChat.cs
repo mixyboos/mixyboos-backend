@@ -1,5 +1,4 @@
-﻿#nullable enable
-using System;
+﻿using System;
 
 namespace MixyBoos.Api.Data.Models {
     /// <summary>
@@ -8,7 +7,7 @@ namespace MixyBoos.Api.Data.Models {
     /// </summary>
     public class ShowChat : BaseEntity {
         public MixyBoosUser FromUser { get; set; }
-        public MixyBoosUser? ToUser { get; set; }
+        public MixyBoosUser ToUser { get; set; }
         public DateTime DateSent { get; set; }
         public string Message { get; set; }
         public virtual LiveShow Show { get; set; }

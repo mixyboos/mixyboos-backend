@@ -18,116 +18,111 @@ namespace MixyBoos.Api.Controllers;
 [Authorize]
 [Route("[controller]")]
 public class ProfileController : _Controller {
-    private readonly UserManager<MixyBoosUser> _userManager;
-    private readonly MixyBoosContext _context;
+  private readonly UserManager<MixyBoosUser> _userManager;
+  private readonly MixyBoosContext _context;
 
-    public ProfileController(
-        UserManager<MixyBoosUser> userManager,
-        MixyBoosContext context,
-        ILogger<ProfileController> logger) : base(logger) {
-        _userManager = userManager;
-        _context = context;
+  public ProfileController(
+    UserManager<MixyBoosUser> userManager,
+    MixyBoosContext context,
+    ILogger<ProfileController> logger) : base(logger) {
+    _userManager = userManager;
+    _context = context;
+  }
+
+  [HttpGet]
+  public async Task<ActionResult<ProfileDTO>> GetProfile() {
+    var user = await _userManager.FindByNameWithFollowingAsync(User.Identity.Name);
+    if (user is null) {
+      return Unauthorized();
     }
 
-    [HttpGet("me")]
-    public async Task<ActionResult<ProfileDTO>> GetProfile() {
-        var user = await _userManager.FindByNameWithFollowingAsync(User.Identity.Name);
-        if (user is null) {
-            return Unauthorized();
-        }
+    return Ok(user.ToDto());
+  }
 
-        return Ok(user.Adapt<ProfileDTO>());
+
+  [HttpPost]
+  [Authorize]
+  [Consumes(MediaTypeNames.Application.Json)]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status404NotFound)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  public async Task<ActionResult<ProfileDTO>> UpdateProfile([FromBody] ProfileDTO incoming) {
+    if (!ModelState.IsValid) {
+      return BadRequest();
     }
 
-    [HttpPost("follow")]
-    public async Task<IActionResult> FollowUser([FromQuery] string userId) {
-        var userToFollow = await _userManager.FindByIdAsync(userId);
-        var me = await _userManager.FindByNameWithFollowingAsync(User.Identity.Name);
-
-        if (userToFollow is null && me is not null) {
-            return BadRequest();
-        }
-
-        if (!me.Following.Any(f => f.Id.Equals(userToFollow.Id))) {
-            me.Following.Add(userToFollow);
-            userToFollow.Followers.Add(me);
-            await _context.SaveChangesAsync();
-        }
-
-        return Ok();
+    var user = await _userManager.FindByIdAsync(incoming.Id);
+    if (user is null) {
+      return NotFound();
     }
 
-    [HttpPost("togglefollow")]
-    public async Task<IActionResult> ToggleFollow([FromQuery] string slug) {
-        var userToFollow = await _userManager.FindBySlugWithFollowingAsync(slug);
-        var me = await _userManager.FindByNameWithFollowingAsync(User.Identity.Name);
+    user.FromDto(incoming);
 
-        if (userToFollow is null && me is not null) {
-            return BadRequest();
-        }
+    await _userManager.UpdateAsync(user);
 
-        if (!me.Following.Any(f => f.Id.Equals(userToFollow.Id))) {
-            me.Following.Add(userToFollow);
-            userToFollow.Followers.Add(me);
-        } else {
-            me.Following.Remove(userToFollow);
-            userToFollow.Followers.Remove(userToFollow);
-        }
+    return Ok(user.ToDto());
+  }
 
-        await _context.SaveChangesAsync();
-        return Ok();
+  [HttpPost("follow")]
+  public async Task<IActionResult> FollowUser([FromQuery] string userId) {
+    var userToFollow = await _userManager.FindByIdAsync(userId);
+    var me = await _userManager.FindByNameWithFollowingAsync(User.Identity.Name);
+
+    if (userToFollow is null && me is not null) {
+      return BadRequest();
     }
 
-    [HttpGet("apikey")]
-    public async Task<ActionResult<GetApiKeyDTO>> GetApiKey() {
-        var user = await _userManager.FindByNameAsync(User.Identity.Name);
-        if (string.IsNullOrEmpty(user.StreamKey)) {
-            user.StreamKey = KeyGenerator.GenerateRandomCryptoString(32);
-            await _context.SaveChangesAsync();
-        }
-
-        return Ok(new GetApiKeyDTO {
-            UserId = User.Identity.Name,
-            ApiKey = user.StreamKey
-        });
+    if (!me.Following.Any(f => f.Id.Equals(userToFollow.Id))) {
+      me.Following.Add(userToFollow);
+      userToFollow.Followers.Add(me);
+      await _context.SaveChangesAsync();
     }
 
-    [HttpGet]
-    public async Task<ActionResult<ProfileDTO>> GetBySlug([FromQuery] string slug) {
-        var user = await _userManager.FindBySlugAsync(slug);
-        if (user is null) {
-            return NotFound();
-        }
+    return Ok();
+  }
 
-        return Ok(user.Adapt<ProfileDTO>());
+  [HttpPost("togglefollow")]
+  public async Task<IActionResult> ToggleFollow([FromQuery] string slug) {
+    var userToFollow = await _userManager.FindBySlugWithFollowingAsync(slug);
+    var me = await _userManager.FindByNameWithFollowingAsync(User.Identity.Name);
+
+    if (userToFollow is null && me is not null) {
+      return BadRequest();
     }
 
-    [HttpPost]
-    [Authorize]
-    [Consumes(MediaTypeNames.Application.Json)]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ProfileDTO>> UpdateBySlug([FromBody] ProfileDTO incoming) {
-        if (!ModelState.IsValid) {
-            return BadRequest();
-        }
-
-        var user = await _userManager.FindByIdAsync(incoming.Id);
-        if (user is null) {
-            return NotFound();
-        }
-
-        user.UserName = incoming.UserName;
-        user.Title = incoming.Title;
-        user.DisplayName = incoming.DisplayName;
-        user.City = incoming.City;
-        user.Country = incoming.Country;
-        user.Biography = incoming.Biography;
-        user.PhoneNumber = incoming.PhoneNumber;
-
-        await _userManager.UpdateAsync(user);
-
-        return Ok(user.Adapt<ProfileDTO>());
+    if (!me.Following.Any(f => f.Id.Equals(userToFollow.Id))) {
+      me.Following.Add(userToFollow);
+      userToFollow.Followers.Add(me);
+    } else {
+      me.Following.Remove(userToFollow);
+      userToFollow.Followers.Remove(userToFollow);
     }
+
+    await _context.SaveChangesAsync();
+    return Ok();
+  }
+
+  [HttpGet("apikey")]
+  public async Task<ActionResult<GetApiKeyDTO>> GetApiKey() {
+    var user = await _userManager.FindByNameAsync(User.Identity.Name);
+    if (string.IsNullOrEmpty(user.StreamKey)) {
+      user.StreamKey = KeyGenerator.GenerateRandomCryptoString(32);
+      await _context.SaveChangesAsync();
+    }
+
+    return Ok(new GetApiKeyDTO {
+      UserId = User.Identity.Name,
+      ApiKey = user.StreamKey
+    });
+  }
+
+  [HttpGet("{slug}")]
+  public async Task<ActionResult<ProfileDTO>> GetBySlug(string slug) {
+    var user = await _userManager.FindBySlugAsync(slug);
+    if (user is null) {
+      return NotFound();
+    }
+
+    return Ok(user.Adapt<ProfileDTO>());
+  }
 }

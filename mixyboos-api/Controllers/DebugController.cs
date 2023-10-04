@@ -23,7 +23,13 @@ namespace MixyBoos.Api.Controllers {
     private readonly IConfiguration _configuration;
     private readonly IHubContext<DebugHub> _hub;
 
-    public DebugController(ILogger<DebugController> logger) : base(logger) { }
+    public DebugController(IConfiguration configuration, ILogger<DebugController> logger, IHubContext<DebugHub> hub,
+      UserManager<MixyBoosUser> userManager) :
+      base(logger) {
+      _configuration = configuration;
+      _hub = hub;
+      _userManager = userManager;
+    }
 
     [HttpGet("ping")]
     public ActionResult Ping() {

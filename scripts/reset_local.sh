@@ -8,7 +8,9 @@ reset_pg() {
   export DBNAME=mixyboos
   export ASPNETCORE_Environment=Development
   
+  echo "Dropping db"
   dropdb -f --if-exists ${DBNAME}
+  echo "Creating db"
   createdb ${DBNAME}
 }
 
@@ -38,4 +40,8 @@ reset_mssql() {
 }
 #reset_mssql
 reset_pg
-./scripts/reset.sh
+
+if [ "$1" == "recreate" ]; then
+     echo "Running migrations"
+    ./scripts/reset.sh
+fi

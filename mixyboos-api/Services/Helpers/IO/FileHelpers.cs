@@ -255,6 +255,6 @@ public static class FileHelpers {
     }
   }
 
-  public static string? GetFirstMatchingFile(string path, string filename) =>
+  public static string GetFirstMatchingFile(string path, string filename) =>
     Directory.GetFiles(path, $"{filename}.*").FirstOrDefault();
 }

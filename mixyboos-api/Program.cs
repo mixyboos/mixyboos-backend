@@ -15,18 +15,25 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.Models;
-using MixyBoos.Api.Data.Seeders;
+using MixyBoos.Api.Data.Options;
 using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Auth;
 using MixyBoos.Api.Services.Helpers;
 using MixyBoos.Api.Services.Helpers.Audio;
+using MixyBoos.Api.Services.Startup;
+using MixyBoos.Api.Services.Startup.Mapster;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var instance = CodePagesEncodingProvider.Instance;
 Encoding.RegisterProvider(instance);
+
+builder.CreateLogger(builder.Configuration);
+
 
 builder.WebHost.ConfigureKestrel(options => {
   var pemFile = builder.Configuration["SSL:PemFile"];
@@ -43,8 +50,8 @@ builder.WebHost.ConfigureKestrel(options => {
   });
 });
 
+builder.Services.Configure<DbScaffoldOptions>(builder.Configuration.GetSection("DbScaffoldOptions"));
 
-builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IClaimsTransformation, ClaimsTransformer>();
 builder.Services.AddTransient<IEmailSender, ARMMailSender>();
 builder.Services.AddSingleton<IAudioFileConverter, AudioFileConverter>();
@@ -55,9 +62,6 @@ builder.Services.AddSingleton<IFileProvider, PhysicalFileProvider>(_ =>
   new PhysicalFileProvider(
     builder.Configuration["ImageProcessing:ImageRootFolder"] ?? ".pn-cache"));
 
-builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
-builder.Services.AddAuthorizationBuilder();
-
 builder.Services.AddDbContext<MixyBoosContext>(options =>
   options
     .UseNpgsql(builder.Configuration.GetConnectionString("MixyBoos"), options => {
@@ -66,32 +70,31 @@ builder.Services.AddDbContext<MixyBoosContext>(options =>
         .MigrationsHistoryTable("migrations", "sys");
     }).EnableSensitiveDataLogging(builder.Environment.IsDevelopment()));
 
-builder.Services
-  .AddIdentityCore<MixyBoosUser>()
-  .AddEntityFrameworkStores<MixyBoosContext>()
-  .AddApiEndpoints();
-
-builder.Services.Configure<IdentityOptions>(options => {
-  // Default Password settings.
-  options.Password.RequireDigit = false;
-  options.Password.RequireLowercase = false;
-  options.Password.RequireNonAlphanumeric = false;
-  options.Password.RequireUppercase = false;
-  options.Password.RequiredLength = 4;
-  options.Password.RequiredUniqueChars = 0;
-});
+builder.Services.AddMixyboosAuthentication(builder.Configuration);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddSignalR();
 
 builder.Services.Configure<RouteOptions>(options => {
   options.LowercaseUrls = true;
 });
+builder.Services.LoadScheduler();
 
 var app = builder.Build();
+
+
+// Apply pending migrations
+using (var scope = app.Services.CreateScope()) {
+  var dbContext = scope.ServiceProvider
+    .GetRequiredService<MixyBoosContext>();
+
+  // Here is the migration executed
+  dbContext.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
@@ -99,6 +102,8 @@ if (app.Environment.IsDevelopment()) {
   app.UseSwaggerUI();
 }
 
+app.UseSignalRHubs();
+app.UseSerilogRequestLogging();
 app.MapGroup("/auth")
   .MapIdentityApi<MixyBoosUser>()
   .WithTags("Auth");

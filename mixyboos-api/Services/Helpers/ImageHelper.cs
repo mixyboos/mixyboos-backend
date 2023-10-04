@@ -13,6 +13,12 @@ public class ImageHelper {
     _config = config;
   }
 
+  public string GetImage(string imageType, string profileImage) {
+    return string.IsNullOrEmpty(profileImage) ? string.Empty :
+      profileImage.StartsWith("http") ? profileImage :
+      GetLargeImageUrl(imageType, profileImage);
+  }
+
   //TODO: the Guid on the querystring is really yuck
   //TODO: find a better way to invalidate the cached image
   public string GetLargeImageUrl(string imageType, string imageUrl) =>

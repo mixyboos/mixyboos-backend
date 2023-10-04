@@ -63,14 +63,11 @@ public static class MappingProvider {
       .NewConfig()
       .Map(dest => dest.Id, src => src.Id.ToString())
       .Map(dest => dest.HeaderImage,
-        src => src.HeaderImage.StartsWith("http")
-          ? src.HeaderImage
-          : imageHelper.GetLargeImageUrl("users/headers", src.HeaderImage))
+        src => imageHelper.GetImage("users/headers", src.HeaderImage))
       .Map(dest => dest.ProfileImage,
-        src => src.ProfileImage.StartsWith("http")
-          ? src.ProfileImage
-          : imageHelper.GetSmallImageUrl("users/avatars", src.ProfileImage))
+        src => imageHelper.GetImage("users/avatars", src.ProfileImage))
       .Map(dest => dest.Followers, src => _runMap(src.Followers))
-      .Map(dest => dest.Following, src => _runMap(src.Following));
+      .Map(dest => dest.Following, src => _runMap(src.Following))
+      .IgnoreNullValues(true);
   }
 }

@@ -1,5 +1,4 @@
-﻿#nullable enable
-namespace MixyBoos.Api.Data.Models;
+﻿namespace MixyBoos.Api.Data.Models;
 
 public class UserNotifications : BaseEntity {
     public MixyBoosUser User { get; set; }
