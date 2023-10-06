@@ -102,6 +102,17 @@ if (app.Environment.IsDevelopment()) {
   app.UseSwaggerUI();
 }
 
+app.UseCors(corsBuilder => corsBuilder
+  .WithOrigins("http://localhost:3000")
+  .WithOrigins("https://mixyboos.dev.fergl.ie:3000")
+  .WithOrigins("http://mixyboos.dev.fergl.ie:3000")
+  .WithOrigins("https://www.mixyboos.com")
+  .WithOrigins("https://mixyboos.com")
+  .AllowCredentials()
+  .AllowAnyHeader()
+  .AllowAnyMethod()
+);
+
 app.UseSignalRHubs();
 app.UseSerilogRequestLogging();
 app.MapGroup("/auth")
