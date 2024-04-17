@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Communication.Email" Version="1.0.1" />
+    <PackageReference Include="Azure.Communication.Email" Version="1.0.1"/>
     <PackageReference Include="Bogus" Version="34.0.2"/>
     <PackageReference Include="CliWrap" Version="3.6.4"/>
     <PackageReference Include="ExpressionDebugger" Version="2.2.1"/>

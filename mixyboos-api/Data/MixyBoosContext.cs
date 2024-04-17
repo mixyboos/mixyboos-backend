@@ -111,25 +111,6 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
       .WithMany(p => p.Followers)
       .UsingEntity(j => j.ToTable("user_followers"));
 
-    // mb.Entity<MixyBoosUser>()
-    //     .HasMany(p => p.Plays)
-    //     .WithMany()
-    //     .UsingEntity(j => j.ToTable("mix_plays"));
-    // mb.Entity<MixyBoosUser>()
-    //     .HasMany(p => p.Shares)
-    //     .WithMany()
-    //     .UsingEntity(j => j.ToTable("mix_shares"));
-    //
-    // mb.Entity<MixyBoosUser>()
-    //     .HasMany(p => p.Likes)
-    //     .WithMany()
-    //     .UsingEntity(j => j.ToTable("mix_likes"));
-    //
-    // mb.Entity<MixyBoosUser>()
-    //     .HasMany(p => p.Downloads)
-    //     .WithMany()
-    //     .UsingEntity(j => j.ToTable("mix_downloads"));
-
     mb.Entity<Mix>()
       .HasMany(m => m.Tags)
       .WithMany()
@@ -146,13 +127,6 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
 
     mb.Entity<MixPlay>()
       .HasKey(i => new {i.MixId, i.UserId});
-
-    // mb.Entity<Mix>()
-    //     .HasMany(m => m.Shares)
-    //     .WithOne(m => m.Mix);
-    // mb.Entity<Mix>()
-    //     .HasMany(m => m.Downloads)
-    //     .WithOne(m => m.Mix);
 
     mb.Entity<Mix>()
       .Navigation(m => m.Plays)
