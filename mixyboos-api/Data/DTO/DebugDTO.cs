@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace MixyBoos.Api.Data.DTO {
     public class DebugDTO {

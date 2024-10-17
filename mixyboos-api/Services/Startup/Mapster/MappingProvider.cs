@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Bogus;
 using Microsoft.Extensions.DependencyInjection;
 using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
 using Mapster;
 using Microsoft.Extensions.Configuration;
-using MixyBoos.Api.Data;
 using MixyBoos.Api.Services.Extensions;
 using MixyBoos.Api.Services.Helpers;
 

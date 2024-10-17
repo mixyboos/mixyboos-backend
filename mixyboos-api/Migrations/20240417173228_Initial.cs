@@ -563,17 +563,17 @@ namespace MixyBoos.Api.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0f8e07af-7dc4-4f33-b439-67b55f414275", null, "Artist", "ARTIST" },
-                    { "34296e64-181e-403e-ad60-5a24250ddc0e", null, "Admin", "ADMIN" },
-                    { "85a9d1fc-4488-47b1-b6a2-8d27d8e00b50", null, "SuperAdmin", "SUPERADMIN" },
-                    { "afc938e6-4c92-4706-9bbf-75b1987d001d", null, "Member", "MEMBER" }
+                    { "175718c9-7775-485a-8892-5a8036dd730e", null, "Artist", "ARTIST" },
+                    { "31672428-820e-48c4-8713-7b3e6daf3378", null, "Member", "MEMBER" },
+                    { "6fab2c7b-61f9-400e-9815-c9a1c6a685c0", null, "SuperAdmin", "SUPERADMIN" },
+                    { "aa509ee5-9995-46e5-8688-0de62b416791", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 schema: "oid",
                 table: "user",
                 columns: new[] { "Id", "AccessFailedCount", "Biography", "City", "ConcurrencyStamp", "Country", "DisplayName", "Email", "EmailConfirmed", "HeaderImage", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfileImage", "SecurityStamp", "Slug", "StreamKey", "Title", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("d67fa40e-702f-4d7c-a14b-ae516013a113"), 0, null, null, "ce08fd74-d3e1-4f51-a8ff-a52773d97c6f", null, "Fergal Moran", "fergal.moran+mixyboos@gmail.com", true, null, false, null, "FERGAL.MORAN+MIXYBOOS@GMAIL.COM", "FERGAL.MORAN", "AQAAAAIAAYagAAAAEAFmXzQvlABn0PbIi+LgKCBN+5+AU+4Mrvo/zMIwbwOrbNc/ph/yA6bYc6PGX405Mg==", null, false, null, null, null, "YfbUdfzcgjgIXvUaNZ3X9lQoyhdEc6nc", null, false, "fergal.moran" });
+                values: new object[] { new Guid("0511ec00-87b4-478f-a771-56df46158678"), 0, null, null, "8ce91cb9-f402-403c-ba1f-b0e2c1cc57ce", null, "Fergal Moran", "fergal.moran+mixyboos@gmail.com", true, null, false, null, "FERGAL.MORAN+MIXYBOOS@GMAIL.COM", "FERGAL.MORAN", "AQAAAAIAAYagAAAAEAns5488ljEkPba2z9w7Fy2FwEK1vSsPH/R1hqhS8f7bVxUDZAp87WX2yPq1QU6lfw==", null, false, null, null, null, "YfbUdfzcgjgIXvUaNZ3X9lQoyhdEc6nc", null, false, "fergal.moran" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_live_shows_UserId",

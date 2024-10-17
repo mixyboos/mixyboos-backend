@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
 
 namespace MixyBoos.Api.Services.Helpers {
     public static class KeyGenerator {

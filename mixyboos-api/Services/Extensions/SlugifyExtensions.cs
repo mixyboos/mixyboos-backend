@@ -4,13 +4,9 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Bogus;
-using Bogus.DataSets;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.Utils;
-using MixyBoos.Api.Services.Helpers;
 
 namespace MixyBoos.Api.Services.Extensions;
 

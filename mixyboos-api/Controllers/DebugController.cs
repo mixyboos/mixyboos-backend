@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Threading.Tasks;
-using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,6 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Controllers.Hubs;
-using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
 

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using CliWrap;
 using CliWrap.Buffered;
 using FFMpegCore;
-using FFMpegCore.Enums;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Web.Resource;
 using MixyBoos.Api.Controllers.Hubs;
 using MixyBoos.Api.Data;
 using Quartz;

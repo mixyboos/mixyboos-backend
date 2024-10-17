@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using MixyBoos.Api.Data.Models;
 
 namespace MixyBoos.Api.Data.DTO {
   public class LiveShowDTO {

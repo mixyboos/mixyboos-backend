@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20231129192439_Initial")]
+    [Migration("20240417173228_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -22,7 +22,7 @@ namespace MixyBoos.Api.Migrations
             modelBuilder
                 .HasDefaultSchema("mixyboos")
                 .UseCollation("en_US.utf8")
-                .HasAnnotation("ProductVersion", "8.0.0-rc.1.23419.6")
+                .HasAnnotation("ProductVersion", "9.0.0-preview.3.24172.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -63,25 +63,25 @@ namespace MixyBoos.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "85a9d1fc-4488-47b1-b6a2-8d27d8e00b50",
+                            Id = "6fab2c7b-61f9-400e-9815-c9a1c6a685c0",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
-                            Id = "34296e64-181e-403e-ad60-5a24250ddc0e",
+                            Id = "aa509ee5-9995-46e5-8688-0de62b416791",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "0f8e07af-7dc4-4f33-b439-67b55f414275",
+                            Id = "175718c9-7775-485a-8892-5a8036dd730e",
                             Name = "Artist",
                             NormalizedName = "ARTIST"
                         },
                         new
                         {
-                            Id = "afc938e6-4c92-4706-9bbf-75b1987d001d",
+                            Id = "31672428-820e-48c4-8713-7b3e6daf3378",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         });
@@ -493,7 +493,7 @@ namespace MixyBoos.Api.Migrations
                     b.Property<string>("MixId")
                         .HasColumnType("character varying(36)");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateCreated")
@@ -652,16 +652,16 @@ namespace MixyBoos.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d67fa40e-702f-4d7c-a14b-ae516013a113"),
+                            Id = new Guid("0511ec00-87b4-478f-a771-56df46158678"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ce08fd74-d3e1-4f51-a8ff-a52773d97c6f",
+                            ConcurrencyStamp = "8ce91cb9-f402-403c-ba1f-b0e2c1cc57ce",
                             DisplayName = "Fergal Moran",
                             Email = "fergal.moran+mixyboos@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "FERGAL.MORAN+MIXYBOOS@GMAIL.COM",
                             NormalizedUserName = "FERGAL.MORAN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAFmXzQvlABn0PbIi+LgKCBN+5+AU+4Mrvo/zMIwbwOrbNc/ph/yA6bYc6PGX405Mg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAns5488ljEkPba2z9w7Fy2FwEK1vSsPH/R1hqhS8f7bVxUDZAp87WX2yPq1QU6lfw==",
                             PhoneNumberConfirmed = false,
                             StreamKey = "YfbUdfzcgjgIXvUaNZ3X9lQoyhdEc6nc",
                             TwoFactorEnabled = false,

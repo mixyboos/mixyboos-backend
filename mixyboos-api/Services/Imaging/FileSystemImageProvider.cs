@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.FileProviders.Physical;
 using MixyBoos.Api.Services.Extensions;
 using SixLabors.ImageSharp.Web;
 using SixLabors.ImageSharp.Web.Providers;

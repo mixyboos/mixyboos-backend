@@ -126,7 +126,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
       .WithOne(m => m.Mix);
 
     mb.Entity<MixPlay>()
-      .HasKey(i => new {i.MixId, i.UserId});
+      .HasKey(i => new { i.MixId, i.UserId });
 
     mb.Entity<Mix>()
       .Navigation(m => m.Plays)
