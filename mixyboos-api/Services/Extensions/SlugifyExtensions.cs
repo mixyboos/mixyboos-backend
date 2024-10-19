@@ -10,21 +10,15 @@ using MixyBoos.Api.Data.Utils;
 
 namespace MixyBoos.Api.Services.Extensions;
 
-/// <summary>Class <c>UniqueGeneratedFieldExtensions</c>
-/// Various methods for slugifying/unique keying entities.</summary>
-///
+/// <summary>
+///   Class <c>UniqueGeneratedFieldExtensions</c>
+///   Various methods for slugifying/unique keying entities.
+/// </summary>
 public class GenerateSlugFailureException : Exception {
   public GenerateSlugFailureException(string message) : base(message) { }
 }
 
 public static class UniqueGeneratedFieldExtensions {
-  /// <summary>
-  /// Simple ViewModel to easily work with ExecSQL 
-  /// </summary>
-  private class ProxySluggedModel : ISluggedEntity {
-    public string Slug { get; set; }
-  }
-
   public static IEnumerable<T> Select<T>(this IDataReader reader,
     Func<IDataReader, T> projection) {
     while (reader.Read()) {
@@ -99,7 +93,7 @@ public static class UniqueGeneratedFieldExtensions {
         if (!string.IsNullOrEmpty(tableName)) {
           var sourceField = (attribute as SlugFieldAttribute)?.SourceField;
           if (string.IsNullOrEmpty(sourceField)) {
-            logger?.LogError($"Error slugifying - Entry title is blank, cannot slugify");
+            logger?.LogError("Error slugifying - Entry title is blank, cannot slugify");
             // need to throw here, shouldn't save without slug
             throw new GenerateSlugFailureException("Entry title is blank, cannot slugify");
           }
@@ -123,5 +117,12 @@ public static class UniqueGeneratedFieldExtensions {
     }
 
     return string.Empty;
+  }
+
+  /// <summary>
+  ///   Simple ViewModel to easily work with ExecSQL
+  /// </summary>
+  private class ProxySluggedModel : ISluggedEntity {
+    public string Slug { get; set; }
   }
 }

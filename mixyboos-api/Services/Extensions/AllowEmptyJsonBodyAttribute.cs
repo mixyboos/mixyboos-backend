@@ -13,7 +13,9 @@ public class AllowEmptyJsonBodyAttribute : Attribute, IResourceFilter {
   public void OnResourceExecuting(ResourceExecutingContext context) {
     var request = context.HttpContext.Request;
     if (!string.IsNullOrEmpty(request.ContentType) && !request.HasJsonContentType() ||
-        (request.ContentLength ?? 0) != 0) return;
+        (request.ContentLength ?? 0) != 0) {
+      return;
+    }
 
     request.ContentType = "application/json";
     context.HttpContext.Items[StreamOverride] = request.Body; // store the original stream
@@ -23,7 +25,9 @@ public class AllowEmptyJsonBodyAttribute : Attribute, IResourceFilter {
   }
 
   public void OnResourceExecuted(ResourceExecutedContext context) {
-    if (!context.HttpContext.Items.TryGetValue(StreamOverride, out var o) || o is not Stream s) return;
+    if (!context.HttpContext.Items.TryGetValue(StreamOverride, out var o) || o is not Stream s) {
+      return;
+    }
 
     var request = context.HttpContext.Request;
     request.Body.Dispose(); // this disposes our injected stream

@@ -17,8 +17,17 @@ using MixyBoos.Api.Services.Extensions;
 namespace MixyBoos.Api.Data;
 
 public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid>, Guid> {
-  private readonly DbScaffoldOptions _settings;
   private readonly ILogger<MixyBoosContext> _logger;
+  private readonly DbScaffoldOptions _settings;
+
+
+  public MixyBoosContext(DbContextOptions<MixyBoosContext> options, IOptions<DbScaffoldOptions> settings,
+    ILogger<MixyBoosContext> logger)
+    : base(options) {
+    _settings = settings.Value;
+    _logger = logger;
+  }
+
   public DbSet<Mix> Mixes { get; set; }
 
   public DbSet<MixPlay> MixPlays { get; set; }
@@ -29,14 +38,6 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
   public DbSet<LiveShow> LiveShows { get; set; }
   public DbSet<Tag> Tags { get; set; }
   public DbSet<ShowChat> ShowChat { get; set; }
-
-
-  public MixyBoosContext(DbContextOptions<MixyBoosContext> options, IOptions<DbScaffoldOptions> settings,
-    ILogger<MixyBoosContext> logger)
-    : base(options) {
-    _settings = settings.Value;
-    _logger = logger;
-  }
 
   private IEnumerable<PropertyBuilder> __getColumns(ModelBuilder modelBuilder, string columnName) {
     //helper function to only return models which are part of this project
@@ -126,7 +127,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
       .WithOne(m => m.Mix);
 
     mb.Entity<MixPlay>()
-      .HasKey(i => new { i.MixId, i.UserId });
+      .HasKey(i => new {i.MixId, i.UserId});
 
     mb.Entity<Mix>()
       .Navigation(m => m.Plays)

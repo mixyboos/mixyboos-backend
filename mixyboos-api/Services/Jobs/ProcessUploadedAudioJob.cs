@@ -16,10 +16,10 @@ namespace MixyBoos.Api.Services.Jobs;
 
 // ReSharper disable once ClassNeverInstantiated.Global
 public class ProcessUploadedAudioJob : IJob {
+  private readonly IConfiguration _config;
   private readonly MixyBoosContext _context;
   private readonly IHubContext<UpdatesHub> _hub;
   private readonly ILogger<ProcessUploadedAudioJob> _logger;
-  private readonly IConfiguration _config;
 
   public ProcessUploadedAudioJob(MixyBoosContext context,
     IHubContext<UpdatesHub> hub,
@@ -66,7 +66,7 @@ public class ProcessUploadedAudioJob : IJob {
     }
 
     var reader = await FFProbe.AnalyseAsync(inputFile);
-    TimeSpan duration = reader.Duration;
+    var duration = reader.Duration;
 
     Directory.CreateDirectory(tempProcessingPath);
     await _hub.Clients.User(userId).SendAsync("ConversionStarted", showId);
@@ -91,7 +91,9 @@ public class ProcessUploadedAudioJob : IJob {
       var result = await command.ExecuteBufferedAsync();
       _logger.LogInformation("Completed conversion: {Result}", result.ExitCode);
 
-      if (context.CancellationToken.IsCancellationRequested) return;
+      if (context.CancellationToken.IsCancellationRequested) {
+        return;
+      }
 
       //TODO: What if they haven't created the mix yet in the web ui?
       var mix = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(showId)));

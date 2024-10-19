@@ -3,29 +3,29 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Services.Helpers.Audio;
 
-namespace MixyBoos.Api.Services.Workers {
-    public class UploadFileProcessor : BackgroundService {
-        private readonly IAudioFileConverter _converter;
-        private readonly ILogger<UploadFileProcessor> _logger;
+namespace MixyBoos.Api.Services.Workers;
 
-        public UploadFileProcessor(IAudioFileConverter converter, ILogger<UploadFileProcessor> logger) {
-            _converter = converter;
-            _logger = logger;
-        }
+public class UploadFileProcessor : BackgroundService {
+  private readonly IAudioFileConverter _converter;
+  private readonly ILogger<UploadFileProcessor> _logger;
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
-            _logger.LogDebug($"UploadFileProcessor is starting.");
+  public UploadFileProcessor(IAudioFileConverter converter, ILogger<UploadFileProcessor> logger) {
+    _converter = converter;
+    _logger = logger;
+  }
 
-            stoppingToken.Register(() =>
-                _logger.LogDebug($" GracePeriod background task is stopping."));
+  protected override async Task ExecuteAsync(CancellationToken stoppingToken) {
+    _logger.LogDebug("UploadFileProcessor is starting.");
 
-            while (!stoppingToken.IsCancellationRequested) {
-                _logger.LogDebug($"GracePeriod task doing background work.");
+    stoppingToken.Register(() =>
+      _logger.LogDebug(" GracePeriod background task is stopping."));
 
-                await _converter.ConvertFileToMp3("askjdhas");
-            }
+    while (!stoppingToken.IsCancellationRequested) {
+      _logger.LogDebug("GracePeriod task doing background work.");
 
-            _logger.LogDebug($"GracePeriod background task is stopping.");
-        }
+      await _converter.ConvertFileToMp3("askjdhas");
     }
+
+    _logger.LogDebug("GracePeriod background task is stopping.");
+  }
 }

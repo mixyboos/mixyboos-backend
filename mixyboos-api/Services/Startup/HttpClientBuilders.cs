@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,12 +9,12 @@ using Polly.Extensions.Http;
 namespace MixyBoos.Api.Services.Startup;
 
 public static class HttpClientBuilders {
-  static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy() {
+  private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy() {
     return HttpPolicyExtensions
       .HandleTransientHttpError()
       .OrResult(msg => {
         Console.WriteLine($"Failed getting RTMP stream {msg.StatusCode} - {msg.ReasonPhrase}");
-        return msg.StatusCode == System.Net.HttpStatusCode.NotFound;
+        return msg.StatusCode == HttpStatusCode.NotFound;
       })
       .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
   }

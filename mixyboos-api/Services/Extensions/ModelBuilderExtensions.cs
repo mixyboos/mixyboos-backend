@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
@@ -39,7 +40,7 @@ public static class ModelBuilderExtensions {
     builder.Entity<IdentityRole>().HasData(roles);
 
     var adminUser = new MixyBoosUser {
-      Id = System.Guid.NewGuid(),
+      Id = Guid.NewGuid(),
       Email = settings.AdminUserEmail,
       UserName = settings.AdminUserName,
       DisplayName = settings.AdminUserDisplayName,

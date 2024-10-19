@@ -28,10 +28,10 @@ namespace MixyBoos.Api.Controllers {
   [Authorize]
   [Route("[controller]")]
   public class UploadController : _Controller {
-    private readonly UserManager<MixyBoosUser> _userManager;
+    private const long AudioFileSizeLimit = 2147483648;
+    private const long ImageFileSizeLimit = 52428800;
     private readonly ISchedulerFactory _schedulerFactory;
-    const long AudioFileSizeLimit = 2147483648;
-    const long ImageFileSizeLimit = 52428800;
+    private readonly UserManager<MixyBoosUser> _userManager;
 
     public UploadController(UserManager<MixyBoosUser> userManager, ISchedulerFactory schedulerFactory,
       ILogger<UploadController> logger) : base(logger) {
@@ -72,7 +72,7 @@ namespace MixyBoos.Api.Controllers {
         return response;
       }
 
-      var jobData = new Dictionary<string, string>() {
+      var jobData = new Dictionary<string, string> {
         {"Id", id},
         {"FileLocation", localFile},
         {"ImageSource", imageSource},
@@ -99,7 +99,7 @@ namespace MixyBoos.Api.Controllers {
         return response;
       }
 
-      var jobData = new Dictionary<string, string>() {
+      var jobData = new Dictionary<string, string> {
         {"Id", id},
         {"FileLocation", localFile},
         {"UserId", User.Identity.Name}

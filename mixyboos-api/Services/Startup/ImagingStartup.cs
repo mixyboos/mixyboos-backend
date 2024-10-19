@@ -10,21 +10,21 @@ using SixLabors.ImageSharp.Web.Providers;
 namespace MixyBoos.Api.Services.Startup;
 
 public static class ImagingStartup {
-    public static IServiceCollection AddImaging(this IServiceCollection services, IConfiguration config) {
-        services.AddImageSharp()
-            .SetRequestParser<QueryCollectionRequestParser>()
-            .ClearProviders()
-            .Configure<PhysicalFileSystemCacheOptions>(options => {
-                options.CacheRootPath = ".img-cache";
-            })
-            .Configure<PhysicalFileSystemProviderOptions>(options => {
-                options.ProviderRootPath = config["ImageProcessing:ImageCacheFolder"] ?? "/tmp";
-                options.ProcessingBehavior = ProcessingBehavior.All;
-            })
-            .SetCache<PhysicalFileSystemCache>()
-            .AddProvider<FileSystemImageProvider>()
-            // .AddProvider(PhysicalFileSystemProviderFactory)
-            .AddProcessor<ResizeWebProcessor>();
-        return services;
-    }
+  public static IServiceCollection AddImaging(this IServiceCollection services, IConfiguration config) {
+    services.AddImageSharp()
+      .SetRequestParser<QueryCollectionRequestParser>()
+      .ClearProviders()
+      .Configure<PhysicalFileSystemCacheOptions>(options => {
+        options.CacheRootPath = ".img-cache";
+      })
+      .Configure<PhysicalFileSystemProviderOptions>(options => {
+        options.ProviderRootPath = config["ImageProcessing:ImageCacheFolder"] ?? "/tmp";
+        options.ProcessingBehavior = ProcessingBehavior.All;
+      })
+      .SetCache<PhysicalFileSystemCache>()
+      .AddProvider<FileSystemImageProvider>()
+      // .AddProvider(PhysicalFileSystemProviderFactory)
+      .AddProcessor<ResizeWebProcessor>();
+    return services;
+  }
 }

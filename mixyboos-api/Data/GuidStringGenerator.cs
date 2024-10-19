@@ -3,14 +3,13 @@ using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace MixyBoos.Api.Data;
 
-public class GuidStringGenerator : ValueGenerator<string>
-{
-    private readonly SequentialGuidValueGenerator _guidGenerator 
-        = new SequentialGuidValueGenerator();
+public class GuidStringGenerator : ValueGenerator<string> {
+  private readonly SequentialGuidValueGenerator _guidGenerator = new();
 
-    public override string Next(EntityEntry entry) 
-        => _guidGenerator.Next(entry).ToString();
+  public override bool GeneratesTemporaryValues
+    => false;
 
-    public override bool GeneratesTemporaryValues 
-        => false;
+  public override string Next(EntityEntry entry) {
+    return _guidGenerator.Next(entry).ToString();
+  }
 }

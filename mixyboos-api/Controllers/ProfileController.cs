@@ -18,8 +18,8 @@ namespace MixyBoos.Api.Controllers;
 [Authorize]
 [Route("[controller]")]
 public class ProfileController : _Controller {
-  private readonly UserManager<MixyBoosUser> _userManager;
   private readonly MixyBoosContext _context;
+  private readonly UserManager<MixyBoosUser> _userManager;
 
   public ProfileController(
     UserManager<MixyBoosUser> userManager,

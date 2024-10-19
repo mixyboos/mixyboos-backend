@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Azure;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Azure.Communication.Email;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -26,11 +26,11 @@ public class ARMMailSender : IEmailSender {
 
       var client = new EmailClient(connectionString);
       var operation = await client.SendAsync(
-        wait: WaitUntil.Completed,
-        senderAddress: _config["Email:FromAddress"].ToString(),
-        recipientAddress: email,
-        subject: subject,
-        htmlContent: htmlMessage
+        WaitUntil.Completed,
+        _config["Email:FromAddress"],
+        email,
+        subject,
+        htmlMessage
       );
       _logger.LogDebug(
         "Send email to {Email} with subject {Subject} with tracking id {TrackingId}",

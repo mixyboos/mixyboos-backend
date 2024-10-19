@@ -16,9 +16,6 @@ public class MixyBoosUser : IdentityUser<Guid>, ISluggedEntity {
   public string ProfileImage { get; set; }
   public string HeaderImage { get; set; }
 
-  [SlugField(SourceField = "UserName")]
-  public string Slug { get; set; }
-
   [MaxLength(100)] public string City { get; set; }
   [MaxLength(100)] public string Country { get; set; }
   [MaxLength(2048)] public string Biography { get; set; }
@@ -32,6 +29,9 @@ public class MixyBoosUser : IdentityUser<Guid>, ISluggedEntity {
   public ICollection<MixShare> Shares { get; set; } = new List<MixShare>();
   public ICollection<MixDownload> Downloads { get; set; } = new List<MixDownload>();
 
+  [SlugField(SourceField = "UserName")]
+  public string Slug { get; set; }
+
 
   public void FromDto(ProfileDTO profile) {
     Slug = profile.Slug;
@@ -43,5 +43,7 @@ public class MixyBoosUser : IdentityUser<Guid>, ISluggedEntity {
     PhoneNumber = profile.PhoneNumber;
   }
 
-  public ProfileDTO ToDto() => this.Adapt<ProfileDTO>();
+  public ProfileDTO ToDto() {
+    return this.Adapt<ProfileDTO>();
+  }
 }

@@ -9,7 +9,7 @@ public enum ShowStatus {
   AwaitingStreamConnection,
   InProgress,
   Ended,
-  Error,
+  Error
 }
 
 public class LiveShow : BaseEntity {

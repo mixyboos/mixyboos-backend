@@ -22,41 +22,6 @@ public class ProcessUploadedImageJob : IJob {
     _logger = logger;
   }
 
-  private async Task _updateUserImageDetails(string id, string imageType, string path) {
-    _logger.LogInformation("Updating user record");
-    var user = await _context
-      .Users
-      .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
-    if (user is null) {
-      _logger.LogError("Unable to fond user in db {MixId}", id);
-      return;
-    }
-
-    if (imageType.Equals("headers")) {
-      user.HeaderImage = Path.GetFileName(path);
-    }
-
-    if (imageType.Equals("avatars")) {
-      user.ProfileImage = Path.GetFileName(path);
-    }
-
-    await _context.SaveChangesAsync();
-  }
-
-  private async Task _updateMixImageDetails(string id, string path) {
-    _logger.LogInformation("Updating mix record");
-    var mix = await _context
-      .Mixes
-      .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
-    if (mix is null) {
-      _logger.LogError("Unable to fond mix in db {MixId}", id);
-      return;
-    }
-
-    mix.Image = Path.GetFileName(path);
-    await _context.SaveChangesAsync();
-  }
-
   public async Task Execute(IJobExecutionContext context) {
     try {
       var data = context.Trigger.JobDataMap;
@@ -100,5 +65,40 @@ public class ProcessUploadedImageJob : IJob {
       _logger.LogError("Error caching image file\n\t{Error}", e.Message);
       throw;
     }
+  }
+
+  private async Task _updateUserImageDetails(string id, string imageType, string path) {
+    _logger.LogInformation("Updating user record");
+    var user = await _context
+      .Users
+      .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
+    if (user is null) {
+      _logger.LogError("Unable to fond user in db {MixId}", id);
+      return;
+    }
+
+    if (imageType.Equals("headers")) {
+      user.HeaderImage = Path.GetFileName(path);
+    }
+
+    if (imageType.Equals("avatars")) {
+      user.ProfileImage = Path.GetFileName(path);
+    }
+
+    await _context.SaveChangesAsync();
+  }
+
+  private async Task _updateMixImageDetails(string id, string path) {
+    _logger.LogInformation("Updating mix record");
+    var mix = await _context
+      .Mixes
+      .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
+    if (mix is null) {
+      _logger.LogError("Unable to fond mix in db {MixId}", id);
+      return;
+    }
+
+    mix.Image = Path.GetFileName(path);
+    await _context.SaveChangesAsync();
   }
 }
