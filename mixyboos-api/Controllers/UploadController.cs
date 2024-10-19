@@ -64,7 +64,7 @@ namespace MixyBoos.Api.Controllers {
     [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
     [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
     [DisableFormValueModelBinding]
-    public async Task<IActionResult> UploadImage([FromRoute] string id, [FromForm] IFormFile file,
+    public async Task<IActionResult> UploadImage([FromRoute] string id, IFormFile file,
       [FromQuery] string imageSource, [FromQuery] string imageType) {
       var (response, localFile) = await _preProcessUpload(id, file);
 
@@ -92,7 +92,7 @@ namespace MixyBoos.Api.Controllers {
     [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
     [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
     [DisableFormValueModelBinding]
-    public async Task<IActionResult> UploadAudio([FromRoute] string id, [FromForm] IFormFile file) {
+    public async Task<IActionResult> UploadAudio([FromRoute] string id, IFormFile file) {
       var (response, localFile) = await _preProcessUpload(id, file);
 
       if (string.IsNullOrEmpty(localFile)) {

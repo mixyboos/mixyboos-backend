@@ -100,5 +100,6 @@ app.MapGroup("/auth")
   .WithTags("Auth");
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.MapControllers();
 app.Run();
