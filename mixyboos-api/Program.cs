@@ -42,11 +42,13 @@ builder.Services.AddSingleton<IFileProvider, PhysicalFileProvider>(_ =>
 
 builder.Services.AddDbContext<MixyBoosContext>(options =>
   options
-    .UseNpgsql(builder.Configuration.GetConnectionString("MixyBoos"), options => {
-      options
+    .UseNpgsql(builder.Configuration.GetConnectionString("MixyBoos"), pgOptions => {
+      pgOptions
         .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)
         .MigrationsHistoryTable("migrations", "sys");
-    }).EnableSensitiveDataLogging(builder.Environment.IsDevelopment()));
+    })
+    .UseSnakeCaseNamingConvention()
+    .EnableSensitiveDataLogging(builder.Environment.IsDevelopment()));
 
 builder.Services.AddMixyboosAuthentication(builder.Configuration);
 

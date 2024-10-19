@@ -54,11 +54,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
     if (!optionsBuilder.IsConfigured) {
       optionsBuilder
         .UseNpgsql("Name=MixyBoos")
-        //TODO: Re-enable this once
-        // https://github.com/efcore/EFCore.NamingConventions/issues/209
-        // is resolved
-        // .UseSnakeCaseNamingConvention()
-        ;
+        .UseSnakeCaseNamingConvention();
     }
   }
 
@@ -68,28 +64,19 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
     mb.HasDefaultSchema("mixyboos");
     mb.UseIdentityByDefaultColumns();
 
-    mb.HasAnnotation("Relational:Collation", "en_US.utf8");
+    mb.HasAnnotation("Relational:Collation", "en_IE.utf8");
 
-    //give the identity tables proper names and schema
-    mb.Entity<MixyBoosUser>().ToTable("user", "oid");
-    mb.Entity<IdentityUser>().ToTable("identity_user_base", "oid");
-    mb.Entity<IdentityUser<Guid>>().ToTable("identity_user", "oid");
-    mb.Entity<IdentityRole<Guid>>().ToTable("user_user_role", "oid");
-    mb.Entity<IdentityUserClaim<Guid>>().ToTable("user_claim", "oid");
-    mb.Entity<IdentityUserLogin<Guid>>().ToTable("user_login", "oid");
-    mb.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claim", "oid");
-    mb.Entity<IdentityUserToken<Guid>>().ToTable("user_token", "oid");
-    mb.Entity<IdentityUserRole<Guid>>().ToTable("user_identity_role", "oid");
-    //end identity stuff
+    // //give the identity tables proper names and schema
+    mb.Entity<MixyBoosUser>().ToTable("user", "auth");
+    mb.Entity<IdentityUser<Guid>>().ToTable("identity_user", "auth");
+    mb.Entity<IdentityRole<Guid>>().ToTable("identity_role", "auth");
+    mb.Entity<IdentityUserClaim<Guid>>().ToTable("user_claim", "auth");
+    mb.Entity<IdentityUserLogin<Guid>>().ToTable("user_login", "auth");
+    mb.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claim", "auth");
+    mb.Entity<IdentityUserToken<Guid>>().ToTable("user_token", "auth");
+    mb.Entity<IdentityUserRole<Guid>>().ToTable("user_identity_role", "auth");
+    // //end identity stuff
 
-    mb.Entity<Mix>().ToTable("mixes");
-    mb.Entity<LiveShow>().ToTable("live_shows");
-    mb.Entity<ShowChat>().ToTable("show_chats");
-    mb.Entity<Tag>().ToTable("tags");
-    mb.Entity<MixPlay>().ToTable("mix_plays");
-    mb.Entity<MixLike>().ToTable("mix_likes");
-    mb.Entity<MixShare>().ToTable("mix_shares");
-    mb.Entity<MixDownload>().ToTable("mix_download");
 
     foreach (var pb in __getColumns(mb, "DateCreated")) {
       pb.ValueGeneratedOnAdd()
