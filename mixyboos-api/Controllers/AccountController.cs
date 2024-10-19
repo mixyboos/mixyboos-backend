@@ -41,7 +41,7 @@ namespace MixyBoos.Api.Controllers {
         return BadRequest(ModelState);
       }
 
-      var faker = new Faker("en");
+      var faker = new Faker();
       var user = new MixyBoosUser {
         UserName = model.UserName,
         Email = model.UserName,

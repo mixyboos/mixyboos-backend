@@ -82,8 +82,8 @@ if (app.Environment.IsDevelopment()) {
 
 app.UseCors(corsBuilder => corsBuilder
   .WithOrigins("http://localhost:3000")
-  .WithOrigins("https://mixyboos.dev.fergl.ie:3000")
-  .WithOrigins("http://mixyboos.dev.fergl.ie:3000")
+  .WithOrigins("https://mixyboos.dev.fergl.ie:3002")
+  .WithOrigins("http://mixyboos.dev.fergl.ie:3002")
   .WithOrigins("https://www.mixyboos.com")
   .WithOrigins("https://mixyboos.com")
   .AllowCredentials()
