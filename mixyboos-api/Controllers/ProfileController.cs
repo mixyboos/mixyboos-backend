@@ -2,6 +2,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Mapster;
+using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

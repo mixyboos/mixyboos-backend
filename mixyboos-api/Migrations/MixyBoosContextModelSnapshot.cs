@@ -18,7 +18,6 @@ namespace MixyBoos.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("mixyboos")
-                .UseCollation("en_IE.utf8")
                 .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -73,32 +72,6 @@ namespace MixyBoos.Api.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("identity_role", "auth");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("797a8b5d-adc4-4083-9ad3-7d1afc83b105"),
-                            Name = "SuperAdmin",
-                            NormalizedName = "SUPERADMIN"
-                        },
-                        new
-                        {
-                            Id = new Guid("40f63451-76d9-4b54-82d6-cb4e0278e9e9"),
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = new Guid("ee39d193-0ada-43dc-b168-e84a6a9f912e"),
-                            Name = "Artist",
-                            NormalizedName = "ARTIST"
-                        },
-                        new
-                        {
-                            Id = new Guid("34a72006-b670-4818-9b30-b4c82f04fefa"),
-                            Name = "Member",
-                            NormalizedName = "MEMBER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -710,25 +683,6 @@ namespace MixyBoos.Api.Migrations
                         .HasDatabaseName("ix_user_slug");
 
                     b.ToTable("user", "auth");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("28c796f3-bb77-467f-a53e-2eb7f8c48bab"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "b3df0bf6-3c68-48be-a25f-50fd6f0263ae",
-                            DisplayName = "Fergal Moran",
-                            Email = "fergal.moran+mixyboos@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "FERGAL.MORAN+MIXYBOOS@GMAIL.COM",
-                            NormalizedUserName = "FERGAL.MORAN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFNLexXClVZcDHtchHeo9ssBtPn66cuaVFSh6VK8awRFN0RlHuinjjYZXVNGWxn05w==",
-                            PhoneNumberConfirmed = false,
-                            StreamKey = "YfbUdfzcgjgIXvUaNZ3X9lQoyhdEc6nc",
-                            TwoFactorEnabled = false,
-                            UserName = "fergal.moran"
-                        });
                 });
 
             modelBuilder.Entity("MixyBoos.Api.Data.Models.ShowChat", b =>

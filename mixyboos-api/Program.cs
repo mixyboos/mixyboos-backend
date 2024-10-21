@@ -1,7 +1,9 @@
-﻿using System.Text;
+﻿using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SignalR;
@@ -66,7 +68,6 @@ builder.Services.LoadScheduler();
 
 var app = builder.Build();
 
-
 // Apply pending migrations
 using (var scope = app.Services.CreateScope()) {
   var dbContext = scope.ServiceProvider
@@ -95,11 +96,19 @@ app.UseCors(corsBuilder => corsBuilder
 
 app.UseSignalRHubs();
 app.UseSerilogRequestLogging();
+
+app.UseHttpsRedirection();
+app.MapControllers();
+
+
 app.MapGroup("/auth")
   .MapIdentityApi<MixyBoosUser>()
   .WithTags("Auth");
 
-app.UseHttpsRedirection();
-app.UseAuthentication();
-app.MapControllers();
+app.MapGet("/pingauth", () => new {
+    Ping = "Secure Pong"
+  })
+  .RequireAuthorization()
+  .WithName("AuthPing");
+
 app.Run();

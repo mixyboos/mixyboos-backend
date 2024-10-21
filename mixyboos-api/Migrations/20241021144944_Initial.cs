@@ -4,8 +4,6 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace MixyBoos.Api.Migrations
 {
     /// <inheritdoc />
@@ -515,24 +513,6 @@ namespace MixyBoos.Api.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                schema: "auth",
-                table: "identity_role",
-                columns: new[] { "id", "concurrency_stamp", "name", "normalized_name" },
-                values: new object[,]
-                {
-                    { new Guid("34a72006-b670-4818-9b30-b4c82f04fefa"), null, "Member", "MEMBER" },
-                    { new Guid("40f63451-76d9-4b54-82d6-cb4e0278e9e9"), null, "Admin", "ADMIN" },
-                    { new Guid("797a8b5d-adc4-4083-9ad3-7d1afc83b105"), null, "SuperAdmin", "SUPERADMIN" },
-                    { new Guid("ee39d193-0ada-43dc-b168-e84a6a9f912e"), null, "Artist", "ARTIST" }
-                });
-
-            migrationBuilder.InsertData(
-                schema: "auth",
-                table: "user",
-                columns: new[] { "id", "access_failed_count", "biography", "city", "concurrency_stamp", "country", "display_name", "email", "email_confirmed", "header_image", "lockout_enabled", "lockout_end", "normalized_email", "normalized_user_name", "password_hash", "phone_number", "phone_number_confirmed", "profile_image", "security_stamp", "slug", "stream_key", "title", "two_factor_enabled", "user_name" },
-                values: new object[] { new Guid("28c796f3-bb77-467f-a53e-2eb7f8c48bab"), 0, null, null, "b3df0bf6-3c68-48be-a25f-50fd6f0263ae", null, "Fergal Moran", "fergal.moran+mixyboos@gmail.com", true, null, false, null, "FERGAL.MORAN+MIXYBOOS@GMAIL.COM", "FERGAL.MORAN", "AQAAAAIAAYagAAAAEFNLexXClVZcDHtchHeo9ssBtPn66cuaVFSh6VK8awRFN0RlHuinjjYZXVNGWxn05w==", null, false, null, null, null, "YfbUdfzcgjgIXvUaNZ3X9lQoyhdEc6nc", null, false, "fergal.moran" });
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",

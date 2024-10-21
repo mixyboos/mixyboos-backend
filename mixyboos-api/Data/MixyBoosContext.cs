@@ -64,8 +64,6 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
     mb.HasDefaultSchema("mixyboos");
     mb.UseIdentityByDefaultColumns();
 
-    mb.HasAnnotation("Relational:Collation", "en_IE.utf8");
-
     // //give the identity tables proper names and schema
     mb.Entity<MixyBoosUser>().ToTable("user", "auth");
     mb.Entity<IdentityUser<Guid>>().ToTable("identity_user", "auth");
@@ -124,7 +122,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
       .Navigation(m => m.User)
       .AutoInclude();
 
-    mb.SeedAuthenticationUsers(_settings);
+    // mb.SeedAuthenticationUsers(_settings);
   }
 
   public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,

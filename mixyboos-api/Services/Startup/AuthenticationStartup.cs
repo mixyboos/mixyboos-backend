@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.BearerToken;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MixyBoos.Api.Data;
@@ -9,13 +11,10 @@ namespace MixyBoos.Api.Services.Startup;
 
 public static class AuthenticationStartup {
   public static IServiceCollection AddMixyboosAuthentication(this IServiceCollection services, IConfiguration config) {
-    services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
-    services.AddAuthorizationBuilder();
-
+    services.AddAuthorization();
     services
-      .AddIdentityCore<MixyBoosUser>()
-      .AddEntityFrameworkStores<MixyBoosContext>()
-      .AddApiEndpoints();
+      .AddIdentityApiEndpoints<MixyBoosUser>()
+      .AddEntityFrameworkStores<MixyBoosContext>();
 
     services.Configure<IdentityOptions>(options => {
       // Default Password settings.

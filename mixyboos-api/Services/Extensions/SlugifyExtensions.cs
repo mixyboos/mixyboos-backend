@@ -103,7 +103,7 @@ public static class UniqueGeneratedFieldExtensions {
             ?.GetValue(entity, null)
             ?.ToString() ?? string.Empty;
 
-          var source = context.ExecSQL<ProxySluggedModel>($"SELECT \"Slug\" FROM {schemaName}.{tableName}")
+          var source = context.ExecSQL<ProxySluggedModel>($"SELECT \"slug\" FROM {schemaName}.{tableName}")
             .Select(m => m.Slug);
 
           return slugSource.Slugify(source);
