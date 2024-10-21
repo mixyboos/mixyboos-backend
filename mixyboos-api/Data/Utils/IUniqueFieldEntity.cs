@@ -1,4 +1,3 @@
-﻿namespace MixyBoos.Api.Data.Utils {
-    public interface IUniqueFieldEntity {
-    }
-}
+﻿namespace MixyBoos.Api.Data.Utils;
+
+public interface IUniqueFieldEntity { }

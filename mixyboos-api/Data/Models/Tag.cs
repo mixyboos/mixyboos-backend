@@ -2,7 +2,7 @@
 
 namespace MixyBoos.Api.Data.Models;
 
-[Index(nameof(Tag.TagName), IsUnique = true)]
+[Index(nameof(TagName), IsUnique = true)]
 public class Tag : BaseEntity {
-    public string TagName { get; set; }
+  public string TagName { get; set; }
 }

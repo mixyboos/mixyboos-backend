@@ -1,7 +1,9 @@
-﻿using System.Text;
+﻿using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SignalR;
@@ -42,11 +44,13 @@ builder.Services.AddSingleton<IFileProvider, PhysicalFileProvider>(_ =>
 
 builder.Services.AddDbContext<MixyBoosContext>(options =>
   options
-    .UseNpgsql(builder.Configuration.GetConnectionString("MixyBoos"), options => {
-      options
+    .UseNpgsql(builder.Configuration.GetConnectionString("MixyBoos"), pgOptions => {
+      pgOptions
         .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)
         .MigrationsHistoryTable("migrations", "sys");
-    }).EnableSensitiveDataLogging(builder.Environment.IsDevelopment()));
+    })
+    .UseSnakeCaseNamingConvention()
+    .EnableSensitiveDataLogging(builder.Environment.IsDevelopment()));
 
 builder.Services.AddMixyboosAuthentication(builder.Configuration);
 
@@ -63,7 +67,6 @@ builder.Services.Configure<RouteOptions>(options => {
 builder.Services.LoadScheduler();
 
 var app = builder.Build();
-
 
 // Apply pending migrations
 using (var scope = app.Services.CreateScope()) {
@@ -93,10 +96,19 @@ app.UseCors(corsBuilder => corsBuilder
 
 app.UseSignalRHubs();
 app.UseSerilogRequestLogging();
+
+app.UseHttpsRedirection();
+app.MapControllers();
+
+
 app.MapGroup("/auth")
   .MapIdentityApi<MixyBoosUser>()
   .WithTags("Auth");
 
-app.UseHttpsRedirection();
-app.MapControllers();
+app.MapGet("/pingauth", () => new {
+    Ping = "Secure Pong"
+  })
+  .RequireAuthorization()
+  .WithName("AuthPing");
+
 app.Run();

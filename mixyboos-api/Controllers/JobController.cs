@@ -39,7 +39,7 @@ public class JobController : _Controller {
       return NotFound();
     }
 
-    var jobData = new Dictionary<string, string>() {
+    var jobData = new Dictionary<string, string> {
       {"Id", mixId},
       {"FileLocation", localFile},
       {"UserId", User.Identity.Name}

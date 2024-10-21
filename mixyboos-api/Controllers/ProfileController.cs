@@ -2,6 +2,7 @@ using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Mapster;
+using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -18,8 +19,8 @@ namespace MixyBoos.Api.Controllers;
 [Authorize]
 [Route("[controller]")]
 public class ProfileController : _Controller {
-  private readonly UserManager<MixyBoosUser> _userManager;
   private readonly MixyBoosContext _context;
+  private readonly UserManager<MixyBoosUser> _userManager;
 
   public ProfileController(
     UserManager<MixyBoosUser> userManager,

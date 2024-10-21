@@ -27,7 +27,7 @@ public static class FileHelpers {
       new List<byte[]> {
         new byte[] {0xFF, 0xFB},
         new byte[] {0xFF, 0xF3}, new byte[] {0xFF, 0xF2},
-        new byte[] {0x49, 0x44, 0x33,}
+        new byte[] {0x49, 0x44, 0x33}
       }
     }, {
       ".wav", new List<byte[]> {
@@ -45,13 +45,13 @@ public static class FileHelpers {
       ".jpeg",
       new List<byte[]> {
         new byte[] {0xFF, 0xD8, 0xFF, 0xE0}, new byte[] {0xFF, 0xD8, 0xFF, 0xE2},
-        new byte[] {0xFF, 0xD8, 0xFF, 0xE3},
+        new byte[] {0xFF, 0xD8, 0xFF, 0xE3}
       }
     }, {
       ".jpg", new List<byte[]> {
         new byte[] {0xFF, 0xD8, 0xFF, 0xE0},
         new byte[] {0xFF, 0xD8, 0xFF, 0xE1},
-        new byte[] {0xFF, 0xD8, 0xFF, 0xE8},
+        new byte[] {0xFF, 0xD8, 0xFF, 0xE8}
       }
     },
     //other
@@ -62,9 +62,9 @@ public static class FileHelpers {
         new byte[] {0x50, 0x4B, 0x53, 0x70, 0x58},
         new byte[] {0x50, 0x4B, 0x05, 0x06},
         new byte[] {0x50, 0x4B, 0x07, 0x08},
-        new byte[] {0x57, 0x69, 0x6E, 0x5A, 0x69, 0x70},
+        new byte[] {0x57, 0x69, 0x6E, 0x5A, 0x69, 0x70}
       }
-    },
+    }
   };
 
   // **WARNING!**
@@ -245,16 +245,17 @@ public static class FileHelpers {
 
   public static void CopyFilesRecursively(string sourcePath, string targetPath) {
     //Now Create all of the directories
-    foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories)) {
+    foreach (var dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories)) {
       Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
     }
 
     //Copy all the files & Replaces any files with the same name
-    foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories)) {
+    foreach (var newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories)) {
       File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
     }
   }
 
-  public static string GetFirstMatchingFile(string path, string filename) =>
-    Directory.GetFiles(path, $"{filename}.*").FirstOrDefault();
+  public static string GetFirstMatchingFile(string path, string filename) {
+    return Directory.GetFiles(path, $"{filename}.*").FirstOrDefault();
+  }
 }

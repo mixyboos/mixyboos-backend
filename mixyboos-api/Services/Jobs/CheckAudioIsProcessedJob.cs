@@ -12,10 +12,10 @@ using Quartz;
 namespace MixyBoos.Api.Services.Jobs;
 
 public class CheckAudioIsProcessedJob : IJob {
-  private readonly MixyBoosContext _context;
-  private readonly IHubContext<LiveHub> _hub;
   private readonly IConfiguration _config;
+  private readonly MixyBoosContext _context;
   private readonly IHttpClientFactory _httpClientFactory;
+  private readonly IHubContext<LiveHub> _hub;
 
   public CheckAudioIsProcessedJob(MixyBoosContext context, IHubContext<LiveHub> hub,
     IConfiguration config, IHttpClientFactory httpClientFactory) {

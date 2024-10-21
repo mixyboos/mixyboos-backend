@@ -13,6 +13,7 @@ public class PathHelpers {
     return path;
   }
 
-  public static string GetScopedTempFile(string extension) =>
-    $"{Path.Combine(GetScopedTempPath(), $"{Guid.NewGuid()}.{extension.TrimStart('.')}")}";
+  public static string GetScopedTempFile(string extension) {
+    return $"{Path.Combine(GetScopedTempPath(), $"{Guid.NewGuid()}.{extension.TrimStart('.')}")}";
+  }
 }

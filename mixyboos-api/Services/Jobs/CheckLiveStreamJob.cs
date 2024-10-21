@@ -18,9 +18,9 @@ public class LiveStreamNotFound : Exception {
 }
 
 public class CheckLiveStreamJob : IJob {
-  private readonly IHubContext<LiveHub> _hub;
-  private readonly IHttpClientFactory _httpClientFactory;
   private readonly MixyBoosContext _context;
+  private readonly IHttpClientFactory _httpClientFactory;
+  private readonly IHubContext<LiveHub> _hub;
 
   public CheckLiveStreamJob(IHubContext<LiveHub> hub, IHttpClientFactory httpClientFactory, MixyBoosContext context) {
     _hub = hub;

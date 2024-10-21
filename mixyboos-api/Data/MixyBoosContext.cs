@@ -17,8 +17,17 @@ using MixyBoos.Api.Services.Extensions;
 namespace MixyBoos.Api.Data;
 
 public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid>, Guid> {
-  private readonly DbScaffoldOptions _settings;
   private readonly ILogger<MixyBoosContext> _logger;
+  private readonly DbScaffoldOptions _settings;
+
+
+  public MixyBoosContext(DbContextOptions<MixyBoosContext> options, IOptions<DbScaffoldOptions> settings,
+    ILogger<MixyBoosContext> logger)
+    : base(options) {
+    _settings = settings.Value;
+    _logger = logger;
+  }
+
   public DbSet<Mix> Mixes { get; set; }
 
   public DbSet<MixPlay> MixPlays { get; set; }
@@ -29,14 +38,6 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
   public DbSet<LiveShow> LiveShows { get; set; }
   public DbSet<Tag> Tags { get; set; }
   public DbSet<ShowChat> ShowChat { get; set; }
-
-
-  public MixyBoosContext(DbContextOptions<MixyBoosContext> options, IOptions<DbScaffoldOptions> settings,
-    ILogger<MixyBoosContext> logger)
-    : base(options) {
-    _settings = settings.Value;
-    _logger = logger;
-  }
 
   private IEnumerable<PropertyBuilder> __getColumns(ModelBuilder modelBuilder, string columnName) {
     //helper function to only return models which are part of this project
@@ -53,11 +54,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
     if (!optionsBuilder.IsConfigured) {
       optionsBuilder
         .UseNpgsql("Name=MixyBoos")
-        //TODO: Re-enable this once
-        // https://github.com/efcore/EFCore.NamingConventions/issues/209
-        // is resolved
-        // .UseSnakeCaseNamingConvention()
-        ;
+        .UseSnakeCaseNamingConvention();
     }
   }
 
@@ -67,28 +64,17 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
     mb.HasDefaultSchema("mixyboos");
     mb.UseIdentityByDefaultColumns();
 
-    mb.HasAnnotation("Relational:Collation", "en_US.utf8");
+    // //give the identity tables proper names and schema
+    mb.Entity<MixyBoosUser>().ToTable("user", "auth");
+    mb.Entity<IdentityUser<Guid>>().ToTable("identity_user", "auth");
+    mb.Entity<IdentityRole<Guid>>().ToTable("identity_role", "auth");
+    mb.Entity<IdentityUserClaim<Guid>>().ToTable("user_claim", "auth");
+    mb.Entity<IdentityUserLogin<Guid>>().ToTable("user_login", "auth");
+    mb.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claim", "auth");
+    mb.Entity<IdentityUserToken<Guid>>().ToTable("user_token", "auth");
+    mb.Entity<IdentityUserRole<Guid>>().ToTable("user_identity_role", "auth");
+    // //end identity stuff
 
-    //give the identity tables proper names and schema
-    mb.Entity<MixyBoosUser>().ToTable("user", "oid");
-    mb.Entity<IdentityUser>().ToTable("identity_user_base", "oid");
-    mb.Entity<IdentityUser<Guid>>().ToTable("identity_user", "oid");
-    mb.Entity<IdentityRole<Guid>>().ToTable("user_user_role", "oid");
-    mb.Entity<IdentityUserClaim<Guid>>().ToTable("user_claim", "oid");
-    mb.Entity<IdentityUserLogin<Guid>>().ToTable("user_login", "oid");
-    mb.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claim", "oid");
-    mb.Entity<IdentityUserToken<Guid>>().ToTable("user_token", "oid");
-    mb.Entity<IdentityUserRole<Guid>>().ToTable("user_identity_role", "oid");
-    //end identity stuff
-
-    mb.Entity<Mix>().ToTable("mixes");
-    mb.Entity<LiveShow>().ToTable("live_shows");
-    mb.Entity<ShowChat>().ToTable("show_chats");
-    mb.Entity<Tag>().ToTable("tags");
-    mb.Entity<MixPlay>().ToTable("mix_plays");
-    mb.Entity<MixLike>().ToTable("mix_likes");
-    mb.Entity<MixShare>().ToTable("mix_shares");
-    mb.Entity<MixDownload>().ToTable("mix_download");
 
     foreach (var pb in __getColumns(mb, "DateCreated")) {
       pb.ValueGeneratedOnAdd()
@@ -126,7 +112,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
       .WithOne(m => m.Mix);
 
     mb.Entity<MixPlay>()
-      .HasKey(i => new { i.MixId, i.UserId });
+      .HasKey(i => new {i.MixId, i.UserId});
 
     mb.Entity<Mix>()
       .Navigation(m => m.Plays)
@@ -136,7 +122,7 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
       .Navigation(m => m.User)
       .AutoInclude();
 
-    mb.SeedAuthenticationUsers(_settings);
+    // mb.SeedAuthenticationUsers(_settings);
   }
 
   public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,

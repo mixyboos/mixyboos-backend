@@ -28,10 +28,10 @@ namespace MixyBoos.Api.Controllers {
   [Authorize]
   [Route("[controller]")]
   public class UploadController : _Controller {
-    private readonly UserManager<MixyBoosUser> _userManager;
+    private const long AudioFileSizeLimit = 2147483648;
+    private const long ImageFileSizeLimit = 52428800;
     private readonly ISchedulerFactory _schedulerFactory;
-    const long AudioFileSizeLimit = 2147483648;
-    const long ImageFileSizeLimit = 52428800;
+    private readonly UserManager<MixyBoosUser> _userManager;
 
     public UploadController(UserManager<MixyBoosUser> userManager, ISchedulerFactory schedulerFactory,
       ILogger<UploadController> logger) : base(logger) {
@@ -64,7 +64,7 @@ namespace MixyBoos.Api.Controllers {
     [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
     [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
     [DisableFormValueModelBinding]
-    public async Task<IActionResult> UploadImage([FromRoute] string id, [FromForm] IFormFile file,
+    public async Task<IActionResult> UploadImage([FromRoute] string id, IFormFile file,
       [FromQuery] string imageSource, [FromQuery] string imageType) {
       var (response, localFile) = await _preProcessUpload(id, file);
 
@@ -72,7 +72,7 @@ namespace MixyBoos.Api.Controllers {
         return response;
       }
 
-      var jobData = new Dictionary<string, string>() {
+      var jobData = new Dictionary<string, string> {
         {"Id", id},
         {"FileLocation", localFile},
         {"ImageSource", imageSource},
@@ -92,14 +92,14 @@ namespace MixyBoos.Api.Controllers {
     [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
     [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
     [DisableFormValueModelBinding]
-    public async Task<IActionResult> UploadAudio([FromRoute] string id, [FromForm] IFormFile file) {
+    public async Task<IActionResult> UploadAudio([FromRoute] string id, IFormFile file) {
       var (response, localFile) = await _preProcessUpload(id, file);
 
       if (string.IsNullOrEmpty(localFile)) {
         return response;
       }
 
-      var jobData = new Dictionary<string, string>() {
+      var jobData = new Dictionary<string, string> {
         {"Id", id},
         {"FileLocation", localFile},
         {"UserId", User.Identity.Name}

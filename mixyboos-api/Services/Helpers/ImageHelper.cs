@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Flurl;
 using Microsoft.Extensions.Configuration;
 
 namespace MixyBoos.Api.Services.Helpers;
@@ -21,15 +22,17 @@ public class ImageHelper {
 
   //TODO: the Guid on the querystring is really yuck
   //TODO: find a better way to invalidate the cached image
-  public string GetLargeImageUrl(string imageType, string imageUrl) =>
-    Flurl.Url.Combine(
+  public string GetLargeImageUrl(string imageType, string imageUrl) {
+    return Url.Combine(
       _config["Servers:ImageServer"],
       $"/img/{imageType}/{imageUrl}?width=1024&height=768&t={Guid.NewGuid().ToString()}");
+  }
 
-  public string GetSmallImageUrl(string imageType, string imageUrl) =>
-    Flurl.Url.Combine(
+  public string GetSmallImageUrl(string imageType, string imageUrl) {
+    return Url.Combine(
       _config["Servers:ImageServer"],
       $"/img/{imageType}/{imageUrl}?width=128&height=128&t={Guid.NewGuid().ToString()}");
+  }
 
   public async Task<string> CacheImage(string source, string destination) {
     try {

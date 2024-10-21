@@ -23,8 +23,8 @@ namespace MixyBoos.Api.Controllers;
 
 [Route("[controller]")]
 public class MixController : _Controller {
-  private readonly MixyBoosContext _context;
   private readonly IConfiguration _config;
+  private readonly MixyBoosContext _context;
   private readonly UserManager<MixyBoosUser> _userManager;
 
   public MixController(MixyBoosContext context,
@@ -133,7 +133,7 @@ public class MixController : _Controller {
       entity.IsProcessed = System.IO.File.Exists(
         Path.Combine(_config["AudioProcessing:OutputDir"], entity.Id.ToString(), $"{entity.Id}.m3u8"));
 
-      await _context.AddOrUpdate<Mix>(entity);
+      await _context.AddOrUpdate(entity);
       await _context.SaveChangesAsync();
 
       var response = entity.Adapt<MixDTO>();

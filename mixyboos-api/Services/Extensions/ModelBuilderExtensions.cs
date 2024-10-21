@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
@@ -20,26 +21,34 @@ public static class ModelBuilderExtensions {
 
   public static void SeedAuthenticationUsers(this ModelBuilder builder, DbScaffoldOptions settings) {
     var passwordHasher = new PasswordHasher<MixyBoosUser>();
-    var superAdminRole = new IdentityRole("SuperAdmin");
+    var superAdminRole = new IdentityRole<Guid>("SuperAdmin") {
+      Id = Guid.NewGuid(),
+    };
     superAdminRole.NormalizedName = superAdminRole.Name.ToUpper();
-    var adminRole = new IdentityRole("Admin");
+    var adminRole = new IdentityRole<Guid>("Admin") {
+      Id = Guid.NewGuid(),
+    };
     adminRole.NormalizedName = adminRole.Name.ToUpper();
-    var artistRole = new IdentityRole("Artist");
+    var artistRole = new IdentityRole<Guid>("Artist") {
+      Id = Guid.NewGuid(),
+    };
     artistRole.NormalizedName = artistRole.Name.ToUpper();
-    var memberRole = new IdentityRole("Member");
+    var memberRole = new IdentityRole<Guid>("Member") {
+      Id = Guid.NewGuid(),
+    };
     memberRole.NormalizedName = memberRole.Name.ToUpper();
 
-    var roles = new List<IdentityRole> {
+    var roles = new List<IdentityRole<Guid>> {
       superAdminRole,
       adminRole,
       artistRole,
       memberRole
     };
 
-    builder.Entity<IdentityRole>().HasData(roles);
+    builder.Entity<IdentityRole<Guid>>().HasData(roles);
 
     var adminUser = new MixyBoosUser {
-      Id = System.Guid.NewGuid(),
+      Id = Guid.NewGuid(),
       Email = settings.AdminUserEmail,
       UserName = settings.AdminUserName,
       DisplayName = settings.AdminUserDisplayName,
