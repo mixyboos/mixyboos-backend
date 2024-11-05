@@ -61,11 +61,15 @@ namespace MixyBoos.Api.Controllers {
     }
 
     [HttpPost("image/{id}")]
-    [RequestFormLimits(MultipartBodyLengthLimit = AudioFileSizeLimit)] //2Gb
-    [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
+    [RequestFormLimits(MultipartBodyLengthLimit = ImageFileSizeLimit)] //2Gb
+    [RequestSizeLimit(ImageFileSizeLimit)] //2Gb
     [DisableFormValueModelBinding]
-    public async Task<IActionResult> UploadImage([FromRoute] string id, IFormFile file,
-      [FromQuery] string imageSource, [FromQuery] string imageType) {
+    public async Task<IActionResult> UploadImage([FromRoute] string id,
+      [FromQuery] string imageSource, [FromQuery] string imageType, IFormFile file) {
+      if (file is null) {
+        return BadRequest("No file found in request");
+      }
+
       var (response, localFile) = await _preProcessUpload(id, file);
 
       if (string.IsNullOrEmpty(localFile)) {

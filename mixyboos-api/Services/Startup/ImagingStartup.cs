@@ -14,16 +14,7 @@ public static class ImagingStartup {
     services.AddImageSharp()
       .SetRequestParser<QueryCollectionRequestParser>()
       .ClearProviders()
-      .Configure<PhysicalFileSystemCacheOptions>(options => {
-        options.CacheRootPath = ".img-cache";
-      })
-      .Configure<PhysicalFileSystemProviderOptions>(options => {
-        options.ProviderRootPath = config["ImageProcessing:ImageCacheFolder"] ?? "/tmp";
-        options.ProcessingBehavior = ProcessingBehavior.All;
-      })
-      .SetCache<PhysicalFileSystemCache>()
       .AddProvider<FileSystemImageProvider>()
-      // .AddProvider(PhysicalFileSystemProviderFactory)
       .AddProcessor<ResizeWebProcessor>();
     return services;
   }

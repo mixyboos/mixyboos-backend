@@ -1,7 +1,10 @@
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Bogus;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -33,8 +36,6 @@ public class AccountController : _Controller {
     _imageCacher = imageCacher;
   }
 
-  //
-  // POST: /Account/Register
   [HttpPost("register")]
   [AllowAnonymous]
   public async Task<IActionResult> Register([FromBody] RegisterDTO model) {
@@ -63,6 +64,25 @@ public class AccountController : _Controller {
 
     // If we got this far, something failed.
     return BadRequest(ModelState);
+  }
+
+  [HttpDelete("logout")]
+  public async Task<IActionResult> Logout() {
+    var cookieName = _config["Auth:CookieName"];
+    var domainName = _config["Auth:DomainName"];
+    if (string.IsNullOrEmpty(cookieName)) {
+      return BadRequest();
+    }
+
+    await HttpContext.SignOutAsync();
+    Response.Cookies.Delete(cookieName, new CookieOptions {
+      Domain = domainName,
+      SameSite = SameSiteMode.Strict,
+      HttpOnly = true
+    });
+
+    // Response.Cookies[cookieName].Expires = DateTime.Now.AddDays(-1);
+    return Ok();
   }
 
 

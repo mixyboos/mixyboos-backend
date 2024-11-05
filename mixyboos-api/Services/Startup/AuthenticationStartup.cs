@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,13 @@ namespace MixyBoos.Api.Services.Startup;
 public static class AuthenticationStartup {
   public static IServiceCollection AddMixyboosAuthentication(this IServiceCollection services, IConfiguration config) {
     services.AddAuthorization();
+    services.ConfigureApplicationCookie(options => {
+      options.Cookie.Name = config["Auth:CookieName"];
+      options.Cookie.Domain = config["Auth:DomainName"];
+      options.Cookie.SameSite = SameSiteMode.Strict;
+      options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+      options.Cookie.HttpOnly = true;
+    });
     services
       .AddIdentityApiEndpoints<MixyBoosUser>()
       .AddEntityFrameworkStores<MixyBoosContext>();

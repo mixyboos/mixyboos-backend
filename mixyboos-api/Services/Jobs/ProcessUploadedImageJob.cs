@@ -29,7 +29,11 @@ public class ProcessUploadedImageJob : IJob {
       var imageSource = data["ImageSource"]?.ToString();
       var imageType = data["ImageType"]?.ToString();
       var fileLocation = data["FileLocation"]?.ToString();
-      var outputPath = _config[$"ImageProcessing:{imageSource}Dir"];
+      var outputPath =
+        Path.Combine(
+          _config["ImageProcessing:ImageRootFolder"] ?? throw new InvalidOperationException(),
+          imageSource ?? throw new InvalidOperationException(),
+          imageType ?? throw new InvalidOperationException());
       if (string.IsNullOrEmpty(outputPath)) {
         _logger.LogError("Unable to create output path for {FileLocation}", fileLocation);
         return;
@@ -41,7 +45,9 @@ public class ProcessUploadedImageJob : IJob {
         Directory.CreateDirectory(outputPath);
       }
 
-      var destinationFile = Path.Combine(outputPath, imageType ?? string.Empty, Path.GetFileName(fileLocation));
+      var destinationFile = Path.Combine(
+        outputPath, Path.GetFileName(fileLocation) ?? throw new InvalidOperationException());
+
       if (File.Exists(fileLocation) && Directory.Exists(outputPath)) {
         if (File.Exists(destinationFile)) {
           File.Delete(destinationFile);
@@ -54,10 +60,10 @@ public class ProcessUploadedImageJob : IJob {
         fileLocation, destinationFile);
 
       switch (imageSource) {
-        case "MixImage":
+        case "mixes":
           await _updateMixImageDetails(id, destinationFile);
           break;
-        case "UserImage":
+        case "users":
           await _updateUserImageDetails(id, imageType, destinationFile);
           break;
       }

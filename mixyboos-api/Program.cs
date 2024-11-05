@@ -21,6 +21,7 @@ using MixyBoos.Api.Services.Helpers;
 using MixyBoos.Api.Services.Helpers.Audio;
 using MixyBoos.Api.Services.Startup;
 using Serilog;
+using SixLabors.ImageSharp.Web.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,8 +40,8 @@ builder.Services.AddSingleton<IUserIdProvider, CustomEmailProvider>();
 builder.Services.AddSingleton<ImageCacher>();
 builder.Services.AddSingleton<ImageHelper>();
 builder.Services.AddSingleton<IFileProvider, PhysicalFileProvider>(_ =>
-  new PhysicalFileProvider(
-    builder.Configuration["ImageProcessing:ImageRootFolder"] ?? ".pn-cache"));
+  new PhysicalFileProvider("/"));
+// builder.Configuration["ImageProcessing:ImageRootFolder"] ?? ".pn-cache"));
 
 builder.Services.AddDbContext<MixyBoosContext>(options =>
   options
@@ -60,7 +61,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
-
+builder.Services.AddImaging(builder.Configuration);
 builder.Services.Configure<RouteOptions>(options => {
   options.LowercaseUrls = true;
 });
@@ -85,8 +86,7 @@ if (app.Environment.IsDevelopment()) {
 
 app.UseCors(corsBuilder => corsBuilder
   .WithOrigins("http://localhost:3000")
-  .WithOrigins("https://mixyboos.dev.fergl.ie:3002")
-  .WithOrigins("http://mixyboos.dev.fergl.ie:3002")
+  .WithOrigins("https://mixyboos.dev.fergl.ie:3000")
   .WithOrigins("https://www.mixyboos.com")
   .WithOrigins("https://mixyboos.com")
   .AllowCredentials()
@@ -111,4 +111,5 @@ app.MapGet("/pingauth", () => new {
   .RequireAuthorization()
   .WithName("AuthPing");
 
+app.UseImageSharp();
 app.Run();

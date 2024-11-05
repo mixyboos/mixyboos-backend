@@ -33,20 +33,26 @@ public class FileSystemImageProvider : IImageProvider {
   }
 
   public Task<IImageResolver> GetAsync(HttpContext context) {
+    var imageRootPath = _config["ImageProcessing:ImageRootFolder"];
+    if (string.IsNullOrEmpty(imageRootPath) || !Directory.Exists(imageRootPath)) {
+      throw new FileNotFoundException("ImageRootFolder not found");
+    }
+
+    var prefix = _pathPrefixes
+      .Select(r => context.Request.Path.Value.TrimStartString(r))
+      .Aggregate((a, b) => $"{a}{b}")
+      .TrimStart('/');
+
     var filePath = Path.Combine(
-      _config["ImageProcessing:ImageRootFolder"],
-      _pathPrefixes.Select(r => context.Request.Path.Value.TrimStartString(r))
-        .Aggregate((a, b) => $"{a}{b}")
+      imageRootPath,
+      prefix
     );
     var info = _fileProvider.GetFileInfo(filePath);
 
     // Check to see if the file exists.
-    if (!info.Exists) {
-      return Task.FromResult<IImageResolver>(null);
-    }
+    return Task.FromResult<IImageResolver>(!info.Exists ? null : new ImageResolver(info));
 
     // We don't care about the content type nor cache control max age here.
-    return Task.FromResult<IImageResolver>(new ImageResolver(info));
   }
 
   public ProcessingBehavior ProcessingBehavior { get; }
