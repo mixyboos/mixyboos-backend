@@ -97,6 +97,11 @@ namespace MixyBoos.Api.Controllers {
     [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
     [DisableFormValueModelBinding]
     public async Task<IActionResult> UploadAudio([FromRoute] string id, IFormFile file) {
+      var user = await _userManager.FindByNameAsync(User.Identity.Name);
+      if (user is null) {
+        return Unauthorized();
+      }
+
       var (response, localFile) = await _preProcessUpload(id, file);
 
       if (string.IsNullOrEmpty(localFile)) {
@@ -106,7 +111,7 @@ namespace MixyBoos.Api.Controllers {
       var jobData = new Dictionary<string, string> {
         {"Id", id},
         {"FileLocation", localFile},
-        {"UserId", User.Identity.Name}
+        {"UserId", user.Id.ToString()}
       };
       var scheduler = await _schedulerFactory.GetScheduler();
       await scheduler.TriggerJob(

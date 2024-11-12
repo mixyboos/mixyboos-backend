@@ -2,15 +2,18 @@
 using System.Threading.Tasks;
 using Bogus;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services.Helpers;
 
 namespace MixyBoos.Api.Data.Utils;
 
 public class ImageCacher {
+  private readonly ILogger<ImageCacher> _logger;
   private readonly ImageHelper _imageHelper;
 
-  public ImageCacher(ImageHelper imageHelper) {
+  public ImageCacher(ILogger<ImageCacher> logger, ImageHelper imageHelper) {
+    _logger = logger;
     _imageHelper = imageHelper;
   }
 

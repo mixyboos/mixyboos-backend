@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bogus;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -20,6 +21,7 @@ public static class ModelBuilderExtensions {
   }
 
   public static void SeedAuthenticationUsers(this ModelBuilder builder, DbScaffoldOptions settings) {
+    var faker = new Faker();
     var passwordHasher = new PasswordHasher<MixyBoosUser>();
     var superAdminRole = new IdentityRole<Guid>("SuperAdmin") {
       Id = Guid.NewGuid(),
@@ -53,7 +55,9 @@ public static class ModelBuilderExtensions {
       UserName = settings.AdminUserName,
       DisplayName = settings.AdminUserDisplayName,
       StreamKey = settings.AdminUserStreamKey,
-      EmailConfirmed = true
+      EmailConfirmed = true,
+      ProfileImage = faker.Person.Avatar,
+      HeaderImage = faker.Image.PicsumUrl()
     };
     adminUser.NormalizedUserName = adminUser.UserName.ToUpper();
     adminUser.NormalizedEmail = adminUser.Email.ToUpper();

@@ -16,6 +16,10 @@ public class MixDTO {
   public int PlayCount { get; set; }
   public int ShareCount { get; set; }
   public int DownloadCount { get; set; }
+  public long Duration { get; set; }
+
+  public string AudioUrl { get; set; }
+  public string PcmUrl { get; set; }
 
   public string[] Tags { get; set; }
 }

@@ -48,7 +48,9 @@ public class AccountController : _Controller {
       UserName = model.UserName,
       Email = model.UserName,
       DisplayName = model.DisplayName,
-      Title = faker.Name.JobTitle()
+      Title = faker.Name.JobTitle(),
+      ProfileImage = faker.Person.Avatar,
+      HeaderImage = faker.Image.PicsumUrl()
     };
     var result = await _userManager.CreateAsync(user, model.Password);
 

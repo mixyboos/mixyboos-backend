@@ -35,6 +35,7 @@ builder.Services.Configure<DbScaffoldOptions>(
 );
 builder.Services.AddScoped<IClaimsTransformation, ClaimsTransformer>();
 builder.Services.AddTransient<IEmailSender, ARMMailSender>();
+builder.Services.AddTransient<IWaveformGenerator, WaveformGenerator>();
 builder.Services.AddSingleton<IAudioFileConverter, AudioFileConverter>();
 builder.Services.AddSingleton<IUserIdProvider, CustomEmailProvider>();
 builder.Services.AddSingleton<ImageCacher>();
@@ -110,6 +111,11 @@ app.MapGet("/pingauth", () => new {
   })
   .RequireAuthorization()
   .WithName("AuthPing");
+
+app.UseStaticFiles(new StaticFileOptions {
+  FileProvider = new PhysicalFileProvider(builder.Configuration["AudioProcessing:WaveformDir"]),
+  RequestPath = new PathString("/waveforms")
+});
 
 app.UseImageSharp();
 app.Run();

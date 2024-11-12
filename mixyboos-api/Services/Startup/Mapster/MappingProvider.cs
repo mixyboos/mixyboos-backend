@@ -33,10 +33,16 @@ public static class MappingProvider {
       .Map(dest => dest.PlayCount, src => src.Plays.Count)
       .Map(dest => dest.LikeCount, src => src.Likes.Count)
       .Map(dest => dest.ShareCount, src => src.Shares.Count)
-      .Map(dest => dest.DownloadCount, src => src.Downloads.Count);
+      .Map(dest => dest.DownloadCount, src => src.Downloads.Count)
+      .Map(dest => dest.Duration, src => src.Duration.TotalSeconds)
+      .Map(dest => dest.AudioUrl,
+        src => Flurl.Url.Combine(config["LiveServices:ListenUrl"], src.Id.ToString(), $"{src.Id}.m3u8"))
+      .Map(dest => dest.PcmUrl,
+        src => Flurl.Url.Combine(config["LiveServices:PcmUrl"], src.Id.ToString(), $"{src.Id}.json"));
 
     TypeAdapterConfig<MixDTO, Mix>
       .NewConfig()
+      .Map(dest => dest.Duration, src => TimeSpan.FromSeconds(src.Duration))
       .Map(dest => dest.Id, src => Guid.Parse(src.Id));
 
     TypeAdapterConfig<LiveShow, LiveShowDTO>

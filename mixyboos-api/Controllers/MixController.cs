@@ -124,14 +124,20 @@ public class MixController : _Controller {
   public async Task<ActionResult<MixDTO>> Post([FromBody] MixDTO mix) {
     try {
       var entity = mix.Adapt<Mix>();
+      var existing = await _context.Mixes
+        .AsNoTracking()
+        .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(mix.Id)));
+      if (existing is not null) {
+        //we have a proxy mix from waveform generation
+        //that completed before the form was submitted
+        entity.IsProcessed = existing.IsProcessed;
+        entity.Duration = existing.Duration;
+      }
+
       var faker = new Faker();
       var user = await _userManager.FindByNameAsync(User.Identity.Name);
       entity.User = user;
       entity.Image = entity.Image ?? faker.Image.LoremFlickrUrl();
-
-      //check if the file has been processed
-      entity.IsProcessed = System.IO.File.Exists(
-        Path.Combine(_config["AudioProcessing:OutputDir"], entity.Id.ToString(), $"{entity.Id}.m3u8"));
 
       await _context.AddOrUpdate(entity);
       await _context.SaveChangesAsync();
