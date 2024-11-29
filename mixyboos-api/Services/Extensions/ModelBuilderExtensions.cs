@@ -17,7 +17,7 @@ public static class ModelBuilderExtensions {
       .Where(t => t.Name.StartsWith("MixyBoos.Api.Data")) //this dude is all on her own!
       .SelectMany(t => t.GetProperties())
       .Where(p => p.Name == columnName)
-      .Select(p => modelBuilder.Entity(p.DeclaringEntityType.ClrType).Property(p.Name));
+      .Select(p => modelBuilder.Entity(p.DeclaringType.ClrType).Property(p.Name));
   }
 
   public static void SeedAuthenticationUsers(this ModelBuilder builder, DbScaffoldOptions settings) {

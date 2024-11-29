@@ -45,9 +45,9 @@ public class MixyBoosContext : IdentityDbContext<MixyBoosUser, IdentityRole<Guid
     return modelBuilder.Model
       .GetEntityTypes()
       .SelectMany(t => t.GetProperties())
-      .Where(p => p.DeclaringEntityType.ClrType.IsSubclassOf(typeof(BaseEntity)))
+      .Where(p => p.DeclaringType.ClrType.IsSubclassOf(typeof(BaseEntity)))
       .Where(p => p.Name == columnName)
-      .Select(p => modelBuilder.Entity(p.DeclaringEntityType.ClrType).Property(p.Name));
+      .Select(p => modelBuilder.Entity(p.DeclaringType.ClrType).Property(p.Name));
   }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {

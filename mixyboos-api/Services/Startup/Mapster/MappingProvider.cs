@@ -24,6 +24,7 @@ public static class MappingProvider {
     TypeAdapterConfig<Mix, MixDTO>
       .NewConfig()
       .Map(dest => dest.Id, src => src.Id.ToString())
+      .Map(dest => dest.Slug, src => src.Slug)
       .Map(dest => dest.DateUploaded, src => src.DateCreated)
       .Map(dest => dest.Image,
         src => src.Image.StartsWith("http")
@@ -43,7 +44,7 @@ public static class MappingProvider {
     TypeAdapterConfig<MixDTO, Mix>
       .NewConfig()
       .Map(dest => dest.Duration, src => TimeSpan.FromSeconds(src.Duration))
-      .Map(dest => dest.Id, src => Guid.Parse(src.Id));
+      .Map(dest => dest.Id, src => src.Id);
 
     TypeAdapterConfig<LiveShow, LiveShowDTO>
       .NewConfig()

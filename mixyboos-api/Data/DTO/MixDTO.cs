@@ -3,7 +3,7 @@
 namespace MixyBoos.Api.Data.DTO;
 
 public class MixDTO {
-  public string Id { get; set; }
+  public Guid Id { get; set; }
   public string Slug { get; set; }
   public string Title { get; set; }
   public string Description { get; set; }

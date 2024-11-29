@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
@@ -17,30 +16,26 @@ using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.DTO;
 using MixyBoos.Api.Data.Models;
+using MixyBoos.Api.Data.Repositories;
 using MixyBoos.Api.Services.Extensions;
 
 namespace MixyBoos.Api.Controllers;
 
 [Route("[controller]")]
-public class MixController : _Controller {
-  private readonly IConfiguration _config;
-  private readonly MixyBoosContext _context;
-  private readonly UserManager<MixyBoosUser> _userManager;
-
-  public MixController(MixyBoosContext context,
-    IConfiguration config,
-    UserManager<MixyBoosUser> userManager,
-    ILogger<MixController> logger) : base(logger) {
-    _context = context;
-    _config = config;
-    _userManager = userManager;
-  }
-
+public class MixController(
+  MixyBoosContext __context,
+  MixRepository repository,
+  IRepository<MixLike> mixLikeRepository,
+  IConfiguration config,
+  UserManager<MixyBoosUser> userManager,
+  ILogger<MixController> logger)
+  : _Controller(logger) {
   [HttpGet]
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
   public async Task<ActionResult<List<MixDTO>>> Get() {
-    var mixes = await _context.Mixes.Include(m => m.User).ToListAsync();
+    var mixes = await __context.Mixes.Include(m => m.User).ToListAsync();
+
     var script = mixes.BuildAdapter()
       .CreateMapExpression<MixDTO>()
       .ToScript();
@@ -53,39 +48,28 @@ public class MixController : _Controller {
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
   public async Task<ActionResult<List<MixDTO>>> GetByUser([FromQuery] string user) {
-    var mixes = await _context.Mixes
-      .Include(m => m.User)
-      .Where(m => m.User.Slug.Equals(user))
-      .Where(m => m.IsProcessed)
-      .ToListAsync();
-    var result = mixes.Adapt<List<MixDTO>>();
-    return Ok(result);
+    var mixes = await repository.GetByUser(user);
+    return Ok(mixes.Adapt<List<MixDTO>>());
   }
 
   [HttpGet("single")]
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
-  public async Task<ActionResult<MixDTO>> GetByUserAndMix([FromQuery] string user, [FromQuery] string mix) {
-    var mixes = await _context.Mixes
-      .Where(m => m.User.Slug.Equals(user))
-      .Where(m => m.Slug.Equals(mix))
-      .Include(m => m.User).FirstOrDefaultAsync();
-    if (mixes is null) {
+  public async Task<ActionResult<MixDTO>> GetByUserAndSlug([FromQuery] string user, [FromQuery] string mix) {
+    var result = await repository.GetByUserAndSlug(user, mix);
+    if (result is null) {
       return NoContent();
     }
 
-    var result = mixes.Adapt<MixDTO>();
-    return Ok(result);
+    return Ok(result.Adapt<MixDTO>());
   }
 
   [HttpGet("audiourl")]
   [Produces(MediaTypeNames.Text.Plain)]
   [ProducesResponseType(StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
-  public async Task<ActionResult<MixDTO>> GetAudioUrl([FromQuery] string id) {
-    var mix = await _context.Mixes
-      .Where(r => r.Id.Equals(Guid.Parse(id)))
-      .SingleOrDefaultAsync();
+  public async Task<ActionResult<MixDTO>> GetAudioUrl([FromQuery] Guid id) {
+    var mix = await repository.Get(id);
 
     if (mix is null) {
       return NotFound();
@@ -98,7 +82,11 @@ public class MixController : _Controller {
     //     User = user
     // });
     // await _context.SaveChangesAsync();
-    return Ok(Flurl.Url.Combine(_config["LiveServices:ListenUrl"], mix.Id.ToString(), $"{mix.Id}.m3u8"));
+    return Ok(
+      Flurl.Url.Combine(
+        config["LiveServices:ListenUrl"],
+        mix.Id.ToString(),
+        $"{mix.Id}.m3u8"));
   }
 
   [Authorize]
@@ -106,12 +94,8 @@ public class MixController : _Controller {
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
   public async Task<ActionResult<List<MixDTO>>> GetFeed() {
-    var user = await _userManager.FindByNameAsync(User.Identity.Name);
-    var mixes = await _context.Mixes
-      .Where(m => m.User.Id.Equals(user.Id))
-      .Where(m => m.IsProcessed)
-      .OrderByDescending(m => m.DateCreated)
-      .ToListAsync();
+    var user = await userManager.FindByNameAsync(User.Identity.Name);
+    var mixes = await repository.GetFeedForUser(user.Id);
     var result = mixes.Adapt<List<MixDTO>>();
     return Ok(result);
   }
@@ -124,9 +108,9 @@ public class MixController : _Controller {
   public async Task<ActionResult<MixDTO>> Post([FromBody] MixDTO mix) {
     try {
       var entity = mix.Adapt<Mix>();
-      var existing = await _context.Mixes
+      var existing = await __context.Mixes
         .AsNoTracking()
-        .FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(mix.Id)));
+        .FirstOrDefaultAsync(m => m.Id.Equals(mix.Id));
       if (existing is not null) {
         //we have a proxy mix from waveform generation
         //that completed before the form was submitted
@@ -135,12 +119,10 @@ public class MixController : _Controller {
       }
 
       var faker = new Faker();
-      var user = await _userManager.FindByNameAsync(User.Identity.Name);
+      var user = await userManager.FindByNameAsync(User.Identity.Name);
       entity.User = user;
-      entity.Image = entity.Image ?? faker.Image.LoremFlickrUrl();
-
-      await _context.AddOrUpdate(entity);
-      await _context.SaveChangesAsync();
+      entity.Image ??= faker.Image.LoremFlickrUrl();
+      await repository.AddOrUpdate(entity);
 
       var response = entity.Adapt<MixDTO>();
       return CreatedAtAction(nameof(Get), new {id = response.Id}, response);
@@ -158,7 +140,8 @@ public class MixController : _Controller {
   public async Task<ActionResult<MixDTO>> Patch([FromBody] MixDTO mix) {
     try {
       var entity = mix.Adapt<Mix>();
-      var existing = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(mix.Id)));
+      var existing = await repository.Get(mix.Id);
+
       if (existing is null) {
         return NotFound();
       }
@@ -168,7 +151,7 @@ public class MixController : _Controller {
       existing.Description = entity.Description;
       existing.Image = entity.Image;
 
-      await _context.SaveChangesAsync();
+      await repository.Update(existing);
 
       var response = existing.Adapt<MixDTO>();
       return CreatedAtAction(nameof(Get), new {id = response.Id}, response);
@@ -178,29 +161,43 @@ public class MixController : _Controller {
     }
   }
 
-  [HttpPost("addlike")]
+  [HttpPost("togglelike")]
   [Authorize]
-  [Consumes(MediaTypeNames.Application.Json)]
-  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status404NotFound)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
-  public async Task<ActionResult<MixDTO>> AddLike([FromBody] string id) {
-    var user = await _userManager.FindByNameAsync(User.Identity.Name);
-    if (user is null) {
+  [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+  public async Task<ActionResult<MixDTO>> ToggleLike(Guid id) {
+    if (id.Equals(Guid.Empty)) {
       return BadRequest();
     }
 
-    var mix = await _context
-      .Mixes
-      .FirstOrDefaultAsync(m => m.Id.Equals(id));
+    var user = await userManager.FindByNameAsync(User.Identity.Name);
+    if (user is null) {
+      return Unauthorized();
+    }
+
+    var likes = await mixLikeRepository
+      .GetAll()
+      .Where(l => l.MixId.Equals(id) && l.UserId.Equals(user.Id))
+      .ToListAsync();
+
+    if (likes.Count != 0) {
+      __context.RemoveRange(likes);
+      await __context.SaveChangesAsync();
+      return NoContent();
+    }
+
+    var mix = await repository.Get(id);
     if (mix is null) {
       return NotFound();
     }
 
-    //
-    // await _context.MixLikes.AddAsync(new MixLike {
-    //     Mix = mix,
-    //     User = user
-    // });
+    await __context.MixLikes.AddAsync(new MixLike {
+      Mix = mix,
+      User = user
+    });
+    await __context.SaveChangesAsync();
     return Ok();
   }
 
@@ -209,22 +206,14 @@ public class MixController : _Controller {
   [ProducesResponseType(StatusCodes.Status204NoContent)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   [ProducesResponseType(StatusCodes.Status404NotFound)]
-  public async Task<IActionResult> Delete([FromQuery] string id) {
+  public async Task<IActionResult> Delete([FromQuery] Guid id) {
     try {
-      var user = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(id)));
-      if (user is null) {
-        return NotFound();
-      }
-
-      var mix = await _context
-        .Mixes
-        .FirstOrDefaultAsync(m => m.Id.Equals(id));
+      var mix = await repository.Get(id);
       if (mix is null) {
         return NotFound();
       }
 
-      _context.Remove(user);
-      await _context.SaveChangesAsync();
+      await repository.Delete(mix);
       return Ok(StatusCodes.Status204NoContent);
     } catch (DbUpdateException ex) {
       _logger.LogError("Error creating mix {Message}", ex.Message);

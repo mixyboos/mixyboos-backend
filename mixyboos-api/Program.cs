@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using MixyBoos.Api.Data;
 using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Data.Options;
+using MixyBoos.Api.Data.Repositories;
 using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Auth;
 using MixyBoos.Api.Services.Helpers;
@@ -33,7 +34,9 @@ builder.CreateLogger(builder.Configuration);
 builder.Services.Configure<DbScaffoldOptions>(
   builder.Configuration.GetSection("DbScaffoldOptions")
 );
-builder.Services.AddScoped<IClaimsTransformation, ClaimsTransformer>();
+builder.Services.AddTransient<MixRepository>();
+builder.Services.AddTransient<IRepository<MixLike>, Repository<MixLike>>();
+builder.Services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
 builder.Services.AddTransient<IEmailSender, ARMMailSender>();
 builder.Services.AddTransient<IWaveformGenerator, WaveformGenerator>();
 builder.Services.AddSingleton<IAudioFileConverter, AudioFileConverter>();
