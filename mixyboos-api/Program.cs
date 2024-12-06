@@ -21,6 +21,7 @@ using MixyBoos.Api.Services.Auth;
 using MixyBoos.Api.Services.Helpers;
 using MixyBoos.Api.Services.Helpers.Audio;
 using MixyBoos.Api.Services.Startup;
+using MixyBoos.Api.Services.Startup.Mapster;
 using Serilog;
 using SixLabors.ImageSharp.Web.DependencyInjection;
 
@@ -46,7 +47,6 @@ builder.Services.AddSingleton<ImageHelper>();
 builder.Services.AddSingleton<IFileProvider, PhysicalFileProvider>(_ =>
   new PhysicalFileProvider("/"));
 // builder.Configuration["ImageProcessing:ImageRootFolder"] ?? ".pn-cache"));
-
 builder.Services.AddDbContext<MixyBoosContext>(options =>
   options
     .UseNpgsql(builder.Configuration.GetConnectionString("MixyBoos"), pgOptions => {
@@ -80,6 +80,7 @@ using (var scope = app.Services.CreateScope()) {
 
   // Here is the migration executed
   dbContext.Database.Migrate();
+  builder.Services.RegisterMapsterConfiguration(builder.Configuration, scope.ServiceProvider);
 }
 
 // Configure the HTTP request pipeline.

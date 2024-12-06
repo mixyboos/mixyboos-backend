@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MixyBoos.Api.Data.DTO;
@@ -19,10 +21,26 @@ public static class MappingProvider {
     }).ToList();
   }
 
-  public static void RegisterMapsterConfiguration(this IServiceCollection services, IConfiguration config) {
+  private static bool _isLiked(Mix src, ClaimsPrincipal currentUser) {
+    var userId = currentUser?.FindFirstValue(ClaimTypes.NameIdentifier);
+    if (userId is null) {
+      return false;
+    }
+
+    return src.Likes != null && src.Likes.Any(l => l.UserId.Equals(Guid.Parse(userId)));
+  }
+
+  public static void RegisterMapsterConfiguration(this IServiceCollection services, IConfiguration config,
+    IServiceProvider serviceProvider) {
     var imageHelper = services.BuildServiceProvider().GetService<ImageHelper>();
+    var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+
     TypeAdapterConfig<Mix, MixDTO>
       .NewConfig()
+      // .BeforeMapping((src, dest, context) => {
+      //   var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+      //   var currentUser = httpContextAccessor.HttpContext?.User;
+      // })
       .Map(dest => dest.Id, src => src.Id.ToString())
       .Map(dest => dest.Slug, src => src.Slug)
       .Map(dest => dest.DateUploaded, src => src.DateCreated)
@@ -39,7 +57,8 @@ public static class MappingProvider {
       .Map(dest => dest.AudioUrl,
         src => Flurl.Url.Combine(config["LiveServices:ListenUrl"], src.Id.ToString(), $"{src.Id}.m3u8"))
       .Map(dest => dest.PcmUrl,
-        src => Flurl.Url.Combine(config["LiveServices:PcmUrl"], src.Id.ToString(), $"{src.Id}.json"));
+        src => Flurl.Url.Combine(config["LiveServices:PcmUrl"], src.Id.ToString(), $"{src.Id}.json"))
+      .Map(dest => dest.IsLiked, (src) => _isLiked(src, httpContextAccessor.HttpContext.User));
 
     TypeAdapterConfig<MixDTO, Mix>
       .NewConfig()

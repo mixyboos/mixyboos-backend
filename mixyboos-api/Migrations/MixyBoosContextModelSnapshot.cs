@@ -18,7 +18,7 @@ namespace MixyBoos.Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("mixyboos")
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -348,7 +348,8 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("AudioUrl")
-                        .HasColumnType("text")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
                         .HasColumnName("audio_url");
 
                     b.Property<DateTime>("DateCreated")
@@ -365,7 +366,8 @@ namespace MixyBoos.Api.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
                         .HasColumnName("description");
 
                     b.Property<TimeSpan>("Duration")
@@ -386,7 +388,8 @@ namespace MixyBoos.Api.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("title");
 
                     b.Property<Guid>("UserId")
@@ -492,7 +495,7 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnType("character varying(36)")
                         .HasColumnName("mix_id");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 

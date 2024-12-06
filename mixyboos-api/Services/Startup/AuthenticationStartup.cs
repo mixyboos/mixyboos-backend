@@ -35,7 +35,6 @@ public static class AuthenticationStartup {
       options.Password.RequiredLength = 4;
       options.Password.RequiredUniqueChars = 0;
     });
-    services.RegisterMapsterConfiguration(config);
     services.RegisterHttpClients(config);
 
     return services;

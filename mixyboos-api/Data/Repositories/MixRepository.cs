@@ -9,6 +9,7 @@ using MixyBoos.Api.Data.Models;
 
 namespace MixyBoos.Api.Data.Repositories;
 
+//TODO: Perhaps refactor this out to methods on Mix ?
 public class MixRepository : Repository<Mix> {
   public MixRepository(MixyBoosContext context) : base(context) { }
 

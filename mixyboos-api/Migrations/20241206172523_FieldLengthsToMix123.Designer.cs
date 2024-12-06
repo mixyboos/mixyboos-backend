@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    [Migration("20241104180729_Initial")]
-    partial class Initial
+    [Migration("20241206172523_FieldLengthsToMix123")]
+    partial class FieldLengthsToMix123
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -351,7 +351,8 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("AudioUrl")
-                        .HasColumnType("text")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
                         .HasColumnName("audio_url");
 
                     b.Property<DateTime>("DateCreated")
@@ -368,8 +369,13 @@ namespace MixyBoos.Api.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
                         .HasColumnName("description");
+
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("interval")
+                        .HasColumnName("duration");
 
                     b.Property<string>("Image")
                         .HasColumnType("text")
@@ -385,7 +391,8 @@ namespace MixyBoos.Api.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("title");
 
                     b.Property<Guid>("UserId")
@@ -491,7 +498,7 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnType("character varying(36)")
                         .HasColumnName("mix_id");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 

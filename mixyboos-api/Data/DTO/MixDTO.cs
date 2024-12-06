@@ -18,6 +18,7 @@ public class MixDTO {
   public int DownloadCount { get; set; }
   public long Duration { get; set; }
 
+  public bool IsLiked { get; set; }
   public string AudioUrl { get; set; }
   public string PcmUrl { get; set; }
 

@@ -182,15 +182,15 @@ public class MixController(
       .Where(l => l.MixId.Equals(id) && l.UserId.Equals(user.Id))
       .ToListAsync();
 
-    if (likes.Count != 0) {
-      __context.RemoveRange(likes);
-      await __context.SaveChangesAsync();
-      return NoContent();
-    }
-
     var mix = await repository.Get(id);
     if (mix is null) {
       return NotFound();
+    }
+
+    if (likes.Count != 0) {
+      __context.RemoveRange(likes);
+      await __context.SaveChangesAsync();
+      return Ok(mix.Adapt<MixDTO>());
     }
 
     await __context.MixLikes.AddAsync(new MixLike {
@@ -198,7 +198,7 @@ public class MixController(
       User = user
     });
     await __context.SaveChangesAsync();
-    return Ok();
+    return Ok(mix.Adapt<MixDTO>());
   }
 
   [HttpDelete]

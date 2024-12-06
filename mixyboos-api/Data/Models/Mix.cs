@@ -10,14 +10,24 @@ namespace MixyBoos.Api.Data.Models;
 
 [Index(nameof(Slug), IsUnique = true)]
 public class Mix : BaseEntity, ISluggedEntity {
-  [Required] public string? Title { get; set; }
-  [Required] public string? Description { get; set; }
+  [Required]
+  [MaxLength(100)]
+  public required string Title { get; set; }
+
+
+  [Required]
+  [MaxLength(2000)]
+  public required string Description { get; set; }
+
   public string? Image { get; set; }
+
+  [MaxLength(2000)]
   public string? AudioUrl { get; set; }
+
   public bool IsProcessed { get; set; } = false;
-  
+
   public TimeSpan Duration { get; set; }
-  [Required] public virtual MixyBoosUser? User { get; set; }
+  [Required] public virtual required MixyBoosUser User { get; set; }
 
   public ICollection<MixPlay>? Plays { get; set; } = new List<MixPlay>();
   public ICollection<MixLike>? Likes { get; set; } = new List<MixLike>();
