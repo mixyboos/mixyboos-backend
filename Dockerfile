@@ -1,18 +1,23 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0 as build-env
+﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+USER $APP_UID
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
+
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY mixyboos-api/*.csproj .
-RUN dotnet restore
-COPY mixyboos-api .
-RUN dotnet publish -c Release -o /publish
+COPY ["mixyboos-api/mixyboos-api.csproj", "mixyboos-api/"]
+RUN dotnet restore "mixyboos-api/mixyboos-api.csproj"
+COPY . .
+WORKDIR "/src/mixyboos-api"
+RUN dotnet build "mixyboos-api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine as runtime
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "mixyboos-api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-RUN apk add  --no-cache ffmpeg
-RUN mkdir /images
-ENV ASPNETCORE_ENVIRONMENT Production
-
-WORKDIR /publish
-COPY --from=build-env /publish .
-EXPOSE 80
-    
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "mixyboos-api.dll"]
