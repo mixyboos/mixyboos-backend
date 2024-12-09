@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,11 @@ builder.Services.AddSingleton<ImageHelper>();
 builder.Services.AddSingleton<IFileProvider, PhysicalFileProvider>(_ =>
   new PhysicalFileProvider("/"));
 // builder.Configuration["ImageProcessing:ImageRootFolder"] ?? ".pn-cache"));
+
+Console.WriteLine("About to show you the connection string");
+Console.WriteLine(builder.Configuration.GetConnectionString("MixyBoos"));
+Console.WriteLine("Showed you the connection string");
+
 builder.Services.AddDbContext<MixyBoosContext>(options =>
   options
     .UseNpgsql(builder.Configuration.GetConnectionString("MixyBoos"), pgOptions => {
