@@ -79,17 +79,13 @@ builder.Services.LoadScheduler();
 
 var app = builder.Build();
 
-// Apply pending migrations
 using (var scope = app.Services.CreateScope()) {
   var dbContext = scope.ServiceProvider
     .GetRequiredService<MixyBoosContext>();
-
-  // Here is the migration executed
   dbContext.Database.Migrate();
   builder.Services.RegisterMapsterConfiguration(builder.Configuration, scope.ServiceProvider);
 }
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {
   app.UseSwagger();
   app.UseSwaggerUI();

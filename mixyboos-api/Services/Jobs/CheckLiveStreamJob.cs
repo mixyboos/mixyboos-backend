@@ -13,31 +13,20 @@ using Quartz;
 
 namespace MixyBoos.Api.Services.Jobs;
 
-public class LiveStreamNotFound : Exception {
-  public LiveStreamNotFound(string message) : base(message) { }
-}
+public class LiveStreamNotFound(string message) : Exception(message);
 
-public class CheckLiveStreamJob : IJob {
-  private readonly MixyBoosContext _context;
-  private readonly IHttpClientFactory _httpClientFactory;
-  private readonly IHubContext<LiveHub> _hub;
-
-  public CheckLiveStreamJob(IHubContext<LiveHub> hub, IHttpClientFactory httpClientFactory, MixyBoosContext context) {
-    _hub = hub;
-    _httpClientFactory = httpClientFactory;
-    _context = context;
-  }
-
-  public async Task Execute(IJobExecutionContext context) {
-    var userEmail = context.MergedJobDataMap
+public class CheckLiveStreamJob(IHubContext<LiveHub> hub, IHttpClientFactory httpClientFactory, MixyBoosContext context)
+  : IJob {
+  public async Task Execute(IJobExecutionContext jobContext) {
+    var userEmail = jobContext.MergedJobDataMap
       .Where(r => r.Key.Equals("UserEmail"))
       .Select(r => r.Value.ToString())
       .FirstOrDefault();
-    var showId = context.MergedJobDataMap
+    var showId = jobContext.MergedJobDataMap
       .Where(r => r.Key.Equals("ShowId"))
       .Select(r => r.Value.ToString())
       .FirstOrDefault();
-    var show = await _context
+    var show = await context
       .LiveShows
       .Where(r => r.Id.Equals(Guid.Parse(showId)))
       .FirstOrDefaultAsync();
@@ -46,17 +35,16 @@ public class CheckLiveStreamJob : IJob {
       throw new LiveStreamNotFound($"Unable to find show in db context {showId}");
     }
 
-    await _hub.Clients.User(userEmail).SendAsync(
+    await hub.Clients.User(userEmail).SendAsync(
       "StreamStarted",
       show.Adapt<LiveShowDTO>());
-    using var httpClient = _httpClientFactory.CreateClient("RTMP");
+    using var httpClient = httpClientFactory.CreateClient("RTMP");
     var response = await httpClient.GetAsync($"/hls/{showId}/index.m3u8");
 
-    show.Status = ShowStatus.InProgress;
-    await _context.SaveChangesAsync();
-
     if (response.IsSuccessStatusCode) {
-      await _hub.Clients.User(userEmail).SendAsync(
+      show.Status = ShowStatus.InProgress;
+      await context.SaveChangesAsync();
+      await hub.Clients.User(userEmail).SendAsync(
         "StreamReady",
         show.Adapt<LiveShowDTO>());
     }

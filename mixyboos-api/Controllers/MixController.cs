@@ -44,6 +44,19 @@ public class MixController(
     return Ok(result);
   }
 
+  [HttpGet("me")]
+  [Produces(MediaTypeNames.Application.Json)]
+  [ProducesResponseType(StatusCodes.Status200OK)]
+  public async Task<ActionResult<List<MixDTO>>> GetMyMixes() {
+    var user = await userManager.FindByNameAsync(User.Identity.Name);
+    if (user is null) {
+      return Unauthorized();
+    }
+
+    var mixes = await repository.GetByUser(user.Slug);
+    return Ok(mixes.Adapt<List<MixDTO>>());
+  }
+
   [HttpGet("user")]
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
