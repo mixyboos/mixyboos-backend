@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication.BearerToken;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.BearerToken;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +15,29 @@ namespace MixyBoos.Api.Services.Startup;
 
 public static class AuthenticationStartup {
   public static IServiceCollection AddMixyboosAuthentication(this IServiceCollection services, IConfiguration config) {
+    var googleClientId = config["Auth:Google:ClientId"];
+    var googleClientSecret = config["Auth:Google:ClientSecret"];
+    if (!string.IsNullOrEmpty(googleClientId) && !string.IsNullOrEmpty(googleClientSecret)) {
+      services.AddAuthentication(options => {
+          options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+          options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+        })
+        .AddCookie(options => {
+          options.Cookie.Name = ".MixyBoos.Cookies";
+          options.Cookie.SameSite = SameSiteMode.None;
+          options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        })
+        .AddGoogle(options => {
+          options.ClientId = googleClientId;
+          options.ClientSecret = googleClientSecret;
+          options.SignInScheme = IdentityConstants.ExternalScheme;
+          options.CorrelationCookie.SameSite = SameSiteMode.None;
+          options.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;
+          options.Scope.Add("profile");
+          options.ClaimActions.MapJsonKey("picture", "picture", "url"); // Map the picture claim
+        });
+    }
+
     services.AddAuthorization();
     services.ConfigureApplicationCookie(options => {
       options.Cookie.Name = config["Auth:CookieName"];

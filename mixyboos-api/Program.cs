@@ -77,6 +77,11 @@ builder.Services.Configure<RouteOptions>(options => {
 });
 builder.Services.LoadScheduler();
 
+builder.Services.Configure<CookiePolicyOptions>(options => {
+  options.CheckConsentNeeded = context => false;
+  options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope()) {
@@ -100,6 +105,7 @@ app.UseCors(corsBuilder => corsBuilder
   .AllowAnyHeader()
   .AllowAnyMethod()
 );
+
 
 app.UseSignalRHubs();
 app.UseSerilogRequestLogging();
