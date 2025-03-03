@@ -26,14 +26,15 @@ public class ProcessUploadedImageJob : IJob {
     try {
       var data = context.Trigger.JobDataMap;
       var id = data["Id"]?.ToString();
-      var imageSource = data["ImageSource"]?.ToString();
-      var imageType = data["ImageType"]?.ToString();
+      var imageRootFolder = _config["ImageProcessing:ImageRootFolder"] ?? throw new InvalidOperationException();
+      var imageSource = data["ImageSource"]?.ToString() ?? throw new InvalidOperationException();
+      var imageType = data["ImageType"]?.ToString() ?? string.Empty;
       var fileLocation = data["FileLocation"]?.ToString();
       var outputPath =
         Path.Combine(
-          _config["ImageProcessing:ImageRootFolder"] ?? throw new InvalidOperationException(),
-          imageSource ?? throw new InvalidOperationException(),
-          imageType ?? throw new InvalidOperationException());
+          imageRootFolder,
+          imageSource,
+          imageType);
       if (string.IsNullOrEmpty(outputPath)) {
         _logger.LogError("Unable to create output path for {FileLocation}", fileLocation);
         return;

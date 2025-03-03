@@ -88,13 +88,6 @@ public class MixController(
       return NotFound();
     }
 
-    //track this as a play
-    //TODO: Re-enable this
-    // await _context.MixPlays.AddAsync(new MixPlay() {
-    //     Mix = mix,
-    //     User = user
-    // });
-    // await _context.SaveChangesAsync();
     return Ok(
       Flurl.Url.Combine(
         config["LiveServices:ListenUrl"],

@@ -114,8 +114,8 @@ public class ProcessUploadedAudioJob : IJob {
       if (mix is null) {
         mix = new Mix {
           Id = Guid.Parse(showId),
-          Title = $"{showId} - Pending Update",
-          Description = $"{showId} - Pending Update",
+          Title = $"{showId}",
+          Description = $"{showId}",
           User = user
         };
         await _context.Mixes.AddAsync(mix);

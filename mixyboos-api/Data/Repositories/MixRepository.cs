@@ -16,6 +16,7 @@ public class MixRepository : Repository<Mix> {
   private IQueryable<Mix> _internalGet(Expression<Func<Mix, bool>> predicate) {
     return entities
       .Where(predicate)
+      .OrderByDescending(m => m.DateUpdated)
       .Where(m => m.IsProcessed)
       .Include(m => m.User)
       .Include(m => m.Likes)

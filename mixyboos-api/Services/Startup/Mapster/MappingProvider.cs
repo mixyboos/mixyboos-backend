@@ -85,13 +85,6 @@ public static class MappingProvider {
 
     TypeAdapterConfig<MixyBoosUser, ProfileDTO>
       .NewConfig()
-      .Map(dest => dest.Id, src => src.Id.ToString())
-      .Map(dest => dest.HeaderImage,
-        src => imageHelper.GetImage("users/headers", src.HeaderImage))
-      .Map(dest => dest.ProfileImage,
-        src => imageHelper.GetImage("users/avatars", src.ProfileImage))
-      .Map(dest => dest.Followers, src => _runMap(src.Followers))
-      .Map(dest => dest.Following, src => _runMap(src.Following))
       .IgnoreNullValues(true);
   }
 }

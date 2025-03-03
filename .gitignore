@@ -308,3 +308,4 @@ scripts/create_dev_google_keys.sql
 external/
 
 mixyboos-api/Logs/log.txt
+mixyboos-api/wwwroot/is-cache
