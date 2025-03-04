@@ -21,6 +21,7 @@ using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Auth;
 using MixyBoos.Api.Services.Helpers;
 using MixyBoos.Api.Services.Helpers.Audio;
+using MixyBoos.Api.Services.Helpers.IO;
 using MixyBoos.Api.Services.Startup;
 using MixyBoos.Api.Services.Startup.Mapster;
 using Serilog;
@@ -124,10 +125,16 @@ app.MapGet("/pingauth", () => new {
   .RequireAuthorization()
   .WithName("AuthPing");
 
-app.UseStaticFiles(new StaticFileOptions {
-  FileProvider = new PhysicalFileProvider(builder.Configuration["AudioProcessing:WaveformDir"]),
-  RequestPath = new PathString("/waveforms")
-});
+
+var waveformDir = builder.Configuration["AudioProcessing:WaveformDir"];
+if (DirectoryHelpers.ValidateDirectory(waveformDir)) {
+  app.UseStaticFiles(new StaticFileOptions {
+    FileProvider = new PhysicalFileProvider(waveformDir),
+    RequestPath = new PathString("/waveforms")
+  });
+} else {
+  throw new InvalidOperationException("Audio processing directory not found");
+}
 
 app.UseImageSharp();
 app.Run();
