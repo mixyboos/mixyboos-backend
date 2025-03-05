@@ -29,6 +29,8 @@ using SixLabors.ImageSharp.Web.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Console.WriteLine($"Using environment: {builder.Environment.EnvironmentName}");
+Console.WriteLine($"Reading configuration from: appsettings.{builder.Configuration.GetSection("Environment").Value}.json");
 var instance = CodePagesEncodingProvider.Instance;
 Encoding.RegisterProvider(instance);
 
