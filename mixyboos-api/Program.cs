@@ -30,7 +30,8 @@ using SixLabors.ImageSharp.Web.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 Console.WriteLine($"Using environment: {builder.Environment.EnvironmentName}");
-Console.WriteLine($"Reading configuration from: appsettings.{builder.Configuration.GetSection("Environment").Value}.json");
+Console.WriteLine(
+  $"Reading configuration from: appsettings.{builder.Configuration.GetSection("Environment").Value}.json");
 var instance = CodePagesEncodingProvider.Instance;
 Encoding.RegisterProvider(instance);
 
@@ -102,6 +103,7 @@ if (app.Environment.IsDevelopment()) {
 app.UseCors(corsBuilder => corsBuilder
   .WithOrigins("http://localhost:3000")
   .WithOrigins("https://mixyboos.dev.fergl.ie:3000")
+  .WithOrigins("https://preview.mixyboos.com")
   .WithOrigins("https://www.mixyboos.com")
   .WithOrigins("https://mixyboos.com")
   .AllowCredentials()
