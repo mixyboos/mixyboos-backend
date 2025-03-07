@@ -36,6 +36,8 @@ Console.WriteLine($"Using environment: {builder.Environment.EnvironmentName}");
 Console.WriteLine(
   $"Reading configuration from: appsettings.{builder.Configuration.GetSection("Environment").Value}.json");
 
+//TODO: Should refactor these to a Commands configuration section
+//TODO: and validate them all at once
 builder.Configuration["AudioProcessing:FFMPEGPath"].ValidateCommand(true);
 builder.Configuration["AudioProcessing:AudioWaveformPath"].ValidateCommand(true);
 
