@@ -20,6 +20,7 @@ using MixyBoos.Api.Data.Options;
 using MixyBoos.Api.Data.Repositories;
 using MixyBoos.Api.Data.Utils;
 using MixyBoos.Api.Services.Auth;
+using MixyBoos.Api.Services.Extensions;
 using MixyBoos.Api.Services.Helpers;
 using MixyBoos.Api.Services.Helpers.Audio;
 using MixyBoos.Api.Services.Helpers.IO;
@@ -34,6 +35,10 @@ var builder = WebApplication.CreateBuilder(args);
 Console.WriteLine($"Using environment: {builder.Environment.EnvironmentName}");
 Console.WriteLine(
   $"Reading configuration from: appsettings.{builder.Configuration.GetSection("Environment").Value}.json");
+
+builder.Configuration["AudioProcessing:FFMPEGPath"].ValidateCommand(true);
+builder.Configuration["AudioProcessing:AudioWaveformPath"].ValidateCommand(true);
+
 var instance = CodePagesEncodingProvider.Instance;
 Encoding.RegisterProvider(instance);
 

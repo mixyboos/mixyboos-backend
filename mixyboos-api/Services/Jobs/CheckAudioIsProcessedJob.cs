@@ -42,6 +42,8 @@ public class CheckAudioIsProcessedJob : IJob {
         var manifestFile = Path.Combine(_config["AudioProcessing:OutputDir"],
           mix.Id.ToString(),
           $"{mix.Id}.m3u8");
+
+        _logger.LogDebug("Checking manifest file {manifestFile}", mix.User.Id);
         if (File.Exists(manifestFile)) {
           mix.IsProcessed = true;
         }

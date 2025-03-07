@@ -26,14 +26,14 @@ public class ProcessUploadedAudioJob : IJob {
 
   public ProcessUploadedAudioJob(MixyBoosContext context,
     IHubContext<UpdatesHub> hub,
-    ILogger<ProcessUploadedAudioJob> logger,
     IConfiguration config,
-    IWaveformGenerator waveformGenerator) {
+    IWaveformGenerator waveformGenerator,
+    ILogger<ProcessUploadedAudioJob> logger) {
     _context = context;
     _hub = hub;
-    _logger = logger;
     _config = config;
     _waveformGenerator = waveformGenerator;
+    _logger = logger;
   }
 
   public async Task Execute(IJobExecutionContext context) {
@@ -43,53 +43,53 @@ public class ProcessUploadedAudioJob : IJob {
     var inputFile = data["FileLocation"]?.ToString();
     var outputPath = _config["AudioProcessing:OutputDir"];
 
-    var user = await _context
-      .Users
-      .FirstOrDefaultAsync(u => u.Id.Equals(Guid.Parse(userId)));
-
-    if (userId is null || user is null) {
-      _logger.LogError("Error processing {Id} - invalid user id", showId);
-      return;
-    }
-
-    if (string.IsNullOrEmpty(showId)) {
-      await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
-      _logger.LogError("Error processing {Id} - invalid id", showId);
-      return;
-    }
-
-    if (!File.Exists(inputFile)) {
-      await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
-      _logger.LogError("Error processing {Id} - unable to locate file {InputFile}", showId, inputFile);
-      return;
-    }
-
-    if (outputPath is null) {
-      await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
-      _logger.LogError("Error processing {Id} - AudioProcessing:OutputDir must be set", showId);
-      return;
-    }
-
-    var tempProcessingPath = Path.Combine(Path.GetTempPath(), showId!);
-
-    var finalOutputPath = Path.Combine(outputPath, showId);
-    if (!Directory.Exists(finalOutputPath)) {
-      Directory.CreateDirectory(finalOutputPath);
-    }
-
-    Directory.CreateDirectory(tempProcessingPath);
-    await _hub.Clients.User(userId).SendAsync("ConversionStarted", showId);
-    await _waveformGenerator.GenerateWaveformFromFile(inputFile, showId);
-
-    var progressHandler = new Action<string>(async void (p) => {
-      try {
-        _logger.LogInformation("Progress on encode: {Percentage}", p);
-        await _hub.Clients.User(userId).SendAsync("ConversionProgress", showId, p);
-      } catch (Exception e) {
-        _logger.LogError("Error sending progress {Error}", e);
-      }
-    });
     try {
+      var user = await _context
+        .Users
+        .FirstOrDefaultAsync(u => u.Id.Equals(Guid.Parse(userId)));
+
+      if (userId is null || user is null) {
+        _logger.LogError("Error processing {Id} - invalid user id", showId);
+        return;
+      }
+
+      if (string.IsNullOrEmpty(showId)) {
+        await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
+        _logger.LogError("Error processing {Id} - invalid id", showId);
+        return;
+      }
+
+      if (!File.Exists(inputFile)) {
+        await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
+        _logger.LogError("Error processing {Id} - unable to locate file {InputFile}", showId, inputFile);
+        return;
+      }
+
+      if (outputPath is null) {
+        await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
+        _logger.LogError("Error processing {Id} - AudioProcessing:OutputDir must be set", showId);
+        return;
+      }
+
+      var tempProcessingPath = Path.Combine(Path.GetTempPath(), showId!);
+
+      var finalOutputPath = Path.Combine(outputPath, showId);
+      if (!Directory.Exists(finalOutputPath)) {
+        Directory.CreateDirectory(finalOutputPath);
+      }
+
+      Directory.CreateDirectory(tempProcessingPath);
+      await _hub.Clients.User(userId).SendAsync("ConversionStarted", showId);
+      await _waveformGenerator.GenerateWaveformFromFile(inputFile, showId);
+
+      var progressHandler = new Action<string>(async void (p) => {
+        try {
+          _logger.LogInformation("Progress on encode: {Percentage}", p);
+          await _hub.Clients.User(userId).SendAsync("ConversionProgress", showId, p);
+        } catch (Exception e) {
+          _logger.LogError("Error sending progress {Error}", e);
+        }
+      });
       var command = Cli.Wrap("ffmpeg")
         .WithArguments(args => args
           .Add(["-i", inputFile])
