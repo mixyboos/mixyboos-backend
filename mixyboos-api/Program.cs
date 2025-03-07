@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Text;
+using CrystalQuartz.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +25,7 @@ using MixyBoos.Api.Services.Helpers.Audio;
 using MixyBoos.Api.Services.Helpers.IO;
 using MixyBoos.Api.Services.Startup;
 using MixyBoos.Api.Services.Startup.Mapster;
+using Quartz;
 using Serilog;
 using SixLabors.ImageSharp.Web.DependencyInjection;
 
@@ -79,7 +81,7 @@ builder.Services.AddImaging(builder.Configuration);
 builder.Services.Configure<RouteOptions>(options => {
   options.LowercaseUrls = true;
 });
-builder.Services.LoadScheduler();
+builder.Services.AddScheduler();
 
 builder.Services.Configure<CookiePolicyOptions>(options => {
   options.CheckConsentNeeded = context => false;
@@ -139,6 +141,8 @@ if (DirectoryHelpers.ValidateDirectory(waveformDir)) {
 } else {
   throw new InvalidOperationException("Audio processing directory not found");
 }
+
+app.UseJobScheduler();
 
 app.UseImageSharp();
 app.Run();

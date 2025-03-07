@@ -1,3 +1,5 @@
+using CrystalQuartz.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using MixyBoos.Api.Services.Jobs;
 using Quartz;
@@ -6,7 +8,7 @@ using Quartz.AspNetCore;
 namespace MixyBoos.Api.Services.Startup;
 
 public static class SchedulerBuilders {
-  public static void LoadScheduler(this IServiceCollection services) {
+  public static void AddScheduler(this IServiceCollection services) {
     services.AddQuartz(q => {
       q.SchedulerId = "MixyBoos-Server-Core";
       q.SchedulerName = "MixyBoos Scheduler";
@@ -38,5 +40,14 @@ public static class SchedulerBuilders {
       // when shutting down we want jobs to complete gracefully
       options.WaitForJobsToComplete = true;
     });
+  }
+
+
+  public static WebApplication UseJobScheduler(this WebApplication app) {
+    var schedulerFactory = app.Services.GetRequiredService<ISchedulerFactory>();
+    var scheduler = schedulerFactory.GetScheduler().Result;
+    app.UseCrystalQuartz(() => scheduler);
+
+    return app;
   }
 }
