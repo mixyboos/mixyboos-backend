@@ -13,20 +13,10 @@ namespace MixyBoos.Api.Controllers;
 [Authorize]
 [Route("[controller]")]
 public class ChatController : _Controller {
-  private readonly IConfiguration _config;
-  private readonly MixyBoosContext _context;
-  private readonly IHubContext<ChatHub> _hub;
-  private readonly UserManager<MixyBoosUser> _userManager;
-
   public ChatController(
     UserManager<MixyBoosUser> userManager,
     MixyBoosContext context,
     IConfiguration config,
     IHubContext<ChatHub> hub,
-    ILogger<ChatController> logger) : base(logger) {
-    _userManager = userManager;
-    _context = context;
-    _config = config;
-    _hub = hub;
-  }
+    ILogger<ChatController> logger) : base(userManager, logger) { }
 }

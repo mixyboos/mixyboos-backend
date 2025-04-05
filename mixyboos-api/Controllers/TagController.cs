@@ -15,13 +15,11 @@ namespace MixyBoos.Api.Controllers;
 [Authorize]
 public class TagController : _Controller {
   private readonly MixyBoosContext _context;
-  private readonly UserManager<MixyBoosUser> _userManager;
 
   public TagController(MixyBoosContext context,
     UserManager<MixyBoosUser> userManager,
-    ILogger<TagController> logger) : base(logger) {
+    ILogger<TagController> logger) : base(userManager, logger) {
     _context = context;
-    _userManager = userManager;
   }
 
   [HttpGet("search")]

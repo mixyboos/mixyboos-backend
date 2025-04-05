@@ -22,11 +22,9 @@ namespace MixyBoos.Api.Controllers;
 [Authorize]
 [Route("[controller]")]
 public class LiveController : _Controller {
-  private readonly IConfiguration _config;
   private readonly MixyBoosContext _context;
   private readonly IHubContext<LiveHub> _hub;
   private readonly ISchedulerFactory _schedulerFactory;
-  private readonly UserManager<MixyBoosUser> _userManager;
 
   public LiveController(
     UserManager<MixyBoosUser> userManager,
@@ -34,23 +32,20 @@ public class LiveController : _Controller {
     IConfiguration config,
     ISchedulerFactory schedulerFactory,
     IHubContext<LiveHub> hub,
-    ILogger<LiveController> logger) : base(logger) {
-    _userManager = userManager;
+    ILogger<LiveController> logger) : base(userManager, logger) {
     _context = context;
-    _config = config;
     _schedulerFactory = schedulerFactory;
     _hub = hub;
   }
 
   [HttpPost("start")]
   public async Task<IActionResult> StartShow([FromBody] CreateLiveShowDTO show) {
-    var user = await _userManager.FindByNameAsync(User.Identity.Name);
     var newShow = new LiveShow {
       Title = show.Title,
       Description = show.Description,
       Tags = await _context.MapTags(show.Tags),
       StartDate = DateTime.UtcNow,
-      User = user,
+      User = CurrentUser,
       Status = ShowStatus.AwaitingStreamConnection
     };
 

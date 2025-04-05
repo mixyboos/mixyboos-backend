@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using MixyBoos.Api.Data.Models;
@@ -15,9 +16,7 @@ using MixyBoos.Api.Services;
 using MixyBoos.Api.Services.Extensions;
 using Quartz;
 
-public class InvalidFileUploadException : Exception {
-  public InvalidFileUploadException(string message) : base(message) { }
-}
+public class InvalidFileUploadException(string message) : Exception(message);
 
 namespace MixyBoos.Api.Controllers {
   public class FileUploadModel {
@@ -31,27 +30,25 @@ namespace MixyBoos.Api.Controllers {
     private const long AudioFileSizeLimit = 2147483648;
     private const long ImageFileSizeLimit = 52428800;
     private readonly ISchedulerFactory _schedulerFactory;
-    private readonly UserManager<MixyBoosUser> _userManager;
+    private readonly IConfiguration _configuration;
 
     public UploadController(UserManager<MixyBoosUser> userManager, ISchedulerFactory schedulerFactory,
-      ILogger<UploadController> logger) : base(logger) {
-      _userManager = userManager;
+      IConfiguration configuration,
+      ILogger<UploadController> logger) : base(userManager, logger) {
       _schedulerFactory = schedulerFactory;
+      _configuration = configuration;
     }
 
     private async Task<(IActionResult, string)> _preProcessUpload(string id, IFormFile file) {
+      var cacheFolder = _configuration["Uploads:UploadCacheDir"] ?? Constants.TempFolder;
+
       if (!ModelState.IsValid || id is null || file is null) {
         return (BadRequest(), string.Empty);
       }
 
-      var user = await _userManager.FindByNameAsync(User.Identity.Name);
-      if (user is null) {
-        return (Unauthorized(), string.Empty);
-      }
-
       var fileName = file.FileName;
       var extension = Path.GetExtension(fileName);
-      var localPath = Path.Combine(Constants.TempFolder, $"{id}{extension}");
+      var localPath = Path.Combine(cacheFolder, $"{id}{extension}");
 
       await using (var stream = new FileStream(localPath, FileMode.Create)) {
         await file.CopyToAsync(stream);
@@ -81,7 +78,7 @@ namespace MixyBoos.Api.Controllers {
         {"FileLocation", localFile},
         {"ImageSource", imageSource},
         {"ImageType", imageType},
-        {"UserId", User.Identity.Name}
+        {"UserId", CurrentUser.Id.ToString()}
       };
       var scheduler = await _schedulerFactory.GetScheduler();
       await scheduler.TriggerJob(
@@ -97,11 +94,6 @@ namespace MixyBoos.Api.Controllers {
     [RequestSizeLimit(AudioFileSizeLimit)] //2Gb
     [DisableFormValueModelBinding]
     public async Task<IActionResult> UploadAudio([FromRoute] string id, IFormFile file) {
-      var user = await _userManager.FindByNameAsync(User.Identity.Name);
-      if (user is null) {
-        return Unauthorized();
-      }
-
       var (response, localFile) = await _preProcessUpload(id, file);
 
       if (string.IsNullOrEmpty(localFile)) {
@@ -111,7 +103,7 @@ namespace MixyBoos.Api.Controllers {
       var jobData = new Dictionary<string, string> {
         {"Id", id},
         {"FileLocation", localFile},
-        {"UserId", user.Id.ToString()}
+        {"UserId", CurrentUser.Id.ToString()}
       };
       var scheduler = await _schedulerFactory.GetScheduler();
       await scheduler.TriggerJob(

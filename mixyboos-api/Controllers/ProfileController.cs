@@ -20,13 +20,11 @@ namespace MixyBoos.Api.Controllers;
 [Route("[controller]")]
 public class ProfileController : _Controller {
   private readonly MixyBoosContext _context;
-  private readonly UserManager<MixyBoosUser> _userManager;
 
   public ProfileController(
     UserManager<MixyBoosUser> userManager,
     MixyBoosContext context,
-    ILogger<ProfileController> logger) : base(logger) {
-    _userManager = userManager;
+    ILogger<ProfileController> logger) : base(userManager, logger) {
     _context = context;
   }
 

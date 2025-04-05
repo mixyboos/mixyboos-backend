@@ -20,18 +20,13 @@ namespace MixyBoos.Api.Controllers;
 [Route("[controller]")]
 public class AccountController : _Controller {
   private readonly IConfiguration _config;
-  private readonly MixyBoosContext _context;
   private readonly ImageCacher _imageCacher;
-  private readonly UserManager<MixyBoosUser> _userManager;
 
   public AccountController(
     UserManager<MixyBoosUser> userManager,
-    MixyBoosContext dbContext,
     IConfiguration config,
     ImageCacher imageCacher,
-    ILogger<AccountController> logger) : base(logger) {
-    _userManager = userManager;
-    _context = dbContext;
+    ILogger<AccountController> logger) : base(userManager, logger) {
     _config = config;
     _imageCacher = imageCacher;
   }

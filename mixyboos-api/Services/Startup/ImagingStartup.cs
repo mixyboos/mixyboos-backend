@@ -12,6 +12,10 @@ namespace MixyBoos.Api.Services.Startup;
 public static class ImagingStartup {
   public static IServiceCollection AddImaging(this IServiceCollection services, IConfiguration config) {
     services.AddImageSharp()
+      .Configure<PhysicalFileSystemCacheOptions>(options => {
+          options.CacheFolder = config["ImageProcessing:ImageCacheFolder"] ?? "mb-cache";
+        }
+      )
       .SetRequestParser<QueryCollectionRequestParser>()
       .ClearProviders()
       .AddProvider<FileSystemImageProvider>()

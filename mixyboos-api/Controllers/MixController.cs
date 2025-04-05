@@ -29,31 +29,26 @@ public class MixController(
   IConfiguration config,
   UserManager<MixyBoosUser> userManager,
   ILogger<MixController> logger)
-  : _Controller(logger) {
+  : _Controller(userManager, logger) {
   [HttpGet]
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
   public async Task<ActionResult<List<MixDTO>>> Get() {
     var mixes = await __context.Mixes.Include(m => m.User).ToListAsync();
-
-    var script = mixes.BuildAdapter()
-      .CreateMapExpression<MixDTO>()
-      .ToScript();
-
     var result = mixes.Adapt<List<MixDTO>>();
     return Ok(result);
   }
 
+  [Authorize]
   [HttpGet("me")]
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
   public async Task<ActionResult<List<MixDTO>>> GetMyMixes() {
-    var user = await userManager.FindByNameAsync(User.Identity.Name);
-    if (user is null) {
+    if (CurrentUser is null) {
       return Unauthorized();
     }
 
-    var mixes = await repository.GetByUser(user.Slug);
+    var mixes = await repository.GetMyMixes(CurrentUser.Id);
     return Ok(mixes.Adapt<List<MixDTO>>());
   }
 
@@ -61,7 +56,7 @@ public class MixController(
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
   public async Task<ActionResult<List<MixDTO>>> GetByUser([FromQuery] string user) {
-    var mixes = await repository.GetByUser(user);
+    var mixes = await repository.GetByUser(user, CurrentUser);
     return Ok(mixes.Adapt<List<MixDTO>>());
   }
 
@@ -69,7 +64,7 @@ public class MixController(
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
   public async Task<ActionResult<MixDTO>> GetByUserAndSlug([FromQuery] string user, [FromQuery] string mix) {
-    var result = await repository.GetByUserAndSlug(user, mix);
+    var result = await repository.GetByUserAndSlug(user, mix, CurrentUser);
     if (result is null) {
       return NoContent();
     }
@@ -100,8 +95,11 @@ public class MixController(
   [Produces(MediaTypeNames.Application.Json)]
   [ProducesResponseType(StatusCodes.Status200OK)]
   public async Task<ActionResult<List<MixDTO>>> GetFeed() {
-    var user = await userManager.FindByNameAsync(User.Identity.Name);
-    var mixes = await repository.GetFeedForUser(user.Id);
+    if (CurrentUser is null) {
+      return Unauthorized();
+    }
+
+    var mixes = await repository.GetFeedForUser(CurrentUser.Id);
     var result = mixes.Adapt<List<MixDTO>>();
     return Ok(result);
   }
@@ -125,13 +123,14 @@ public class MixController(
       }
 
       var faker = new Faker();
-      var user = await userManager.FindByNameAsync(User.Identity.Name);
-      entity.User = user;
+      entity.User = CurrentUser;
       entity.Image ??= faker.Image.LoremFlickrUrl();
       await repository.AddOrUpdate(entity);
 
-      var response = entity.Adapt<MixDTO>();
-      return CreatedAtAction(nameof(Get), new {id = response.Id}, response);
+      //reload the mix to get any updated details
+      var finalisedMix = await repository.Get(entity.Id);
+      var response = finalisedMix.Adapt<MixDTO>();
+      return CreatedAtAction(nameof(Get), new {id = response.Id, slug = response.Slug}, response);
     } catch (DbUpdateException ex) {
       _logger.LogError("Error creating mix {Message}", ex.Message);
       return BadRequest(ex.Message);
@@ -178,14 +177,13 @@ public class MixController(
       return BadRequest();
     }
 
-    var user = await userManager.FindByNameAsync(User.Identity.Name);
-    if (user is null) {
+    if (CurrentUser is null) {
       return Unauthorized();
     }
 
     var likes = await mixLikeRepository
       .GetAll()
-      .Where(l => l.MixId.Equals(id) && l.UserId.Equals(user.Id))
+      .Where(l => l.MixId.Equals(id) && l.UserId.Equals(CurrentUser.Id))
       .ToListAsync();
 
     var mix = await repository.Get(id);
@@ -201,7 +199,7 @@ public class MixController(
 
     await __context.MixLikes.AddAsync(new MixLike {
       Mix = mix,
-      User = user
+      User = CurrentUser
     });
     await __context.SaveChangesAsync();
     return Ok(mix.Adapt<MixDTO>());

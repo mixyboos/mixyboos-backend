@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -19,18 +20,26 @@ public class CheckAudioIsProcessedJob : IJob {
   private readonly IHttpClientFactory _httpClientFactory;
   private readonly ILogger<CheckAudioIsProcessedJob> _logger;
   private readonly IHubContext<LiveHub> _hub;
+  private readonly ISchedulerFactory _schedulerFactory;
 
   public CheckAudioIsProcessedJob(MixyBoosContext context, IHubContext<LiveHub> hub,
-    IConfiguration config, IHttpClientFactory httpClientFactory, ILogger<CheckAudioIsProcessedJob> logger) {
+    ISchedulerFactory schedulerFactory, IConfiguration config,
+    IHttpClientFactory httpClientFactory, ILogger<CheckAudioIsProcessedJob> logger) {
     _context = context;
     _hub = hub;
+    _schedulerFactory = schedulerFactory;
     _config = config;
     _httpClientFactory = httpClientFactory;
     _logger = logger;
   }
 
   public async Task Execute(IJobExecutionContext context) {
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development") {
+      return;
+    }
+
     _logger.LogDebug($"Checking for unprocessed audio");
+
     try {
       var unprocessed = await _context.Mixes.Where(m => !m.IsProcessed)
         .Include(m => m.User)
@@ -46,6 +55,16 @@ public class CheckAudioIsProcessedJob : IJob {
         _logger.LogDebug("Checking manifest file {manifestFile}", mix.User.Id);
         if (File.Exists(manifestFile)) {
           mix.IsProcessed = true;
+        } else {
+          var jobData = new Dictionary<string, string> {
+            {"Id", mix.Id.ToString()},
+            {"FileLocation", mix.__localfile},
+            {"UserId", mix.User.Id.ToString()}
+          };
+          var scheduler = await _schedulerFactory.GetScheduler();
+          await scheduler.TriggerJob(
+            new JobKey("ProcessUploadedAudioJob"),
+            new JobDataMap(jobData));
         }
 
         await _hub.Clients.User(mix.User.Email).SendAsync("ConversionFinished", mix.Id);

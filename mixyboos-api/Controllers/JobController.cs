@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MixyBoos.Api.Data;
+using MixyBoos.Api.Data.Models;
 using MixyBoos.Api.Services;
 using MixyBoos.Api.Services.Helpers.IO;
 using Quartz;
@@ -14,17 +16,12 @@ namespace MixyBoos.Api.Controllers;
 
 [Authorize]
 [Route("[controller]")]
-public class JobController : _Controller {
-  private readonly MixyBoosContext _context;
-  private readonly ISchedulerFactory _schedulerFactory;
-
-  public JobController(ILogger<JobController> logger,
-    MixyBoosContext context, ISchedulerFactory schedulerFactory) :
-    base(logger) {
-    _context = context;
-    _schedulerFactory = schedulerFactory;
-  }
-
+public class JobController(
+  ILogger<JobController> logger,
+  UserManager<MixyBoosUser> userManager,
+  MixyBoosContext context,
+  ISchedulerFactory schedulerFactory)
+  : _Controller(userManager, logger) {
   [HttpPost("requeuemix")]
   public async Task<IActionResult> RequeueProcessMix([FromQuery] string mixId) {
     if (string.IsNullOrEmpty(mixId)) {
@@ -32,7 +29,7 @@ public class JobController : _Controller {
     }
 
     var localFile = FileHelpers.GetFirstMatchingFile(Constants.TempFolder, mixId);
-    var mix = await _context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(mixId)));
+    var mix = await context.Mixes.FirstOrDefaultAsync(m => m.Id.Equals(Guid.Parse(mixId)));
     if (mix is null ||
         string.IsNullOrEmpty(localFile) ||
         !System.IO.File.Exists(localFile)) {
@@ -44,7 +41,7 @@ public class JobController : _Controller {
       {"FileLocation", localFile},
       {"UserId", User.Identity.Name}
     };
-    var scheduler = await _schedulerFactory.GetScheduler();
+    var scheduler = await schedulerFactory.GetScheduler();
     await scheduler.TriggerJob(
       new JobKey("ProcessUploadedAudioJob"),
       new JobDataMap(jobData));

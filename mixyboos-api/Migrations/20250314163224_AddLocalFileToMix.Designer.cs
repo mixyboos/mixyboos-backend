@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MixyBoos.Api.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    partial class MixyBoosContextModelSnapshot : ModelSnapshot
+    [Migration("20250314163224_AddLocalFileToMix")]
+    partial class AddLocalFileToMix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -397,6 +400,7 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("user_id");
 
                     b.Property<string>("__localfile")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("__localfile");
 

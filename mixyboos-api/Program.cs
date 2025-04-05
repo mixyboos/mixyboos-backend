@@ -60,7 +60,6 @@ builder.Services.AddSingleton<ImageCacher>();
 builder.Services.AddSingleton<ImageHelper>();
 builder.Services.AddSingleton<IFileProvider, PhysicalFileProvider>(_ =>
   new PhysicalFileProvider("/"));
-// builder.Configuration["ImageProcessing:ImageRootFolder"] ?? ".pn-cache"));
 
 Console.WriteLine("About to show you the connection string");
 Console.WriteLine(builder.Configuration.GetConnectionString("MixyBoos"));

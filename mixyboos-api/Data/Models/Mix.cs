@@ -37,4 +37,6 @@ public class Mix : BaseEntity, ISluggedEntity {
   public ICollection<Tag> Tags { get; } = new List<Tag>();
 
   [SlugField(SourceField = "Title")] public string? Slug { get; set; }
+
+  public string? __localfile { get; set; }
 }

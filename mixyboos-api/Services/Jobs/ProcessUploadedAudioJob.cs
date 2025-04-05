@@ -43,30 +43,30 @@ public class ProcessUploadedAudioJob : IJob {
     var inputFile = data["FileLocation"]?.ToString();
     var outputPath = _config["AudioProcessing:OutputDir"];
 
+    var user = await _context
+      .Users
+      .FirstOrDefaultAsync(u => u.Id.Equals(Guid.Parse(userId)));
+
+    if (userId is null || user?.Email is null) {
+      _logger.LogError("Error processing {Id} - invalid user id", showId);
+      return;
+    }
+
     try {
-      var user = await _context
-        .Users
-        .FirstOrDefaultAsync(u => u.Id.Equals(Guid.Parse(userId)));
-
-      if (userId is null || user is null) {
-        _logger.LogError("Error processing {Id} - invalid user id", showId);
-        return;
-      }
-
       if (string.IsNullOrEmpty(showId)) {
-        await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
+        await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId);
         _logger.LogError("Error processing {Id} - invalid id", showId);
         return;
       }
 
       if (!File.Exists(inputFile)) {
-        await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
+        await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId);
         _logger.LogError("Error processing {Id} - unable to locate file {InputFile}", showId, inputFile);
         return;
       }
 
       if (outputPath is null) {
-        await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
+        await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId);
         _logger.LogError("Error processing {Id} - AudioProcessing:OutputDir must be set", showId);
         return;
       }
@@ -79,13 +79,39 @@ public class ProcessUploadedAudioJob : IJob {
       }
 
       Directory.CreateDirectory(tempProcessingPath);
-      await _hub.Clients.User(userId).SendAsync("ConversionStarted", showId);
+      await _hub.Clients.User(user.Email).SendAsync("ConversionStarted", showId);
       await _waveformGenerator.GenerateWaveformFromFile(inputFile, showId);
 
-      var progressHandler = new Action<string>(async void (p) => {
+      var progressHandler = new Action<string>(async void (output) => {
         try {
-          _logger.LogInformation("Progress on encode: {Percentage}", p);
-          await _hub.Clients.User(userId).SendAsync("ConversionProgress", showId, p);
+          // FFmpeg progress typically looks like "time=00:00:10.00 bitrate=N/A speed=1.23x"
+          if (!output.Contains("time=")) {
+            return;
+          }
+
+          // Extract time information
+          var timeIndex = output.IndexOf("time=", StringComparison.Ordinal);
+          if (timeIndex < 0) {
+            return;
+          }
+
+          var timeStr = output.Substring(timeIndex + 5, 11).Trim();
+
+          // Parse the timestamp (HH:MM:SS.FF format)
+          if (!TimeSpan.TryParse(timeStr, out var processedTime)) {
+            return;
+          }
+
+          // Get audio duration to calculate percentage
+          var audioInfo = await FFProbe.AnalyseAsync(inputFile);
+          var totalDuration = audioInfo.Duration;
+
+          // Calculate percentage
+          var percentage = (int)((processedTime.TotalSeconds / totalDuration.TotalSeconds) * 100);
+          percentage = Math.Min(percentage, 100); // Cap at 100%
+
+          _logger.LogInformation("Progress on encode: {Percentage}%", percentage);
+          await _hub.Clients.User(user.Email).SendAsync("ConversionProgress", showId, percentage.ToString());
         } catch (Exception e) {
           _logger.LogError("Error sending progress {Error}", e);
         }
@@ -100,7 +126,7 @@ public class ProcessUploadedAudioJob : IJob {
           .Add(["-segment_time", "10"])
           .Add(["-segment_list", $"{Path.Combine(finalOutputPath, showId)}.m3u8"])
           .Add($"{Path.Combine(finalOutputPath, showId)}_%05d.ts")
-        ).WithStandardOutputPipe(PipeTarget.ToDelegate(progressHandler));
+        ).WithStandardErrorPipe(PipeTarget.ToDelegate(progressHandler));
 
       var result = await command.ExecuteBufferedAsync();
       _logger.LogInformation("Completed conversion: {Result}", result.ExitCode);
@@ -126,11 +152,11 @@ public class ProcessUploadedAudioJob : IJob {
 
       await _context.SaveChangesAsync();
 
-      await _hub.Clients.User(userId).SendAsync("ConversionFinished", showId);
+      await _hub.Clients.User(user.Email).SendAsync("ConversionFinished", showId);
       _logger.LogInformation("Finished processing {Id}", showId);
     } catch (Exception e) {
       _logger.LogError("Error processing audio upload {Error}", e.Message);
-      await _hub.Clients.User(userId).SendAsync("ConversionFailed", showId);
+      await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId);
     }
   }
 }
