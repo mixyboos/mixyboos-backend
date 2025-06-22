@@ -15,8 +15,7 @@ namespace MixyBoos.Api.Controllers;
 public class AuthController(
   SignInManager<MixyBoosUser> signInManager,
   UserManager<MixyBoosUser> userManager,
-  IConfiguration config)
-  : ControllerBase {
+  IConfiguration config) : ControllerBase {
   [HttpGet("google-login")]
   public IActionResult GoogleLogin() {
     var properties = new AuthenticationProperties {

@@ -32,7 +32,7 @@ public static class MappingProvider {
 
   public static void RegisterMapsterConfiguration(this IServiceCollection services, IConfiguration config,
     IServiceProvider serviceProvider) {
-    var imageHelper = services.BuildServiceProvider().GetService<ImageHelper>();
+    var imageHelper = serviceProvider.GetRequiredService<ImageHelper>();
     var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
 
     TypeAdapterConfig<Mix, MixDTO>
@@ -45,9 +45,7 @@ public static class MappingProvider {
       .Map(dest => dest.Slug, src => src.Slug)
       .Map(dest => dest.DateUploaded, src => src.DateCreated)
       .Map(dest => dest.Image,
-        src => src.Image.StartsWith("http")
-          ? src.Image
-          : imageHelper.GetLargeImageUrl("mixes", src.Image))
+        src => imageHelper.GetLargeImageUrl("mixes", src.Image))
       .Map(dest => dest.Tags, src => src.Tags.Select(r => r))
       .Map(dest => dest.PlayCount, src => src.Plays.Count)
       .Map(dest => dest.LikeCount, src => src.Likes.Count)

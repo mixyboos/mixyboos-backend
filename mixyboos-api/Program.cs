@@ -110,6 +110,7 @@ if (app.Environment.IsDevelopment()) {
 
 app.UseCors(corsBuilder => corsBuilder
   .WithOrigins("http://localhost:3000")
+  .WithOrigins("http://localhost:5173")
   .WithOrigins("https://mixyboos.dev.fergl.ie:3000")
   .WithOrigins("https://preview.mixyboos.com")
   .WithOrigins("https://www.mixyboos.com")
