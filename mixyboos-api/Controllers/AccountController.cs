@@ -65,7 +65,7 @@ public class AccountController : _Controller {
 
   [HttpDelete("logout")]
   public async Task<IActionResult> Logout() {
-    var cookieName = _config["Auth:CookieName"];
+    var cookieName = _config["Auth:AuthCookieName"];
     var domainName = _config["Auth:DomainName"];
     if (string.IsNullOrEmpty(cookieName)) {
       return BadRequest();

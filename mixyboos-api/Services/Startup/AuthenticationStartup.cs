@@ -31,6 +31,7 @@ public static class AuthenticationStartup {
           options.ClientId = googleClientId;
           options.ClientSecret = googleClientSecret;
           options.SignInScheme = IdentityConstants.ExternalScheme;
+          options.CorrelationCookie.Name = config["Auth:CorrelationCookieName"];
           options.CorrelationCookie.SameSite = SameSiteMode.None;
           options.CorrelationCookie.SecurePolicy = CookieSecurePolicy.Always;
           options.Scope.Add("profile");
@@ -40,7 +41,7 @@ public static class AuthenticationStartup {
 
     services.AddAuthorization();
     services.ConfigureApplicationCookie(options => {
-      options.Cookie.Name = config["Auth:CookieName"];
+      options.Cookie.Name = config["Auth:AuthCookieName"];
       options.Cookie.Domain = config["Auth:DomainName"];
       options.Cookie.SameSite = SameSiteMode.Strict;
       options.Cookie.SecurePolicy = CookieSecurePolicy.Always;

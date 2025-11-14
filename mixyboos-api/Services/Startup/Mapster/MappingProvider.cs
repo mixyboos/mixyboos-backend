@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -37,10 +38,6 @@ public static class MappingProvider {
 
     TypeAdapterConfig<Mix, MixDTO>
       .NewConfig()
-      // .BeforeMapping((src, dest, context) => {
-      //   var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
-      //   var currentUser = httpContextAccessor.HttpContext?.User;
-      // })
       .Map(dest => dest.Id, src => src.Id.ToString())
       .Map(dest => dest.Slug, src => src.Slug)
       .Map(dest => dest.DateUploaded, src => src.DateCreated)
@@ -84,5 +81,12 @@ public static class MappingProvider {
     TypeAdapterConfig<MixyBoosUser, ProfileDTO>
       .NewConfig()
       .IgnoreNullValues(true);
+
+
+    TypeAdapterConfig<MixyBoosUser, UserDTO>
+      .NewConfig()
+      .IgnoreNullValues(true)
+      .Map(src => src.ProfileImage, src => imageHelper.GetLargeImageUrl("users/avatars", src.ProfileImage))
+      .Map(src => src.HeaderImage, src => imageHelper.GetLargeImageUrl("users/headers", src.HeaderImage));
   }
 }
