@@ -54,19 +54,22 @@ public class ProcessUploadedAudioJob : IJob {
 
     try {
       if (string.IsNullOrEmpty(showId)) {
-        await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId);
+        var errorMsg = "Invalid mix ID provided";
+        await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId, errorMsg);
         _logger.LogError("Error processing {Id} - invalid id", showId);
         return;
       }
 
       if (!File.Exists(inputFile)) {
-        await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId);
+        var errorMsg = $"Unable to locate uploaded file";
+        await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId, errorMsg);
         _logger.LogError("Error processing {Id} - unable to locate file {InputFile}", showId, inputFile);
         return;
       }
 
       if (outputPath is null) {
-        await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId);
+        var errorMsg = "Server configuration error - output directory not set";
+        await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId, errorMsg);
         _logger.LogError("Error processing {Id} - AudioProcessing:OutputDir must be set", showId);
         return;
       }
@@ -111,7 +114,7 @@ public class ProcessUploadedAudioJob : IJob {
           percentage = Math.Min(percentage, 100); // Cap at 100%
 
           _logger.LogInformation("Progress on encode: {Percentage}%", percentage);
-          await _hub.Clients.User(user.Email).SendAsync("ConversionProgress", showId, percentage.ToString());
+          await _hub.Clients.User(user.Email).SendAsync("ConversionProgress", showId, percentage);
         } catch (Exception e) {
           _logger.LogError("Error sending progress {Error}", e);
         }
@@ -157,7 +160,8 @@ public class ProcessUploadedAudioJob : IJob {
       _logger.LogInformation("Finished processing {Id}", showId);
     } catch (Exception e) {
       _logger.LogError("Error processing audio upload {Error}", e.Message);
-      await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId);
+      var errorMessage = $"Processing failed: {e.Message}";
+      await _hub.Clients.User(user.Email).SendAsync("ConversionFailed", showId, errorMessage);
     }
   }
 }
