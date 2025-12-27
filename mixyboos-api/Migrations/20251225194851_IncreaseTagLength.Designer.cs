@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MixyBoos.Api.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixyBoos.Api.Migrations
 {
     [DbContext(typeof(MixyBoosContext))]
-    partial class MixyBoosContextModelSnapshot : ModelSnapshot
+    [Migration("20251225194851_IncreaseTagLength")]
+    partial class IncreaseTagLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -769,17 +772,17 @@ namespace MixyBoos.Api.Migrations
                         .HasColumnName("date_updated")
                         .HasDefaultValueSql("now()");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("TagName")
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasColumnName("name");
+                        .HasColumnName("tag_name");
 
                     b.HasKey("Id")
                         .HasName("pk_tags");
 
-                    b.HasIndex("Name")
+                    b.HasIndex("TagName")
                         .IsUnique()
-                        .HasDatabaseName("ix_tags_name");
+                        .HasDatabaseName("ix_tags_tag_name");
 
                     b.ToTable("tags", "mixyboos");
                 });

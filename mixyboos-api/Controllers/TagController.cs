@@ -13,21 +13,17 @@ namespace MixyBoos.Api.Controllers;
 
 [Route("[controller]")]
 [Authorize]
-public class TagController : _Controller {
-  private readonly MixyBoosContext _context;
-
-  public TagController(MixyBoosContext context,
-    UserManager<MixyBoosUser> userManager,
-    ILogger<TagController> logger) : base(userManager, logger) {
-    _context = context;
-  }
-
+public class TagController(
+  MixyBoosContext context,
+  UserManager<MixyBoosUser> userManager,
+  ILogger<TagController> logger)
+  : _Controller(userManager, logger) {
   [HttpGet("search")]
   public async Task<List<string>> DoSearch([FromQuery] string query) {
-    var results = await _context
+    var results = await context
       .Tags
-      .Where(t => t.TagName.Contains(query))
-      .Select(t => t.TagName)
+      .Where(t => t.Name.Contains(query))
+      .Select(t => t.Name)
       .ToListAsync();
     return results;
   }

@@ -15,8 +15,8 @@ public static class DbContextExtensions {
     }
 
     foreach (var t in tags) {
-      var tag = await context.Tags.Where(r => r.TagName.Equals(t)).FirstOrDefaultAsync() ?? new Tag {
-        TagName = t
+      var tag = await context.Tags.Where(r => r.Name.Equals(t)).FirstOrDefaultAsync() ?? new Tag {
+        Name = t
       };
       result.Add(tag);
     }

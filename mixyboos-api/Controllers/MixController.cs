@@ -111,7 +111,7 @@ public class MixController(
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   public async Task<ActionResult<MixDTO>> Post([FromBody] MixDTO mix) {
     try {
-      var entity = mix.Adapt<Mix>();
+      var entity = await mix.BuildAdapter().AdaptToTypeAsync<Mix>();
       var existing = await __context.Mixes
         .AsNoTracking()
         .FirstOrDefaultAsync(m => m.Id.Equals(mix.Id));
@@ -143,25 +143,25 @@ public class MixController(
   [ProducesResponseType(StatusCodes.Status201Created)]
   [ProducesResponseType(StatusCodes.Status400BadRequest)]
   public async Task<ActionResult<MixDTO>> Patch([FromBody] MixDTO mix) {
+    if (CurrentUser is null) {
+      return Unauthorized();
+    }
+
     try {
-      var entity = mix.Adapt<Mix>();
-      var existing = await repository.Get(mix.Id);
+      var existing = await repository.GetById(mix.Id, CurrentUser);
 
       if (existing is null) {
         return NotFound();
       }
 
-      existing.IsProcessed = entity.IsProcessed;
-      existing.Title = entity.Title;
-      existing.Description = entity.Description;
-      existing.Image = entity.Image;
+      await mix.BuildAdapter().AdaptToAsync(existing);
 
       await repository.Update(existing);
 
       var response = existing.Adapt<MixDTO>();
       return CreatedAtAction(nameof(Get), new {id = response.Id}, response);
     } catch (DbUpdateException ex) {
-      _logger.LogError("Error creating mix {Message}", ex.Message);
+      _logger.LogError("Error updating mix {Message}", ex.Message);
       return BadRequest(ex.Message);
     }
   }

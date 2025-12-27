@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace MixyBoos.Api.Data.Models;
 
-[Index(nameof(TagName), IsUnique = true)]
+[Index(nameof(Name), IsUnique = true)]
 public class Tag : BaseEntity {
-  public string TagName { get; set; }
+  [MaxLength(50)]
+  public string Name { get; set; }
 }

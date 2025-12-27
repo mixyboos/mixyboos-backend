@@ -34,7 +34,7 @@ public class Mix : BaseEntity, ISluggedEntity {
   public ICollection<MixShare>? Shares { get; set; } = new List<MixShare>();
   public ICollection<MixDownload>? Downloads { get; set; } = new List<MixDownload>();
 
-  public ICollection<Tag> Tags { get; } = new List<Tag>();
+  public IList<Tag> Tags { get; } = new List<Tag>();
 
   [SlugField(SourceField = "Title")] public string? Slug { get; set; }
 

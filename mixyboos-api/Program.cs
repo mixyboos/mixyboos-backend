@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Security.Claims;
 using System.Text;
 using CrystalQuartz.AspNetCore;
@@ -49,6 +49,7 @@ builder.CreateLogger(builder.Configuration);
 builder.Services.Configure<DbScaffoldOptions>(
   builder.Configuration.GetSection("DbScaffoldOptions")
 );
+builder.Services.AddScoped<TagConverter>();
 builder.Services.AddTransient<MixRepository>();
 builder.Services.AddTransient<IRepository<MixLike>, Repository<MixLike>>();
 builder.Services.AddTransient<IClaimsTransformation, ClaimsTransformer>();

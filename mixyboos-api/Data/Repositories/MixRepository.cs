@@ -18,6 +18,7 @@ public class MixRepository(MixyBoosContext context) : Repository<Mix>(context) {
       .OrderByDescending(m => m.DateUpdated)
       .Where(m => requestingUser != null && m.User.Id.Equals(requestingUser.Id) || m.IsProcessed)
       .Include(m => m.User)
+      .Include(m => m.Tags)
       .Include(m => m.Likes)
       .Include(m => m.Plays)
       .Include(m => m.Shares)
@@ -25,15 +26,14 @@ public class MixRepository(MixyBoosContext context) : Repository<Mix>(context) {
   }
 
   public async Task<IEnumerable<Mix>> GetMyMixes(Guid userId) {
-    return await entities
-      .Where(m => m.User.Id.Equals(userId))
+    return await _internalGet(m => m.User.Id.Equals(userId))
       .OrderByDescending(m => m.DateUpdated)
-      .Include(m => m.User)
-      .Include(m => m.Likes)
-      .Include(m => m.Plays)
-      .Include(m => m.Shares)
-      .Include(m => m.Downloads)
       .ToListAsync();
+  }
+
+  public async Task<Mix?> GetById(Guid id, MixyBoosUser requestingUser) {
+    return await _internalGet(m => m.Id.Equals(id), requestingUser)
+      .FirstOrDefaultAsync();
   }
 
   public async Task<IEnumerable<Mix>> GetByUser(string userSlug, MixyBoosUser requestingUser) {
