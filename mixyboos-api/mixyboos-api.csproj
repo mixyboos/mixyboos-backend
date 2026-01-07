@@ -67,6 +67,7 @@
     <Content Include="..\.dockerignore">
       <Link>.dockerignore</Link>
     </Content>
+    <Content Include=".github\copilot-instructions.md" />
   </ItemGroup>
 
 </Project>

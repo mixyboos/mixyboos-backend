@@ -21,7 +21,7 @@ public class TagConverter {
   /// <returns>List of Tag entities (both existing and newly created)</returns>
   public async Task<List<Tag>> ProcessTagsPayload(IEnumerable<string> tagNames) {
     if (tagNames == null) {
-      return new List<Tag>();
+      return [];
     }
 
     // Normalise tag names (trim and filter out empty strings)
