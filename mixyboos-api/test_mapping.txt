@@ -1,0 +1,13 @@
+Testing mapping changes:
+
+MixDTO.Tags is now List<TagDTO> where TagDTO is a record with Name and Slug properties.
+
+Mapping from Mix to MixDTO:
+- Maps src.Tags (ICollection<Tag>) to List<TagDTO> using: 
+  src.Tags.Select(t => new TagDTO(t.Name, t.Slug)).ToList()
+
+Mapping from MixDTO to Mix:
+- Extracts tag names from List<TagDTO> using:
+  var tagNames = src.Tags.Select(t => t.Name).ToList();
+- Then processes tagNames through TagConverter.ProcessTagsPayload(tagNames)
+

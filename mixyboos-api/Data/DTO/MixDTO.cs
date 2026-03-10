@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MixyBoos.Api.Data.DTO;
 
@@ -22,5 +23,5 @@ public class MixDTO {
   public string AudioUrl { get; set; }
   public string PcmUrl { get; set; }
 
-  public string[] Tags { get; set; }
+  public List<TagDTO> Tags { get; set; }
 }

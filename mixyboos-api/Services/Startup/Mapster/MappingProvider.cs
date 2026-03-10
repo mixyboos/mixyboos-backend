@@ -43,7 +43,7 @@ public static class MappingProvider {
       .Map(dest => dest.DateUploaded, src => src.DateCreated)
       .Map(dest => dest.Image,
         src => imageHelper.GetLargeImageUrl("mixes", src.Image))
-      .Map(dest => dest.Tags, src => src.Tags.Select(r => r.Name).ToArray())
+      .Map(dest => dest.Tags, src => src.Tags.Select(t => new TagDTO(t.Name, t.Slug)).ToList())
       .Map(dest => dest.PlayCount, src => src.Plays.Count)
       .Map(dest => dest.LikeCount, src => src.Likes.Count)
       .Map(dest => dest.ShareCount, src => src.Shares.Count)
@@ -65,7 +65,7 @@ public static class MappingProvider {
         if (src.Tags == null) return;
 
         // If empty array, clear all tags
-        if (src.Tags.Length == 0) {
+        if (src.Tags.Count == 0) {
           dest.Tags.Clear();
           return;
         }
@@ -73,7 +73,7 @@ public static class MappingProvider {
         var tagConverter = httpContextAccessor.HttpContext?.RequestServices.GetService<TagConverter>();
         if (tagConverter == null) return;
 
-        var tagNames = src.Tags.ToList();
+        var tagNames = src.Tags.Select(t => t.Name).ToList();
         var incomingTags = await tagConverter.ProcessTagsPayload(tagNames);
 
         var existingTagIds = dest.Tags.Select(t => t.Id).ToHashSet();

@@ -32,6 +32,10 @@ using SixLabors.ImageSharp.Web.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Allow all app settings to be overridden with MIXYBOOS_ prefixed environment variables.
+// e.g. MIXYBOOS_ConnectionStrings__MixyBoos, MIXYBOOS_Auth__AuthCookieName
+builder.Configuration.AddEnvironmentVariables("MIXYBOOS_");
+
 Console.WriteLine($"Using environment: {builder.Environment.EnvironmentName}");
 Console.WriteLine(
   $"Reading configuration from: appsettings.{builder.Configuration.GetSection("Environment").Value}.json");
